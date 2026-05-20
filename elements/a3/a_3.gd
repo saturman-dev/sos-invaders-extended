@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-# WWW
-
 # FOR DAMAGE
 var fullhp = 7.5
 var hp = fullhp
@@ -33,6 +31,7 @@ const bulletScene = preload("res://elements/a3bullet/a_3_bullet.tscn")
 @onready var expl := $NormTema
 @onready var cldown := $cldown
 @onready var shotTimer := $shotTimer
+@onready var hitbox := $CollisionShape2D
 
 # HPBAR SETUP
 
@@ -103,6 +102,9 @@ func beam_dmg(dmg: float):
 		dmgcldown2.start()
 
 func die():
+	remove_from_group("enemies")
+	if not hitbox:
+		return
 	Saves.data["killed_a3s"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1
@@ -115,7 +117,7 @@ func die():
 	Functions.sfx_play("res://sounds/A3Dead.mp3", -8.0)
 	died = true
 	Globals.change_points(givepts)
-	$CollisionShape2D.queue_free()
+	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()
 	CTween = create_tween()

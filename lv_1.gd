@@ -1,5 +1,9 @@
 extends Node2D
 
+
+var bossfighting = false
+var flseye_diffi = diffi_range[0]
+
 # ENEMIES COOLDOWN
 var defCldown = 2
 var newCldown = 4
@@ -29,12 +33,20 @@ func _ready() -> void:
 	Globals.shake_str = 0.0
 	print("Game started!")
 	Events.lives_changed.connect(func(lives): check_game_over())
+	Events.points_changed.connect(func(points): check_bossfighting())
+	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	Globals.newbest = false
 
 func check_game_over():
 	if Globals.lives <= 0:
 		if Globals.nodeath == false:
 			gameOver()
+
+func check_bossfighting():
+	await get_tree().process_frame
+	if bossfighting == true and get_tree().get_nodes_in_group("enemies").size() == 0:
+		print(0)
+		Events.bossfight_start.emit("flseye")
 
 func gameOver():
 	if Globals.pts > Saves.data["score"]:
@@ -58,9 +70,11 @@ var time2 = 0
 var diffsec = 0.01
 
 func _process(delta: float) -> void:
-	if diffi <= maxDiffi:
+	if diffi < maxDiffi and bossfighting == false:
 		diffi += delta * 1.0
 		Globals.diffi = diffi
+		if diffi > flseye_diffi:
+			bossfighting = true
 	timer += delta
 	time += delta
 	if diffi > diffsec:
@@ -96,15 +110,25 @@ func addBonus(bonus_type: String):
 const diffi_range = [15, 35, 55, 80, 105, 135, 175, 230]
 
 func spawn_enemy():
+	if bossfighting == true:
+		return
 	if diffi < diffi_range[0]:
 		spawn_darsinGroup()
 	elif diffi < diffi_range[1]:
+		if Saves.data["ever_met_bigdar"] == false:
+			spawn_bigDar()
+			print("NEW ENEMY BIGDAR")
+			return
 		var random = randf_range(0, 100)
 		if random < 50:
 			spawn_darsinGroup()
 		else:
 			spawn_bigDar()
 	elif diffi < diffi_range[2]:
+		if Saves.data["ever_met_a3"] == false:
+			spawn_a3()
+			print("NEW ENEMY A3")
+			return
 		var random = randf_range(0, 100)
 		if random < 33:
 			spawn_darsinGroup()
@@ -121,6 +145,10 @@ func spawn_enemy():
 		else:
 			spawn_a3()
 	elif diffi < diffi_range[4]:
+		if Saves.data["ever_met_wertue"] == false:
+			spawn_wertue()
+			print("NEW ENEMY WERTUE")
+			return
 		var random = randf_range(0, 100)
 		if random < 20:
 			spawn_darsinGroup()
@@ -190,6 +218,12 @@ func spawn_a3():
 	add_child(A3)
 
 func spawn_wertue():
+	var Wertue = wertue.instantiate()
+	Wertue.position = Vector2(randf_range(60, 330), -30)
+	add_child(Wertue)
+
+func spawn_boss_flseye():
+	print("BOSSFIGHT FLSEYE")
 	var Wertue = wertue.instantiate()
 	Wertue.position = Vector2(randf_range(60, 330), -30)
 	add_child(Wertue)

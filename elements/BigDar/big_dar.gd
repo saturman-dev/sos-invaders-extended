@@ -32,6 +32,7 @@ const bulletScene = preload("res://elements/bobm/bobm.tscn")
 @onready var expl := $Slabovat
 @onready var cldown := $cldown
 @onready var shotTimer := $shotTimer
+@onready var hitbox := $CollisionShape2D
 
 
 
@@ -91,6 +92,9 @@ func beam_dmg(dmg: float):
 			Globals.change_points(givepts / 2)
 
 func die():
+	remove_from_group("enemies")
+	if not hitbox:
+		return
 	Saves.data["killed_bigdars"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1
@@ -99,7 +103,7 @@ func die():
 	Functions.sfx_play("res://sounds/bigDarDead.mp3")
 	died = true
 	Globals.change_points(givepts)
-	$CollisionShape2D.queue_free()
+	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()
 	CTween = create_tween()

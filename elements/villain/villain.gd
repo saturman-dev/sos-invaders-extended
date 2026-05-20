@@ -29,6 +29,7 @@ const bulletScene = preload("res://elements/vlnbullet/vlnbullet.tscn")
 @onready var hpbar1 := $hpfull
 @onready var hpbar2 := $hpfull/hp2
 @onready var expl := $Slabo
+@onready var hitbox := $CollisionShape2D
 
 var enabled = true
 
@@ -60,6 +61,9 @@ func beam_dmg(dmg: float):
 		dmgcldown2.start()
 
 func die():
+	remove_from_group("enemies")
+	if not hitbox:
+		return
 	Saves.data["killed_darsins"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1
@@ -67,7 +71,7 @@ func die():
 	Functions.sfx_play("res://sounds/darsinDead.mp3", 0.0, randf_range(0.9, 1.1))
 	died = true
 	Globals.change_points(givepts)
-	$CollisionShape2D.queue_free()
+	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()
 	CTween = create_tween()

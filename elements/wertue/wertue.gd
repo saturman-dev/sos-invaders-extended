@@ -43,6 +43,7 @@ const bulletScene = preload("res://elements/wertue/wertueBeam.tscn")
 @onready var circle := $AnimatedSprite2D/circle
 @onready var enrageEffect := $enrageEffect
 @onready var enrageLoop := $ENRAGED
+@onready var hitbox := $CollisionShape2D
 
 
 
@@ -120,6 +121,9 @@ func beam_dmg(dmg: float):
 		dmgcldown2.start()
 
 func die():
+	remove_from_group("enemies")
+	if not hitbox:
+		return
 	Saves.data["killed_wertues"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1
@@ -134,7 +138,7 @@ func die():
 	Functions.sfx_play("res://sounds/wertueDead.mp3", -5.0)
 	died = true
 	Globals.change_points(givepts)
-	$CollisionShape2D.queue_free()
+	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()
 	CTween = create_tween()
