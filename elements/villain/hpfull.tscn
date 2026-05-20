@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b3dhf571n7g2o"]
+
+[ext_resource type="Script" uid="uid://csmflkcus0h6b" path="res://elements/villain/hpfull.gd" id="1_pmm4v"]
+
+[node name="hpfull" type="ColorRect" unique_id=39752477]
+offset_left = -34.0
+offset_top = -79.0
+offset_right = 33.999992
+offset_bottom = -61.0
+pivot_offset = Vector2(34, 9)
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_pmm4v")
+
+[node name="hp2" type="ColorRect" parent="." unique_id=722326008]
+layout_mode = 0
+offset_left = 4.000004
+offset_top = 4.0000076
+offset_right = 64.0
+offset_bottom = 14.000008
+color = Color(1, 1, 0, 1)
+
+[node name="hp" type="ColorRect" parent="." unique_id=518042600]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 64.0
+offset_bottom = 14.0
+color = Color(1, 0, 0, 1)

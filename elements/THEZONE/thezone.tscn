@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bocql6n3wi5jt"]
+
+[ext_resource type="Texture2D" uid="uid://lym4ueal2jjd" path="res://textures/circle1.png" id="1_l4o3g"]
+[ext_resource type="Script" uid="uid://cs1xi0qybu22h" path="res://elements/THEZONE/thezone.gd" id="1_rtd7p"]
+[ext_resource type="Texture2D" uid="uid://c4vf4hv61x8yn" path="res://textures/circle2.png" id="2_rtd7p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kicv4"]
+radius = 244.0082
+
+[node name="THEZONE" type="Area2D" unique_id=633090958]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rtd7p")
+
+[node name="Circle1" type="Sprite2D" parent="." unique_id=930093895]
+position = Vector2(128, 430)
+texture = ExtResource("1_l4o3g")
+
+[node name="Circle2" type="Sprite2D" parent="." unique_id=93903573]
+modulate = Color(1, 1, 1, 0.3)
+position = Vector2(128, 430)
+texture = ExtResource("2_rtd7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2063160458]
+position = Vector2(128, 430)
+shape = SubResource("CircleShape2D_kicv4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

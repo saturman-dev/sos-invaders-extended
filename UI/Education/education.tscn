@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dsbux52b0ajtv"]
+
+[ext_resource type="Script" uid="uid://c2xwhtuvsoq8v" path="res://UI/Education/education.gd" id="1_tt0vr"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="1_uw0tw"]
+
+[node name="Education" type="CanvasLayer" unique_id=31455989]
+script = ExtResource("1_tt0vr")
+
+[node name="move" type="Label" parent="." unique_id=2058304877]
+visible = false
+offset_left = 73.0
+offset_top = 89.0
+offset_right = 118.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 13
+text = "move"
+horizontal_alignment = 1
+
+[node name="up" type="Label" parent="move" unique_id=283682482]
+layout_mode = 0
+offset_left = 16.5
+offset_top = 15.0
+offset_right = 28.5
+offset_bottom = 28.0
+rotation = -1.5707964
+pivot_offset = Vector2(6, 6.5)
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 13
+text = "->"
+
+[node name="down" type="Label" parent="move" unique_id=1930270516]
+layout_mode = 0
+offset_left = 15.5
+offset_top = 38.0
+offset_right = 27.5
+offset_bottom = 51.0
+rotation = 1.5707964
+pivot_offset = Vector2(6, 6.5)
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 13
+text = "->"
+
+[node name="right" type="Label" parent="move" unique_id=1897635449]
+layout_mode = 0
+offset_left = 26.5
+offset_top = 27.0
+offset_right = 38.5
+offset_bottom = 40.0
+pivot_offset = Vector2(6, 6.5)
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 13
+text = "->"
+
+[node name="left" type="Label" parent="move" unique_id=390720995]
+layout_mode = 0
+offset_left = 5.4999847
+offset_top = 26.0
+offset_right = 17.499985
+offset_bottom = 39.0
+rotation = 3.1415927
+pivot_offset = Vector2(6, 6.5)
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 13
+text = "->"
+
+[node name="shoot" type="Label" parent="." unique_id=1415339958]
+visible = false
+offset_left = 171.0
+offset_top = 89.0
+offset_right = 219.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 13
+text = "shoot"
+horizontal_alignment = 1
+
+[node name="up" type="Label" parent="shoot" unique_id=714963817]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 44.0
+offset_bottom = 37.0
+pivot_offset = Vector2(6, 6.5)
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 7
+text = "spacebar"
+horizontal_alignment = 1
+
+[node name="dash" type="Label" parent="." unique_id=1129442395]
+visible = false
+offset_left = 270.0
+offset_top = 89.0
+offset_right = 318.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 13
+text = "dash"
+horizontal_alignment = 1
+
+[node name="shift" type="Label" parent="dash" unique_id=1282170515]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 30.0
+offset_right = 44.0
+offset_bottom = 37.0
+pivot_offset = Vector2(6, 6.5)
+theme_override_fonts/font = ExtResource("1_uw0tw")
+theme_override_font_sizes/font_size = 7
+text = "shift"
+horizontal_alignment = 1

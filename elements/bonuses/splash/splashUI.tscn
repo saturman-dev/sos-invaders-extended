@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bfqbpgvehs8sm"]
+
+[ext_resource type="Script" uid="uid://cdvnc1fll5cdi" path="res://elements/bonuses/splash/splash_ui.gd" id="1_1yyit"]
+[ext_resource type="Texture2D" uid="uid://bkvcnsuudqv20" path="res://textures/bonusSplash.png" id="2_oo2wi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erpcx"]
+atlas = ExtResource("2_oo2wi")
+region = Rect2(39, 0, 39, 39)
+
+[node name="trioUI" type="Control" unique_id=1181271743]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 30.0
+offset_bottom = 30.0
+script = ExtResource("1_1yyit")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1817773723]
+position = Vector2(15, 12)
+texture = SubResource("AtlasTexture_erpcx")
+
+[node name="bar2" type="ColorRect" parent="." unique_id=1132043004]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 25.0
+offset_right = 26.0
+offset_bottom = 28.0
+color = Color(0.16924536, 0.16924527, 0.16924521, 1)
+
+[node name="bar" type="ColorRect" parent="." unique_id=858442677]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 25.0
+offset_right = 26.0
+offset_bottom = 28.0
+color = Color(1, 0, 0.03529412, 1)

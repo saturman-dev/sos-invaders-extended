@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cbam5knxmptxp"]
+
+[ext_resource type="Texture2D" uid="uid://cajutxuv4x35k" path="res://textures/bobmExplosion.png" id="1_6htae"]
+[ext_resource type="Script" uid="uid://bwo1oyk3hkaw5" path="res://elements/bobm/bobm_explosion.gd" id="1_icl8u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icl8u"]
+atlas = ExtResource("1_6htae")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bwjco"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icl8u")
+}],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p6b7"]
+atlas = ExtResource("1_6htae")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iw181"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p6b7")
+}],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6htae"]
+radius = 34.0
+
+[node name="bobmExplosion" type="Area2D" unique_id=195225025]
+scale = Vector2(1.3, 1.3)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_icl8u")
+
+[node name="okrestnosti" type="AnimatedSprite2D" parent="." unique_id=730199100]
+modulate = Color(1, 1, 1, 0.78431374)
+position = Vector2(0.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_bwjco")
+
+[node name="znak" type="AnimatedSprite2D" parent="." unique_id=1532124376]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_iw181")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1297896626]
+shape = SubResource("CircleShape2D_6htae")
+debug_color = Color(0.99607843, 0, 0.20392157, 0.5882353)

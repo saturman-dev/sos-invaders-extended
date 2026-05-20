@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://o5xip0drl264"]
+
+[ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="1_nhqvb"]
+[ext_resource type="Script" uid="uid://dnmuhb0pkmsaa" path="res://elements/wertue/wing_right.gd" id="2_dc2uy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc2uy"]
+atlas = ExtResource("1_nhqvb")
+region = Rect2(271, 89, 129, 111)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhqvb"]
+atlas = ExtResource("1_nhqvb")
+region = Rect2(0, 0, 94, 200)
+
+[node name="wingRight" type="Sprite2D" unique_id=1902289196]
+texture = SubResource("AtlasTexture_dc2uy")
+offset = Vector2(110, -30)
+script = ExtResource("2_dc2uy")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=502510895]
+visible = false
+texture = SubResource("AtlasTexture_nhqvb")

@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://5gwmj61lrfo7"]
+
+[ext_resource type="Script" uid="uid://ba3yp044i7mqa" path="res://elements/bonuses/heal/heal.gd" id="1_xno0u"]
+[ext_resource type="Texture2D" uid="uid://cdmi8edk3ityv" path="res://textures/bonusHeal.png" id="2_8f0wi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1g8u"]
+atlas = ExtResource("2_8f0wi")
+region = Rect2(0, 0, 39, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6fp3"]
+atlas = ExtResource("2_8f0wi")
+region = Rect2(39, 0, 39, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vunfs"]
+atlas = ExtResource("2_8f0wi")
+region = Rect2(78, 0, 39, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rtxe"]
+atlas = ExtResource("2_8f0wi")
+region = Rect2(78, 39, 39, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svit7"]
+atlas = ExtResource("2_8f0wi")
+region = Rect2(39, 39, 39, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig16i"]
+atlas = ExtResource("2_8f0wi")
+region = Rect2(0, 39, 39, 39)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdhta"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vunfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rtxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svit7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig16i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wpoca"]
+
+[node name="heal" type="Area2D" unique_id=562743611 groups=["bonuses"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_xno0u")
+
+[node name="circle" type="Sprite2D" parent="." unique_id=983525426]
+modulate = Color(1, 1, 1, 0.5)
+texture = SubResource("AtlasTexture_w1g8u")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=680238613]
+texture = SubResource("AtlasTexture_j6fp3")
+
+[node name="outline" type="AnimatedSprite2D" parent="." unique_id=1865025332]
+sprite_frames = SubResource("SpriteFrames_mdhta")
+autoplay = "default"
+frame_progress = 0.6639607
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=263828784]
+rect = Rect2(-35, -34, 70, 68)
+
+[node name="hitbox" type="CollisionShape2D" parent="." unique_id=1227902090]
+shape = SubResource("CircleShape2D_wpoca")
+debug_color = Color(0.3259149, 0.99999994, 0.29823202, 0.42000002)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

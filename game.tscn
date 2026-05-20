@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bipoqhhalsyp8"]
+
+[ext_resource type="PackedScene" uid="uid://ccgr3yvi0bmri" path="res://bg_1.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://bktmndbpcxpil" path="res://game.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://bfralhkxlh1nj" path="res://menu.tscn" id="2_fc0e3"]
+[ext_resource type="AudioStream" uid="uid://choif40dlwxeb" path="res://sounds/Title.mp3" id="4_fc0e3"]
+
+[node name="game" type="Node2D" unique_id=2020904288]
+script = ExtResource("1_feb5d")
+
+[node name="menu" parent="." unique_id=2077539137 instance=ExtResource("2_fc0e3")]
+
+[node name="bg1" parent="." unique_id=266714418 instance=ExtResource("1_80nbo")]
+
+[node name="pauseC" type="CanvasLayer" parent="." unique_id=1133165590]
+layer = 4
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=105882260]
+position = Vector2(195, 120)
+
+[node name="Title" type="AudioStreamPlayer" parent="." unique_id=1916955955]
+stream = ExtResource("4_fc0e3")
+autoplay = true
+bus = &"Music"
+parameters/looping = true

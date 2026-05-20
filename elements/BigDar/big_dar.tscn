@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://ptpjeoi3uomu"]
+
+[ext_resource type="Script" uid="uid://dh44q6qwihunv" path="res://elements/BigDar/big_dar.gd" id="1_54n7x"]
+[ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="2_54n7x"]
+[ext_resource type="Texture2D" uid="uid://l2clt1eillu2" path="res://textures/bigDar.png" id="2_i6iqp"]
+[ext_resource type="Texture2D" uid="uid://e2y4855244l5" path="res://textures/slabovat.png" id="4_54n7x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljn8a"]
+atlas = ExtResource("2_i6iqp")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_supck"]
+atlas = ExtResource("2_i6iqp")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ljn8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljn8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_supck")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijc1q"]
+radius = 45.0
+height = 130.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6iqp"]
+atlas = ExtResource("4_54n7x")
+region = Rect2(0, 0, 150, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijc1q"]
+atlas = ExtResource("4_54n7x")
+region = Rect2(150, 0, 150, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijc1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6iqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijc1q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="BigDar" type="CharacterBody2D" unique_id=582401852 groups=["enemies"]]
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_54n7x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304707848]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_ljn8a")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2114654353]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ijc1q")
+debug_color = Color(0.80784315, 0.3372549, 0.6313726, 0.39215687)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1390399834]
+target_position = Vector2(-70, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=649499112]
+target_position = Vector2(70, 0)
+
+[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("2_54n7x")]
+
+[node name="dmgstop" type="Timer" parent="." unique_id=56275858]
+one_shot = true
+
+[node name="Slabovat" type="AnimatedSprite2D" parent="." unique_id=588606608]
+visible = false
+position = Vector2(0, -5)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_ijc1q")
+autoplay = "default"
+
+[node name="shotTimer" type="Timer" parent="." unique_id=1469726031]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="cldown" type="Timer" parent="." unique_id=233778247]
+wait_time = 0.2
+one_shot = true
+
+[node name="dmgCldown" type="Timer" parent="." unique_id=1091378152]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="dmgCldown2" type="Timer" parent="." unique_id=352222495]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
+[connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

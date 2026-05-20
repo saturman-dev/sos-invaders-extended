@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dooiqkpymn3nb"]
+
+[ext_resource type="Script" uid="uid://c4lddm1800ir2" path="res://elements/vln_group.gd" id="1_flo4y"]
+[ext_resource type="PackedScene" uid="uid://dddtgdmmxsjul" path="res://elements/villain/villain.tscn" id="2_87gi4"]
+
+[node name="vlnGroup" type="Node2D" unique_id=107043171 groups=["vlnGroup"]]
+script = ExtResource("1_flo4y")
+
+[node name="villain1" parent="." unique_id=2093320812 groups=["vlnGroup"] instance=ExtResource("2_87gi4")]
+position = Vector2(-44.999996, 1.9073486e-06)
+
+[node name="villain2" parent="." unique_id=1045490640 instance=ExtResource("2_87gi4")]
+position = Vector2(-14.999996, 1.9073486e-06)
+
+[node name="villain3" parent="." unique_id=2104284667 instance=ExtResource("2_87gi4")]
+position = Vector2(15.000008, 1.9073486e-06)
+
+[node name="villain4" parent="." unique_id=830365022 instance=ExtResource("2_87gi4")]
+position = Vector2(45.000008, 1.9073486e-06)
+
+[node name="cldown" type="Timer" parent="." unique_id=24656671]
+wait_time = 0.2
+one_shot = true
+
+[node name="shotTimer" type="Timer" parent="." unique_id=874480156]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bk0j5jm6tb0l2"]
+
+[ext_resource type="Script" uid="uid://cv7wq84xi14u4" path="res://lv_1.gd" id="1_c4o0f"]
+[ext_resource type="PackedScene" uid="uid://dmig5vpy262nd" path="res://UI/HUD/ui.tscn" id="1_iefvx"]
+[ext_resource type="PackedScene" uid="uid://c5xrlrt7b8bpg" path="res://elements/spaceship/spaceship.tscn" id="2_if3o6"]
+[ext_resource type="PackedScene" uid="uid://1wk747i66jxe" path="res://elements/wall/wall.tscn" id="3_m5q4o"]
+[ext_resource type="PackedScene" uid="uid://bblyfxu1uls66" path="res://elements/floor/floor.tscn" id="5_iefvx"]
+[ext_resource type="PackedScene" uid="uid://dsbux52b0ajtv" path="res://UI/Education/education.tscn" id="6_c4o0f"]
+
+[node name="lv1" type="Node2D" unique_id=2077539137]
+script = ExtResource("1_c4o0f")
+
+[node name="UI" parent="." unique_id=1498106473 instance=ExtResource("1_iefvx")]
+
+[node name="spaceship" parent="." unique_id=1792907597 instance=ExtResource("2_if3o6")]
+position = Vector2(195, 255)
+scale = Vector2(0.4, 0.4)
+
+[node name="wallL" parent="." unique_id=1864108173 instance=ExtResource("3_m5q4o")]
+
+[node name="wallR" parent="." unique_id=972975583 instance=ExtResource("3_m5q4o")]
+position = Vector2(405, 0)
+
+[node name="floor" parent="." unique_id=270879483 instance=ExtResource("5_iefvx")]
+
+[node name="floor2" parent="." unique_id=2041952918 instance=ExtResource("5_iefvx")]
+position = Vector2(0, -245)
+
+[node name="Education" parent="." unique_id=31455989 instance=ExtResource("6_c4o0f")]

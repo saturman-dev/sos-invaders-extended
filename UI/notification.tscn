@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://7uvofvc2esyc"]
+
+[ext_resource type="Script" uid="uid://cyb7o5l7fn05q" path="res://UI/notification.gd" id="1_dj3cc"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="1_jx85d"]
+
+[node name="notification" type="CanvasLayer" unique_id=1638338266]
+layer = 7
+scale = Vector2(1.245, 1)
+transform = Transform2D(1.245, 0, 0, 1, 0, 0)
+script = ExtResource("1_dj3cc")
+
+[node name="BG" type="ColorRect" parent="." unique_id=659937253]
+offset_left = -181.0
+offset_top = 194.0
+offset_right = -1.0
+offset_bottom = 226.0
+color = Color(0, 0, 0, 0.4)
+
+[node name="Label1" type="Label" parent="BG" unique_id=1995773573]
+layout_mode = 0
+offset_left = 2.5903625
+offset_top = 6.0
+offset_right = 180.59036
+offset_bottom = 19.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("1_jx85d")
+theme_override_font_sizes/font_size = 14
+text = "Some Notification"
+
+[node name="Label2" type="Label" parent="BG" unique_id=1730890902]
+layout_mode = 0
+offset_left = 2.5903625
+offset_top = 21.0
+offset_right = 116.78715
+offset_bottom = 31.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("1_jx85d")
+theme_override_font_sizes/font_size = 10
+text = "More info"

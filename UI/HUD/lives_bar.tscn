@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://declhp76gcxrb"]
+
+[ext_resource type="Script" uid="uid://bp4cij64oe418" path="res://UI/HUD/lives_bar.gd" id="1_x6vql"]
+
+[node name="LivesBar" type="HBoxContainer" unique_id=52817040]
+alignment = 2
+script = ExtResource("1_x6vql")

@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bodlgjnlro7ak"]
+
+[ext_resource type="Script" uid="uid://dksowa3jrtejc" path="res://UI/gameover/game_over.gd" id="1_4spbu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iefvx"]
+bg_color = Color(0.47843137, 0.60784316, 0.7921569, 0.2627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4o0f"]
+bg_color = Color(0.47843137, 0.60784316, 0.7921569, 0.2627451)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="Win" type="CanvasLayer" unique_id=326502182]
+script = ExtResource("1_4spbu")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2111025627]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.87058824)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=488115717]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1664994541]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=265413594]
+layout_mode = 2
+text = "YOU WIN!!"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=77803024]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_iefvx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c4o0f")
+text = "BACK TO MENU"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

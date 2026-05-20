@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://dqspf5wgnreyx"]
+
+[ext_resource type="Texture2D" uid="uid://h5jirjw1c7uy" path="res://textures/a3.png" id="1_0j076"]
+[ext_resource type="Script" uid="uid://7ie0kk4ij0r6" path="res://elements/a3/a_3.gd" id="1_y2la4"]
+[ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="2_y2la4"]
+[ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_y2la4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2la4"]
+atlas = ExtResource("1_0j076")
+region = Rect2(0, 0, 220, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u462"]
+atlas = ExtResource("1_0j076")
+region = Rect2(220, 0, 220, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaife"]
+atlas = ExtResource("1_0j076")
+region = Rect2(440, 0, 220, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_havno"]
+atlas = ExtResource("1_0j076")
+region = Rect2(220, 0, 220, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co76q"]
+atlas = ExtResource("1_0j076")
+region = Rect2(0, 0, 220, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0j076"]
+atlas = ExtResource("1_0j076")
+region = Rect2(0, 200, 220, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apj7r"]
+atlas = ExtResource("1_0j076")
+region = Rect2(220, 200, 220, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xaife"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2la4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u462")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xaife")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_havno")
+}],
+"loop": true,
+"name": &"def",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co76q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0j076")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apj7r")
+}],
+"loop": false,
+"name": &"preshot",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0j076"]
+radius = 56.0
+height = 158.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7s1q"]
+atlas = ExtResource("4_y2la4")
+region = Rect2(0, 0, 140, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvd0o"]
+atlas = ExtResource("4_y2la4")
+region = Rect2(140, 0, 140, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_apj7r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7s1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvd0o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="a3" type="CharacterBody2D" unique_id=73654707 groups=["enemies"]]
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_y2la4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1882523190]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_xaife")
+animation = &"def"
+autoplay = "def"
+frame_progress = 0.976669
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2145923726]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0j076")
+debug_color = Color(0.80784315, 0.3372549, 0.6313726, 0.39215687)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=940993637]
+target_position = Vector2(-250, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1683368942]
+target_position = Vector2(250, 0)
+
+[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("2_y2la4")]
+offset_top = -103.99997
+offset_bottom = -85.99997
+
+[node name="dmgstop" type="Timer" parent="." unique_id=810226505]
+one_shot = true
+
+[node name="NormTema" type="AnimatedSprite2D" parent="." unique_id=241245243]
+visible = false
+position = Vector2(0, -5)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_apj7r")
+autoplay = "default"
+
+[node name="dmgCldown" type="Timer" parent="." unique_id=1453494047]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="dmgCldown2" type="Timer" parent="." unique_id=341385893]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="cldown" type="Timer" parent="." unique_id=1540107542]
+wait_time = 3.0
+one_shot = true
+
+[node name="shotTimer" type="Timer" parent="." unique_id=1248246866]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
+[connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

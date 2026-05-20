@@ -1,0 +1,589 @@
+[gd_scene format=3 uid="uid://bh4mu086d2q8e"]
+
+[ext_resource type="Script" uid="uid://bomy6e7hqex37" path="res://menu/settings.gd" id="1_2j7bf"]
+[ext_resource type="Texture2D" uid="uid://cdh6vw81ppmrd" path="res://textures/window.png" id="2_qxoij"]
+[ext_resource type="Texture2D" uid="uid://bnbpwhwq1dlvc" path="res://textures/back.png" id="3_oksnb"]
+[ext_resource type="Texture2D" uid="uid://c75sw53sbht8j" path="res://textures/bg.png" id="4_oksnb"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="5_lwjig"]
+[ext_resource type="Texture2D" uid="uid://dgdvlaankchxc" path="res://textures/slider.png" id="6_mottj"]
+[ext_resource type="Texture2D" uid="uid://c57p4g27ebhfe" path="res://textures/galochka.png" id="7_fredc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2j7bf"]
+bg_color = Color(0.05000019, 0, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.70000005, 1, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwjig"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxoij"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oksnb"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mottj"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fredc"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymyge"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tiin"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frxcm"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y331f"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06g33"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd76h"]
+atlas = ExtResource("3_oksnb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mottj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwjig")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxoij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oksnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mottj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fredc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymyge")
+}],
+"loop": false,
+"name": &"hover",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tiin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frxcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y331f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06g33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pd76h")
+}],
+"loop": false,
+"name": &"unhover",
+"speed": 30.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qxoij"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oksnb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwjig"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mottj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fredc"]
+
+[sub_resource type="Theme" id="Theme_ymyge"]
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_qxoij")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_oksnb")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_lwjig")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_mottj")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_fredc")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw158"]
+atlas = ExtResource("4_oksnb")
+region = Rect2(167, 293, 146, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7nx7"]
+atlas = ExtResource("6_mottj")
+region = Rect2(0, 0, 15, 15)
+margin = Rect2(0, -0.5, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lakt"]
+atlas = ExtResource("6_mottj")
+region = Rect2(15, 0, 15, 15)
+margin = Rect2(0, -0.5, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mottj"]
+bg_color = Color(0.1882353, 0.27058825, 0, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.1882353, 0.27058825, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fredc"]
+bg_color = Color(0, 0.18039216, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymyge"]
+bg_color = Color(0.46666667, 0.6784314, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihpo6"]
+atlas = ExtResource("7_fredc")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btk10"]
+atlas = ExtResource("7_fredc")
+region = Rect2(15, 0, 15, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_omhd3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihpo6")
+}],
+"loop": false,
+"name": &"no",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btk10")
+}],
+"loop": false,
+"name": &"yes",
+"speed": 1.0
+}]
+
+[node name="settings" type="Node2D" unique_id=983669397]
+process_mode = 3
+script = ExtResource("1_2j7bf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=705497764]
+process_mode = 3
+layer = 5
+
+[node name="back" type="Button" parent="CanvasLayer" unique_id=1424460373]
+offset_left = 120.0
+offset_top = 33.0
+offset_right = 136.0
+offset_bottom = 49.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.7019608, 1, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_2j7bf")
+text_overrun_behavior = 1
+
+[node name="backAnim" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=312774097]
+position = Vector2(128, 41)
+sprite_frames = SubResource("SpriteFrames_mottj")
+autoplay = "default"
+
+[node name="Window" type="Sprite2D" parent="CanvasLayer" unique_id=21238945]
+position = Vector2(195, 124)
+texture = ExtResource("2_qxoij")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=953583657]
+offset_left = 122.0
+offset_top = 51.0
+offset_right = 268.0
+offset_bottom = 197.0
+theme = SubResource("Theme_ymyge")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer" unique_id=1831796844]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer" unique_id=976608949]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control" unique_id=808270711]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 146.0
+offset_bottom = 23.0
+texture = SubResource("AtlasTexture_sw158")
+
+[node name="sounds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=1485734779]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 6.0
+offset_right = 94.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 9
+text = "sounds"
+
+[node name="all" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=140632191]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 26.0
+offset_right = 52.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "all"
+
+[node name="allSlider" type="HSlider" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=1390123287]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 22.0
+offset_right = 137.0
+offset_bottom = 38.0
+theme_override_icons/grabber = SubResource("AtlasTexture_i7nx7")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_5lakt")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mottj")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_fredc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ymyge")
+value = 50.0
+
+[node name="all1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=443040322]
+visible = false
+layout_mode = 0
+offset_left = 89.0
+offset_top = 26.0
+offset_right = 103.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+
+[node name="sfx" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=678790805]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 46.0
+offset_right = 55.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "sfx"
+
+[node name="sfxSlider" type="HSlider" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=1508342223]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 42.0
+offset_right = 137.0
+offset_bottom = 58.0
+theme_override_icons/grabber = SubResource("AtlasTexture_i7nx7")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_5lakt")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mottj")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_fredc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ymyge")
+value = 50.0
+
+[node name="sfx1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=1605833148]
+visible = false
+layout_mode = 0
+offset_left = 89.0
+offset_top = 46.0
+offset_right = 103.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+
+[node name="music" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=283691345]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 66.0
+offset_right = 52.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "music"
+
+[node name="musicSlider" type="HSlider" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=501477923]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 62.0
+offset_right = 137.0
+offset_bottom = 78.0
+theme_override_icons/grabber = SubResource("AtlasTexture_i7nx7")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_5lakt")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mottj")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_fredc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ymyge")
+value = 50.0
+
+[node name="music1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=1208011394]
+visible = false
+layout_mode = 0
+offset_left = 89.0
+offset_top = 66.0
+offset_right = 103.0
+offset_bottom = 74.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+
+[node name="gameplay" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer" unique_id=1212755440]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay" unique_id=802573956]
+layout_mode = 0
+offset_right = 146.0
+offset_bottom = 20.0
+texture = SubResource("AtlasTexture_sw158")
+
+[node name="gameplay" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=1105807006]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 6.0
+offset_right = 102.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 9
+text = "gameplay"
+
+[node name="countd" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=682918537]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 26.0
+offset_right = 52.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Countdown"
+
+[node name="cdSlider" type="HSlider" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=2110098358]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 22.0
+offset_right = 137.0
+offset_bottom = 38.0
+theme_override_icons/grabber = SubResource("AtlasTexture_i7nx7")
+theme_override_icons/grabber_highlight = SubResource("AtlasTexture_5lakt")
+theme_override_styles/slider = SubResource("StyleBoxFlat_mottj")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_fredc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ymyge")
+max_value = 5.0
+value = 3.0
+
+[node name="countd1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=922267443]
+visible = false
+layout_mode = 0
+offset_left = 98.0
+offset_top = 26.0
+offset_right = 103.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 8
+text = "3"
+horizontal_alignment = 1
+
+[node name="hpbars" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=2013299603]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 46.0
+offset_right = 83.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Hide healthbars"
+
+[node name="hbbarsb" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=2053350038]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 41.0
+offset_right = 137.0
+offset_bottom = 56.0
+focus_mode = 0
+flat = true
+
+[node name="hpbarsg" type="AnimatedSprite2D" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/hbbarsb" unique_id=1341396582]
+position = Vector2(7.5, 7.5)
+sprite_frames = SubResource("SpriteFrames_omhd3")
+animation = &"no"
+autoplay = "no"
+
+[node name="keybinds" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer" unique_id=22422766]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds" unique_id=642433958]
+layout_mode = 0
+offset_right = 146.0
+offset_bottom = 20.0
+texture = SubResource("AtlasTexture_sw158")
+
+[node name="keybinds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/TextureRect2" unique_id=531503155]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 7.0
+offset_right = 102.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 9
+text = "keybinds"
+
+[node name="VBOXkb" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds" unique_id=221892494]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 26.0
+offset_right = 141.0
+offset_bottom = 91.0
+theme_override_constants/separation = 8
+
+[node name="KB1" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb" unique_id=1814559493]
+layout_mode = 2
+
+[node name="kb1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB1" unique_id=1442990641]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "move"
+
+[node name="spacer" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB1" unique_id=1884014873]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="kb2" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB1" unique_id=518571185]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = " / <-  /    / ->"
+
+[node name="kb3" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB1/kb2" unique_id=871413697]
+layout_mode = 0
+offset_right = 6.0
+offset_bottom = 7.0
+rotation = 1.5707964
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "<-"
+
+[node name="kb4" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB1/kb2" unique_id=185385532]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 6.0
+offset_right = 38.0
+offset_bottom = 13.0
+rotation = -1.5707964
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "<-"
+
+[node name="KB2" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb" unique_id=2028617160]
+layout_mode = 2
+
+[node name="kb1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB2" unique_id=1391200211]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "shoot"
+
+[node name="spacer" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB2" unique_id=1847849271]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="kb2" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB2" unique_id=635778436]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Spacebar"
+
+[node name="KB3" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb" unique_id=519592848]
+layout_mode = 2
+
+[node name="kb1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB3" unique_id=1133455647]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "pause"
+
+[node name="spacer" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB3" unique_id=1939614521]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="kb2" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB3" unique_id=1155720672]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Esc"
+
+[node name="KB4" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb" unique_id=1813953965]
+layout_mode = 2
+
+[node name="kb1" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB4" unique_id=1072627176]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "restart"
+
+[node name="spacer" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB4" unique_id=1971844136]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="kb2" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/VBOXkb/KB4" unique_id=2085371947]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "R"
+
+[connection signal="mouse_entered" from="CanvasLayer/back" to="." method="_on_back_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/back" to="." method="_on_back_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/back" to="." method="_on_back_pressed"]
+[connection signal="drag_ended" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/allSlider" to="." method="_on_all_slider_drag_ended"]
+[connection signal="drag_started" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/allSlider" to="." method="_on_all_slider_drag_started"]
+[connection signal="gui_input" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/allSlider" to="." method="_on_all_slider_gui_input"]
+[connection signal="value_changed" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/allSlider" to="." method="_on_all_slider_value_changed"]
+[connection signal="drag_ended" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/sfxSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="drag_started" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/sfxSlider" to="." method="_on_sfx_slider_drag_started"]
+[connection signal="gui_input" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/sfxSlider" to="." method="_on_sfx_slider_gui_input"]
+[connection signal="value_changed" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/sfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="drag_ended" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/musicSlider" to="." method="_on_music_slider_drag_ended"]
+[connection signal="drag_started" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/musicSlider" to="." method="_on_music_slider_drag_started"]
+[connection signal="gui_input" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/musicSlider" to="." method="_on_music_slider_gui_input"]
+[connection signal="value_changed" from="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect/musicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/cdSlider" to="." method="_on_cd_slider_drag_ended"]
+[connection signal="drag_started" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/cdSlider" to="." method="_on_cd_slider_drag_started"]
+[connection signal="gui_input" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/cdSlider" to="." method="_on_cd_slider_gui_input"]
+[connection signal="value_changed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/cdSlider" to="." method="_on_cd_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/hbbarsb" to="." method="_on_hbbarsb_pressed"]

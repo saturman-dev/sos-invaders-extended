@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://6o0apg1kop5v"]
+
+[ext_resource type="Script" uid="uid://d3uqaodbkcfc" path="res://UI/HUD/overlives_bar.gd" id="1_uiqh3"]
+
+[node name="OverlivesBar" type="HBoxContainer" unique_id=52817040]
+alignment = 2
+script = ExtResource("1_uiqh3")

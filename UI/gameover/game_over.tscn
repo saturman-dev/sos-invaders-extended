@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://c7muf7dp82inr"]
+
+[ext_resource type="Script" uid="uid://dksowa3jrtejc" path="res://UI/gameover/game_over.gd" id="1_iglle"]
+[ext_resource type="Texture2D" uid="uid://cls8nj4707wrh" path="res://textures/a6.png" id="2_67l1h"]
+[ext_resource type="Texture2D" uid="uid://cujrbyhq5mwjp" path="res://textures/gameover.png" id="3_pb6xu"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="4_pb6xu"]
+
+[node name="GameOver" type="CanvasLayer" unique_id=326502182]
+process_mode = 3
+script = ExtResource("1_iglle")
+
+[node name="A6" type="Sprite2D" parent="." unique_id=1254048935]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(195.5, 120)
+scale = Vector2(1.525, 1)
+texture = ExtResource("2_67l1h")
+
+[node name="VBOX" type="VBoxContainer" parent="." unique_id=340293695]
+offset_left = 120.0
+offset_top = 40.0
+offset_right = 270.0
+offset_bottom = 200.0
+alignment = 1
+
+[node name="Gameo" type="HBoxContainer" parent="VBOX" unique_id=875289774]
+layout_mode = 2
+alignment = 1
+
+[node name="Gameov" type="Control" parent="VBOX/Gameo" unique_id=400810243]
+custom_minimum_size = Vector2(97, 13)
+layout_mode = 2
+
+[node name="Gameover" type="Sprite2D" parent="VBOX/Gameo/Gameov" unique_id=443453848]
+position = Vector2(48.5, 6.5)
+texture = ExtResource("3_pb6xu")
+
+[node name="Spacer" type="Control" parent="VBOX" unique_id=650814760]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Pt" type="HBoxContainer" parent="VBOX" unique_id=621816580]
+layout_mode = 2
+
+[node name="PtsL" type="Label" parent="VBOX/Pt" unique_id=965399767]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 10
+text = "Points:"
+
+[node name="Spacer2" type="Control" parent="VBOX/Pt" unique_id=1290273067]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Pts" type="Label" parent="VBOX/Pt" unique_id=1740704678]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="Pts2" type="Label" parent="VBOX/Pt/Pts" unique_id=321359003]
+visible = false
+layout_mode = 0
+offset_left = 3.0000153
+offset_top = -14.0
+offset_right = 35.000015
+offset_bottom = -9.0
+rotation = 0.34906584
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 5
+text = "New best!"
+
+[node name="Tim" type="HBoxContainer" parent="VBOX" unique_id=97803792]
+layout_mode = 2
+
+[node name="TimeL" type="Label" parent="VBOX/Tim" unique_id=1289527671]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 10
+text = "Time:"
+
+[node name="Spacer2" type="Control" parent="VBOX/Tim" unique_id=768341026]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Time" type="Label" parent="VBOX/Tim" unique_id=1718062772]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 10
+text = "0:00"
+
+[node name="Spacer2" type="Control" parent="VBOX" unique_id=1253672713]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Text" type="Control" parent="VBOX" unique_id=1030063266]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+
+[node name="Press" type="Label" parent="VBOX/Text" unique_id=1048616128]
+visible = false
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 10
+text = "Press [R] to restart"
+horizontal_alignment = 1
+
+[node name="esc to exit" type="Label" parent="VBOX/Text" unique_id=773523160]
+visible = false
+layout_mode = 0
+offset_top = 14.0
+offset_right = 150.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 7
+text = "[esc] - back to menu"
+horizontal_alignment = 1

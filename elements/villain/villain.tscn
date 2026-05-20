@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://dddtgdmmxsjul"]
+
+[ext_resource type="Script" uid="uid://c0y5jbqp8pdoy" path="res://elements/villain/villain.gd" id="1_14vvm"]
+[ext_resource type="Texture2D" uid="uid://dwgbyh6vadcd5" path="res://textures/jarsin.png" id="1_s324y"]
+[ext_resource type="Texture2D" uid="uid://djlopngkraimn" path="res://textures/slabo.png" id="3_1li8i"]
+[ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="3_5tfog"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14vvm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14vvm"]
+atlas = ExtResource("1_s324y")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1li8i"]
+atlas = ExtResource("1_s324y")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_da4rc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14vvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1li8i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5tfog"]
+radius = 40.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tfog"]
+atlas = ExtResource("3_1li8i")
+region = Rect2(0, 0, 110, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n07w8"]
+atlas = ExtResource("3_1li8i")
+region = Rect2(110, 0, 110, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_judyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tfog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n07w8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="villain" type="CharacterBody2D" unique_id=2093320812 groups=["enemies"]]
+material = SubResource("ShaderMaterial_14vvm")
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_14vvm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1895573202]
+sprite_frames = SubResource("SpriteFrames_da4rc")
+autoplay = "default"
+frame_progress = 0.05792608
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=707665576]
+shape = SubResource("CircleShape2D_5tfog")
+debug_color = Color(0.80784315, 0.3372549, 0.6313726, 0.39215687)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1220831151]
+target_position = Vector2(-70, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=545216706]
+target_position = Vector2(70, 0)
+
+[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("3_5tfog")]
+
+[node name="dmgstop" type="Timer" parent="." unique_id=2087813103]
+one_shot = true
+
+[node name="Slabo" type="AnimatedSprite2D" parent="." unique_id=542817029]
+visible = false
+position = Vector2(0, -5)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_judyc")
+autoplay = "default"
+frame_progress = 0.36066306
+
+[node name="dmgCldown" type="Timer" parent="." unique_id=1806675598]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="dmgCldown2" type="Timer" parent="." unique_id=748230550]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]

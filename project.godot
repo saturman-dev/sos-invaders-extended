@@ -1,0 +1,58 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="sos invaders prefinal"
+run/main_scene="uid://bipoqhhalsyp8"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="uid://diult6hm7bbdg"
+
+[autoload]
+
+Events="*uid://4vb8ga1xjbuf"
+Globals="*uid://biipd8y0af2iw"
+Saves="*uid://3bjc448xuoqj"
+Functions="*uid://ctwxpxw0mjenk"
+
+[display]
+
+window/size/viewport_width=390
+window/size/viewport_height=240
+window/size/borderless=true
+window/size/window_width_override=1560
+window/size/window_height_override=960
+window/stretch/aspect="keep_width"
+window/stretch/scale=4.0
+
+[global_group]
+
+player=""
+enemies=""
+bonuses="вуху донат"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_physics/layer_1="env"
+2d_physics/layer_2="spsp"
+2d_physics/layer_3="vln"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=3
+rendering_device/driver.windows="d3d12"

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ccgr3yvi0bmri"]
+
+[ext_resource type="Script" uid="uid://chg8m58my0mnr" path="res://bg_1.gd" id="1_qjax3"]
+[ext_resource type="Texture2D" uid="uid://c75sw53sbht8j" path="res://textures/bg.png" id="2_c6kox"]
+[ext_resource type="Shader" uid="uid://dljubrf2svfww" path="res://bg_1.gdshader" id="2_x85p0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cy34r"]
+shader = ExtResource("2_x85p0")
+shader_parameter/hue_offset = 0.0
+
+[node name="bg1" type="ParallaxBackground" unique_id=266714418]
+script = ExtResource("1_qjax3")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="." unique_id=1880675626]
+motion_mirroring = Vector2(0, 240)
+
+[node name="Bg" type="Sprite2D" parent="ParallaxLayer" unique_id=702513957]
+material = SubResource("ShaderMaterial_cy34r")
+position = Vector2(195, 120)
+scale = Vector2(0.63, 0.63)
+texture = ExtResource("2_c6kox")

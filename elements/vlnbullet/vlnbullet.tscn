@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dskuv0n5qk7a7"]
+
+[ext_resource type="Script" uid="uid://c6dhtnvw7ugo8" path="res://elements/vlnbullet/vlnbullet.gd" id="1_4agk3"]
+[ext_resource type="Texture2D" uid="uid://bfjp8clb840x" path="res://textures/vlnbullet.png" id="1_dlmbj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4agk3"]
+atlas = ExtResource("1_dlmbj")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgjnx"]
+atlas = ExtResource("1_dlmbj")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qb6or"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4agk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgjnx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_011pn"]
+radius = 2.0
+
+[node name="vlnbullet" type="CharacterBody2D" unique_id=378099452]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_4agk3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1638782197]
+sprite_frames = SubResource("SpriteFrames_qb6or")
+autoplay = "default"
+frame_progress = 0.8956758
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1358312238]
+shape = SubResource("CircleShape2D_011pn")
+debug_color = Color(0.99607843, 0, 0.20392157, 0.5882353)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=349887433]
+scale = Vector2(0.305, 0.305)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
