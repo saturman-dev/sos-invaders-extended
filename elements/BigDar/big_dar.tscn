@@ -3,7 +3,13 @@
 [ext_resource type="Script" uid="uid://dh44q6qwihunv" path="res://elements/BigDar/big_dar.gd" id="1_54n7x"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="2_54n7x"]
 [ext_resource type="Texture2D" uid="uid://l2clt1eillu2" path="res://textures/bigDar.png" id="2_i6iqp"]
+[ext_resource type="Shader" uid="uid://jvir6dwrf1ea" path="res://elements/BigDar/big_dar.gdshader" id="2_ljn8a"]
 [ext_resource type="Texture2D" uid="uid://e2y4855244l5" path="res://textures/slabovat.png" id="4_54n7x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_supck"]
+shader = ExtResource("2_ljn8a")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ljn8a"]
 atlas = ExtResource("2_i6iqp")
@@ -60,6 +66,7 @@ collision_mask = 3
 script = ExtResource("1_54n7x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304707848]
+material = SubResource("ShaderMaterial_supck")
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_ljn8a")
 autoplay = "default"

@@ -11,5 +11,7 @@ func end():
 	Functions.sfx_play("res://sounds/damage.mp3")
 	defsprite.play("end")
 	oversprite.play("end")
+	if Globals.lives == 0:
+		Functions.stop_all_sfx()
 	await defsprite.animation_finished
 	queue_free()

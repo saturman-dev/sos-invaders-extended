@@ -69,9 +69,11 @@ func dmg(source: Object, dam: float):
 	if source.hp <= 0:
 		source.hp = 0
 		if source.has_method("die"):
+			if source.has_method("damageAnimation"):
+				source.damageAnimation()
 			source.die()
 	else:
-		if source.sprite is Sprite2D:
+		if source.has_method("damageAnimation"):
 			source.damageAnimation()
 		else:
 			source.sprite.modulate = source.dmgColor
@@ -174,3 +176,21 @@ func checkHeal():
 		Saves.data["ever_got_heal_bonus"] = true
 		Functions.add_bonus("heal", Vector2(195.0, 70.0))
 		Functions.notify("New \"Heal\" bonus added!!", "Go catch it!")
+
+func flash(fade_in: float, fade_out: float, hold: float = 0.0, visibility: float = 1.0, color: Color = Color.WHITE):
+	var canv := CanvasLayer.new()
+	canv.layer = 50
+	var flasher := ColorRect.new()
+	flasher.color = color
+	flasher.global_position = Vector2(-100, -100)
+	flasher.size = Vector2(590, 440)
+	flasher.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	flasher.modulate.a = 0.0
+	add_child(canv)
+	canv.add_child(flasher)
+	var ftween: Tween
+	ftween = create_tween()
+	ftween.tween_property(flasher, "modulate:a", visibility, fade_in)
+	await get_tree().create_timer(hold, false).timeout
+	ftween = create_tween()
+	ftween.tween_property(flasher, "modulate:a", 0.0, fade_out)

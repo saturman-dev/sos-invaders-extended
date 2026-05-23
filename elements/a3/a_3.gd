@@ -139,6 +139,13 @@ func die():
 	await get_tree().create_timer(afterdead, false).timeout
 	queue_free()
 
+var dmgtween: Tween
+func damageAnimation():
+	sprite.material.set_shader_parameter("flash_modifier", 1.0)
+	if dmgtween and dmgtween.is_running():
+		dmgtween.kill()
+	dmgtween = create_tween()
+	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.2)
 
 var ATween: Tween
 var BTween: Tween

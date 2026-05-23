@@ -79,5 +79,5 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		if Globals.game_running == true:
 			$pauseC.add_child(pause.instantiate())
-	#if event.is_action_pressed("ui_accept"):
-	#	Functions.notify()
+	if event.is_action_pressed("ui_accept"):
+		pass

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://lna63yx2e5fn"]
+
+[ext_resource type="Script" uid="uid://d3s0ywbl23ntw" path="res://UI/bosshpbar/bosshpbar.gd" id="1_3lcev"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="1_piywj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3lcev"]
+size = Vector2(390, 214)
+
+[node name="bosshpbar" type="Control" unique_id=214188899]
+custom_minimum_size = Vector2(390, 25)
+layout_mode = 3
+anchors_preset = 0
+offset_top = 215.0
+offset_right = 390.0
+offset_bottom = 240.0
+script = ExtResource("1_3lcev")
+
+[node name="barBlack" type="ColorRect" parent="." unique_id=291126693]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 386.0
+offset_bottom = 25.0
+color = Color(0, 0, 0, 1)
+
+[node name="barYell" type="ColorRect" parent="." unique_id=783310992]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 384.0
+offset_bottom = 23.0
+color = Color(1, 1, 0, 1)
+
+[node name="barRed" type="ColorRect" parent="." unique_id=1727108349]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 384.0
+offset_bottom = 23.0
+color = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=105829806]
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("1_piywj")
+text = "BOSSNAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="yellwait" type="Timer" parent="." unique_id=59300858]
+wait_time = 0.35
+one_shot = true
+
+[node name="afterdead" type="Timer" parent="." unique_id=1185811146]
+wait_time = 2.0
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1945282182]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1340357197]
+position = Vector2(195, 98)
+shape = SubResource("RectangleShape2D_3lcev")
+
+[connection signal="timeout" from="yellwait" to="." method="_on_yellwait_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

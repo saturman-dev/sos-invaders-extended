@@ -2,10 +2,17 @@
 
 [ext_resource type="Script" uid="uid://c0y5jbqp8pdoy" path="res://elements/villain/villain.gd" id="1_14vvm"]
 [ext_resource type="Texture2D" uid="uid://dwgbyh6vadcd5" path="res://textures/jarsin.png" id="1_s324y"]
+[ext_resource type="Shader" uid="uid://cs6g5se4cslba" path="res://elements/villain/villain.gdshader" id="2_n07w8"]
 [ext_resource type="Texture2D" uid="uid://djlopngkraimn" path="res://textures/slabo.png" id="3_1li8i"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="3_5tfog"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_14vvm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_judyc"]
+resource_local_to_scene = true
+shader = ExtResource("2_n07w8")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_14vvm"]
 atlas = ExtResource("1_s324y")
@@ -62,6 +69,7 @@ collision_mask = 3
 script = ExtResource("1_14vvm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1895573202]
+material = SubResource("ShaderMaterial_judyc")
 sprite_frames = SubResource("SpriteFrames_da4rc")
 autoplay = "default"
 frame_progress = 0.05792608

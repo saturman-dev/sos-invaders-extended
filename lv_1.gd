@@ -3,6 +3,7 @@ extends Node2D
 
 var bossfighting = false
 var flseye_diffi = diffi_range[0]
+var shaurman_diffi = 9999
 
 # ENEMIES COOLDOWN
 var defCldown = 2
@@ -21,6 +22,9 @@ const bigDar = preload("res://elements/BigDar/big_dar.tscn")
 const a3 = preload("res://elements/a3/a_3.tscn")
 const wertue = preload("res://elements/wertue/wertue.tscn")
 
+#  BOSSES
+const flseye = preload("res://elements/flseye/flseye.tscn")
+
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
@@ -35,7 +39,11 @@ func _ready() -> void:
 	Events.lives_changed.connect(func(lives): check_game_over())
 	Events.points_changed.connect(func(points): check_bossfighting())
 	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
+	Events.bossfight_end.connect(func(): end_bossfight())
 	Globals.newbest = false
+
+func end_bossfight():
+	bossfighting = false
 
 func check_game_over():
 	if Globals.lives <= 0:
@@ -45,13 +53,14 @@ func check_game_over():
 func check_bossfighting():
 	await get_tree().process_frame
 	if bossfighting == true and get_tree().get_nodes_in_group("enemies").size() == 0:
-		print(0)
-		Events.bossfight_start.emit("flseye")
+		if diffi < flseye_diffi + 50:
+			Events.bossfight_start.emit("flseye")
 
 func gameOver():
 	if Globals.pts > Saves.data["score"]:
 		Saves.data["score"] = Globals.pts
 		Globals.newbest = true
+	Functions.stop_all_sfx()
 	get_tree().paused = true
 	print("RIP Saraf")
 	await get_tree().create_timer(1.0).timeout
@@ -69,12 +78,19 @@ var time2 = 0
 
 var diffsec = 0.01
 
+var already_bossfighted = false
+var already_bossfighted_2 = false
+
 func _process(delta: float) -> void:
 	if diffi < maxDiffi and bossfighting == false:
 		diffi += delta * 1.0
 		Globals.diffi = diffi
-		if diffi > flseye_diffi:
+		if diffi > flseye_diffi and diffi < flseye_diffi + 50 and already_bossfighted == false:
 			bossfighting = true
+			already_bossfighted = true
+		if diffi > shaurman_diffi and diffi < shaurman_diffi + 50 and already_bossfighted_2 == false:
+			bossfighting = true
+			already_bossfighted_2 = true
 	timer += delta
 	time += delta
 	if diffi > diffsec:
@@ -107,11 +123,12 @@ func timech():
 func addBonus(bonus_type: String):
 	$UI.addBonus(bonus_type)
 
-const diffi_range = [15, 35, 55, 80, 105, 135, 175, 230]
+const diffi_range = [4, 35, 55, 80, 105, 135, 175, 230]
 
 func spawn_enemy():
 	if bossfighting == true:
 		return
+	print("hi")
 	if diffi < diffi_range[0]:
 		spawn_darsinGroup()
 	elif diffi < diffi_range[1]:
@@ -223,7 +240,8 @@ func spawn_wertue():
 	add_child(Wertue)
 
 func spawn_boss_flseye():
+	await get_tree().create_timer(3.0, false).timeout
 	print("BOSSFIGHT FLSEYE")
-	var Wertue = wertue.instantiate()
-	Wertue.position = Vector2(randf_range(60, 330), -30)
-	add_child(Wertue)
+	var Flseye = flseye.instantiate()
+	Flseye.position = Vector2(390.0/2, 50.0)
+	add_child(Flseye)

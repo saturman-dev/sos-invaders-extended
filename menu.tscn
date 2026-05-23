@@ -544,6 +544,18 @@ script = ExtResource("1_ouk20")
 position = Vector2(15, 230)
 texture = ExtResource("2_4hy44")
 
+[node name="Label" type="Label" parent="CanvasLayer/StrLogo" unique_id=2087638121]
+offset_left = 184.0
+offset_top = -2.0
+offset_right = 559.0
+offset_bottom = 13.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.8980392, 1, 0, 1)
+theme_override_fonts/font = ExtResource("6_l48gv")
+text = "v0.0 (unreleased)"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Logo" type="Sprite2D" parent="CanvasLayer" unique_id=2026627514]
 position = Vector2(197, 70)
 scale = Vector2(0.5, 0.5)

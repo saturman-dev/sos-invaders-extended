@@ -91,6 +91,14 @@ func beam_dmg(dmg: float):
 		if hp <= 0:
 			Globals.change_points(givepts / 2)
 
+var dmgtween: Tween
+func damageAnimation():
+	sprite.material.set_shader_parameter("flash_modifier", 1.0)
+	if dmgtween and dmgtween.is_running():
+		dmgtween.kill()
+	dmgtween = create_tween()
+	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.2)
+
 func die():
 	remove_from_group("enemies")
 	if not hitbox:

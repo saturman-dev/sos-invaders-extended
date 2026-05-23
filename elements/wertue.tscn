@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://b3akrd7uof8ej"]
+
+[ext_resource type="Script" uid="uid://b47gtrv67j5ko" path="res://elements/flseye/shield.gd" id="1_yskto"]
+[ext_resource type="PackedScene" path="res://elements/flseye/wertue2/wing_right.tscn" id="2_uvj0l"]
+[ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="3_lvahr"]
+[ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="4_8ayf2"]
+[ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="5_6455n"]
+[ext_resource type="Texture2D" uid="uid://ccs21h62xd5bk" path="res://textures/enrageEffect.png" id="6_apg2l"]
+[ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_7c42j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rjny"]
+atlas = ExtResource("3_lvahr")
+region = Rect2(0, 0, 94, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hj3l"]
+atlas = ExtResource("3_lvahr")
+region = Rect2(94, 53, 94, 94)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h36qe"]
+radius = 59.999992
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7s1q"]
+atlas = ExtResource("5_6455n")
+region = Rect2(0, 0, 140, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvd0o"]
+atlas = ExtResource("5_6455n")
+region = Rect2(140, 0, 140, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_apj7r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7s1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvd0o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="wertue" type="CharacterBody2D" unique_id=73654707 groups=["enemies"]]
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_yskto")
+
+[node name="wingRight" parent="." unique_id=1902289196 instance=ExtResource("2_uvj0l")]
+position = Vector2(0, 3.8146973e-06)
+scale = Vector2(1.25, 1.25)
+
+[node name="wingLeft" parent="." unique_id=1355497482 instance=ExtResource("2_uvj0l")]
+position = Vector2(0, 3.8146973e-06)
+scale = Vector2(-1.25, 1.25)
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=1212913958]
+scale = Vector2(1.25, 1.25)
+texture = SubResource("AtlasTexture_7rjny")
+
+[node name="circle" type="Sprite2D" parent="AnimatedSprite2D" unique_id=863114329]
+visible = false
+texture = SubResource("AtlasTexture_3hj3l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2145923726]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_h36qe")
+debug_color = Color(0.80784315, 0.3372549, 0.6313726, 0.39215687)
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=940993637]
+target_position = Vector2(-250, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=1683368942]
+target_position = Vector2(250, 0)
+
+[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("4_8ayf2")]
+offset_top = -103.99997
+offset_bottom = -85.99997
+
+[node name="dmgstop" type="Timer" parent="." unique_id=810226505]
+one_shot = true
+
+[node name="NormTema" type="AnimatedSprite2D" parent="." unique_id=241245243]
+visible = false
+position = Vector2(0, -5)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_apj7r")
+autoplay = "default"
+
+[node name="dmgCldown" type="Timer" parent="." unique_id=1453494047]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="dmgCldown2" type="Timer" parent="." unique_id=593117829]
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="cldown" type="Timer" parent="." unique_id=1540107542]
+wait_time = 3.0
+one_shot = true
+
+[node name="shotTimer" type="Timer" parent="." unique_id=1248246866]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="enrageEffect" type="Sprite2D" parent="." unique_id=953057591]
+visible = false
+texture = ExtResource("6_apg2l")
+
+[node name="ENRAGED" type="AudioStreamPlayer2D" parent="." unique_id=328184531]
+stream = ExtResource("7_7c42j")
+volume_db = 13.0
+bus = &"SFX"
+
+[connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
+[connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

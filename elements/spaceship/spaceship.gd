@@ -5,13 +5,14 @@ const rocket_scene = preload("res://elements/bullet/bullet.tscn")
 @onready var cdt := $CD
 @onready var shit := $ShootEffect
 @onready var sprite := $sprite
+@onready var trail := $Trail
 var cd = 0.2
 var defcd  = cd
 var INVINCIBLE := 1.5
 var dmg = 1.0
 
-@export var speed = 150.0
-@export var acceleration = speed * 6
+@export var speed = 160.0
+@export var acceleration = speed * 8
 
 @onready var defShitSize = shit.scale
 var trioShitSize = Vector2(4.5, 4.5)
@@ -20,6 +21,7 @@ func _ready() -> void:
 	Globals.bonusSpeedActive = false
 	Globals.bonusTrioActive = false
 	Globals.bonusSplashActive = false
+	trail.target = self
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("ui_accept"):
@@ -71,6 +73,7 @@ func shot():
 var is_invincible := false
 
 func takeDmg():
+	Functions.flash(0.0, 1.0, 0.05, 0.7, Color("a60000"))
 	is_invincible = true
 	set_collision_layer_value(2, false)
 	Globals.apply_shake(5.0)

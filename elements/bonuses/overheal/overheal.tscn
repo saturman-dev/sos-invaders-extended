@@ -51,7 +51,7 @@ animations = [{
 
 [node name="overheal" type="Area2D" unique_id=562743611 groups=["bonuses"]]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 32
 script = ExtResource("1_6tfdu")
 
 [node name="circle" type="Sprite2D" parent="." unique_id=983525426]

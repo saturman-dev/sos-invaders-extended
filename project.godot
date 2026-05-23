@@ -37,6 +37,8 @@ window/stretch/scale=4.0
 player=""
 enemies=""
 bonuses="вуху донат"
+bosses=""
+flseye_attack=""
 
 [input_devices]
 
@@ -44,9 +46,11 @@ pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 
-2d_physics/layer_1="env"
-2d_physics/layer_2="spsp"
-2d_physics/layer_3="vln"
+2d_physics/layer_1="environment"
+2d_physics/layer_2="spaceship"
+2d_physics/layer_3="enemies"
+2d_physics/layer_6="bonuses"
+2d_physics/layer_8="walls only"
 
 [physics]
 

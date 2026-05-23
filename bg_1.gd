@@ -1,6 +1,7 @@
 extends ParallaxBackground
 
-@onready var sprite = $ParallaxLayer/Bg
+@onready var sprite := $ParallaxLayer/Bg
+@onready var black := $ParallaxLayer/ColorRect
 
 var defspeed := 10.0
 var speed := 10.0
@@ -8,6 +9,7 @@ var hue := 0.0
 var huespeed := 0.0
 
 func _ready() -> void:
+	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	sprite.material.set_shader_parameter("hue_offset", hue)
 
 func _process(delta: float) -> void:
@@ -18,3 +20,9 @@ func _process(delta: float) -> void:
 		if Globals.diffi > 0:
 			hue += huespeed * delta
 			sprite.material.set_shader_parameter("hue_offset", hue)
+
+func spawn_boss_flseye():
+	var btween := create_tween()
+	btween.tween_property(black, "modulate:a", 1.0, 2.0)
+	await Events.boss_animation_finished
+	black.modulate.a = 0.0

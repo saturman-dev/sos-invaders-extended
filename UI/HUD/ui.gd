@@ -10,13 +10,14 @@ var ptoff = 0.3
 @onready var pts2 := $Label2
 @onready var multi1 := $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/multiplyer
 @onready var multi2 := $multiplyer2
-@onready var bonuses := $activeBonuses
+@onready var bonuses := $VBoxContainer/activeBonuses
 
 var ATween: Tween
 var BTween: Tween
 
 func _ready() -> void:
-	Events.points_changed.connect(update_points)
+	Events.bossfight_start.connect(func(type): add_hpbar(type))
+	Events.points_changed.connect(func(points): update_points(points))
 	if score > 0:
 		highest.text = str("/ ", int(score))
 	else:
@@ -29,15 +30,20 @@ func align_ptsPosition():
 	pts2.global_position = pts1.global_position
 
 func update_points(points: int):
+	if ATween and ATween.is_running():
+		ATween.kill()
 	align_ptsPosition()
 	pts1.modulate.a = 0.0
-	pts1.text = str(points)
+	pts1.text = str(Globals.points)
 	Globals.pts = points
 	pts2.text = pts1.text
 	pts2.pivot_offset = pts2.size / 2
 	pts2.modulate = Color.YELLOW
 	ATween = create_tween().set_parallel(true)
-	ATween.tween_property(pts2, "scale", Vector2(ptsize, ptsize), pton)
+	if points >= 50:
+		ATween.tween_property(pts2, "scale", Vector2(ptsize * 1.5, ptsize * 1.5), pton * 2)
+	else:
+		ATween.tween_property(pts2, "scale", Vector2(ptsize, ptsize), pton)
 	await ATween.finished
 	BTween = create_tween().set_parallel(true)
 	BTween.tween_property(pts2, "modulate", Color.WHITE, pton + ptoff)
@@ -76,3 +82,12 @@ func addBonus(bonus_type: String):
 	if bonus_type == "splash":
 		var SplashUI = splashUI.instantiate()
 		bonuses.add_child(SplashUI)
+
+const bossbar = preload("res://UI/bosshpbar/bosshpbar.tscn")
+
+func add_hpbar(type):
+	await Events.boss_animation_finished
+	var Bossbar = bossbar.instantiate()
+	add_child(Bossbar)
+	if type == "flseye":
+		Bossbar.label.text = "FLSEYE"

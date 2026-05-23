@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bhbaxp8ugf7e6"]
+
+[ext_resource type="Script" uid="uid://dnvchpfvj5q72" path="res://elements/flseye/flseye_laser.gd" id="1_omln1"]
+[ext_resource type="Texture2D" uid="uid://c7lbjvqxcdjjj" path="res://textures/flseyeLaser2.png" id="2_lcqc4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grg43"]
+size = Vector2(2, 398)
+
+[node name="flseyeLaser" type="Area2D" unique_id=1631263153]
+rotation = 3.1415927
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_omln1")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1229295199]
+texture_repeat = 2
+offset_left = -6.5
+offset_right = 6.5
+offset_bottom = 500.0
+pivot_offset_ratio = Vector2(0.5, 0)
+texture = ExtResource("2_lcqc4")
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1871240721]
+position = Vector2(0, 199)
+shape = SubResource("RectangleShape2D_grg43")

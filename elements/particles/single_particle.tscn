@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b1ebuyv7scd7o"]
+
+[ext_resource type="Script" uid="uid://bqo2lv336geur" path="res://elements/particles/single_particle.gd" id="1_aan8u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ku03r"]
+radius = 5.0
+
+[node name="singleParticle" type="CharacterBody2D" unique_id=1435211631]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("1_aan8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1259213460]
+shape = SubResource("CircleShape2D_ku03r")

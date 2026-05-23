@@ -1,9 +1,20 @@
 [gd_scene format=3 uid="uid://dqspf5wgnreyx"]
 
 [ext_resource type="Texture2D" uid="uid://h5jirjw1c7uy" path="res://textures/a3.png" id="1_0j076"]
+[ext_resource type="Shader" uid="uid://nrworllrgyb6" path="res://elements/a3/a_3.gdshader" id="1_6u462"]
 [ext_resource type="Script" uid="uid://7ie0kk4ij0r6" path="res://elements/a3/a_3.gd" id="1_y2la4"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="2_y2la4"]
 [ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_y2la4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xaife"]
+shader = ExtResource("1_6u462")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6u462"]
+shader = ExtResource("1_6u462")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2la4"]
 atlas = ExtResource("1_0j076")
@@ -94,12 +105,14 @@ animations = [{
 }]
 
 [node name="a3" type="CharacterBody2D" unique_id=73654707 groups=["enemies"]]
+material = SubResource("ShaderMaterial_xaife")
 scale = Vector2(0.2, 0.2)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_y2la4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1882523190]
+material = SubResource("ShaderMaterial_6u462")
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_xaife")
 animation = &"def"

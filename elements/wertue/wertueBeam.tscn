@@ -1,29 +1,11 @@
 [gd_scene format=3 uid="uid://ccqvkmg4ebvs8"]
 
 [ext_resource type="Script" uid="uid://bpt72xgehmiq" path="res://elements/wertue/wertue_beam.gd" id="1_e1pic"]
-[ext_resource type="Shader" uid="uid://b32gglf31os70" path="res://elements/wertue/wertueBeam.gdshader" id="2_cnmiy"]
-[ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="2_xmf5v"]
+[ext_resource type="Texture2D" uid="uid://gsv6gi5g1j1o" path="res://textures/wertueSlabost.png" id="2_2d0jn"]
+[ext_resource type="Texture2D" uid="uid://bf7en40ddb8p6" path="res://textures/wertueWarning.png" id="3_4d0o7"]
 [ext_resource type="AudioStream" uid="uid://heha5l0mrh3x" path="res://sounds/wertuePreparing.mp3" id="3_8wmr8"]
+[ext_resource type="Texture2D" uid="uid://dyko52r2gcngr" path="res://textures/wertueLaser.png" id="4_5b0o4"]
 [ext_resource type="AudioStream" uid="uid://cummi6ocb8wi4" path="res://sounds/wertueAttackLoop.mp3" id="4_cnmiy"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oqk33"]
-atlas = ExtResource("2_xmf5v")
-region = Rect2(220, 32, 180, 16)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_js5m3"]
-shader = ExtResource("2_cnmiy")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8wmr8"]
-atlas = ExtResource("2_xmf5v")
-region = Rect2(220, 0, 180, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cnmiy"]
-atlas = ExtResource("2_xmf5v")
-region = Rect2(220, 16, 180, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_js5m3"]
-atlas = ExtResource("2_xmf5v")
-region = Rect2(220, 32, 180, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqk33"]
 size = Vector2(35.38462, 238.46156)
@@ -35,33 +17,40 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_e1pic")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1495472528]
+[node name="slabost" type="TextureRect" parent="." unique_id=1495472528]
+modulate = Color(1, 1, 1, 0.702)
 texture_repeat = 2
 offset_left = -18.0
+offset_top = -240.0
 offset_right = 162.0
-offset_bottom = 16.0
+offset_bottom = 2160.0
 scale = Vector2(0.2, 0.2)
-texture = SubResource("AtlasTexture_oqk33")
+texture = ExtResource("2_2d0jn")
 stretch_mode = 1
 
-[node name="slabost" type="Sprite2D" parent="." unique_id=2142346362]
+[node name="warning" type="TextureRect" parent="." unique_id=2144099431]
 visible = false
-modulate = Color(1, 1, 1, 0.70000005)
-material = SubResource("ShaderMaterial_js5m3")
-scale = Vector2(0.2, 30)
-texture = SubResource("AtlasTexture_8wmr8")
-region_rect = Rect2(0, 0, 180, 160)
+modulate = Color(1, 1, 1, 0.7019608)
+texture_repeat = 2
+offset_left = -18.0
+offset_top = -240.0
+offset_right = 162.0
+offset_bottom = 2160.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_4d0o7")
+stretch_mode = 1
 
-[node name="warning" type="Sprite2D" parent="." unique_id=1709358516]
+[node name="laser" type="TextureRect" parent="." unique_id=734654203]
 visible = false
-modulate = Color(1, 1, 1, 0.5)
-scale = Vector2(0.2, 30)
-texture = SubResource("AtlasTexture_cnmiy")
-
-[node name="laser" type="Sprite2D" parent="." unique_id=493972212]
-visible = false
-scale = Vector2(0.2, 30)
-texture = SubResource("AtlasTexture_js5m3")
+modulate = Color(1, 1, 1, 0.7019608)
+texture_repeat = 2
+offset_left = -18.0
+offset_top = -240.0
+offset_right = 162.0
+offset_bottom = 2160.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_5b0o4")
+stretch_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1297896626]
 visible = false

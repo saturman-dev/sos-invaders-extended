@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cls8nj4707wrh" path="res://textures/a6.png" id="2_67l1h"]
 [ext_resource type="Texture2D" uid="uid://cujrbyhq5mwjp" path="res://textures/gameover.png" id="3_pb6xu"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="4_pb6xu"]
+[ext_resource type="AudioStream" uid="uid://cfgqy6apyx13g" path="res://sounds/gameOver.mp3" id="5_0b4p0"]
 
 [node name="GameOver" type="CanvasLayer" unique_id=326502182]
 process_mode = 3
@@ -11,8 +12,8 @@ script = ExtResource("1_iglle")
 
 [node name="A6" type="Sprite2D" parent="." unique_id=1254048935]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(195.5, 120)
-scale = Vector2(1.525, 1)
+position = Vector2(195.00002, 120)
+scale = Vector2(1.5390626, 1.0166668)
 texture = ExtResource("2_67l1h")
 
 [node name="VBOX" type="VBoxContainer" parent="." unique_id=340293695]
@@ -122,3 +123,8 @@ theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 7
 text = "[esc] - back to menu"
 horizontal_alignment = 1
+
+[node name="music" type="AudioStreamPlayer2D" parent="." unique_id=1854068831]
+stream = ExtResource("5_0b4p0")
+volume_db = 10.0
+autoplay = true

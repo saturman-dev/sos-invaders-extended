@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bfc70u5w4dnn6" path="res://elements/spaceship/spaceship.gd" id="1_44xa4"]
 [ext_resource type="Texture2D" uid="uid://k5ahhlm4kbx3" path="res://textures/nickname.png" id="1_uypcs"]
 [ext_resource type="Texture2D" uid="uid://cquyi4h5570h8" path="res://textures/nicknameTrio.png" id="2_a7wa0"]
+[ext_resource type="PackedScene" uid="uid://ck7ioqmrjuli0" path="res://elements/trail/trail.tscn" id="2_g1k5q"]
 [ext_resource type="Texture2D" uid="uid://b5lrd0wgykfk8" path="res://textures/dmg.png" id="3_yhm16"]
 [ext_resource type="Texture2D" uid="uid://cp5jumw332i01" path="res://textures/shootEffect.png" id="4_oe7yg"]
 [ext_resource type="Texture2D" uid="uid://lu554cummowp" path="res://textures/bonus.png" id="6_g1k5q"]
@@ -169,9 +170,12 @@ animations = [{
 [node name="spaceship" type="CharacterBody2D" unique_id=1792907597 groups=["player"]]
 z_index = 1
 scale = Vector2(0.8, 0.8)
-collision_layer = 2
+collision_layer = 34
 collision_mask = 9
 script = ExtResource("1_44xa4")
+
+[node name="Trail" parent="." unique_id=1681703106 instance=ExtResource("2_g1k5q")]
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="NicknameTrio" type="Sprite2D" parent="." unique_id=1535745749]
 visible = false
@@ -181,8 +185,10 @@ texture = ExtResource("2_a7wa0")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=96751793]
 sprite_frames = SubResource("SpriteFrames_x3hdb")
-animation = &"def"
+animation = &"dmg"
 autoplay = "def"
+frame = 2
+frame_progress = 0.2698379
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1340923221]
 scale = Vector2(2.5, 2.5)
