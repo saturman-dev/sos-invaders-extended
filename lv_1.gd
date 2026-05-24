@@ -57,8 +57,8 @@ func check_bossfighting():
 			Events.bossfight_start.emit("flseye")
 
 func gameOver():
-	if Globals.pts > Saves.data["score"]:
-		Saves.data["score"] = Globals.pts
+	if Globals.points > Saves.data["score"]:
+		Saves.data["score"] = Globals.points
 		Globals.newbest = true
 	Functions.stop_all_sfx()
 	get_tree().paused = true

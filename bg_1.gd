@@ -3,14 +3,33 @@ extends ParallaxBackground
 @onready var sprite := $ParallaxLayer/Bg
 @onready var black := $ParallaxLayer2/ColorRect
 
+@onready var wall1 := $ParallaxLayer2/Wall
+@onready var wall2 := $ParallaxLayer2/Wall2
+@onready var wall3 := $ParallaxLayer2/Wall3
+@onready var wall4 := $ParallaxLayer2/Wall4
+
 var defspeed := 10.0
 var speed := 10.0
 var hue := 0.0
 var huespeed := 0.0
 
+var loadOffset = 30
+var loadTrans = Tween.TRANS_EXPO
+var loadTime = 7.5
 func _ready() -> void:
 	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	sprite.material.set_shader_parameter("hue_offset", hue)
+	wall1.material.set_shader_parameter("hue_offset", hue)
+	wall3.material.set_shader_parameter("hue_offset", hue)
+	wall1.position.x -= loadOffset
+	wall2.position.x -= loadOffset
+	wall3.position.x += loadOffset
+	wall4.position.x += loadOffset
+	var s = create_tween()
+	s.tween_property(wall1, "position:x", loadOffset, loadTime).as_relative().set_trans(loadTrans).set_ease(Tween.EASE_OUT)
+	s.parallel().tween_property(wall2, "position:x", loadOffset, loadTime).as_relative().set_trans(loadTrans).set_ease(Tween.EASE_OUT)
+	s.parallel().tween_property(wall3, "position:x", -loadOffset, loadTime).as_relative().set_trans(loadTrans).set_ease(Tween.EASE_OUT)
+	s.parallel().tween_property(wall4, "position:x", -loadOffset, loadTime).as_relative().set_trans(loadTrans).set_ease(Tween.EASE_OUT)
 
 func _process(delta: float) -> void:
 	if Globals.bgStay == true:
@@ -22,8 +41,8 @@ func _process(delta: float) -> void:
 		if Globals.diffi > 0:
 			hue += huespeed * delta
 			sprite.material.set_shader_parameter("hue_offset", hue)
-			$ParallaxLayer2/Wall.material.set_shader_parameter("hue_offset", hue)
-			$ParallaxLayer2/Wall3.material.set_shader_parameter("hue_offset", hue)
+			wall1.material.set_shader_parameter("hue_offset", hue)
+			wall3.material.set_shader_parameter("hue_offset", hue)
 
 func spawn_boss_flseye():
 	var btween := create_tween()

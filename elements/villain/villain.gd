@@ -74,9 +74,9 @@ func damageAnimation():
 
 func die():
 	remove_from_group("enemies")
-	Functions.dead_enemy_explosion(self)
 	if not hitbox:
 		return
+	Functions.dead_enemy_explosion(self)
 	Saves.data["killed_darsins"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1

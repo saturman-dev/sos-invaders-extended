@@ -110,7 +110,7 @@ func _on_laser_time_timeout() -> void:
 	var looptween = create_tween()
 	looptween.tween_property(attackLoop, "pitch_scale", 0.7, laserTime.wait_time/2)
 	var lasertween = create_tween()
-	lasertween.tween_property(self, "scale:x", 0.0, laserTime.wait_time/2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	lasertween.tween_property(self, "global_scale:x", 0.0, laserTime.wait_time/2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await lasertween.finished
 	attackLoop.stop()
 	if wertue:

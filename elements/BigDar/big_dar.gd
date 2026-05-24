@@ -105,9 +105,9 @@ func damageAnimation():
 
 func die():
 	remove_from_group("enemies")
-	Functions.mid_enemy_explosion(self)
 	if not hitbox:
 		return
+	Functions.mid_enemy_explosion(self)
 	Saves.data["killed_bigdars"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1

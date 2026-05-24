@@ -49,7 +49,7 @@ texture = ExtResource("4_x85p0")
 
 [node name="Wall2" type="Sprite2D" parent="ParallaxLayer2" unique_id=314528366]
 modulate = Color(0, 0, 0, 0.5)
-position = Vector2(29, 120)
+position = Vector2(29, 121)
 scale = Vector2(1, -1)
 texture = ExtResource("4_x85p0")
 
@@ -61,7 +61,7 @@ texture = ExtResource("4_x85p0")
 
 [node name="Wall4" type="Sprite2D" parent="ParallaxLayer2" unique_id=872613706]
 modulate = Color(0, 0, 0, 0.5)
-position = Vector2(361, 120)
+position = Vector2(361, 121)
 scale = Vector2(-1, 1)
 texture = ExtResource("4_x85p0")
 

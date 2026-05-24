@@ -48,6 +48,7 @@ var overlives := 0
 
 func change_points(diff: int):
 	points += diff
+	pts += diff
 	Events.points_added.emit(diff)
 	Events.points_changed.emit(points)
 	if Saves.data["ever_got_overheal_bonus"] == false and Saves.data["killed_enemies"] >= needForOverheal:

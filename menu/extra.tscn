@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="9_f3lx7"]
 [ext_resource type="Texture2D" uid="uid://h5jirjw1c7uy" path="res://textures/a3.png" id="9_oa725"]
 [ext_resource type="PackedScene" uid="uid://o5xip0drl264" path="res://elements/wertue/wing_right.tscn" id="10_f3lx7"]
+[ext_resource type="Texture2D" uid="uid://c2w2itvx7qp1d" path="res://textures/flseye.png" id="12_f11j0"]
 [ext_resource type="Texture2D" uid="uid://cdmi8edk3ityv" path="res://textures/bonusHeal.png" id="12_xr6wq"]
+[ext_resource type="Texture2D" uid="uid://bylip2xfir8of" path="res://textures/flseyeSquare.png" id="13_iwq1c"]
 [ext_resource type="Texture2D" uid="uid://4d6u251a4gex" path="res://textures/bonusOverheal.png" id="13_oovj8"]
 [ext_resource type="Texture2D" uid="uid://bkvcnsuudqv20" path="res://textures/bonusSplash.png" id="14_14r56"]
 [ext_resource type="Texture2D" uid="uid://byepx10skb5c7" path="res://textures/bonusTrio.png" id="15_e3bvy"]
@@ -228,6 +230,84 @@ animations = [{
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwec3"]
 atlas = ExtResource("9_f3lx7")
 region = Rect2(0, 0, 93, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofxwr"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdnvc"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqko2"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3kk1"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntvc6"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkh8s"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6os6c"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55na7"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmp71"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwtpt"]
+atlas = ExtResource("12_f11j0")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iwq1c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofxwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdnvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqko2")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_c3kk1")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_ntvc6")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_kkh8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6os6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55na7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmp71")
+}, {
+"duration": 35.0,
+"texture": SubResource("AtlasTexture_mwtpt")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 8.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_113gv"]
 atlas = ExtResource("5_f3lx7")
@@ -492,6 +572,7 @@ offset_top = 51.0
 offset_right = 268.0
 offset_bottom = 197.0
 theme = SubResource("Theme_e3bvy")
+scroll_vertical = 112
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer" unique_id=590071018]
 layout_mode = 2
@@ -823,6 +904,93 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
 [node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue" unique_id=22636482]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="flseye" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=842765154]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="beginner" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye" unique_id=1693337219]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="icon" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye" unique_id=1107772072]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="bg" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon" unique_id=1763019646]
+position = Vector2(20, 20)
+scale = Vector2(0.4, 0.4)
+texture = SubResource("AtlasTexture_f3em0")
+
+[node name="lock" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon" unique_id=2067048603]
+visible = false
+position = Vector2(20, 20)
+texture = SubResource("AtlasTexture_f11j0")
+
+[node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon" unique_id=1494209393]
+position = Vector2(20, 20)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_iwq1c")
+animation = &"blink"
+autoplay = "blink"
+frame_progress = 0.56380975
+
+[node name="square1" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy" unique_id=1712084015]
+modulate = Color(1, 1, 1, 0.5)
+show_behind_parent = true
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("13_iwq1c")
+
+[node name="square2" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy" unique_id=1578808948]
+show_behind_parent = true
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_iwq1c")
+
+[node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon" unique_id=1564497484]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 34.0
+offset_right = 5.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.5439695, 0.40851173, 1, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "0"
+vertical_alignment = 2
+
+[node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye" unique_id=2058377925]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=85419031]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("7_xr6wq")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "enemy info enemy info enemy info enemy info enemy info enemy info enemy info "
+fit_content = true
+
+[node name="specialNote" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=1500395717]
+layout_mode = 2
+alignment = 2
+
+[node name="flseye" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/specialNote" unique_id=1822910866]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "special note"
+horizontal_alignment = 2
+
+[node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye" unique_id=925624116]
 layout_mode = 2
 mouse_filter = 1
 

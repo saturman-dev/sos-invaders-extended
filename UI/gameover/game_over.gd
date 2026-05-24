@@ -2,7 +2,7 @@ extends CanvasLayer
 
 const game = preload("res://game.tscn")
 
-var pts = Globals.pts
+var pts = Globals.points
 var newbest = Globals.newbest
 var times = Globals.secs
 var timee = Globals.time
@@ -34,6 +34,8 @@ func counterSfx():
 func precounterSfx():
 	Functions.sfx_play("res://sounds/preCounter.mp3")
 
+var firstSound := 0
+var firstSound2 := 0
 func _ready():
 	ATween = create_tween()
 	ATween.tween_property(a6, "modulate:a", 0.85, 3.0)
@@ -55,7 +57,7 @@ func _ready():
 	while not int(ptst.text) == pts:
 		ptst.text = str(LPts)
 		LPts += 1
-		counterSfx()
+		counterSfxCheck2()
 		if not int(ptst.text) == pts:
 			await get_tree().create_timer(Ptime / modd).timeout
 	if newbest == true:
@@ -80,10 +82,10 @@ func _ready():
 			time2 += 1
 		if time2 < 10:
 			time.text = str(time1, ":0", time2)
-			counterSfx()
+			counterSfxCheck()
 		else:
 			time.text = str(time1, ":", time2)
-			counterSfx()
+			counterSfxCheck()
 		if not time.text == timee:
 			await get_tree().create_timer(Ttime / modd).timeout
 	await get_tree().create_timer(between).timeout
@@ -91,6 +93,20 @@ func _ready():
 	$VBOX/Text/Press.visible = true
 	$"VBOX/Text/esc to exit".visible = true
 	precounterSfx()
+
+func counterSfxCheck():
+	if firstSound == 3:
+		counterSfx()
+		firstSound = 0
+	else:
+		firstSound += 1
+
+func counterSfxCheck2():
+	if firstSound2 == 1:
+		counterSfx()
+		firstSound2 = 0
+	else:
+		firstSound2 += 1
 
 func shimmer():
 	while 1>0:

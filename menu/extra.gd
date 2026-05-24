@@ -34,6 +34,17 @@ var wertueInfoText := "[color=00ffdc]Wertue:[/color]   Creates a beam of light t
 var wertueNoText := "[color=00ffdc]?????[/color]"
 var wertueSpecialNote := "[color=00ffdc]If you kill Wertue right before the beam activates, it will attack significantly harder, damaging enemies.[/color]"
 
+var flseyeInfoText := "[color=7200ff]FLSEYE:[/color]   Creates a shield every 10 seconds, has 4 attacks.
+
+Attack 1:   Fires 2 lasers pointing upward and then symmetrically rotates them downward. Each laser creates four bullets and disappears upon impact.
+
+Attack 2:   Creates 3 static wertue's beams.
+
+Attack 3:   Creates 2 wertue's beams on the sides of the arena that move towards the center.
+
+Attack 4:   Shoots 12 bullets 3 times around itself."
+var flseyeNoText := "[color=7200ff]?????[/color]"
+
 
 
 var healLockedText := "[color=00ff22]???[/color]   [color=7f7f7f]Defeat any enemy after taking damage to get this bonus.[/color]"
@@ -84,6 +95,15 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var wertueBg := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/bg
 @onready var wertueCount := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/count
 @onready var wertueLeftWing := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy/wingLeft
+
+@onready var flseyeInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/text
+@onready var flseyeSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/specialNote/flseye
+@onready var flseyeIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy
+@onready var flseyeLock := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/lock
+@onready var flseyeBg := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/bg
+@onready var flseyeCount := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/count
+@onready var flseyeSquare1 := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy/square1
+@onready var flseyeSquare2 := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy/square2
 
 
 
@@ -140,6 +160,10 @@ func back():
 func menuClick_play():
 	Functions.sfx_play("res://sounds/menuClick.mp3")
 
+var flseyeSpeed = 180.0
+func _process(delta: float) -> void:
+	flseyeSquare1.global_rotation_degrees += flseyeSpeed * delta
+	flseyeSquare2.global_rotation_degrees -= flseyeSpeed * delta
 
 
 func _ready() -> void:
@@ -147,6 +171,7 @@ func _ready() -> void:
 	bigdarCount.text = str(int(Saves.data["killed_bigdars"]))
 	a3Count.text = str(int(Saves.data["killed_a3s"]))
 	wertueCount.text = str(int(Saves.data["killed_wertues"]))
+	flseyeCount.text = str(int(Saves.data["killed_flseyes"]))
 	healCount.text = str(int(Saves.data["gotten_heals"]))
 	overhealCount.text = str(int(Saves.data["gotten_overheals"]))
 	splashCount.text = str(int(Saves.data["gotten_splashes"]))
@@ -198,6 +223,16 @@ func _ready() -> void:
 		wertueBg.modulate = bgNoEnemyColor
 		wertueLock.visible = true
 		wertueIcon.visible = false
+	if Saves.data["ever_met_flseye"] == true:
+		flseyeInfo.text = flseyeInfoText
+		flseyeSpecialButton.text = noSpecial
+	else:
+		flseyeCount.visible = false
+		flseyeInfo.text = flseyeNoText
+		flseyeSpecialButton.queue_free()
+		flseyeBg.modulate = bgNoEnemyColor
+		flseyeLock.visible = true
+		flseyeIcon.visible = false
 	if Saves.data["ever_got_heal_bonus"] == true:
 		healInfo.text = healInfoText
 	else:

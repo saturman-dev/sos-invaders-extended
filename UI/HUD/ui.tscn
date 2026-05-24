@@ -30,6 +30,8 @@ theme_override_fonts/font = ExtResource("2_kmbvj")
 theme_override_font_sizes/font_size = 7
 text = "x1.00"
 
+[node name="endedlivesManager" type="Node2D" parent="." unique_id=1360639939 groups=["endedLivesManager"]]
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1046656662]
 anchors_preset = 15
 anchor_right = 1.0

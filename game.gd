@@ -20,8 +20,10 @@ const extra_scene = preload ("res://menu/extra.tscn")
 const menu_scene = preload ("res://menu.tscn")
 const pause = preload ("res://menu/pause/pause.tscn")
 
+var strl: Tween
 func _ready() -> void:
 	menuu.able = true
+	menuu.loaded()
 	Functions.remove_flashes()
 	Functions.removeBonuses()
 	Globals.shake_str = 0.0
@@ -30,28 +32,34 @@ func _ready() -> void:
 	while Saves.is_loading == true:
 		await get_tree().process_frame
 	Globals.update_volume()
+	strlogo.global_position.y += 20
+	strl = create_tween()
+	strl.tween_property(strlogo, "global_position:y", -20.0, 2.0).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func staart():
-	$Title.queue_free()
 	var lv_1 = lv_1_scene.instantiate()
 	lv_1.global_position = Vector2(0, 0)
 	add_child(lv_1)
 	move_tween = create_tween()
-	move_tween.tween_property($lv1/spaceship, "position", Vector2(0.0, -35.0), 1.0).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	move_tween.tween_property($lv1/spaceship, "position", Vector2(0.0, -35.0), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	move_tween2 = create_tween()
-	move_tween2.tween_property($lv1/UI/MarginContainer, "position", Vector2(0, 35), 1.0).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	move_tween2.tween_property($lv1/UI/MarginContainer, "position", Vector2(0, 35), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await move_tween.finished
 	Globals.game_running = true
 	Globals.instart = false
 
 func instart():
 	menuu.queue_free()
+	$Title.queue_free()
+	strlogo.queue_free()
 	staart()
 
 func start():
 	Functions.fade_music($Title, 1.0)
+	if strl and strl.is_running:
+		strl.kill()
 	var s = create_tween()
-	#s.tween_property(strlogo, "global_position:y", 20, ).as_relative()
+	s.tween_property(strlogo, "global_position:y", 20, 0.4).as_relative()
 
 
 func extra():

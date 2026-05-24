@@ -168,7 +168,7 @@ animations = [{
 
 [node name="spaceship" type="CharacterBody2D" unique_id=1792907597 groups=["player"]]
 z_index = 1
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.5, 0.5)
 collision_layer = 34
 collision_mask = 9
 script = ExtResource("1_44xa4")
@@ -196,7 +196,7 @@ one_shot = true
 
 [node name="ShootEffect" type="AnimatedSprite2D" parent="." unique_id=1976183308]
 position = Vector2(0, -30)
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_bim4r")
 animation = &"shoot"
 autoplay = "default"

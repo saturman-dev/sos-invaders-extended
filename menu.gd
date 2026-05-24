@@ -20,6 +20,32 @@ func _ready() -> void:
 	else:
 		best.queue_free()
 
+var loadedTime := 0.7
+var betweenLoaded := 0.1
+var lt: Tween
+func loaded():
+	logo.modulate.a = 0.0
+	playAnim.modulate.a = 0.0
+	settingsAnim.modulate.a = 0.0
+	extraAnim.modulate.a = 0.0
+	settingsAnim.modulate.a = 0.0
+	quitAnim.modulate.a = 0.0
+	await get_tree().create_timer(betweenLoaded*2, false).timeout
+	lt = create_tween().set_parallel(true)
+	lt.tween_property(logo, "modulate:a", 1.0, loadedTime)
+	await get_tree().create_timer(betweenLoaded, false).timeout
+	lt = create_tween().set_parallel(true)
+	lt.parallel().tween_property(playAnim, "modulate:a", 1.0, loadedTime*0.7)
+	await get_tree().create_timer(betweenLoaded, false).timeout
+	lt = create_tween().set_parallel(true)
+	lt.parallel().tween_property(extraAnim, "modulate:a", 1.0, loadedTime*0.85)
+	await get_tree().create_timer(betweenLoaded, false).timeout
+	lt = create_tween().set_parallel(true)
+	lt.parallel().tween_property(settingsAnim, "modulate:a", 1.0, loadedTime)
+	await get_tree().create_timer(betweenLoaded, false).timeout
+	lt = create_tween().set_parallel(true)
+	lt.parallel().tween_property(quitAnim, "modulate:a", 1.0, loadedTime*1.2)
+
 func menuClick_play():
 	Functions.sfx_play("res://sounds/menuClick.mp3")
 
@@ -77,6 +103,8 @@ func _on_play_mouse_entered() -> void:
 
 
 func _on_play_mouse_exited() -> void:
+	if s and s.is_running():
+		return
 	playAnim.play("unhover")
 	if pt and pt.is_running():
 		pt.kill()

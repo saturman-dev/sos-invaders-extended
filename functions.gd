@@ -4,7 +4,7 @@ extends Node
 var bonus_chances = {
 	"heal": 5.0,
 	"overheal": 4.0,
-	"splash": 1.5,
+	"splash": 2.0,
 	"trio": 1.5,
 	"speed": 1.5
 }

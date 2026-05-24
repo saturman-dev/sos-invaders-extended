@@ -7,41 +7,59 @@
 size = Vector2(390, 214)
 
 [node name="bosshpbar" type="Control" unique_id=214188899]
-custom_minimum_size = Vector2(390, 25)
+custom_minimum_size = Vector2(390, 37.5)
 layout_mode = 3
 anchors_preset = 0
-offset_top = 215.0
+offset_top = 205.0
 offset_right = 390.0
-offset_bottom = 240.0
+offset_bottom = 230.0
 script = ExtResource("1_3lcev")
 
 [node name="barBlack" type="ColorRect" parent="." unique_id=291126693]
 layout_mode = 0
 offset_left = 4.0
+offset_top = 10.0
 offset_right = 386.0
-offset_bottom = 25.0
+offset_bottom = 35.0
 color = Color(0, 0, 0, 1)
 
 [node name="barYell" type="ColorRect" parent="." unique_id=783310992]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 2.0
+offset_top = 12.0
 offset_right = 384.0
-offset_bottom = 23.0
+offset_bottom = 33.0
 color = Color(1, 1, 0, 1)
 
 [node name="barRed" type="ColorRect" parent="." unique_id=1727108349]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 2.0
+offset_top = 12.0
 offset_right = 384.0
-offset_bottom = 23.0
+offset_bottom = 33.0
+color = Color(1, 0, 0, 1)
+
+[node name="barAdd2" type="ColorRect" parent="." unique_id=63936955]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 3.0
+offset_right = 380.0
+offset_bottom = 7.0
+color = Color(0, 0, 0, 1)
+
+[node name="barAdd" type="ColorRect" parent="." unique_id=1012512728]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 379.0
+offset_bottom = 6.0
 color = Color(1, 0, 0, 1)
 
 [node name="Label" type="Label" parent="." unique_id=105829806]
 layout_mode = 0
+offset_top = 10.0
 offset_right = 390.0
-offset_bottom = 25.0
+offset_bottom = 35.0
 theme_override_fonts/font = ExtResource("1_piywj")
 text = "BOSSNAME"
 horizontal_alignment = 1
@@ -56,11 +74,13 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1945282182]
+position = Vector2(0, 10)
 collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1340357197]
-position = Vector2(195, 98)
+visible = false
+position = Vector2(195, 87)
 shape = SubResource("RectangleShape2D_3lcev")
 
 [connection signal="timeout" from="yellwait" to="." method="_on_yellwait_timeout"]

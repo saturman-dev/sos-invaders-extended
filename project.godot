@@ -41,6 +41,7 @@ bonuses="вуху донат"
 bosses=""
 flseye_attack=""
 flash=""
+endedLivesManager=""
 
 [input]
 

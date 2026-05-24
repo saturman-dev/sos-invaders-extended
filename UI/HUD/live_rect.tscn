@@ -298,7 +298,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="LiveRect" type="Control" unique_id=824032463]
+[node name="LiveRect" type="Control" unique_id=824032463 groups=["lives", "overlives"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0

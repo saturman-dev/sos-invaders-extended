@@ -5,17 +5,22 @@ extends Control
 @onready var label := $Label
 @onready var yellwait := $yellwait
 @onready var afterdead := $afterdead
+@onready var add := $barAdd
 var defred = 0
 var tween: Tween
 var ytween: Tween
-var defcolor := Color.ALICE_BLUE
+var defcolor := Color.RED
+var defaddsize: float
 
 func _ready() -> void:
+	defaddsize = add.size.x
+	shieldown()
 	Events.flseye_shield_made.connect(func(): shieldup())
 	Events.flseye_shield_broken.connect(func(): shieldown())
 	Events.boss_damaged.connect(func(health_percent): damage(health_percent))
 	defred = red.size.x
 	defcolor = red.color
+	add.color = Color.SKY_BLUE
 
 func damage(health_percent: float):
 	if yellwait.is_stopped() == false:
@@ -63,3 +68,6 @@ func shieldup():
 
 func shieldown():
 	red.color = defcolor
+	add.size.x = 0.0
+	var s = create_tween()
+	s.tween_property(add, "size:x", defaddsize, 10.0)
