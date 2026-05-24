@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bylip2xfir8of" path="res://textures/flseyeSquare.png" id="13_iwq1c"]
 [ext_resource type="Texture2D" uid="uid://4d6u251a4gex" path="res://textures/bonusOverheal.png" id="13_oovj8"]
 [ext_resource type="Texture2D" uid="uid://bkvcnsuudqv20" path="res://textures/bonusSplash.png" id="14_14r56"]
+[ext_resource type="Texture2D" uid="uid://cuqg23i1hwebq" path="res://textures/expand.png" id="14_jgrph"]
 [ext_resource type="Texture2D" uid="uid://byepx10skb5c7" path="res://textures/bonusTrio.png" id="15_e3bvy"]
 [ext_resource type="Texture2D" uid="uid://dc6jfily6xwa3" path="res://textures/bonusSpeed.png" id="16_f3em0"]
 
@@ -572,7 +573,7 @@ offset_top = 51.0
 offset_right = 268.0
 offset_bottom = 197.0
 theme = SubResource("Theme_e3bvy")
-scroll_vertical = 112
+scroll_vertical = 176
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer" unique_id=590071018]
 layout_mode = 2
@@ -975,6 +976,46 @@ theme_override_fonts/normal_font = ExtResource("7_xr6wq")
 theme_override_font_sizes/normal_font_size = 6
 bbcode_enabled = true
 text = "enemy info enemy info enemy info enemy info enemy info enemy info enemy info "
+fit_content = true
+
+[node name="expand" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=208683801]
+layout_mode = 2
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand" unique_id=141289929]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("7_xr6wq")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "expand"
+fit_content = true
+
+[node name="Control" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand" unique_id=758590992]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand/Control" unique_id=1593907875]
+position = Vector2(1, 2.5)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_jgrph")
+
+[node name="flseyeExpand" type="Button" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand/Control/Sprite2D" unique_id=1892862065]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+flat = true
+
+[node name="textAttacks" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=885846540]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("7_xr6wq")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "attack info attack info attack info attack info attack info attack info"
 fit_content = true
 
 [node name="specialNote" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=1500395717]
@@ -1412,6 +1453,7 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/specialNote/bigdar/bigdar" to="." method="_on_bigdar_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info/specialNote/wertue/wertue" to="." method="_on_wertue_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info/specialNote/wertue/wertue" to="." method="_on_wertue_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand/Control/Sprite2D/flseyeExpand" to="." method="_on_flseye_expand_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer2/enemies" to="." method="_on_enemies_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer2/enemies" to="." method="_on_enemies_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer2/enemies" to="." method="_on_enemies_pressed"]

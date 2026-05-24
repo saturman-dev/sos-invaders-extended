@@ -34,15 +34,14 @@ var wertueInfoText := "[color=00ffdc]Wertue:[/color]   Creates a beam of light t
 var wertueNoText := "[color=00ffdc]?????[/color]"
 var wertueSpecialNote := "[color=00ffdc]If you kill Wertue right before the beam activates, it will attack significantly harder, damaging enemies.[/color]"
 
-var flseyeInfoText := "[color=7200ff]FLSEYE:[/color]   Creates a shield every 10 seconds, has 4 attacks.
+var flseyeInfoText := "[color=7200ff]FLSEYE:[/color]   Creates a shield every 10 seconds, has 4 attacks."
+var flseyeAttacksText := "[color=a999ff]Attack 1:[/color]   Fires 2 lasers pointing upward and then symmetrically rotates them downward. Each laser creates four bullets and disappears upon impact.
 
-Attack 1:   Fires 2 lasers pointing upward and then symmetrically rotates them downward. Each laser creates four bullets and disappears upon impact.
+[color=a999ff]Attack 2:[/color]   Creates 3 static wertue's beams.
 
-Attack 2:   Creates 3 static wertue's beams.
+[color=a999ff]Attack 3:[/color]   Creates 2 wertue's beams on the sides of the arena that move towards the center.
 
-Attack 3:   Creates 2 wertue's beams on the sides of the arena that move towards the center.
-
-Attack 4:   Shoots 12 bullets 3 times around itself."
+[color=a999ff]Attack 4:[/color]   Shoots 12 bullets 3 times around itself."
 var flseyeNoText := "[color=7200ff]?????[/color]"
 
 
@@ -104,6 +103,9 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var flseyeCount := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/count
 @onready var flseyeSquare1 := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy/square1
 @onready var flseyeSquare2 := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy/square2
+@onready var flseyeExpand := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand
+@onready var flseyeExpandSprite := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand/Control/Sprite2D
+@onready var flseyeAttacks := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/textAttacks
 
 
 
@@ -172,6 +174,7 @@ func _ready() -> void:
 	a3Count.text = str(int(Saves.data["killed_a3s"]))
 	wertueCount.text = str(int(Saves.data["killed_wertues"]))
 	flseyeCount.text = str(int(Saves.data["killed_flseyes"]))
+	flseyeAttacks.text = flseyeAttacksText
 	healCount.text = str(int(Saves.data["gotten_heals"]))
 	overhealCount.text = str(int(Saves.data["gotten_overheals"]))
 	splashCount.text = str(int(Saves.data["gotten_splashes"]))
@@ -230,6 +233,7 @@ func _ready() -> void:
 		flseyeCount.visible = false
 		flseyeInfo.text = flseyeNoText
 		flseyeSpecialButton.queue_free()
+		flseyeExpand.queue_free()
 		flseyeBg.modulate = bgNoEnemyColor
 		flseyeLock.visible = true
 		flseyeIcon.visible = false
@@ -323,3 +327,12 @@ func _on_bonuses_mouse_entered() -> void:
 
 func _on_bonuses_mouse_exited() -> void:
 	bonusesHover.visible = false
+
+
+func _on_flseye_expand_pressed() -> void:
+	if flseyeAttacks.visible == false:
+		flseyeAttacks.visible = true
+		flseyeExpandSprite.rotation_degrees = 90
+	else:
+		flseyeAttacks.visible = false
+		flseyeExpandSprite.rotation_degrees = 0

@@ -4,6 +4,7 @@ extends Node2D
 var bossfighting = false
 var flseye_diffi = diffi_range[0]
 var shaurman_diffi = 9999
+@onready var viewpos = get_viewport_rect().size
 
 # ENEMIES COOLDOWN
 var defCldown = 2
@@ -15,6 +16,7 @@ var maxDiffi = 360
 
 const GAME_OVER_SCENE = preload("res://UI/gameover/game_over.tscn")
 const WIN_SCENE = preload("res://UI/win/win.tscn")
+const particle = preload("res://elements/particles/speed_particle.tscn")
 
 #  ENEMIES
 const darsin = preload("res://elements/vln_group.tscn")
@@ -77,10 +79,15 @@ var time1 = 0
 var time2 = 0
 
 var diffsec = 0.01
+var particleTimer = 0.0
+var particleTime = defParticleTime
+var defParticleTime = 20
 
 var already_bossfighted = false
 var already_bossfighted_2 = false
 
+var p_x_offset = 30.0
+var p_y_offset = 155.0
 func _process(delta: float) -> void:
 	if diffi < maxDiffi and bossfighting == false:
 		diffi += delta * 1.0
@@ -105,6 +112,16 @@ func _process(delta: float) -> void:
 		spawn_enemy()
 		timer = 0.0
 		cooldown = (defCldown - diffi/180) * float(randf_range(0.7, 1.3))
+	if diffi > flseye_diffi + 1:
+		particleTime = defParticleTime / diffi
+		particleTimer += 1*delta
+		if particleTimer > particleTime:
+			particleTimer = 0.0
+			var p = particle.instantiate()
+			p.speed = diffi*5
+			p.global_position = Vector2(randf_range(p_x_offset, viewpos.x - p_x_offset), randf_range(-50.0, viewpos.y - p_y_offset))
+			#p.global_position = Vector2(195, 50)
+			add_child(p)
 
 func timech():
 	if time >= min:

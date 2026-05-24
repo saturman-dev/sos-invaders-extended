@@ -127,40 +127,61 @@ func notify(notification_text: String = "Some notification", notification_info: 
 
 
 
-func add_bonus(bonus_type: String, bonus_position, ignore_locked: bool = true):
+func add_bonus(bonus_type: String, just_enter_self, ignore_locked: bool = true, excepting: bool = true):
 	if bonus_type == "trio":
 		if Saves.data["ever_got_trio_bonus"] == false and ignore_locked == false:
 			return
+		if Globals.bonusTrioActive == true:
+			addRandomBonus(just_enter_self, 1.0, "trio")
+			return
 		var Trio = trio.instantiate()
-		Trio.global_position = bonus_position
+		Trio.global_position = just_enter_self.global_position
 		call_deferred("add_child", Trio)
 		Saves.data["gotten_trios"] += 1
 	if bonus_type == "speed":
 		if Saves.data["ever_got_speed_bonus"] == false and ignore_locked == false:
 			return
+		if Globals.bonusSpeedActive == true:
+			addRandomBonus(just_enter_self, 1.0, "speed")
+			return
 		var Speed = speed.instantiate()
-		Speed.global_position = bonus_position
+		Speed.global_position = just_enter_self.global_position
 		call_deferred("add_child", Speed)
 		Saves.data["gotten_speeds"] += 1
 	if bonus_type == "heal":
 		if Saves.data["ever_got_heal_bonus"] == false and ignore_locked == false:
 			return
 		var Heal = heal.instantiate()
-		Heal.global_position = bonus_position
+		if Globals.lives == Globals.deflives:
+			addRandomBonus(just_enter_self, 1.0, "heal")
+			return
+		if just_enter_self is Vector2:
+			Heal.global_position = just_enter_self
+		else:
+			Heal.global_position = just_enter_self.global_position
 		call_deferred("add_child", Heal)
 		Saves.data["gotten_heals"] += 1
 	if bonus_type == "overheal":
 		if Saves.data["ever_got_overheal_bonus"] == false and ignore_locked == false:
 			return
+		if Globals.overlives == Globals.deflives:
+			addRandomBonus(just_enter_self, 1.0, "overheal")
+			return
 		var Overheal = overheal.instantiate()
-		Overheal.global_position = bonus_position
+		Overheal.global_position = just_enter_self.global_position
 		call_deferred("add_child", Overheal)
 		Saves.data["gotten_overheals"] += 1
 	if bonus_type == "splash":
 		if Saves.data["ever_got_splash_bonus"] == false and ignore_locked == false:
 			return
+		if Globals.bonusSplashActive == true:
+			addRandomBonus(just_enter_self, 1.0, "splash")
+			return
 		var Splash = splash.instantiate()
-		Splash.global_position = bonus_position
+		if just_enter_self is Vector2:
+			Splash.global_position = just_enter_self
+		else:
+			Splash.global_position = just_enter_self.global_position
 		call_deferred("add_child", Splash)
 		Saves.data["gotten_splashes"] += 1
 
@@ -168,17 +189,20 @@ func removeBonuses():
 	for bonus in get_tree().get_nodes_in_group("bonuses"):
 		bonus.queue_free()
 
-func addRandomBonus(just_enter_self: Object, chance_modifier: float = 1.0):
+func addRandomBonus(just_enter_self: Object, chance_modifier: float = 1.0, except: String = "nothing"):
 	var random = randf_range(0.0, 100.0)
+	if except != "nothing":
+		random = randf_range(0.0, bonus_chances.size - bonus_chances[str(except)])
 	var current_sum = 0.0
 	var selected_bonus = ""
 	for bonus in bonus_chances.keys():
-		current_sum += bonus_chances[bonus] * chance_modifier
-		if random <= current_sum:
-			selected_bonus = bonus
-			break
+		if bonus != except:
+			current_sum += bonus_chances[bonus] * chance_modifier
+			if random <= current_sum:
+				selected_bonus = bonus
+				break
 	if selected_bonus != "":
-		add_bonus(selected_bonus, just_enter_self.global_position, false)
+		add_bonus(selected_bonus, just_enter_self, false)
 
 func checkHeal():
 	if Globals.deflives < Globals.def_hp and Saves.data["ever_got_heal_bonus"] == false:

@@ -7,7 +7,7 @@ var NEO = false
 var last_attack = -1
 
 # FOR DAMAGE
-var fullhp = 80.0
+var fullhp = 1
 var hp = fullhp
 var yellwait = 0.7
 @onready var timer := $dmgstop

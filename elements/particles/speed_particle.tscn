@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://yrfslqht0o3k"]
+
+[ext_resource type="Texture2D" uid="uid://cmqo6o4eln2pr" path="res://textures/particle.png" id="1_54wjn"]
+[ext_resource type="Script" uid="uid://djbvwo3adfe2v" path="res://elements/particles/speed_particle.gd" id="2_m6tgv"]
+
+[node name="speedParticle" type="Sprite2D" unique_id=89834796]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_54wjn")
+script = ExtResource("2_m6tgv")

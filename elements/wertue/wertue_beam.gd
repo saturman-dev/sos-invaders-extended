@@ -80,7 +80,7 @@ func _on_wait_time_timeout() -> void:
 		warning.modulate.a = 1.0
 		warningTime.start()
 		var warntween = create_tween()
-		warntween.tween_property(warning, "scale:x", warning.scale.x * 1.5, warningTime.wait_time)
+		warntween.tween_property(self, "scale:x", scale.x * 1.5, warningTime.wait_time)
 		laserTime.wait_time *= 2
 		while warned == false:
 			warning.visible = true
@@ -103,7 +103,6 @@ func _on_warning_time_timeout() -> void:
 	laserTime.start()
 	if interruption == true:
 		set_collision_mask_value(3, true)
-		laser.scale.x *= 1.5
 		Globals.shake_str += 3.0
 
 func _on_laser_time_timeout() -> void:

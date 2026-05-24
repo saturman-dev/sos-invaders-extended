@@ -1,9 +1,9 @@
 extends Node
 
 var needForOverheal = 40
-var nodeath: bool = false
+var nodeath: bool = true
 
-var def_hp: int = 10
+var def_hp: int = 3
 var game_running: bool = false
 var instart: bool = false
 var pts = 0
