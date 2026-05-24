@@ -1,5 +1,7 @@
 extends Node2D
 
+var able = false
+
 var noEnemyInfoText := "[color=7f7f7f]?????[/color]"
 @onready var backButton := $CanvasLayer2/backAnim
 @onready var specialText := $CanvasLayer2/specialNote/specialNoteText
@@ -131,8 +133,9 @@ func _input(event):
 		turnToEnemies()
 
 func back():
-	get_parent().back()
-	queue_free()
+	if able == false:
+		return
+	get_parent().back(-1)
 
 func menuClick_play():
 	Functions.sfx_play("res://sounds/menuClick.mp3")

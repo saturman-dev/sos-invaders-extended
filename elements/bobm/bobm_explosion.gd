@@ -30,7 +30,8 @@ func _physics_process(delta: float) -> void:
 			Globals.shake_str += 5.0
 			body.explode()
 
-func _ready() -> void:
+func _ready() -> void: #fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+	Functions.particle_explosion(self, global_position, randi_range(20, 30), Color("8fd94e"), 500, 0.8, 100.0, 0.7, 1.5, true, 0.1)
 	ATween = create_tween()
 	ATween.tween_property(okrestnosti, "modulate:a", 0.0, okfade)
 	BTween = create_tween()

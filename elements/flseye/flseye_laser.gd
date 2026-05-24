@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var sprite := $TextureRect
 @onready var hitbox := $CollisionShape2D
+@onready var audio := $AudioStreamPlayer
 var t: Tween
 func _ready() -> void:
 	scaling()

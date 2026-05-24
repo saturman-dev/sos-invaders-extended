@@ -18,6 +18,7 @@ const speed = preload("res://elements/bonuses/speed/speed.tscn")
 const heal = preload("res://elements/bonuses/heal/heal.tscn")
 const overheal = preload("res://elements/bonuses/overheal/overheal.tscn")
 const splash = preload("res://elements/bonuses/splash/splash.tscn")
+const single_particle = preload("res://elements/particles/single_particle.tscn")
 
 func hitstop(seconds: float):
 	hitstopping = true
@@ -92,9 +93,17 @@ func fade_music(player: AudioStreamPlayer, duration: float):
 
 
 
-func sfx_play(soundPath, volume: float = 0.0, pitch: float = 1.0, play_on_hitstop: bool = false):
+func sfx_play(soundPath, volume: float = 0.0, pitch: float = 1.0, play_on_hitstop: bool = false, reverb_power: float = 0.0):
 	var player = AudioStreamPlayer.new()
-	player.bus = "SFX"
+	if reverb_power == 0.0:
+		player.bus = "SFX"
+	else:
+		player.bus = "REVERB"
+		var bus_index = AudioServer.get_bus_index("REVERB")
+		var effect_index = 0
+		var reverb_effect = AudioServer.get_bus_effect(bus_index, effect_index) as AudioEffectReverb
+		if reverb_effect:
+			reverb_effect.wet = clamp(reverb_power, 0.0, 1.0)
 	player.stream = load(soundPath)
 	player.volume_db = volume
 	player.pitch_scale = pitch
@@ -124,35 +133,35 @@ func add_bonus(bonus_type: String, bonus_position, ignore_locked: bool = true):
 			return
 		var Trio = trio.instantiate()
 		Trio.global_position = bonus_position
-		add_child(Trio)
+		call_deferred("add_child", Trio)
 		Saves.data["gotten_trios"] += 1
 	if bonus_type == "speed":
 		if Saves.data["ever_got_speed_bonus"] == false and ignore_locked == false:
 			return
 		var Speed = speed.instantiate()
 		Speed.global_position = bonus_position
-		add_child(Speed)
+		call_deferred("add_child", Speed)
 		Saves.data["gotten_speeds"] += 1
 	if bonus_type == "heal":
 		if Saves.data["ever_got_heal_bonus"] == false and ignore_locked == false:
 			return
 		var Heal = heal.instantiate()
 		Heal.global_position = bonus_position
-		add_child(Heal)
+		call_deferred("add_child", Heal)
 		Saves.data["gotten_heals"] += 1
 	if bonus_type == "overheal":
 		if Saves.data["ever_got_overheal_bonus"] == false and ignore_locked == false:
 			return
 		var Overheal = overheal.instantiate()
 		Overheal.global_position = bonus_position
-		add_child(Overheal)
+		call_deferred("add_child", Overheal)
 		Saves.data["gotten_overheals"] += 1
 	if bonus_type == "splash":
 		if Saves.data["ever_got_splash_bonus"] == false and ignore_locked == false:
 			return
 		var Splash = splash.instantiate()
 		Splash.global_position = bonus_position
-		add_child(Splash)
+		call_deferred("add_child", Splash)
 		Saves.data["gotten_splashes"] += 1
 
 func removeBonuses():
@@ -179,7 +188,8 @@ func checkHeal():
 
 func flash(fade_in: float, fade_out: float, hold: float = 0.0, visibility: float = 1.0, color: Color = Color.WHITE):
 	var canv := CanvasLayer.new()
-	canv.layer = 50
+	canv.layer = 200
+	canv.add_to_group("flash")
 	var flasher := ColorRect.new()
 	flasher.color = color
 	flasher.global_position = Vector2(-100, -100)
@@ -191,6 +201,72 @@ func flash(fade_in: float, fade_out: float, hold: float = 0.0, visibility: float
 	var ftween: Tween
 	ftween = create_tween()
 	ftween.tween_property(flasher, "modulate:a", visibility, fade_in)
+	await ftween.finished
 	await get_tree().create_timer(hold, false).timeout
+	if not canv:
+		return
 	ftween = create_tween()
 	ftween.tween_property(flasher, "modulate:a", 0.0, fade_out)
+	ftween.tween_callback(canv.queue_free)
+
+func remove_flashes():
+	for canv in get_tree().get_nodes_in_group("flash"):
+		canv.queue_free()
+
+func def_enemy_explosion(enter_self: Object):
+	particle_explosion(enter_self, enter_self.global_position, randi_range(1, 3), enter_self.color, 300, 0.2, 100, 0.2, 1.25, false)
+
+func dead_enemy_explosion(enter_self: Object):
+	particle_explosion(enter_self, enter_self.global_position, randi_range(5, 10), enter_self.color, 500, 0.35, 100, 0.5, 1.5, true, 0.10)
+
+func mid_enemy_explosion(enter_self: Object):
+	particle_explosion(enter_self, enter_self.global_position, randi_range(8, 14), enter_self.color, 600, 0.5, 100, 0.75, 2.0, true, 0.20)
+
+func big_enemy_explosion(enter_self: Object):
+	particle_explosion(enter_self, enter_self.global_position, randi_range(12, 20), enter_self.color, 700, 0.7, 100, 0.75, 3.0, true, 0.30)
+
+func particle_explosion(
+	target: Object,
+	position: Vector2,
+	particle_amount: int = 10,
+	particle_color: Color = Color.WHITE,
+	explosion_speed: float = 300.0,
+	lifetime: float = 0.3,
+	gravity: float = 100.0,
+	min_particle_size: float = 0.4,
+	max_particle_size: float = 1.25,
+	collide_with_walls: bool = true,
+	trail_length: float = 0.05
+):
+	for i in range(particle_amount):
+		var p = single_particle.instantiate()
+		p.global_position = position
+		
+		var random_angle = randf_range(0, 2*PI)
+		var direction = Vector2(cos(random_angle), sin(random_angle))
+		var random_speed = randf_range(explosion_speed * 0.5, explosion_speed)
+		
+		p.velocity = direction * random_speed
+		p.gravity = gravity
+		p.lifetime = randf_range(lifetime * 0.5, lifetime * 1.5)
+		
+		var random_scale = randf_range(min_particle_size, max_particle_size)
+		p.scale = Vector2(random_scale, random_scale)
+		
+		var final_color = particle_color
+		var color_change = randf_range(0.0, 0.5)
+		if randf() > 0.5:
+			final_color = particle_color.lightened(color_change)
+		else:
+			final_color = particle_color.darkened(color_change)
+		p.get_node("Trail").default_color = final_color
+		
+		p.get_node("Trail").lifetime = trail_length
+		
+		if not collide_with_walls:
+			p.set_collision_mask_value(8, false)
+		
+		get_tree().current_scene.call_deferred("add_child", p)
+		
+		#await get_tree().process_frame
+		#print(p.get_node("Trail").lifetime)

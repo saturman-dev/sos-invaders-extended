@@ -253,8 +253,9 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="pause" type="Node2D" unique_id=669706358]
+[node name="pause" type="CanvasLayer" unique_id=1563565376]
 process_mode = 3
+layer = 75
 script = ExtResource("1_vsuhs")
 
 [node name="black" type="ColorRect" parent="." unique_id=350661447]

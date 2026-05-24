@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ddw0vpwwmusyx"]
 
 [ext_resource type="Script" uid="uid://dihu0uufti3so" path="res://elements/flseye/flseye_beam.gd" id="1_smy26"]
-[ext_resource type="Texture2D" uid="uid://bf7en40ddb8p6" path="res://textures/wertueWarning.png" id="3_3u6v8"]
+[ext_resource type="Texture2D" uid="uid://depyqp7tuumiv" path="res://textures/flseyeLaserWarning.png" id="2_euh1l"]
 [ext_resource type="Texture2D" uid="uid://bgcygesqkya6g" path="res://textures/flseyeLaser.png" id="4_4aljl"]
 [ext_resource type="AudioStream" uid="uid://cummi6ocb8wi4" path="res://sounds/wertueAttackLoop.mp3" id="8_as8qn"]
 
@@ -20,21 +20,20 @@ modulate = Color(1, 1, 1, 0.7019608)
 texture_repeat = 2
 offset_left = -18.0
 offset_top = -240.0
-offset_right = 162.0
-offset_bottom = 2160.0
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_3u6v8")
+offset_right = 27.0
+offset_bottom = 360.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_euh1l")
 stretch_mode = 1
 
 [node name="laser" type="TextureRect" parent="." unique_id=734654203]
 visible = false
-modulate = Color(1, 1, 1, 0.7019608)
 texture_repeat = 2
 offset_left = -18.0
 offset_top = -240.0
-offset_right = 162.0
-offset_bottom = 2160.0
-scale = Vector2(0.2, 0.2)
+offset_right = 27.0
+offset_bottom = 360.0
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_4aljl")
 stretch_mode = 1
 

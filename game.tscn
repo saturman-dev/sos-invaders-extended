@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://bktmndbpcxpil" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bfralhkxlh1nj" path="res://menu.tscn" id="2_fc0e3"]
 [ext_resource type="AudioStream" uid="uid://choif40dlwxeb" path="res://sounds/Title.mp3" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://cdse5spa6ogel" path="res://fg_1.tscn" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://bo1g1rpdcg3x7" path="res://textures/StrLogo.png" id="6_eow3j"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="7_j5wjh"]
 
 [node name="game" type="Node2D" unique_id=2020904288]
 script = ExtResource("1_feb5d")
@@ -23,3 +26,23 @@ stream = ExtResource("4_fc0e3")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="fg_1" parent="." unique_id=979325285 instance=ExtResource("5_7jktm")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1328399160]
+
+[node name="StrLogo" type="Sprite2D" parent="CanvasLayer" unique_id=1962889467]
+position = Vector2(24, 230)
+texture = ExtResource("6_eow3j")
+
+[node name="Label" type="Label" parent="CanvasLayer/StrLogo" unique_id=69274424]
+offset_left = 158.0
+offset_top = -2.0
+offset_right = 533.0
+offset_bottom = 13.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.8980392, 1, 0, 1)
+theme_override_fonts/font = ExtResource("7_j5wjh")
+text = "v0.0 (unreleased)"
+horizontal_alignment = 2
+vertical_alignment = 1

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const color = Color("fb00cf")
+
 # FOR DAMAGE
 var fullhp = 7.5
 var hp = fullhp
@@ -63,6 +65,7 @@ func _on_shot_timer_timeout() -> void:
 var enabled = true
 
 func _ready() -> void:
+	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Saves.data["ever_met_a3"] = true
 	var bar1PreSize = hpbar1.size.x
 	hpbar.size.x *= fullhp / 3.5
@@ -103,6 +106,7 @@ func beam_dmg(dmg: float):
 
 func die():
 	remove_from_group("enemies")
+	Functions.big_enemy_explosion(self)
 	if not hitbox:
 		return
 	Saves.data["killed_a3s"] += 1
@@ -114,7 +118,7 @@ func die():
 		Functions.add_bonus("trio", global_position)
 	else:
 		Functions.addRandomBonus(self)
-	Functions.sfx_play("res://sounds/A3Dead.mp3", -8.0)
+	Functions.sfx_play("res://sounds/A3Dead.mp3", -8.0, randf_range(0.9, 1.1))
 	died = true
 	Globals.change_points(givepts)
 	hitbox.queue_free()
@@ -141,6 +145,7 @@ func die():
 
 var dmgtween: Tween
 func damageAnimation():
+	Functions.def_enemy_explosion(self)
 	sprite.material.set_shader_parameter("flash_modifier", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()

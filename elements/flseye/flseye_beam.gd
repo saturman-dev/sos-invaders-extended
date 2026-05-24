@@ -1,5 +1,6 @@
 extends Area2D
 
+var pitch = randf_range(0.9, 1.1)
 var dir = 1
 var alter = false
 var NEO = false
@@ -31,7 +32,7 @@ func go() -> void:
 	while warned == false:
 		warning.visible = true
 		if NEO == false:
-			Functions.sfx_play("res://sounds/wertueWarning.mp3")
+			Functions.sfx_play("res://sounds/wertueWarning.mp3", 0.0, pitch)
 		await get_tree().create_timer(warnTickTime, false).timeout
 		warning.visible = false
 		await get_tree().create_timer(warnTickTime, false).timeout
@@ -53,7 +54,7 @@ func altgo():
 
 func _on_warning_time_timeout() -> void:
 	await warrned
-	Functions.sfx_play("res://sounds/wertueAttack.mp3", -5.0, 0.8)
+	Functions.sfx_play("res://sounds/wertueAttack.mp3", -5.0, 0.8 + pitch)
 	attackLoop.play()
 	warned = true
 	warning.visible = false
@@ -65,13 +66,13 @@ func _on_laser_time_timeout() -> void:
 	gone()
 
 func gone():
+	fin.emit()
 	var looptween = create_tween()
 	looptween.tween_property(attackLoop, "pitch_scale", 0.7, laserTime.wait_time/2)
 	var lasertween = create_tween()
 	lasertween.tween_property(self, "scale:x", 0.0, laserTime.wait_time/2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await lasertween.finished
 	attackLoop.stop()
-	fin.emit()
 	queue_free()
 
 func _process(delta: float) -> void:

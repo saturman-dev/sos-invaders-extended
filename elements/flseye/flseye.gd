@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
+const color = Color("7200ff")
+
+var stopped = false
 var NEO = false
-var last_attack = 2
+var last_attack = -1
 
 # FOR DAMAGE
-var fullhp = 10.0
+var fullhp = 80.0
 var hp = fullhp
 var yellwait = 0.7
 @onready var timer := $dmgstop
@@ -18,10 +21,10 @@ var undam = 0.3
 var givepts = 50
 var died = false
 var bar2 = 0.4
-var expltime = 0.3
-var explsize = 3.0
-var explstay = 1.0
-var unexpltime = 1.0
+var expltime = 0.5
+var explsize = 1.5
+var explstay = 0.4
+var unexpltime = 1.5
 var afterdead = 2.0
 var rot = randf_range(10.0, 30.0)
 var enraged = false
@@ -35,6 +38,7 @@ const laserScene = preload("res://elements/flseye/flseye_laser.tscn")
 const beamScene = preload("res://elements/flseye/flseyeBeam.tscn")
 const shieldScene = preload("res://elements/flseye/shield.tscn")
 const explosionScene = preload("res://elements/explosion/explosion.tscn")
+const flbulletScene = preload("res://elements/flseye/flbullet.tscn")
 
 @onready var raycast_left := $RayCastLeft
 @onready var raycast_right := $RayCastRight
@@ -68,9 +72,18 @@ var current_shield: Object
 var current_laser1: Object
 var current_laser2: Object
 
+var squarespeed := 180.0
+var shake_str := 0.0
+
 func _process(delta: float) -> void:
-	square1.rotation_degrees += 180 * delta
-	square2.rotation_degrees -= 180 * delta
+	square1.rotation_degrees += squarespeed * delta
+	square2.rotation_degrees -= squarespeed * delta
+	if shake_str > 0.0:
+		sprite.position.x = randf_range(-shake_str, shake_str)
+		sprite.position.y = randf_range(-shake_str, shake_str)
+		shake_str -= delta * 20.0
+	if stopped == true:
+		return
 	if raycast == true:
 		speed -= dirChanging * delta
 		if speed < -defspeed:
@@ -98,6 +111,7 @@ var moving = false
 var dmgtween: Tween
 
 func damageAnimation():
+	Functions.def_enemy_explosion(self)
 	Events.boss_damaged.emit(hp/fullhp)
 	sprite.material.set_shader_parameter("flash_modifier", 1.0)
 	if dmgtween and dmgtween.is_running():
@@ -106,6 +120,7 @@ func damageAnimation():
 	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.3)
 
 func _ready() -> void:
+	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Events.flseye_shield_broken.connect(func(): shield_broken())
 	Saves.data["ever_met_flseye"] = true
 	dotScale = dot.scale
@@ -158,10 +173,12 @@ var exploded = false
 var explosionsTime = 4.0
 var afterExplosionsTime = 2.0
 func die():
+	shake_str = 0.0
 	shieldcd.stop()
+	Globals.bgStay = true
 	Functions.flash(0.0, 3.0, 0.5)
-	Functions.sfx_play("res://sounds/bossPreDeath.mp3", 10.0, randf_range(0.8, 1.0))
-	global_position = Vector2(390.0/2, 50.0)
+	Functions.sfx_play("res://sounds/bossPreDeath.mp3", 10.0, randf_range(0.8, 1.0), false, 0.3)
+	global_position = Vector2(390.0/2, 70.0)
 	moving = false
 	square1.visible = false
 	square2.visible = false
@@ -192,9 +209,12 @@ func die():
 	exploded = true
 	await get_tree().create_timer(afterExplosionsTime, false).timeout
 	
+	Functions.particle_explosion(self, global_position, randi_range(25, 40), color, 400, 2.0, 50, 1.5, 5.0, true, 0.4)
 	Functions.flash(0.2, 2.0, 0.2, 0.9, Color("7200ff"))
 	Functions.checkHeal()
+	Globals.bgStay = false
 	Globals.change_points(givepts)
+	Functions.sfx_play("res://sounds/flseyeDead.mp3", 10.0)
 	expl.visible = true
 	expl.rotation_degrees = -rot
 	FTween = create_tween()
@@ -233,7 +253,7 @@ func explosions():
 		explosion.scale.y *= explosionScale
 		explosion.hue = randf_range(-180, 180)
 		add_child(explosion)
-		Functions.sfx_play("res://sounds/damage.mp3", 0.0, randf_range(0.9, 1.1))
+		Functions.sfx_play("res://sounds/damage.mp3", 0.0, randf_range(0.8, 1.2))
 		await get_tree().create_timer(explosionsTick, false).timeout
 
 var ATween: Tween
@@ -245,22 +265,36 @@ var FTween: Tween
 var offpos = 3.5
 var color2 := Color.BLUE
 
+var attack_bag: Array = []
 func shot():
-	if died == false:
-		var random = randi_range(0, 2)
-		if random == last_attack:
-			random = randi_range(0, 2)
-		if random == 0:
-			attackLaser()
-		if random == 1:
-			attackBeams()
-		if random == 2:
-			attackMovingBeams()
+	if died == true:
+		return
+	if attack_bag.is_empty():
+		attack_bag = [0, 1, 2, 3]
+		attack_bag.shuffle()
+		if attack_bag[0] == last_attack:
+			var first = attack_bag.pop_front()
+			attack_bag.append(first)
+	
+	var random = attack_bag.pop_front()
+	if random == 0:
+		attackLaser()
+	if random == 1:
+		attackBeams()
+	if random == 2:
+		attackMovingBeams()
+	if random == 3:
+		attackCircle()
 
+var laserBulletCount := 4
+var laserBulletRange := 170.0
+var laserBulletSlightRange := 5.0
+var laserBulletYoffset := 50.0
+var laserBulletXoffset := 20.0
 
 var laserAttackTime = 1.5
-var laserAttackFadeTime = 1.0
-var laserAttackUPFadeTime = 0.2
+var laserAttackFadeTime = 0.5
+var laserAttackUPFadeTime = 0.1
 var laserSize = 3.0
 var laser_right: Tween
 var laser_left: Tween
@@ -268,6 +302,7 @@ var laser_fade1: Tween
 var laser_fade2: Tween
 var dotTween: Tween
 func attackLaser():
+	last_attack = 0
 	dot.scale = Vector2.ZERO
 	dot.position.y = -29.0
 	var laser1 = laserScene.instantiate()
@@ -279,6 +314,7 @@ func attackLaser():
 	current_laser1 = laser1
 	current_laser2 = laser2
 	sprite.play("laserAttack")
+	Functions.sfx_play("res://sounds/flseyeCharge.mp3", 0.0, randf_range(0.9, 1.1))
 	await sprite.animation_finished
 	if died == true:
 		return
@@ -290,13 +326,11 @@ func attackLaser():
 		return
 	laserManager.add_child(laser1)
 	laserManager.add_child(laser2)
-	await get_tree().create_timer(0.1, false).timeout
-	if died == true:
-		return
+	Functions.sfx_play("res://sounds/flseyeShot.mp3", 0.0, randf_range(0.95, 1.1))
 	laser_right = create_tween()
 	laser_left = create_tween()
-	laser_right.tween_property(laser1, "rotation_degrees", 180, laserAttackTime).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	laser_left.tween_property(laser2, "rotation_degrees", -180, laserAttackTime).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	laser_right.tween_property(laser1, "rotation_degrees", 180, laserAttackTime).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	laser_left.tween_property(laser2, "rotation_degrees", -180, laserAttackTime).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(laserAttackTime / 3.0, false).timeout
 	if died == true:
 		return
@@ -314,6 +348,21 @@ func attackLaser():
 	await laser_left.finished
 	if died == true:
 		return
+	laser1.audio.stop()
+	laser2.audio.stop()
+	if died == true:
+		return
+	Functions.sfx_play("res://sounds/flseyeShot.mp3", 0.0, randf_range(0.8, 0.95))
+	for i in range(laserBulletCount):
+		var bullet = flbulletScene.instantiate()
+		var bullet2 = flbulletScene.instantiate()
+		var first_pos = laserBulletRange / laserBulletCount
+		bullet.direction = Vector2.LEFT
+		bullet.global_position = Vector2(global_position.x - laserBulletXoffset + randf_range(-laserBulletSlightRange, laserBulletSlightRange), global_position.y + laserBulletYoffset + first_pos * i + randf_range(-laserBulletSlightRange, laserBulletSlightRange))
+		bullet2.global_position = Vector2(global_position.x + laserBulletXoffset + randf_range(-laserBulletSlightRange, laserBulletSlightRange), global_position.y + laserBulletYoffset + first_pos * i + randf_range(-laserBulletSlightRange, laserBulletSlightRange))
+		bullet.global_rotation_degrees = 180
+		get_parent().add_child(bullet)
+		get_parent().add_child(bullet2)
 	sprite.play("laserAttackFin")
 	laser_fade1 = create_tween().set_parallel(true)
 	laser_fade2 = create_tween().set_parallel(true)
@@ -321,20 +370,19 @@ func attackLaser():
 	laser_fade2.tween_property(laser2, "modulate:a", 0.0, laserAttackFadeTime)
 	dotTween = create_tween()
 	dotTween.tween_property(dot, "scale", Vector2(0.0, 0.0), laserAttackFadeTime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	laser1.hitbox.disabled = true
-	laser2.hitbox.disabled = true
-	await laser_fade1.finished
+	await laser_fade2.finished
 	if died == true:
 		return
 	laser1.queue_free()
 	laser2.queue_free()
 	dot.visible = false
 	shotTimer.start()
-	last_attack = 0
 
+var afterBeamsTime = 1.5
 var beamsAttackSpawnSpeed = 0.5
 var beamsAttackSpawnSpeedRange = 0.3
 func attackBeams():
+	last_attack = 1
 	sprite.play("beamsAttack")
 	await sprite.animation_finished
 	if died == true:
@@ -355,13 +403,14 @@ func attackBeams():
 		return
 	get_parent().add_child(beam3)
 	sprite.play("laserAttackFin")
-	await beam3.fin
+	await get_tree().create_timer(afterBeamsTime, false).timeout
 	if died == true:
 		return
 	shotTimer.start()
-	last_attack = 1
 
 func attackMovingBeams():
+	sprite.play("blink")
+	last_attack = 3
 	var beam1 = beamScene.instantiate()
 	var beam2 = beamScene.instantiate()
 	beam1.global_position = Vector2(-30.0, 0.0)
@@ -375,7 +424,48 @@ func attackMovingBeams():
 	if died == true:
 		return
 	shotTimer.start()
-	last_attack = 3
+
+var circleCount := 12
+var betweenCircles := 0.4
+var circleSpeed := 80.0
+var sqt: Tween
+func attackCircle():
+	stopped = true
+	if sqt and sqt.is_running():
+		sqt.kill()
+	Functions.sfx_play("res://sounds/flseyeCharge1.mp3", 7.0, randf_range(0.9, 1.1))
+	sqt = create_tween()
+	sqt.tween_property(self, "squarespeed", 720, 1.0)
+	await sqt.finished
+	if died == true:
+		return
+	attackCircle0()
+	await get_tree().create_timer(betweenCircles, false).timeout
+	if died == true:
+		return
+	attackCircle0()
+	await get_tree().create_timer(betweenCircles, false).timeout
+	if died == true:
+		return
+	attackCircle0()
+	sqt = create_tween()
+	sqt.tween_property(self, "squarespeed", 180, 1.0)
+	stopped = false
+	await get_tree().create_timer(betweenCircles, false).timeout
+	shotTimer.start()
+
+func attackCircle0():
+	shake_str = 10.0
+	Functions.sfx_play("res://sounds/flseyeShot.mp3", 0.0, randf_range(0.9, 1.1))
+	var angle_step = TAU / circleCount
+	for i in range(circleCount):
+		var current_angle = i * angle_step
+		var bullet = flbulletScene.instantiate()
+		bullet.global_position = global_position
+		bullet.global_rotation = current_angle
+		bullet.direction = Vector2.RIGHT.rotated(current_angle)
+		bullet.speed = circleSpeed
+		get_parent().add_child(bullet)
 
 func _on_dmgstop_timeout() -> void:
 	ETween = create_tween()

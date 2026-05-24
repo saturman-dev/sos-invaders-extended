@@ -18,6 +18,10 @@ func tick_sound(volume: float = 0.0, hitstop: bool = false):
 
 func _ready() -> void:
 	ghosts()
+	var defsize = sprite.scale
+	sprite.scale *= 4
+	var t = create_tween()
+	t.tween_property(sprite, "scale", defsize, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tick_sound()
 	await get_tree().create_timer(1, false).timeout
 	tick_sound(-5.0)

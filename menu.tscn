@@ -1,19 +1,10 @@
 [gd_scene format=3 uid="uid://bfralhkxlh1nj"]
 
 [ext_resource type="Script" uid="uid://cwdcfcmrhun02" path="res://menu.gd" id="1_ouk20"]
-[ext_resource type="Texture2D" uid="uid://bo1g1rpdcg3x7" path="res://textures/StrLogo.png" id="2_4hy44"]
 [ext_resource type="Texture2D" uid="uid://ckmsik3fprhvd" path="res://textures/logo.png" id="2_ouk20"]
 [ext_resource type="Texture2D" uid="uid://v7s7l28idnrd" path="res://textures/PlayQuit.png" id="3_mae5d"]
 [ext_resource type="Texture2D" uid="uid://b11o2ly0s3cxn" path="res://textures/ExtraSettings.png" id="5_ytr4m"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="6_l48gv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ouk20"]
-bg_color = Color(0.05000019, 0, 1, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.70000005, 1, 0, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mae5d"]
 atlas = ExtResource("3_mae5d")
@@ -165,6 +156,14 @@ animations = [{
 "name": &"unhover",
 "speed": 40.0
 }]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ouk20"]
+bg_color = Color(0.05000019, 0, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.70000005, 1, 0, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c8pol"]
 atlas = ExtResource("5_ytr4m")
@@ -540,22 +539,6 @@ script = ExtResource("1_ouk20")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=559639958]
 
-[node name="StrLogo" type="Sprite2D" parent="CanvasLayer" unique_id=777267457]
-position = Vector2(15, 230)
-texture = ExtResource("2_4hy44")
-
-[node name="Label" type="Label" parent="CanvasLayer/StrLogo" unique_id=2087638121]
-offset_left = 184.0
-offset_top = -2.0
-offset_right = 559.0
-offset_bottom = 13.0
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0.8980392, 1, 0, 1)
-theme_override_fonts/font = ExtResource("6_l48gv")
-text = "v0.0 (unreleased)"
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="Logo" type="Sprite2D" parent="CanvasLayer" unique_id=2026627514]
 position = Vector2(197, 70)
 scale = Vector2(0.5, 0.5)
@@ -564,37 +547,35 @@ texture = ExtResource("2_ouk20")
 [node name="buttons" type="Node2D" parent="CanvasLayer" unique_id=1699483628]
 position = Vector2(195, 110)
 
-[node name="play" type="Button" parent="CanvasLayer/buttons" unique_id=1497214872]
-offset_left = -51.0
-offset_right = 51.0
-offset_bottom = 25.0
-focus_mode = 0
-theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0.7019608, 1, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_ouk20")
-flat = true
-text_overrun_behavior = 1
-
 [node name="playAnim" type="AnimatedSprite2D" parent="CanvasLayer/buttons" unique_id=156799393]
 position = Vector2(0, 12.5)
 sprite_frames = SubResource("SpriteFrames_xhgcl")
 animation = &"hover"
 autoplay = "normal"
 
-[node name="extra" type="Button" parent="CanvasLayer/buttons" unique_id=1118020181]
+[node name="play" type="Button" parent="CanvasLayer/buttons/playAnim" unique_id=1497214872]
 offset_left = -51.0
-offset_top = 27.0
-offset_right = -1.0
-offset_bottom = 43.0
+offset_top = -12.5
+offset_right = 51.0
+offset_bottom = 12.5
 focus_mode = 0
 theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0.7019608, 1, 0, 1)
-theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxFlat_ouk20")
 flat = true
 text_overrun_behavior = 1
+
+[node name="BEST" type="RichTextLabel" parent="CanvasLayer/buttons/playAnim" unique_id=1382198640]
+offset_left = -48.0
+offset_top = -19.5
+offset_right = 96.0
+offset_bottom = -14.5
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_l48gv")
+theme_override_font_sizes/normal_font_size = 4
+bbcode_enabled = true
+text = "Highest score: *SCORE*"
 
 [node name="extraAnim" type="AnimatedSprite2D" parent="CanvasLayer/buttons" unique_id=665192791]
 position = Vector2(-26, 35)
@@ -602,11 +583,11 @@ sprite_frames = SubResource("SpriteFrames_lwl3b")
 animation = &"hover"
 autoplay = "normal"
 
-[node name="settings" type="Button" parent="CanvasLayer/buttons" unique_id=2064229880]
-offset_left = 1.0
-offset_top = 27.0
-offset_right = 51.0
-offset_bottom = 43.0
+[node name="extra" type="Button" parent="CanvasLayer/buttons/extraAnim" unique_id=1118020181]
+offset_left = -25.0
+offset_top = -8.0
+offset_right = 25.0
+offset_bottom = 8.0
 focus_mode = 0
 theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -622,15 +603,16 @@ sprite_frames = SubResource("SpriteFrames_s0svo")
 animation = &"hover"
 autoplay = "normal"
 
-[node name="quit" type="Button" parent="CanvasLayer/buttons" unique_id=451756132]
-offset_left = -51.0
-offset_top = 45.0
-offset_right = 51.0
-offset_bottom = 70.0
+[node name="settings" type="Button" parent="CanvasLayer/buttons/settingsAnim" unique_id=2064229880]
+offset_left = -25.0
+offset_top = -8.0
+offset_right = 25.0
+offset_bottom = 8.0
 focus_mode = 0
 theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0.7019608, 1, 0, 1)
+theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxFlat_ouk20")
 flat = true
 text_overrun_behavior = 1
@@ -641,26 +623,28 @@ sprite_frames = SubResource("SpriteFrames_4hy44")
 animation = &"hover"
 autoplay = "normal"
 
-[node name="BEST" type="RichTextLabel" parent="CanvasLayer/buttons" unique_id=1382198640]
-offset_left = -48.0
-offset_top = -6.0
-offset_right = 26.0
-offset_bottom = -1.0
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("6_l48gv")
-theme_override_font_sizes/normal_font_size = 4
-bbcode_enabled = true
-text = "Highest score: *SCORE*"
+[node name="quit" type="Button" parent="CanvasLayer/buttons/quitAnim" unique_id=451756132]
+offset_left = -51.0
+offset_top = -12.5
+offset_right = 51.0
+offset_bottom = 12.5
+focus_mode = 0
+theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.7019608, 1, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ouk20")
+flat = true
+text_overrun_behavior = 1
 
-[connection signal="mouse_entered" from="CanvasLayer/buttons/play" to="." method="_on_play_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/buttons/play" to="." method="_on_play_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/buttons/play" to="." method="_on_play_pressed"]
-[connection signal="mouse_entered" from="CanvasLayer/buttons/extra" to="." method="_on_extra_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/buttons/extra" to="." method="_on_extra_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/buttons/extra" to="." method="_on_extra_pressed"]
-[connection signal="mouse_entered" from="CanvasLayer/buttons/settings" to="." method="_on_settings_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/buttons/settings" to="." method="_on_settings_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/buttons/settings" to="." method="_on_settings_pressed"]
-[connection signal="mouse_entered" from="CanvasLayer/buttons/quit" to="." method="_on_quit_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/buttons/quit" to="." method="_on_quit_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/buttons/quit" to="." method="_on_quit_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/buttons/playAnim/play" to="." method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/buttons/playAnim/play" to="." method="_on_play_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/buttons/playAnim/play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/buttons/extraAnim/extra" to="." method="_on_extra_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/buttons/extraAnim/extra" to="." method="_on_extra_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/buttons/extraAnim/extra" to="." method="_on_extra_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/buttons/settingsAnim/settings" to="." method="_on_settings_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/buttons/settingsAnim/settings" to="." method="_on_settings_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/buttons/settingsAnim/settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/buttons/quitAnim/quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/buttons/quitAnim/quit" to="." method="_on_quit_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/buttons/quitAnim/quit" to="." method="_on_quit_pressed"]

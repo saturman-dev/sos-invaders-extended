@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const color = Color("18ff3b")
+
 # FOR DAMAGE
 var fullhp = 10.0
 var hp = fullhp
@@ -53,6 +55,7 @@ func _on_shot_timer_timeout() -> void:
 var enabled = true
 
 func _ready() -> void:
+	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Saves.data["ever_met_bigdar"] = true
 	var bar1PreSize = hpbar1.size.x
 	hpbar.size.x *= fullhp / 3.5
@@ -93,6 +96,7 @@ func beam_dmg(dmg: float):
 
 var dmgtween: Tween
 func damageAnimation():
+	Functions.def_enemy_explosion(self)
 	sprite.material.set_shader_parameter("flash_modifier", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()
@@ -101,6 +105,7 @@ func damageAnimation():
 
 func die():
 	remove_from_group("enemies")
+	Functions.mid_enemy_explosion(self)
 	if not hitbox:
 		return
 	Saves.data["killed_bigdars"] += 1
@@ -108,7 +113,7 @@ func die():
 	Saves.data["killed_enemies"] += 1
 	if bonus_blocked == false:
 		Functions.addRandomBonus(self)
-	Functions.sfx_play("res://sounds/bigDarDead.mp3")
+	Functions.sfx_play("res://sounds/bigDarDead.mp3", 0.0, randf_range(0.9, 1.1))
 	died = true
 	Globals.change_points(givepts)
 	hitbox.queue_free()

@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://chg8m58my0mnr" path="res://bg_1.gd" id="1_qjax3"]
 [ext_resource type="Texture2D" uid="uid://c75sw53sbht8j" path="res://textures/bg.png" id="2_c6kox"]
 [ext_resource type="Shader" uid="uid://dljubrf2svfww" path="res://bg_1.gdshader" id="2_x85p0"]
+[ext_resource type="Texture2D" uid="uid://crp6g6xal0kjq" path="res://textures/wall.png" id="4_x85p0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cy34r"]
+shader = ExtResource("2_x85p0")
+shader_parameter/hue_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x85p0"]
 shader = ExtResource("2_x85p0")
 shader_parameter/hue_offset = 0.0
 
@@ -32,7 +37,35 @@ position = Vector2(-198, 120)
 scale = Vector2(0.63, 0.63)
 texture = ExtResource("2_c6kox")
 
-[node name="ColorRect" type="ColorRect" parent="ParallaxLayer" unique_id=1705427630]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="." unique_id=1298004162]
+motion_scale = Vector2(1, 1.5)
+motion_mirroring = Vector2(0, 240)
+
+[node name="Wall" type="Sprite2D" parent="ParallaxLayer2" unique_id=2009623993]
+material = SubResource("ShaderMaterial_x85p0")
+position = Vector2(29, 120)
+scale = Vector2(1, -1)
+texture = ExtResource("4_x85p0")
+
+[node name="Wall2" type="Sprite2D" parent="ParallaxLayer2" unique_id=314528366]
+modulate = Color(0, 0, 0, 0.5)
+position = Vector2(29, 120)
+scale = Vector2(1, -1)
+texture = ExtResource("4_x85p0")
+
+[node name="Wall3" type="Sprite2D" parent="ParallaxLayer2" unique_id=1647145925]
+material = SubResource("ShaderMaterial_x85p0")
+position = Vector2(361, 120)
+scale = Vector2(-1, 1)
+texture = ExtResource("4_x85p0")
+
+[node name="Wall4" type="Sprite2D" parent="ParallaxLayer2" unique_id=872613706]
+modulate = Color(0, 0, 0, 0.5)
+position = Vector2(361, 120)
+scale = Vector2(-1, 1)
+texture = ExtResource("4_x85p0")
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxLayer2" unique_id=1705427630]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0

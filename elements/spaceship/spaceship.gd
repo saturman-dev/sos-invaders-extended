@@ -5,7 +5,6 @@ const rocket_scene = preload("res://elements/bullet/bullet.tscn")
 @onready var cdt := $CD
 @onready var shit := $ShootEffect
 @onready var sprite := $sprite
-@onready var trail := $Trail
 var cd = 0.2
 var defcd  = cd
 var INVINCIBLE := 1.5
@@ -21,7 +20,6 @@ func _ready() -> void:
 	Globals.bonusSpeedActive = false
 	Globals.bonusTrioActive = false
 	Globals.bonusSplashActive = false
-	trail.target = self
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("ui_accept"):

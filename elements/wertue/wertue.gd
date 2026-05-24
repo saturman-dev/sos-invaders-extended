@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const color = Color("00ffdc")
+
 var NEO = false
 
 # FOR DAMAGE
@@ -73,6 +75,7 @@ var enabled = true
 var CrTween: Tween
 
 func damageAnimation():
+	Functions.def_enemy_explosion(self)
 	if CrTween and CrTween.is_running():
 		CrTween.kill()
 	circle.visible = true
@@ -122,6 +125,7 @@ func beam_dmg(dmg: float):
 
 func die():
 	remove_from_group("enemies")
+	Functions.big_enemy_explosion(self)
 	if not hitbox:
 		return
 	Saves.data["killed_wertues"] += 1
@@ -135,7 +139,7 @@ func die():
 		Functions.add_bonus("speed", global_position)
 	else:
 		Functions.addRandomBonus(self, 2.0)
-	Functions.sfx_play("res://sounds/wertueDead.mp3", -5.0)
+	Functions.sfx_play("res://sounds/wertueDead.mp3", -5.0, randf_range(0.9, 1.1))
 	died = true
 	Globals.change_points(givepts)
 	hitbox.queue_free()

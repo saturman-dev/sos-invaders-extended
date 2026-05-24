@@ -23,6 +23,8 @@ var trioTimer := 11.0
 var speedTimer := 15.0
 var splashTimer := 9.0
 
+var bgStay = false
+
 
 func _process(delta: float) -> void:
 	if shake_str > 0:
@@ -46,6 +48,7 @@ var overlives := 0
 
 func change_points(diff: int):
 	points += diff
+	Events.points_added.emit(diff)
 	Events.points_changed.emit(points)
 	if Saves.data["ever_got_overheal_bonus"] == false and Saves.data["killed_enemies"] >= needForOverheal:
 		Saves.data["ever_got_overheal_bonus"] = true

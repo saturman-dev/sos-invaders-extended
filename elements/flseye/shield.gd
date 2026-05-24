@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var color = Color("9646ff")
+
 # FOR DAMAGE
 var fullhp = 20.0
 var hp = fullhp
@@ -61,6 +63,8 @@ func beam_dmg(dmg: float):
 var fadetime = 0.8
 func die():
 	remove_from_group("enemies")
+	Functions.big_enemy_explosion(self)
+	Functions.sfx_play("res://sounds/ENRAGE.mp3", 0.0, randf_range(1.05, 1.15))
 	if not hitbox:
 		return
 	Events.flseye_shield_broken.emit()

@@ -53,5 +53,6 @@ position = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_iw181")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1297896626]
+visible = false
 shape = SubResource("CircleShape2D_6htae")
 debug_color = Color(0.99607843, 0, 0.20392157, 0.5882353)

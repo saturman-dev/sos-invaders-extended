@@ -15,6 +15,10 @@ run/main_scene="uid://bipoqhhalsyp8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://diult6hm7bbdg"
 
+[audio]
+
+buses/default_bus_layout="uid://bx1w6at2tam7j"
+
 [autoload]
 
 Events="*uid://4vb8ga1xjbuf"
@@ -39,6 +43,7 @@ enemies=""
 bonuses="вуху донат"
 bosses=""
 flseye_attack=""
+flash=""
 
 [input_devices]
 

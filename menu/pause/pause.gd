@@ -1,4 +1,6 @@
-extends Node2D
+extends CanvasLayer
+
+var settss: Object
 
 @onready var label = $label
 @onready var cont = $cont
@@ -77,6 +79,9 @@ func _on_cont_mouse_exited() -> void:
 	contAnim.play("unhover")
 
 func _on_cont_pressed() -> void:
+	continuee()
+
+func continuee():
 	if en == true:
 		ct = int(Saves.data["ct"])
 		fade0 = create_tween()
@@ -97,8 +102,6 @@ func _on_cont_pressed() -> void:
 		Events.unpaused.emit()
 		queue_free()
 
-
-
 func _on_sett_mouse_entered() -> void:
 	settAnim.play("hover")
 
@@ -107,7 +110,10 @@ func _on_sett_mouse_exited() -> void:
 
 func _on_sett_pressed() -> void:
 	menuClick_play()
-	add_child(setts.instantiate())
+	var settsss = setts.instantiate()
+	add_child(settsss)
+	settss = settsss
+	settsss.get_node("CanvasLayer").layer = 80
 	stb.visible = true
 	cont.disabled = true
 	sett.disabled = true
@@ -126,8 +132,14 @@ func _on_quit_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func back():
+func back(direction: int):
+	if settss:
+		settss.queue_free()
 	stb.visible = false
 	cont.disabled = false
 	sett.disabled = false
 	quit.disabled = false
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		continuee()

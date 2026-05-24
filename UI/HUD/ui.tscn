@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://6o0apg1kop5v" path="res://UI/HUD/overlives_bar.tscn" id="3_0xfy4"]
 
 [node name="UI" type="CanvasLayer" unique_id=1498106473]
+layer = 71
 script = ExtResource("1_3frql")
 
 [node name="Label2" type="Label" parent="." unique_id=1989910893]

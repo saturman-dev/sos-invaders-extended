@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const color = Color("ffc472")
+
 # FOR DAMAGE
 var fullhp = 2.5
 var hp = fullhp
@@ -34,6 +36,7 @@ const bulletScene = preload("res://elements/vlnbullet/vlnbullet.tscn")
 var enabled = true
 
 func _ready() -> void:
+	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Saves.data["ever_met_darsin"] = true
 	fullsize = hpbar.size.x
 
@@ -62,6 +65,7 @@ func beam_dmg(dmg: float):
 
 var dmgtween: Tween
 func damageAnimation():
+	Functions.def_enemy_explosion(self)
 	sprite.material.set_shader_parameter("flash_modifier", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()
@@ -70,6 +74,7 @@ func damageAnimation():
 
 func die():
 	remove_from_group("enemies")
+	Functions.dead_enemy_explosion(self)
 	if not hitbox:
 		return
 	Saves.data["killed_darsins"] += 1

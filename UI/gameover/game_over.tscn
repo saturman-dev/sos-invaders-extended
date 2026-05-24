@@ -8,6 +8,7 @@
 
 [node name="GameOver" type="CanvasLayer" unique_id=326502182]
 process_mode = 3
+layer = 100
 script = ExtResource("1_iglle")
 
 [node name="A6" type="Sprite2D" parent="." unique_id=1254048935]

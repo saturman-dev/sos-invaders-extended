@@ -1,14 +1,20 @@
 [gd_scene format=3 uid="uid://b1ebuyv7scd7o"]
 
 [ext_resource type="Script" uid="uid://bqo2lv336geur" path="res://elements/particles/single_particle.gd" id="1_aan8u"]
+[ext_resource type="PackedScene" uid="uid://ck7ioqmrjuli0" path="res://elements/trail/trail.tscn" id="2_ku03r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku03r"]
 radius = 5.0
 
 [node name="singleParticle" type="CharacterBody2D" unique_id=1435211631]
+z_index = -10
+z_as_relative = false
 collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_aan8u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1259213460]
 shape = SubResource("CircleShape2D_ku03r")
+
+[node name="Trail" parent="." unique_id=1681703106 instance=ExtResource("2_ku03r")]
+width = 20.0

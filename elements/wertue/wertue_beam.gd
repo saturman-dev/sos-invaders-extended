@@ -102,8 +102,6 @@ func _on_warning_time_timeout() -> void:
 	hitbox.disabled = false
 	laserTime.start()
 	if interruption == true:
-		if NEO == false:
-			Functions.hitstop(0.5)
 		set_collision_mask_value(3, true)
 		laser.scale.x *= 1.5
 		Globals.shake_str += 3.0

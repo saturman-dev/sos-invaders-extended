@@ -1,6 +1,6 @@
 extends Node2D
 
-
+var able = false
 
 var fade_tween: Tween
 var fade_tween1: Tween
@@ -38,7 +38,7 @@ func _ready():
 	loaded = true
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and able == true:
 		backk()
 
 func menuClick_play():
@@ -53,8 +53,7 @@ func _on_back_pressed() -> void:
 	backk()
 
 func backk():
-	get_parent().back()
-	queue_free()
+	get_parent().back(1)
 
 func _on_back_mouse_entered() -> void:
 	$CanvasLayer/backAnim.play("hover")
