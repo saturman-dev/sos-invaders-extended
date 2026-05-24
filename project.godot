@@ -32,7 +32,6 @@ window/size/viewport_width=390
 window/size/viewport_height=240
 window/size/mode=4
 window/stretch/mode="canvas_items"
-window/stretch/scale_mode="integer"
 
 [global_group]
 
