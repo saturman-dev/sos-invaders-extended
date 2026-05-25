@@ -73,14 +73,14 @@ func damageAnimation():
 	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.2)
 
 func die():
-	remove_from_group("enemies")
 	if not hitbox:
 		return
+	remove_from_group("enemies")
 	Functions.dead_enemy_explosion(self)
 	Saves.data["killed_darsins"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1
-	Functions.addRandomBonus(self, 0.33)
+	Functions.addRandomBonus(self, 10.0)
 	Functions.sfx_play("res://sounds/darsinDead.mp3", 0.0, randf_range(0.9, 1.1))
 	died = true
 	Globals.change_points(givepts)

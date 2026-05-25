@@ -573,7 +573,7 @@ offset_top = 51.0
 offset_right = 268.0
 offset_bottom = 197.0
 theme = SubResource("Theme_e3bvy")
-scroll_vertical = 176
+scroll_vertical = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer" unique_id=590071018]
 layout_mode = 2

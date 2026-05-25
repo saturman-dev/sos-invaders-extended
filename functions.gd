@@ -127,82 +127,87 @@ func notify(notification_text: String = "Some notification", notification_info: 
 
 
 
-func add_bonus(bonus_type: String, just_enter_self, ignore_locked: bool = true, excepting: bool = true):
-	if bonus_type == "trio":
-		if Saves.data["ever_got_trio_bonus"] == false and ignore_locked == false:
-			return
-		if Globals.bonusTrioActive == true:
-			addRandomBonus(just_enter_self, 1.0, "trio")
-			return
-		var Trio = trio.instantiate()
-		Trio.global_position = just_enter_self.global_position
-		call_deferred("add_child", Trio)
-		Saves.data["gotten_trios"] += 1
-	if bonus_type == "speed":
-		if Saves.data["ever_got_speed_bonus"] == false and ignore_locked == false:
-			return
-		if Globals.bonusSpeedActive == true:
-			addRandomBonus(just_enter_self, 1.0, "speed")
-			return
-		var Speed = speed.instantiate()
-		Speed.global_position = just_enter_self.global_position
-		call_deferred("add_child", Speed)
-		Saves.data["gotten_speeds"] += 1
-	if bonus_type == "heal":
-		if Saves.data["ever_got_heal_bonus"] == false and ignore_locked == false:
-			return
-		var Heal = heal.instantiate()
-		if Globals.lives == Globals.deflives:
-			addRandomBonus(just_enter_self, 1.0, "heal")
-			return
-		if just_enter_self is Vector2:
-			Heal.global_position = just_enter_self
-		else:
-			Heal.global_position = just_enter_self.global_position
-		call_deferred("add_child", Heal)
-		Saves.data["gotten_heals"] += 1
-	if bonus_type == "overheal":
-		if Saves.data["ever_got_overheal_bonus"] == false and ignore_locked == false:
-			return
-		if Globals.overlives == Globals.deflives:
-			addRandomBonus(just_enter_self, 1.0, "overheal")
-			return
-		var Overheal = overheal.instantiate()
-		Overheal.global_position = just_enter_self.global_position
-		call_deferred("add_child", Overheal)
-		Saves.data["gotten_overheals"] += 1
-	if bonus_type == "splash":
-		if Saves.data["ever_got_splash_bonus"] == false and ignore_locked == false:
-			return
-		if Globals.bonusSplashActive == true:
-			addRandomBonus(just_enter_self, 1.0, "splash")
-			return
-		var Splash = splash.instantiate()
-		if just_enter_self is Vector2:
-			Splash.global_position = just_enter_self
-		else:
-			Splash.global_position = just_enter_self.global_position
-		call_deferred("add_child", Splash)
-		Saves.data["gotten_splashes"] += 1
+func add_bonus(bonus_type: String, spawn_source: Variant):
+	var spawn_pos: Vector2 = Vector2.ZERO
+	if spawn_source is Vector2:
+		spawn_pos = spawn_source
+	elif spawn_source is Object:
+		spawn_pos = spawn_source.global_position
+	else:
+		push_error("Неверный тип spawn_source в системе бонусов!")
+		return
+	
+	var bonus_node: Node2D = null
+	
+	match bonus_type:
+		"trio":
+			bonus_node = trio.instantiate()
+			Saves.data["gotten_trios"] += 1
+		"speed":
+			bonus_node = speed.instantiate()
+			Saves.data["gotten_speeds"] += 1
+		"heal":
+			bonus_node = heal.instantiate()
+			Saves.data["gotten_heals"] += 1
+		"overheal":
+			bonus_node = overheal.instantiate()
+			Saves.data["gotten_overheals"] += 1
+		"splash":
+			bonus_node = splash.instantiate()
+			Saves.data["gotten_splashes"] += 1
+	
+	if bonus_node:
+		bonus_node.global_position = spawn_pos
+		call_deferred("add_child", bonus_node)
 
 func removeBonuses():
 	for bonus in get_tree().get_nodes_in_group("bonuses"):
 		bonus.queue_free()
 
-func addRandomBonus(just_enter_self: Object, chance_modifier: float = 1.0, except: String = "nothing"):
-	var random = randf_range(0.0, 100.0)
-	if except != "nothing":
-		random = randf_range(0.0, bonus_chances.size - bonus_chances[str(except)])
+func addRandomBonus(spawn_source: Variant, chance_modifier: float = 1.0):
+	var valid_bonuses = []
+	var total_weight = 0.0
+	
+	for bonus in bonus_chances.keys():
+		if is_bonus_allowed(bonus):
+			valid_bonuses.append(bonus)
+			
+			total_weight += bonus_chances[bonus]
+	
+	if valid_bonuses.is_empty():
+		return
+	
+	var drop_roll = randf_range(0.0, 100.0)
+	
+	var final_drop_chance = clamp(total_weight * chance_modifier * Saves.data["bonus_modifier"], 0.0, 100.0)
+	
+	if drop_roll > final_drop_chance:
+		return
+	
+	var bonus_roll = randf_range(0.0, total_weight)
 	var current_sum = 0.0
 	var selected_bonus = ""
-	for bonus in bonus_chances.keys():
-		if bonus != except:
-			current_sum += bonus_chances[bonus] * chance_modifier
-			if random <= current_sum:
-				selected_bonus = bonus
-				break
+	for bonus in valid_bonuses:
+		current_sum += bonus_chances[bonus]
+		if bonus_roll <= current_sum:
+			selected_bonus = bonus
+			break
 	if selected_bonus != "":
-		add_bonus(selected_bonus, just_enter_self, false)
+		add_bonus(selected_bonus, spawn_source)
+
+func is_bonus_allowed(bonus_type: String) -> bool:
+	
+	var save_key = "ever_got_" + bonus_type + "_bonus"
+	if Saves.data.has(save_key) and Saves.data[save_key] == false:
+		return false
+	
+	match bonus_type:
+		"trio":     return not Globals.bonusTrioActive
+		"speed":    return not Globals.bonusSpeedActive
+		"splash":   return not Globals.bonusSplashActive
+		"heal":     return Globals.lives < Globals.deflives
+		"overheal": return Globals.overlives != Globals.deflives
+	return true
 
 func checkHeal():
 	if Globals.deflives < Globals.def_hp and Saves.data["ever_got_heal_bonus"] == false:

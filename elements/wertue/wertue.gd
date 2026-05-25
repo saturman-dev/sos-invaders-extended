@@ -124,9 +124,9 @@ func beam_dmg(dmg: float):
 		dmgcldown2.start()
 
 func die():
-	remove_from_group("enemies")
 	if not hitbox:
 		return
+	remove_from_group("enemies")
 	Functions.big_enemy_explosion(self)
 	Saves.data["killed_wertues"] += 1
 	Functions.checkHeal()

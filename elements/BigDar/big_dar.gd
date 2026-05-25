@@ -104,9 +104,9 @@ func damageAnimation():
 	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.2)
 
 func die():
-	remove_from_group("enemies")
 	if not hitbox:
 		return
+	remove_from_group("enemies")
 	Functions.mid_enemy_explosion(self)
 	Saves.data["killed_bigdars"] += 1
 	Functions.checkHeal()

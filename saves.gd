@@ -9,6 +9,7 @@ var data = {
 	"v_mus": 25.0,
 	"ct": 3,
 	"bars": 1,
+	"bonus_modifier": 1.0,
 	"killed_enemies": 0,
 	"educated": false,
 	"ever_got_trio_bonus": false,

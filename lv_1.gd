@@ -2,7 +2,7 @@ extends Node2D
 
 
 var bossfighting = false
-var flseye_diffi = diffi_range[0]
+var flseye_diffi = diffi_range[3]
 var shaurman_diffi = 9999
 @onready var viewpos = get_viewport_rect().size
 
@@ -52,10 +52,12 @@ func check_game_over():
 		if Globals.nodeath == false:
 			gameOver()
 
+var bossfight_checked = false
 func check_bossfighting():
 	await get_tree().process_frame
 	if bossfighting == true and get_tree().get_nodes_in_group("enemies").size() == 0:
-		if diffi < flseye_diffi + 50:
+		if diffi < flseye_diffi + 50 and bossfight_checked == false:
+			bossfight_checked = true
 			Events.bossfight_start.emit("flseye")
 
 func gameOver():
@@ -87,7 +89,7 @@ var already_bossfighted = false
 var already_bossfighted_2 = false
 
 var p_x_offset = 30.0
-var p_y_offset = 155.0
+var p_y_offset = 170.0
 func _process(delta: float) -> void:
 	if diffi < maxDiffi and bossfighting == false:
 		diffi += delta * 1.0
@@ -140,12 +142,11 @@ func timech():
 func addBonus(bonus_type: String):
 	$UI.addBonus(bonus_type)
 
-const diffi_range = [4, 35, 55, 80, 105, 135, 175, 230]
+const diffi_range = [15, 35, 55, 80, 105, 135, 175, 230]
 
 func spawn_enemy():
 	if bossfighting == true:
 		return
-	print("hi")
 	if diffi < diffi_range[0]:
 		spawn_darsinGroup()
 	elif diffi < diffi_range[1]:

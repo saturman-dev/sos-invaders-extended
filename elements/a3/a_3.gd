@@ -91,7 +91,7 @@ func periodic_dmg(dmg: float):
 	if dmgcldown.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			Globals.change_points(givepts / 2)
+			Functions.style_bonus("exploded")
 		dmgcldown.wait_time = 1.0
 		dmgcldown.start()
 
@@ -105,9 +105,9 @@ func beam_dmg(dmg: float):
 		dmgcldown2.start()
 
 func die():
-	remove_from_group("enemies")
 	if not hitbox:
 		return
+	remove_from_group("enemies")
 	Functions.big_enemy_explosion(self)
 	Saves.data["killed_a3s"] += 1
 	Functions.checkHeal()
