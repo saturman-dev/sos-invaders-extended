@@ -8,7 +8,7 @@ var shaurman_diffi = 9999
 @onready var viewpos = get_viewport_rect().size
 
 # ENEMIES COOLDOWN
-var defCldown = 2
+var defCldown = 10
 var newCldown = 4
 var cooldown = defCldown
 var maxDiffi = 360
@@ -42,6 +42,19 @@ func _ready() -> void:
 	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	Events.bossfight_end.connect(func(): end_bossfight())
 	Globals.newbest = false
+	ready_animation()
+
+func ready_animation():
+	Globals.hp_animation = true
+	Globals.change_lives(-2)
+	Functions.sfx_play("res://sounds/hpStart.mp3", 0.0)
+	await get_tree().create_timer(0.2, false).timeout
+	Globals.change_lives(1)
+	Functions.sfx_play("res://sounds/hpStart.mp3", 0.0, 1.1)
+	await get_tree().create_timer(0.2, false).timeout
+	Globals.change_lives(1)
+	Functions.sfx_play("res://sounds/hpStart.mp3", 0.0, 1.2)
+	Globals.hp_animation = false
 
 func end_bossfight():
 	bossfighting = false
@@ -105,7 +118,7 @@ func _process(delta: float) -> void:
 		diffiMulti = 0.4
 
 	# DIFFI CHANGE & BOSSFIGHT DIFFI CHECK
-	if diffi < maxDiffi and bossfighting == false:
+	if diffi < maxDiffi and bossfighting == false and Saves.data["educated"] == true:
 		diffi += delta * 1.0 * diffiMulti
 		Globals.diffi = diffi
 		if diffi > flseye_diffi and already_bossfighted == false:
@@ -115,7 +128,7 @@ func _process(delta: float) -> void:
 			bossfighting = true
 			already_bossfighted_2 = true
 
-	if bossfighting == false:
+	if bossfighting == false and Saves.data["educated"] == true:
 		timer += delta * diffiMulti
 	if timer >= cooldown:
 		defCldown = newCldown

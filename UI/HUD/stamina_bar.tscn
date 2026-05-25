@@ -2,6 +2,6 @@
 
 [ext_resource type="Script" uid="uid://df42obga62qor" path="res://UI/HUD/stamina_bar.gd" id="1_ldhch"]
 
-[node name="StaminaBar" type="HBoxContainer" unique_id=552165940]
+[node name="StaminaBar" type="HBoxContainer" unique_id=552165940 groups=["stamina_bar"]]
 alignment = 2
 script = ExtResource("1_ldhch")

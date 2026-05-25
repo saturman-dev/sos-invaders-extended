@@ -5,8 +5,9 @@ var ptsize = 1.5
 var pton = 0.1
 var ptoff = 0.3
 
-@onready var highest := $everythingButTime/thewholedown/scoreV/scoreH/highscore
-@onready var pts1 := $everythingButTime/thewholedown/scoreV/scoreH/score
+@onready var scoreV := $scoreV
+@onready var highest := $scoreV/scoreH/highscore
+@onready var pts1 := $scoreV/scoreH/score
 @onready var pts2 := $Label2
 @onready var multi1 := $VBoxContainer2/HBoxContainer/VBoxContainer/multiplyer
 @onready var multi2 := $multiplyer2
@@ -23,6 +24,15 @@ func _ready() -> void:
 		highest.text = str("/ ", int(score))
 	else:
 		highest.queue_free()
+	ready_animation()
+
+var scoreVoffsetx = 30
+var scoreVoffsety = 20
+func ready_animation():
+	scoreV.position.y += scoreVoffsety
+	scoreV.position.x -= scoreVoffsetx
+	var scoreTween = create_tween()
+	scoreTween.tween_property(scoreV, "position", Vector2(scoreVoffsetx, -scoreVoffsety), 3.0).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func align_position():
 	multi2.global_position = multi1.global_position

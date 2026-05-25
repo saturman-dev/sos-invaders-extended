@@ -2,8 +2,8 @@ extends Line2D
 
 @export var lifetime: float = 0.05
 @export var tick_rate: float = 0.01
-var target: Node2D
-var offset = Vector2.ZERO
+var target: Object
+@export var offset = Vector2.ZERO
 var points_lifetime: Array = []
 var time_since_last_tick: float = 0.0
 

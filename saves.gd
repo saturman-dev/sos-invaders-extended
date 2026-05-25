@@ -10,6 +10,8 @@ var data = {
 	"ct": 3,
 	"bars": 1,
 	"bonus_modifier": 1.0,
+	"speed_modifier": 1.0,
+	"damage_modifier": 1.0,
 	"killed_enemies": 0,
 	"educated": false,
 	"ever_got_trio_bonus": false,

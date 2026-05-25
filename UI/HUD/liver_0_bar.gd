@@ -15,6 +15,8 @@ func update_lives(lives: int):
 		add_live0() if diff < 0 else remove_live0()
 
 func add_live0():
+	if Globals.hp_animation == true:
+		return
 	var rect = RECT_SCENE.instantiate()
 	add_child(rect)
 

@@ -343,11 +343,13 @@ collision_mask = 3
 script = ExtResource("1_1jm5v")
 
 [node name="square1" type="Sprite2D" parent="." unique_id=1520993890]
+visible = false
 modulate = Color(1, 1, 1, 0.5)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_iqko2")
 
 [node name="square2" type="Sprite2D" parent="." unique_id=1453484808]
+visible = false
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_iqko2")
 

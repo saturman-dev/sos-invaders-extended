@@ -65,7 +65,7 @@ func _on_play_pressed() -> void:
 	s.parallel().tween_property(extraAnim, "global_position:y", 115, stspeed).as_relative().set_trans(trans).set_ease(Tween.EASE_OUT)
 	s.parallel().tween_property(settingsAnim, "global_position:y", 115, stspeed).as_relative().set_trans(trans).set_ease(Tween.EASE_OUT)
 	s.parallel().tween_property(quitAnim, "global_position:y", 115, stspeed).as_relative().set_trans(trans).set_ease(Tween.EASE_OUT)
-	await get_tree().create_timer(stspeed/8, false).timeout
+	await get_tree().create_timer(stspeed/2, false).timeout
 	get_parent().staart()
 	await s.finished
 	queue_free()

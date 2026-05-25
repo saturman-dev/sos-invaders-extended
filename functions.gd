@@ -205,8 +205,8 @@ func is_bonus_allowed(bonus_type: String) -> bool:
 		"trio":     return not Globals.bonusTrioActive
 		"speed":    return not Globals.bonusSpeedActive
 		"splash":   return not Globals.bonusSplashActive
-		"heal":     return Globals.lives < Globals.deflives
-		"overheal": return Globals.overlives != Globals.deflives
+		"heal":     return Globals.deflives < Globals.def_hp
+		"overheal": return Globals.overlives != Globals.def_hp
 	return true
 
 func checkHeal():
@@ -299,3 +299,10 @@ func particle_explosion(
 		
 		#await get_tree().process_frame
 		#print(p.get_node("Trail").lifetime)
+
+func dash():
+	sfx_play("res://sounds/dash.mp3", 1.0, randf_range(0.8, 1.2))
+	Globals.currentStaminas -= 1
+
+func nodash():
+	sfx_play("res://sounds/nodash.mp3", 1.0, randf_range(0.9, 1.1))

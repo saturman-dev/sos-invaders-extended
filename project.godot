@@ -43,6 +43,7 @@ flseye_attack=""
 flash=""
 endedLivesManager=""
 lives_bar=""
+stamina_bar=""
 
 [input]
 

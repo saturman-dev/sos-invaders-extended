@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="1_piywj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lcev"]
-size = Vector2(390, 214)
+size = Vector2(390, 136)
 
 [node name="bosshpbar" type="Control" unique_id=214188899]
 custom_minimum_size = Vector2(390, 37.5)
@@ -18,48 +18,46 @@ script = ExtResource("1_3lcev")
 [node name="barBlack" type="ColorRect" parent="." unique_id=291126693]
 layout_mode = 0
 offset_left = 4.0
-offset_top = 10.0
 offset_right = 386.0
-offset_bottom = 35.0
+offset_bottom = 25.0
 color = Color(0, 0, 0, 1)
 
 [node name="barYell" type="ColorRect" parent="." unique_id=783310992]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 12.0
+offset_top = 2.0
 offset_right = 384.0
-offset_bottom = 33.0
+offset_bottom = 23.0
 color = Color(1, 1, 0, 1)
 
 [node name="barRed" type="ColorRect" parent="." unique_id=1727108349]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 12.0
+offset_top = 2.0
 offset_right = 384.0
-offset_bottom = 33.0
+offset_bottom = 23.0
 color = Color(1, 0, 0, 1)
 
 [node name="barAdd2" type="ColorRect" parent="." unique_id=63936955]
 layout_mode = 0
 offset_left = 10.0
-offset_top = 3.0
+offset_top = 27.0
 offset_right = 380.0
-offset_bottom = 7.0
+offset_bottom = 31.0
 color = Color(0, 0, 0, 1)
 
 [node name="barAdd" type="ColorRect" parent="." unique_id=1012512728]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 4.0
+offset_top = 28.0
 offset_right = 379.0
-offset_bottom = 6.0
+offset_bottom = 30.0
 color = Color(1, 0, 0, 1)
 
 [node name="Label" type="Label" parent="." unique_id=105829806]
 layout_mode = 0
-offset_top = 10.0
 offset_right = 390.0
-offset_bottom = 35.0
+offset_bottom = 25.0
 theme_override_fonts/font = ExtResource("1_piywj")
 text = "BOSSNAME"
 horizontal_alignment = 1
@@ -74,13 +72,11 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1945282182]
-position = Vector2(0, 10)
 collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1340357197]
-visible = false
-position = Vector2(195, 87)
+position = Vector2(195, -5)
 shape = SubResource("RectangleShape2D_3lcev")
 
 [connection signal="timeout" from="yellwait" to="." method="_on_yellwait_timeout"]

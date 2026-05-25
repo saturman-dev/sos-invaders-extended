@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	global_position.y += speed * delta
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
-		if body.has_method("bonusHeal") and Globals.lives < Globals.def_hp:
+		if body.has_method("bonusHeal") and Globals.deflives < Globals.def_hp:
 			body.bonusHeal()
 			queue_free()
 

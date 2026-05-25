@@ -6,7 +6,7 @@
 custom_minimum_size = Vector2(20, 2.5)
 offset_right = 20.0
 offset_bottom = 2.5
-color = Color(0, 0.106126174, 0.22376983, 0)
+color = Color(0, 0.10330222, 0.22284207, 1)
 script = ExtResource("1_7a5ji")
 
 [node name="stamina" type="ColorRect" parent="." unique_id=1663774040]

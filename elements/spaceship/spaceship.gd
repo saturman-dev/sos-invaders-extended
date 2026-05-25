@@ -5,6 +5,12 @@ const rocket_scene = preload("res://elements/bullet/bullet.tscn")
 @onready var cdt := $CD
 @onready var shit := $ShootEffect
 @onready var sprite := $sprite
+@onready var trail = $Trail
+var defTrailWidth: float
+var defTrailColor: Color
+var trailDashTween: Tween
+var dashTrailWidth := 70.0
+var dashTrailColor := Color("59a5ff")
 var cd = 0.2
 var defcd  = cd
 var INVINCIBLE := 1.5
@@ -12,8 +18,8 @@ var dmg = 1.0
 
 @export var speed = 160.0
 @export var acceleration = speed * 8
-@export var dash_speed := 700.0
-@export var dash_duration := 0.1
+@export var dash_speed := 800.0
+@export var dash_duration := 0.08
 
 var dash_time_left := 0.0
 var dash_direction := Vector2.UP
@@ -26,6 +32,9 @@ func _ready() -> void:
 	Globals.bonusSpeedActive = false
 	Globals.bonusTrioActive = false
 	Globals.bonusSplashActive = false
+	trail.target = self
+	defTrailWidth = trail.width
+	defTrailColor = trail.default_color
 
 func _physics_process(delta: float) -> void:
 	# MOVING
@@ -41,10 +50,11 @@ func _physics_process(delta: float) -> void:
 		dash_time_left -= delta
 		if dash_time_left <= 0.0:
 			velocity = direction * speed
+			set_collision_layer_value(2, true)
 		else:
 			velocity = dash_direction * dash_speed
-		move_and_slide()
-		return
+		#move_and_slide()
+		#return
 	
 	# SHOOTING
 	if Input.is_action_pressed("ui_accept"):
@@ -52,16 +62,28 @@ func _physics_process(delta: float) -> void:
 			shot()
 			cdt.start(cd)
 	
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and Globals.dashable == true:
 		dash_time_left = dash_duration
 		if direction != Vector2.ZERO:
 			dash_direction = direction
 		else:
 			dash_direction = last_non_zero_direction
 		velocity = dash_direction * dash_speed
-		move_and_slide()
-		return
-
+		if trailDashTween and trailDashTween.is_running():
+			trailDashTween.kill()
+		trail.width = dashTrailWidth
+		trail.default_color = dashTrailColor
+		trailDashTween = create_tween()
+		trailDashTween.tween_property(trail, "width", defTrailWidth, dash_duration * 2)
+		trailDashTween.parallel().tween_property(trail, "default_color", defTrailColor, dash_duration * 4)
+		Functions.dash()
+		set_collision_layer_value(2, false)
+		#move_and_slide()
+		#return
+	
+	if Input.is_action_just_pressed("dash") and Globals.dashable == false:
+		Functions.nodash()
+	
 	var target_velocity = direction * speed
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
 	move_and_slide()
@@ -102,6 +124,7 @@ func shot():
 var is_invincible := false
 
 func takeDmg():
+	Functions.sfx_play("res://sounds/damage.mp3")
 	Functions.flash(0.0, 1.0, 0.05, 0.7, Color("a60000"))
 	is_invincible = true
 	set_collision_layer_value(2, false)

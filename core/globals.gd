@@ -4,7 +4,10 @@ var needForOverheal = 40
 var nodeath: bool = true
 
 var def_hp: int = 3
-var staminas := 3
+var staminas := 3.0
+var currentStaminas := 0.0
+var staminaTime := 2.0
+var dashable := true
 var game_running: bool = false
 var instart: bool = false
 var pts = 0
@@ -25,9 +28,12 @@ var speedTimer := 15.0
 var splashTimer := 9.0
 
 var bgStay = false
+var hp_animation = false
 
 
 func _process(delta: float) -> void:
+	
+	# CAMERA SHAKE
 	if shake_str > 0:
 		shake_str = lerp(shake_str, 0.0, shake_fad * delta)
 		var camera = get_viewport().get_camera_2d()
@@ -36,6 +42,16 @@ func _process(delta: float) -> void:
 				randf_range(-shake_str, shake_str),
 				randf_range(-shake_str, shake_str)
 			)
+	
+	# STAMINA
+	if currentStaminas < staminas and game_running == true:
+		currentStaminas += delta / staminaTime
+		if currentStaminas >= 1:
+			dashable = true
+		else:
+			dashable = false
+		#print(currentStaminas)
+
 
 func setDefHp():
 	lives = def_hp

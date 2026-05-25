@@ -27,6 +27,7 @@ func _ready() -> void:
 	Functions.remove_flashes()
 	Functions.removeBonuses()
 	Globals.shake_str = 0.0
+	Globals.currentStaminas = 0.0
 	Globals.bgStay = false
 	if Globals.instart == true:
 		instart()
@@ -41,12 +42,14 @@ func staart():
 	var lv_1 = lv_1_scene.instantiate()
 	lv_1.global_position = Vector2(0, 0)
 	add_child(lv_1)
+	Globals.game_running = true
+	var staminaTween = create_tween()
+	staminaTween.tween_property(Globals, "currentStaminas", Globals.staminas, 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	move_tween = create_tween()
-	move_tween.tween_property($lv1/spaceship, "position", Vector2(0.0, -35.0), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	move_tween.tween_property($lv1/spaceship, "position", Vector2(0.0, -40.0), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	#move_tween2 = create_tween()
 	#move_tween2.tween_property($lv1/UI/MarginContainer, "global_position", Vector2(0, 0), 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await move_tween.finished
-	Globals.game_running = true
 	Globals.instart = false
 
 func instart():

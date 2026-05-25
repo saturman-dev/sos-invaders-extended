@@ -1,26 +1,27 @@
 extends ColorRect
 
 @onready var s = $stamina
-var t: Tween
-var able = false
-var spawn_time = 0.2
-var target_size = 20.0
-var c := Color("59a5ff")
-var cc: Color
+
+var target_size: float = 20.0
+var full_color := Color("59a5ff")
+var charging_color := Color("2c4d75")
+var bg_color := Color("001a39")
+
+var dryn = false
 
 func _ready() -> void:
-	cc = s.color
-	size.x = 0
-	t = create_tween()
-	t.tween_property(s, "size:x", target_size, spawn_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_callback(func(): able = true)
-	t.tween_callback(func(): s.color = c)
-	t.tween_callback(func(): size.x = target_size)
-
-func loss():
+	size.x = target_size
 	s.size.x = 0
-	s.color = cc
-	t = create_tween()
-	t.tween_property(s, "size:x", target_size, 2.0 * Saves.data["speed_modifier"])
-	t.tween_callback(func(): able = true)
-	t.tween_callback(func(): s.color = c)
+
+func set_fill(amount: float):
+	s.size.x = amount * target_size
+	
+	if amount >= 1.0:
+		s.color = full_color
+		color = bg_color
+		if dryn == false:
+			dryn = true
+			Functions.sfx_play("res://sounds/staminaCharge.mp3", 7.0, 0.8 + Globals.currentStaminas/10)
+	else:
+		s.color = charging_color
+		dryn = false
