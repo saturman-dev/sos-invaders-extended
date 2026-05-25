@@ -2,6 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bp4cij64oe418" path="res://UI/HUD/lives_bar.gd" id="1_x6vql"]
 
-[node name="LivesBar" type="HBoxContainer" unique_id=52817040]
+[node name="LivesBar" type="HBoxContainer" unique_id=52817040 groups=["lives_bar"]]
 alignment = 2
 script = ExtResource("1_x6vql")

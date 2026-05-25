@@ -2,8 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c4nswko4yvo00" path="res://UI/HUD/ui.gd" id="1_3frql"]
 [ext_resource type="PackedScene" uid="uid://declhp76gcxrb" path="res://UI/HUD/lives_bar.tscn" id="2_3frql"]
+[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="2_iho6x"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="2_kmbvj"]
 [ext_resource type="PackedScene" uid="uid://6o0apg1kop5v" path="res://UI/HUD/overlives_bar.tscn" id="3_0xfy4"]
+[ext_resource type="Script" uid="uid://ivg0l8msg6aa" path="res://UI/HUD/time.gd" id="4_8pomw"]
+[ext_resource type="PackedScene" uid="uid://s1ut3vxfcggr" path="res://UI/HUD/oberlives_0_bar.tscn" id="5_f67e7"]
+[ext_resource type="PackedScene" uid="uid://cgxlit60vbwto" path="res://UI/HUD/liver_0_bar.tscn" id="7_g81w3"]
+[ext_resource type="PackedScene" uid="uid://b3om6yevg4tt7" path="res://UI/HUD/stamina_bar.tscn" id="9_g81w3"]
 
 [node name="UI" type="CanvasLayer" unique_id=1498106473]
 layer = 71
@@ -11,65 +16,48 @@ script = ExtResource("1_3frql")
 
 [node name="Label2" type="Label" parent="." unique_id=1989910893]
 offset_left = 10.0
-offset_top = -30.0
+offset_top = -25.0
 offset_right = 21.0
-offset_bottom = -15.0
+offset_bottom = -10.0
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_kmbvj")
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
 [node name="multiplyer2" type="Label" parent="." unique_id=1287901546]
 visible = false
 offset_left = 25.0
-offset_top = -21.0
+offset_top = 14.0
 offset_right = 79.0
-offset_bottom = -14.0
+offset_bottom = 21.0
 theme_override_fonts/font = ExtResource("2_kmbvj")
 theme_override_font_sizes/font_size = 7
 text = "x1.00"
 
-[node name="endedlivesManager" type="Node2D" parent="." unique_id=1360639939 groups=["endedLivesManager"]]
-
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1046656662]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -35.0
-offset_bottom = -35.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1556699986]
-layout_mode = 2
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1556699986]
+visible = false
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 380.0
+offset_bottom = 235.0
 theme_override_constants/separation = 2
+alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=531524192]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2" unique_id=531524192]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=773541712]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_kmbvj")
-theme_override_font_sizes/font_size = 16
-text = "0"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=964719996]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer" unique_id=964719996]
 layout_mode = 2
 theme_override_constants/separation = 1
 alignment = 2
 
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1946236132]
+[node name="Control2" type="Control" parent="VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1946236132]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="multiplyer" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1909489025]
+[node name="multiplyer" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1909489025]
 visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
@@ -77,36 +65,26 @@ theme_override_fonts/font = ExtResource("2_kmbvj")
 theme_override_font_sizes/font_size = 7
 text = "x1.00"
 
-[node name="highest" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=625636267]
-modulate = Color(1, 1, 1, 0.49803922)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_kmbvj")
-theme_override_font_sizes/font_size = 7
-text = "/ *HIGHEST*"
-
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=190741398]
+[node name="Control" type="Control" parent="VBoxContainer2/HBoxContainer" unique_id=190741398]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1236129073]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2" unique_id=1236129073]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="time" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=787700631]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_kmbvj")
-theme_override_font_sizes/font_size = 7
-text = "0:00"
+[node name="VBoxContainer3" type="VBoxContainer" parent="." unique_id=719930799]
+visible = false
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 380.0
+offset_bottom = 235.0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=719930799]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2" unique_id=1608016899]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer3" unique_id=1608016899]
 layout_mode = 2
 alignment = 2
 
-[node name="diffLabel" type="Label" parent="MarginContainer/VBoxContainer2/HBoxContainer" unique_id=1559083105]
-visible = false
+[node name="diffLabel" type="Label" parent="VBoxContainer3/HBoxContainer" unique_id=1559083105]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_kmbvj")
@@ -114,13 +92,7 @@ theme_override_font_sizes/font_size = 7
 text = "0"
 horizontal_alignment = 2
 
-[node name="OverlivesBar" parent="MarginContainer/VBoxContainer2/HBoxContainer" unique_id=52817040 instance=ExtResource("3_0xfy4")]
-layout_mode = 2
-
-[node name="LivesBar" parent="MarginContainer/VBoxContainer2/HBoxContainer" unique_id=1668906684 instance=ExtResource("2_3frql")]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1687214641]
+[node name="timeV" type="VBoxContainer" parent="." unique_id=78499347]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -128,6 +100,98 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="activeBonuses" type="HBoxContainer" parent="VBoxContainer" unique_id=1499376920]
+[node name="timeH" type="HBoxContainer" parent="timeV" unique_id=543622971]
+layout_mode = 2
+alignment = 1
+
+[node name="time" type="Label" parent="timeV/timeH" unique_id=787700631]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_iho6x")
+text = "0:00"
+script = ExtResource("4_8pomw")
+
+[node name="everythingButTime" type="VBoxContainer" parent="." unique_id=1076433339]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="bossBars" type="VBoxContainer" parent="everythingButTime" unique_id=1687214641]
+layout_mode = 2
+
+[node name="spacer" type="Control" parent="everythingButTime" unique_id=928554801]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="thewholedown" type="HBoxContainer" parent="everythingButTime" unique_id=151824840]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="scoreV" type="VBoxContainer" parent="everythingButTime/thewholedown" unique_id=1101744757]
 layout_mode = 2
 alignment = 2
+
+[node name="scoreH" type="HBoxContainer" parent="everythingButTime/thewholedown/scoreV" unique_id=1787593278]
+layout_mode = 2
+
+[node name="score" type="Label" parent="everythingButTime/thewholedown/scoreV/scoreH" unique_id=773541712]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
+[node name="highscore" type="Label" parent="everythingButTime/thewholedown/scoreV/scoreH" unique_id=625636267]
+modulate = Color(1, 1, 1, 0.49803922)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 12
+text = "/ *HIGHEST*"
+
+[node name="spacer" type="Control" parent="everythingButTime/thewholedown" unique_id=884384520]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="staminaHpBonuses" type="VBoxContainer" parent="everythingButTime/thewholedown" unique_id=1297830834]
+layout_mode = 2
+alignment = 2
+
+[node name="bonusesH" type="HBoxContainer" parent="everythingButTime/thewholedown/staminaHpBonuses" unique_id=1853565715]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="bonusesV" type="VBoxContainer" parent="everythingButTime/thewholedown/staminaHpBonuses/bonusesH" unique_id=1765871238]
+layout_mode = 2
+alignment = 2
+
+[node name="Overlives" type="HBoxContainer" parent="everythingButTime/thewholedown/staminaHpBonuses" unique_id=993091017]
+layout_mode = 2
+alignment = 2
+
+[node name="Oberlives0Bar" parent="everythingButTime/thewholedown/staminaHpBonuses/Overlives" unique_id=641916824 instance=ExtResource("5_f67e7")]
+layout_mode = 2
+
+[node name="OverlivesBar" parent="everythingButTime/thewholedown/staminaHpBonuses/Overlives" unique_id=52817040 instance=ExtResource("3_0xfy4")]
+layout_mode = 2
+
+[node name="Lives" type="HBoxContainer" parent="everythingButTime/thewholedown/staminaHpBonuses" unique_id=1743819812]
+layout_mode = 2
+alignment = 2
+
+[node name="Liver0Bar" parent="everythingButTime/thewholedown/staminaHpBonuses/Lives" unique_id=1548388788 instance=ExtResource("7_g81w3")]
+layout_mode = 2
+
+[node name="LivesBar" parent="everythingButTime/thewholedown/staminaHpBonuses/Lives" unique_id=1668906684 instance=ExtResource("2_3frql")]
+layout_mode = 2
+
+[node name="StaminaBar" parent="everythingButTime/thewholedown/staminaHpBonuses" unique_id=552165940 instance=ExtResource("9_g81w3")]
+layout_mode = 2
+
+[node name="endedlivesManager" type="Node2D" parent="." unique_id=1360639939 groups=["endedLivesManager"]]

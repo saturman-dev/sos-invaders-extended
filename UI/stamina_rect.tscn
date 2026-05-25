@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bl67fj6faa3e8"]
+
+[ext_resource type="Script" uid="uid://bkhj7ma8d3tnp" path="res://UI/stamina_rect.gd" id="1_7a5ji"]
+
+[node name="staminaRect" type="ColorRect" unique_id=1022864201]
+custom_minimum_size = Vector2(20, 0)
+offset_right = 20.0
+offset_bottom = 2.5
+color = Color(0, 0.10330222, 0.22284207, 1)
+script = ExtResource("1_7a5ji")
+
+[node name="stamina" type="ColorRect" parent="." unique_id=1663774040]
+layout_mode = 0
+offset_bottom = 2.5
+color = Color(1.1310726e-06, 0.24277028, 0.47339785, 1)

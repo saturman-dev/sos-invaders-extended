@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://deedqj2l0dm77"]
+
+[ext_resource type="Texture2D" uid="uid://cp5spy8lpflfg" path="res://textures/hpNewNo.png" id="2_3oo6i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6txl"]
+atlas = ExtResource("2_3oo6i")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q24d"]
+atlas = ExtResource("2_3oo6i")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7m07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6txl")
+}],
+"loop": false,
+"name": &"def",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q24d")
+}],
+"loop": false,
+"name": &"over",
+"speed": 0.0
+}]
+
+[node name="LiveRect0" type="Control" unique_id=824032463 groups=["lives", "overlives"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 20.0
+offset_bottom = 20.0
+scale = Vector2(0.25, 0.25)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1532792622]
+position = Vector2(10, 10)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_e7m07")
+animation = &"def"
+autoplay = "def"

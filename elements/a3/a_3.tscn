@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://7ie0kk4ij0r6" path="res://elements/a3/a_3.gd" id="1_y2la4"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="2_y2la4"]
 [ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_y2la4"]
+[ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="6_xaife"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xaife"]
 shader = ExtResource("1_6u462")
@@ -161,6 +162,10 @@ one_shot = true
 [node name="shotTimer" type="Timer" parent="." unique_id=1248246866]
 one_shot = true
 autostart = true
+
+[node name="contactDamager" parent="." unique_id=64047935 instance=ExtResource("6_xaife")]
+scale = Vector2(6, 6)
+size_horizontal = 28.0
 
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

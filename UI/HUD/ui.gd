@@ -5,13 +5,14 @@ var ptsize = 1.5
 var pton = 0.1
 var ptoff = 0.3
 
-@onready var highest := $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/highest
-@onready var pts1 := $MarginContainer/VBoxContainer/HBoxContainer/Label
+@onready var highest := $everythingButTime/thewholedown/scoreV/scoreH/highscore
+@onready var pts1 := $everythingButTime/thewholedown/scoreV/scoreH/score
 @onready var pts2 := $Label2
-@onready var multi1 := $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/multiplyer
+@onready var multi1 := $VBoxContainer2/HBoxContainer/VBoxContainer/multiplyer
 @onready var multi2 := $multiplyer2
-@onready var bonuses := $VBoxContainer/activeBonuses
-@onready var vboxbottom := $VBoxContainer
+@onready var bonuses := $everythingButTime/thewholedown/staminaHpBonuses/bonusesH/bonusesV
+@onready var bossbarcontainer := $everythingButTime/bossBars
+@onready var diffLabel = $VBoxContainer3/HBoxContainer/diffLabel
 
 var ATween: Tween
 
@@ -58,9 +59,13 @@ func update_points(points: int):
 		ATween.chain().tween_property(pts2, "scale", Vector2.ONE, ptoff)
 		ATween.parallel().tween_property(pts2, "modulate", Color.WHITE, pton + ptoff)
 
+var diffsec = 0.01
 var multiplyer := 1.0
 func _process(delta: float) -> void:
 	pass
+	if Globals.diffi > diffsec:
+		diffLabel.text = str("Difficulty: ", str(round(diffsec * 100) / 100))
+		diffsec += 0.01
 	#multiplyer += delta / 5
 	#update_multi(multiplyer)
 
@@ -95,6 +100,6 @@ const bossbar = preload("res://UI/bosshpbar/bosshpbar.tscn")
 func add_hpbar(type):
 	await Events.boss_animation_finished
 	var Bossbar = bossbar.instantiate()
-	vboxbottom.add_child(Bossbar)
+	bossbarcontainer.add_child(Bossbar)
 	if type == "flseye":
 		Bossbar.label.text = "FLSEYE"

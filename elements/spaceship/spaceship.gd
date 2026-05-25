@@ -12,6 +12,12 @@ var dmg = 1.0
 
 @export var speed = 160.0
 @export var acceleration = speed * 8
+@export var dash_speed := 700.0
+@export var dash_duration := 0.1
+
+var dash_time_left := 0.0
+var dash_direction := Vector2.UP
+var last_non_zero_direction := Vector2.UP
 
 @onready var defShitSize = shit.scale
 var trioShitSize = Vector2(4.5, 4.5)
@@ -22,15 +28,40 @@ func _ready() -> void:
 	Globals.bonusSplashActive = false
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("ui_accept"):
-		if cdt.is_stopped():
-			shot()
-			cdt.start(cd)
-
+	# MOVING
 	var direction = Vector2.ZERO
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	direction = direction.normalized()
+	if direction != Vector2.ZERO:
+		last_non_zero_direction = direction
+	
+	# DASHING
+	if dash_time_left > 0.0:
+		dash_time_left -= delta
+		if dash_time_left <= 0.0:
+			velocity = direction * speed
+		else:
+			velocity = dash_direction * dash_speed
+		move_and_slide()
+		return
+	
+	# SHOOTING
+	if Input.is_action_pressed("ui_accept"):
+		if cdt.is_stopped():
+			shot()
+			cdt.start(cd)
+	
+	if Input.is_action_just_pressed("dash"):
+		dash_time_left = dash_duration
+		if direction != Vector2.ZERO:
+			dash_direction = direction
+		else:
+			dash_direction = last_non_zero_direction
+		velocity = dash_direction * dash_speed
+		move_and_slide()
+		return
+
 	var target_velocity = direction * speed
 	velocity = velocity.move_toward(target_velocity, acceleration * delta)
 	move_and_slide()

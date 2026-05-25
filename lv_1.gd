@@ -1,8 +1,9 @@
 extends Node2D
 
+var diffiMulti = 1.0
 
 var bossfighting = false
-var flseye_diffi = diffi_range[3]
+var flseye_diffi = diffi_range[5]
 var shaurman_diffi = 9999
 @onready var viewpos = get_viewport_rect().size
 
@@ -11,8 +12,6 @@ var defCldown = 2
 var newCldown = 4
 var cooldown = defCldown
 var maxDiffi = 360
-
-@onready var diffLabel = $UI/MarginContainer/VBoxContainer2/HBoxContainer/diffLabel
 
 const GAME_OVER_SCENE = preload("res://UI/gameover/game_over.tscn")
 const WIN_SCENE = preload("res://UI/win/win.tscn")
@@ -55,8 +54,10 @@ func check_game_over():
 var bossfight_checked = false
 func check_bossfighting():
 	await get_tree().process_frame
-	if bossfighting == true and get_tree().get_nodes_in_group("enemies").size() == 0:
+	if bossfighting == true and get_tree().get_nodes_in_group("enemies").size() <= 0:
+		print("stage 1")
 		if diffi < flseye_diffi + 50 and bossfight_checked == false:
+			print("stage 2")
 			bossfight_checked = true
 			Events.bossfight_start.emit("flseye")
 
@@ -91,24 +92,31 @@ var already_bossfighted_2 = false
 var p_x_offset = 30.0
 var p_y_offset = 170.0
 func _process(delta: float) -> void:
+	
+	# DIFFICULTY MULTIPLIER
+	var enemiesCount = get_tree().get_nodes_in_group("enemies").size()
+	if enemiesCount == 0:
+		diffiMulti = 5.0
+	elif enemiesCount < 3:
+		diffiMulti = 2.5
+	elif enemiesCount < 5:
+		diffiMulti = 1.0
+	else:
+		diffiMulti = 0.4
+
+	# DIFFI CHANGE & BOSSFIGHT DIFFI CHECK
 	if diffi < maxDiffi and bossfighting == false:
-		diffi += delta * 1.0
+		diffi += delta * 1.0 * diffiMulti
 		Globals.diffi = diffi
-		if diffi > flseye_diffi and diffi < flseye_diffi + 50 and already_bossfighted == false:
+		if diffi > flseye_diffi and already_bossfighted == false:
 			bossfighting = true
 			already_bossfighted = true
 		if diffi > shaurman_diffi and diffi < shaurman_diffi + 50 and already_bossfighted_2 == false:
 			bossfighting = true
 			already_bossfighted_2 = true
-	timer += delta
-	time += delta
-	if diffi > diffsec:
-		diffLabel.text = str("Difficulty: ", str(round(diffsec * 100) / 100))
-		diffsec += 0.01
-	if time > sec:
-		sec += 1
-		Globals.secs += 1
-		timech()
+
+	if bossfighting == false:
+		timer += delta * diffiMulti
 	if timer >= cooldown:
 		defCldown = newCldown
 		spawn_enemy()
@@ -124,20 +132,6 @@ func _process(delta: float) -> void:
 			p.global_position = Vector2(randf_range(p_x_offset, viewpos.x - p_x_offset), randf_range(-50.0, viewpos.y - p_y_offset))
 			#p.global_position = Vector2(195, 50)
 			add_child(p)
-
-func timech():
-	if time >= min:
-		min += 60
-		time1 += 1
-		time2 = 0
-	else:
-		time2 += 1
-	if time2 < 10:
-		$UI/MarginContainer/VBoxContainer/HBoxContainer2/time.text = str(time1, ":0", time2)
-		Globals.time = str(time1, ":0", time2)
-	else:
-		$UI/MarginContainer/VBoxContainer/HBoxContainer2/time.text = str(time1, ":", time2)
-		Globals.time = str(time1, ":", time2)
 
 func addBonus(bonus_type: String):
 	$UI.addBonus(bonus_type)
@@ -258,6 +252,7 @@ func spawn_wertue():
 	add_child(Wertue)
 
 func spawn_boss_flseye():
+	print("stage 3")
 	await get_tree().create_timer(3.0, false).timeout
 	print("BOSSFIGHT FLSEYE")
 	var Flseye = flseye.instantiate()

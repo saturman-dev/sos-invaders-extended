@@ -217,7 +217,7 @@ func checkHeal():
 
 func flash(fade_in: float, fade_out: float, hold: float = 0.0, visibility: float = 1.0, color: Color = Color.WHITE):
 	var canv := CanvasLayer.new()
-	canv.layer = 200
+	canv.layer = 74
 	canv.add_to_group("flash")
 	var flasher := ColorRect.new()
 	flasher.color = color

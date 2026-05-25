@@ -91,7 +91,8 @@ func periodic_dmg(dmg: float):
 	if dmgcldown.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			Functions.style_bonus("exploded")
+			pass
+ 			#Functions.style_bonus("exploded")
 		dmgcldown.wait_time = 1.0
 		dmgcldown.start()
 
@@ -163,10 +164,10 @@ var color2 := Color.BLUE
 
 func shot():
 	sprite.play("preshot")
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5, false).timeout
 	if died == false:
 		Functions.sfx_play("res://sounds/A3Reload1.mp3", -10.0)
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5, false).timeout
 	if died == false:
 		Functions.sfx_play("res://sounds/A3Reload2.mp3", -10.0)
 	await sprite.animation_finished

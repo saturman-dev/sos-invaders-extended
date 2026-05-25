@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://l2clt1eillu2" path="res://textures/bigDar.png" id="2_i6iqp"]
 [ext_resource type="Shader" uid="uid://jvir6dwrf1ea" path="res://elements/BigDar/big_dar.gdshader" id="2_ljn8a"]
 [ext_resource type="Texture2D" uid="uid://e2y4855244l5" path="res://textures/slabovat.png" id="4_54n7x"]
+[ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="6_ljn8a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_supck"]
 shader = ExtResource("2_ljn8a")
@@ -112,6 +113,10 @@ autostart = true
 wait_time = 0.001
 one_shot = true
 autostart = true
+
+[node name="contactDamager" parent="." unique_id=64047935 instance=ExtResource("6_ljn8a")]
+scale = Vector2(4.3, 4.3)
+size_horizontal = 29.0
 
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

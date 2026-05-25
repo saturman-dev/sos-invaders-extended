@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://s1ut3vxfcggr"]
+
+[ext_resource type="Script" uid="uid://cxmrpewoiup23" path="res://UI/HUD/oberlives_0_bar.gd" id="1_r7mw8"]
+
+[node name="Oberlives0Bar" type="HBoxContainer" unique_id=641916824]
+alignment = 2
+script = ExtResource("1_r7mw8")

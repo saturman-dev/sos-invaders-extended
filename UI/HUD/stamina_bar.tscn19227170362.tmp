@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b3om6yevg4tt7"]
+
+[ext_resource type="Script" uid="uid://df42obga62qor" path="res://UI/HUD/stamina_bar.gd" id="1_ldhch"]
+
+[node name="StaminaBar" type="HBoxContainer" unique_id=552165940]
+alignment = 2
+script = ExtResource("1_ldhch")

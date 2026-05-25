@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bon0r1wnk0jr1"]
+
+[ext_resource type="Script" uid="uid://bd7yf48oaljma" path="res://elements/contactDamager/contact_damager.gd" id="1_4hg52"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dp6tp"]
+resource_local_to_scene = true
+height = 20.0
+
+[node name="contactDamager" type="Area2D" unique_id=64047935]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_4hg52")
+
+[node name="hitbox" type="CollisionShape2D" parent="." unique_id=252364733]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_dp6tp")
+debug_color = Color(1, 0, 0, 0.18)

@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://r1u6busb4my6"]
+
+[ext_resource type="Texture2D" uid="uid://bjwy4eapa7e8r" path="res://textures/musicIcon.png" id="1_1kp5b"]
+[ext_resource type="Script" uid="uid://0hxlsnqlcl1w" path="res://elements/musicNotifier/music_notifier.gd" id="2_v83t7"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="3_km4la"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c3m3"]
+atlas = ExtResource("1_1kp5b")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v83t7"]
+atlas = ExtResource("1_1kp5b")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_km4la"]
+atlas = ExtResource("1_1kp5b")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2hbl"]
+atlas = ExtResource("1_1kp5b")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vvqn"]
+atlas = ExtResource("1_1kp5b")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcrvi"]
+atlas = ExtResource("1_1kp5b")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2l7ky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c3m3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v83t7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km4la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2hbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vvqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcrvi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="musicNotifier" type="AnimatedSprite2D" unique_id=1462742595]
+sprite_frames = SubResource("SpriteFrames_2l7ky")
+frame_progress = 0.8817381
+script = ExtResource("2_v83t7")
+
+[node name="title" type="Label" parent="." unique_id=225182882]
+offset_left = 10.000001
+offset_top = -8.0
+offset_right = 225.0
+offset_bottom = 20.0
+scale = Vector2(0.6, 0.6)
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_km4la")
+text = "Unknown - Untitled"
+vertical_alignment = 1
+
+[node name="title2" type="Label" parent="title" unique_id=2041708223]
+show_behind_parent = true
+layout_mode = 0
+offset_top = 1.0
+offset_right = 215.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0.023529412, 0.15686275, 1, 1)
+theme_override_fonts/font = ExtResource("3_km4la")
+text = "Unknown - Untitled"
+vertical_alignment = 1
+
+[node name="nowPlaying" type="Label" parent="." unique_id=826721622]
+modulate = Color(1, 1, 1, 0.5)
+offset_left = -6.0
+offset_top = 8.0
+offset_right = 124.0
+offset_bottom = 36.0
+scale = Vector2(0.3, 0.3)
+theme_override_colors/font_color = Color(1, 0.8666667, 0, 1)
+theme_override_fonts/font = ExtResource("3_km4la")
+text = "now playing"
+vertical_alignment = 1

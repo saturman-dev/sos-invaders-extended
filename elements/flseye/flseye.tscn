@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ccs21h62xd5bk" path="res://textures/enrageEffect.png" id="6_8d3pq"]
 [ext_resource type="Texture2D" uid="uid://dwqrgfueto8ln" path="res://textures/flseyeDot.png" id="7_ofxwr"]
 [ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_rafyv"]
+[ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="10_c3kk1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iqko2"]
 shader = ExtResource("3_cdnvc")
@@ -342,13 +343,11 @@ collision_mask = 3
 script = ExtResource("1_1jm5v")
 
 [node name="square1" type="Sprite2D" parent="." unique_id=1520993890]
-visible = false
 modulate = Color(1, 1, 1, 0.5)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_iqko2")
 
 [node name="square2" type="Sprite2D" parent="." unique_id=1453484808]
-visible = false
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_iqko2")
 
@@ -362,7 +361,6 @@ frame = 3
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2145923726]
-visible = false
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ttqck")
 disabled = true
@@ -428,6 +426,10 @@ frame_progress = 0.40118593
 [node name="shieldCD" type="Timer" parent="." unique_id=2007397486]
 wait_time = 10.0
 one_shot = true
+
+[node name="contactDamager" parent="." unique_id=64047935 instance=ExtResource("10_c3kk1")]
+scale = Vector2(6.38, 6.38)
+size_horizontal = 30.0
 
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

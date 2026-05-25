@@ -8,29 +8,38 @@ atlas = ExtResource("2_6wu4t")
 region = Rect2(39, 0, 39, 39)
 
 [node name="trioUI" type="Control" unique_id=1181271743]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_right = 20.0
+offset_bottom = 20.0
 script = ExtResource("1_jfs3i")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=690618565]
+visible = false
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1817773723]
-position = Vector2(15, 12)
+position = Vector2(10.000001, 8)
+scale = Vector2(0.7, 0.7)
 texture = SubResource("AtlasTexture_erpcx")
 
 [node name="bar2" type="ColorRect" parent="." unique_id=1132043004]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 25.0
-offset_right = 26.0
-offset_bottom = 28.0
+offset_left = 2.0
+offset_top = 17.0
+offset_right = 25.0
+offset_bottom = 20.0
+scale = Vector2(0.7, 0.7)
 color = Color(0.16924536, 0.16924527, 0.16924521, 1)
 
 [node name="bar" type="ColorRect" parent="." unique_id=858442677]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 25.0
-offset_right = 26.0
-offset_bottom = 28.0
+offset_left = 2.0
+offset_top = 17.0
+offset_right = 25.0
+offset_bottom = 20.0
+scale = Vector2(0.7, 0.7)
 color = Color(0, 1, 0.9647059, 1)

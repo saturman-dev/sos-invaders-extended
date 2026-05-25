@@ -27,6 +27,7 @@ func _ready() -> void:
 	Functions.remove_flashes()
 	Functions.removeBonuses()
 	Globals.shake_str = 0.0
+	Globals.bgStay = false
 	if Globals.instart == true:
 		instart()
 	while Saves.is_loading == true:
@@ -42,8 +43,8 @@ func staart():
 	add_child(lv_1)
 	move_tween = create_tween()
 	move_tween.tween_property($lv1/spaceship, "position", Vector2(0.0, -35.0), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	move_tween2 = create_tween()
-	move_tween2.tween_property($lv1/UI/MarginContainer, "position", Vector2(0, 35), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	#move_tween2 = create_tween()
+	#move_tween2.tween_property($lv1/UI/MarginContainer, "global_position", Vector2(0, 0), 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await move_tween.finished
 	Globals.game_running = true
 	Globals.instart = false

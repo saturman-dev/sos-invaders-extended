@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_q74va"]
 [ext_resource type="Texture2D" uid="uid://ccs21h62xd5bk" path="res://textures/enrageEffect.png" id="6_a763e"]
 [ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_7rjny"]
+[ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="8_h36qe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rjny"]
 atlas = ExtResource("3_a763e")
@@ -115,6 +116,9 @@ texture = ExtResource("6_a763e")
 stream = ExtResource("7_7rjny")
 volume_db = 13.0
 bus = &"SFX"
+
+[node name="contactDamager" parent="." unique_id=64047935 instance=ExtResource("8_h36qe")]
+scale = Vector2(6.35, 6.35)
 
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

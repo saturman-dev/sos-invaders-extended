@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cgxlit60vbwto"]
+
+[ext_resource type="Script" uid="uid://tus6p413110l" path="res://UI/HUD/liver_0_bar.gd" id="1_lferi"]
+
+[node name="Liver0Bar" type="HBoxContainer" unique_id=1548388788]
+script = ExtResource("1_lferi")
