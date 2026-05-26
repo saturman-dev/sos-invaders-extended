@@ -18,8 +18,8 @@ var dmg = 1.0
 
 @export var speed = 160.0
 @export var acceleration = speed * 8
-@export var dash_speed := 800.0
-@export var dash_duration := 0.08
+@export var dash_speed := 900.0
+@export var dash_duration := 0.09
 
 var dash_time_left := 0.0
 var dash_direction := Vector2.UP

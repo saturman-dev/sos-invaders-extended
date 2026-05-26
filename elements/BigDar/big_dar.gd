@@ -86,7 +86,7 @@ func periodic_dmg(dmg: float):
 			bonus_blocked = true
 		Functions.dmg(self, fullhp)
 		PtbonusesManager.ptbonus(givepts, "EXPLODED", Color("18ff3b"))
-		PtbonusesManager.ptbonus(givepts/2, "SELFHARM", Color("ff003b"))
+		PtbonusesManager.ptbonus(givepts/2, "SELFHARM", Color("d03e79"))
 
 @onready var dmgcldown2 := $dmgCldown2
 func beam_dmg(dmg: float):

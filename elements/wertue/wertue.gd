@@ -119,7 +119,7 @@ func beam_dmg(dmg: float):
 	if dmgcldown2.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			PtbonusesManager.ptbonus(givepts * 2, "MADE IN HEAVEN", Color("00ffdc"))
+			PtbonusesManager.ptbonus(givepts, "MADE IN HEAVEN", Color("00ffdc"))
 			PtbonusesManager.ptbonus(givepts, "FRIENDLY BEAMING", Color("1873fe"))
 		dmgcldown2.wait_time = 0.5
 		dmgcldown2.start()
@@ -127,6 +127,7 @@ func beam_dmg(dmg: float):
 func die():
 	if not hitbox:
 		return
+	enrageLoop.stop()
 	remove_from_group("enemies")
 	Events.enemy_killed.emit()
 	Functions.big_enemy_explosion(self)
@@ -198,9 +199,10 @@ func _on_dmgstop_timeout() -> void:
 	ETween.tween_property(hpbar2, "size:x", (fullsize / fullhp) * hp, bar2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func enrage():
-	if enraged == true:
+	if enraged == true or died == true:
 		return
 	Functions.sfx_play("res://sounds/ENRAGE.mp3", -5.0, 0.8)
+	PtbonusesManager.ptbonus(givepts / 2, "ENRAGED", Color.RED)
 	enrageLoop.play()
 	enraged = true
 	enrageEffect.visible = true

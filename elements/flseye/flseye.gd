@@ -7,7 +7,7 @@ var NEO = false
 var last_attack = -1
 
 # FOR DAMAGE
-var fullhp = 100
+var fullhp = 100.0
 var hp = fullhp
 var yellwait = 0.7
 @onready var timer := $dmgstop
@@ -213,8 +213,8 @@ func die():
 	Functions.flash(0.2, 2.0, 0.2, 0.9, Color("7200ff"))
 	Functions.checkHeal()
 	Globals.bgStay = false
-	Globals.change_points(givepts)
 	Functions.sfx_play("res://sounds/flseyeDead.mp3", 10.0)
+	PtbonusesManager.ptbonus(givepts, "BIG KILL", Color.ORANGE)
 	expl.visible = true
 	expl.rotation_degrees = -rot
 	FTween = create_tween()
@@ -492,6 +492,7 @@ func unenrage():
 	sprite.modulate = Color.WHITE
 
 func shield_broken():
+	PtbonusesManager.ptbonus(5, "GUARD BREAK", Color("7200ff"))
 	shieldcd.start()
 
 func _on_shield_cd_timeout() -> void:

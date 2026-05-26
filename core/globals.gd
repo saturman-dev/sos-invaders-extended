@@ -1,7 +1,7 @@
 extends Node
 
 var needForOverheal = 40
-var nodeath: bool = true
+var nodeath: bool = false
 
 var def_hp: int = 3
 var staminas := 3.0

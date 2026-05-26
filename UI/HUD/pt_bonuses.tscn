@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://c6tqmptox0vky"]
 
 [ext_resource type="Script" uid="uid://bnm177gkrseg1" path="res://UI/HUD/pt_bonuses.gd" id="1_cq03e"]
+[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="2_0jby8"]
 
 [node name="ptBonuses" type="VBoxContainer" unique_id=879256944]
+theme_override_constants/separation = -4
 alignment = 2
 script = ExtResource("1_cq03e")
+custom_font = ExtResource("2_0jby8")

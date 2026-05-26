@@ -112,7 +112,7 @@ autostart = true
 visible = false
 texture = ExtResource("6_a763e")
 
-[node name="ENRAGED" type="AudioStreamPlayer2D" parent="." unique_id=328184531]
+[node name="ENRAGED" type="AudioStreamPlayer" parent="." unique_id=1321285801]
 stream = ExtResource("7_7rjny")
 volume_db = 13.0
 bus = &"SFX"

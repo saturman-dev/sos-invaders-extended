@@ -1,8 +1,9 @@
 extends Node
 
 var enemyTimer: Timer
-var killSeries := 0
+var killStreak := 0
 var targetEnemyTime = 1.0
+var bonusQueueTime := 0.07
 
 func _ready() -> void:
 	enemyTimer = Timer.new()
@@ -11,22 +12,60 @@ func _ready() -> void:
 	enemyTimer.one_shot = true
 	enemyTimer.wait_time = targetEnemyTime
 	add_child(enemyTimer)
+	
+	spawn_timer = Timer.new()
+	spawn_timer.one_shot = true
+	add_child(spawn_timer)
+	spawn_timer.timeout.connect(_process_queue)
 
 func enemy_killed():
-	killSeries += 1
+	killStreak += 1
+	#ptbonus(3, "KILL", Color.WHITE)
 	enemyTimer.start()
-	if killSeries == 2:
-		ptbonus(3, "DOUBLE KILL", Color.ORANGE)
-	elif killSeries == 3:
-		ptbonus(5, "TRIPLE KILL", Color.ORANGE)
-	elif killSeries == 4:
-		ptbonus(7, "QUADRIPLE KILL", Color.ORANGE)
-	elif killSeries > 4:
-		ptbonus(5 + killSeries * 2, "MULTIKILL", Color.ORANGE, killSeries)
+	var target_points = killStreak * 2 - 1
+	if killStreak == 2:
+		ptbonus(target_points, "DOUBLE KILL", Color.ORANGE)
+	elif killStreak == 3:
+		ptbonus(target_points, "TRIPLE KILL", Color.ORANGE)
+	elif killStreak == 4:
+		ptbonus(target_points, "QUADRIPLE KILL", Color.ORANGE)
+	elif killStreak > 4:
+		ptbonus(target_points, "MULTIKILL", Color.ORANGE, killStreak)
 
 func expired():
-	killSeries = 0
+	killStreak = 0
 
-func ptbonus(points: int, name: String, color: Color, series: int = 0):
-	Globals.change_points(points)
-	get_tree().get_first_node_in_group("ptBonusesContainer").add(name, color, series)
+var ptbonus_queue: Array[Dictionary] = []
+@onready var spawn_timer: Timer
+
+func ptbonus(points: int, text: String, color: Color, streak: int = 0):
+	
+	var color_hex = color.to_html(false)
+	
+	ptbonus_queue.append({
+		"text": text,
+		"points": points,
+		"color": color_hex,
+		"streak": streak
+	})
+	
+	if spawn_timer.is_stopped():
+		_process_queue()
+
+func _process_queue() -> void:
+	if ptbonus_queue.is_empty():
+		return
+	
+	var bonus = ptbonus_queue.pop_front()
+	var container = get_tree().get_first_node_in_group("ptBonusesContainer")
+	
+	if container:
+		var bbcode_text = "+ [color=#%s]%s[/color]" % [bonus.color, bonus.text]
+		
+		if bonus.streak > 0:
+			bbcode_text += " x%d" % bonus.streak
+		
+		container.add(bbcode_text)
+	
+	Globals.change_points(bonus.points)
+	spawn_timer.start(bonusQueueTime)

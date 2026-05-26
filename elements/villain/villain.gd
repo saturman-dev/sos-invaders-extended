@@ -66,11 +66,11 @@ func beam_dmg(dmg: float):
 var dmgtween: Tween
 func damageAnimation():
 	Functions.def_enemy_explosion(self)
-	sprite.material.set_shader_parameter("flash_modifier", 1.0)
+	sprite.material.set_shader_parameter("flash_brightness", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()
 	dmgtween = create_tween()
-	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.2)
+	dmgtween.tween_property(sprite.material, "shader_parameter/flash_brightness", 0.0, 0.2)
 
 func die():
 	if not hitbox:

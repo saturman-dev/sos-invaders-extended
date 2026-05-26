@@ -76,6 +76,7 @@ func _on_wait_time_timeout() -> void:
 		await get_tree().create_timer(warnTickTime, false).timeout
 		warrned.emit()
 	if wertue.died == true:
+		PtbonusesManager.ptbonus(wertue.givepts / 2, "INTERRUPTION", Color.WHITE)
 		interruption = true
 		warning.modulate.a = 1.0
 		warningTime.start()
