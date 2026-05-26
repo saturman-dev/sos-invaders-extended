@@ -42,7 +42,6 @@ const bulletScene = preload("res://elements/wertue/wertueBeam.tscn")
 @onready var shotTimer := $shotTimer
 @onready var wingRight := $wingRight
 @onready var wingLeft := $wingLeft
-@onready var circle := $AnimatedSprite2D/circle
 @onready var enrageEffect := $enrageEffect
 @onready var enrageLoop := $ENRAGED
 @onready var hitbox := $CollisionShape2D
@@ -72,16 +71,15 @@ func _on_shot_timer_timeout() -> void:
 
 var enabled = true
 
-var CrTween: Tween
+var dmgtween: Tween
 
 func damageAnimation():
 	Functions.def_enemy_explosion(self)
-	if CrTween and CrTween.is_running():
-		CrTween.kill()
-	circle.visible = true
-	circle.modulate.a = 1.0
-	CrTween = create_tween()
-	CrTween.tween_property(circle, "modulate:a", 0.0, 0.35)
+	sprite.material.set_shader_parameter("flash_brightness", 1.0)
+	if dmgtween and dmgtween.is_running():
+		dmgtween.kill()
+	dmgtween = create_tween()
+	dmgtween.tween_property(sprite.material, "shader_parameter/flash_brightness", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func _ready() -> void:
 	Saves.data["ever_met_wertue"] = true
@@ -212,13 +210,16 @@ func enrage():
 	var etween2 = create_tween()
 	etween1.tween_property(enrageEffect, "scale", Vector2(5.0, 5.0), 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	etween2.tween_property(enrageEffect, "modulate:a", 0.0, 1.0)
-	sprite.modulate = enrageColor
-	wingLeft.modulate = enrageColor
-	wingRight.modulate = enrageColor
+	sprite.material.set_shader_parameter("rage_intensity", 1.0)
+	wingLeft.material.set_shader_parameter("rage_intensity", 1.0)
+	wingRight.material.set_shader_parameter("rage_intensity", 1.0)
 
 func unenrage():
 	enrageLoop.stop()
 	enraged = false
-	sprite.modulate = Color.WHITE
-	wingLeft.modulate = Color.WHITE
-	wingRight.modulate = Color.WHITE
+	if not sprite:
+		return
+	var unetween = create_tween()
+	unetween.tween_property(sprite, "shader_parameter/rage_intencity", 0.0, 0.5)
+	unetween.parallel().tween_property(wingLeft, "shader_parameter/rage_intencity", 0.0, 0.5)
+	unetween.parallel().tween_property(wingRight, "shader_parameter/rage_intencity", 0.0, 0.5)

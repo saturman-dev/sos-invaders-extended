@@ -2,6 +2,7 @@ extends Area2D
 
 var NEO = false
 signal warrned
+var is_attacking := false
 
 @export var tracking_speed := 20.0
 var target_pos := Vector2.ZERO
@@ -72,8 +73,10 @@ func _on_wait_time_timeout() -> void:
 		if NEO == false:
 			Functions.sfx_play("res://sounds/wertueWarning.mp3")
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if wertue.died: break
 		warning.visible = false
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if wertue.died: break
 		warrned.emit()
 	if wertue.died == true:
 		PtbonusesManager.ptbonus(wertue.givepts / 2, "INTERRUPTION", Color.WHITE)
@@ -100,7 +103,7 @@ func _on_warning_time_timeout() -> void:
 	warned = true
 	warning.visible = false
 	laser.visible = true
-	hitbox.disabled = false
+	is_attacking = true
 	laserTime.start()
 	if interruption == true:
 		set_collision_mask_value(3, true)
@@ -125,8 +128,10 @@ func _on_laser_time_timeout() -> void:
 			wertue.newShot()
 	queue_free()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	for body in get_overlapping_bodies():
+		if is_attacking == false:
+			break
 		if body.has_method("takeDmg"):
 			if body.is_invincible == false:
 				body.takeDmg()
@@ -135,7 +140,7 @@ func _process(delta: float) -> void:
 		if body.has_method("explode"):
 			Globals.shake_str += 5.0
 			body.explode()
-	if get_overlapping_bodies().size() > 0:
+	if get_overlapping_bodies().size() > 0 and is_attacking == true:
 		hitted = true
 	if waited == false:
 		var player = get_tree().get_first_node_in_group("player")

@@ -1,5 +1,6 @@
 extends Area2D
 
+var is_attacking := false
 var pitch = randf_range(0.9, 1.1)
 var dir = 1
 var alter = false
@@ -40,10 +41,10 @@ func go() -> void:
 
 var m: Tween
 func altgo():
+	is_attacking = true
 	global_position.y = 120
 	scale *= 0.75
 	warning.visible = false
-	hitbox.disabled = false
 	laser.visible = true
 	attackLoop.volume_db = 15.0
 	attackLoop.play()
@@ -59,7 +60,7 @@ func _on_warning_time_timeout() -> void:
 	warned = true
 	warning.visible = false
 	laser.visible = true
-	hitbox.disabled = false
+	is_attacking = true
 	laserTime.start()
 
 func _on_laser_time_timeout() -> void:
@@ -75,7 +76,9 @@ func gone():
 	attackLoop.stop()
 	queue_free()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if is_attacking == false:
+		return
 	for body in get_overlapping_bodies():
 		if body.has_method("takeDmg"):
 			if body.is_invincible == false:

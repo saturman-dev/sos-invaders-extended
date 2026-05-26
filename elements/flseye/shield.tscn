@@ -2,7 +2,17 @@
 
 [ext_resource type="Script" uid="uid://b47gtrv67j5ko" path="res://elements/flseye/shield.gd" id="1_2keul"]
 [ext_resource type="Texture2D" uid="uid://c2w2itvx7qp1d" path="res://textures/flseye.png" id="2_2keul"]
+[ext_resource type="Shader" uid="uid://ddc0scbtuh2l8" path="res://shaders/gradient.gdshader" id="2_v0k01"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="4_jrls3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ri6un"]
+shader = ExtResource("2_v0k01")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 0.0
+shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2keul"]
 atlas = ExtResource("2_2keul")
@@ -10,19 +20,19 @@ region = Rect2(0, 1000, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0k01"]
 atlas = ExtResource("2_2keul")
-region = Rect2(0, 800, 200, 200)
+region = Rect2(600, 800, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ri6un"]
 atlas = ExtResource("2_2keul")
-region = Rect2(200, 800, 200, 200)
+region = Rect2(600, 1000, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6d0b"]
 atlas = ExtResource("2_2keul")
-region = Rect2(400, 800, 200, 200)
+region = Rect2(400, 1000, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e4qx4"]
 atlas = ExtResource("2_2keul")
-region = Rect2(600, 800, 200, 200)
+region = Rect2(200, 1000, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0fvg"]
 atlas = ExtResource("2_2keul")
@@ -69,11 +79,14 @@ collision_mask = 3
 script = ExtResource("1_2keul")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=580400621]
+modulate = Color(1, 1, 1, 0.9620001)
+material = SubResource("ShaderMaterial_ri6un")
 sprite_frames = SubResource("SpriteFrames_5tovg")
 animation = &"def"
 autoplay = "def"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2145923726]
+visible = false
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_h36qe")
 debug_color = Color(0.80784315, 0.3372549, 0.6313726, 0.39215687)

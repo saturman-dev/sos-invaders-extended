@@ -54,7 +54,6 @@ stretch_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1297896626]
 visible = false
 shape = SubResource("RectangleShape2D_oqk33")
-disabled = true
 debug_color = Color(0.99607843, 0, 0.20392157, 0.5882353)
 
 [node name="waitTime" type="Timer" parent="." unique_id=620244775]

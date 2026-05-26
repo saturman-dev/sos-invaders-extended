@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://nrworllrgyb6" path="res://elements/a3/a_3.gdshader" id="1_6u462"]
 [ext_resource type="Script" uid="uid://7ie0kk4ij0r6" path="res://elements/a3/a_3.gd" id="1_y2la4"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="2_y2la4"]
+[ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_havno"]
 [ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_y2la4"]
 [ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="6_xaife"]
 
@@ -13,9 +14,19 @@ shader_parameter/flash_modifier = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6u462"]
-shader = ExtResource("1_6u462")
-shader_parameter/flash_modifier = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 1)
+resource_local_to_scene = true
+shader = ExtResource("3_havno")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 8.00000038
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2la4"]
 atlas = ExtResource("1_0j076")
@@ -114,7 +125,7 @@ script = ExtResource("1_y2la4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1882523190]
 material = SubResource("ShaderMaterial_6u462")
-scale = Vector2(0.8, 0.8)
+scale = Vector2(1.05, 1.05)
 sprite_frames = SubResource("SpriteFrames_xaife")
 animation = &"def"
 autoplay = "def"

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cndcfgjvtpmpn" path="res://elements/bobm/bobm.gd" id="1_43eun"]
 [ext_resource type="Texture2D" uid="uid://ca7o6vjcraxb6" path="res://textures/bobm.png" id="1_upaf8"]
+[ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_4inwx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upaf8"]
 atlas = ExtResource("1_upaf8")
@@ -24,6 +25,20 @@ animations = [{
 "name": &"def",
 "speed": 5.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipw72"]
+shader = ExtResource("3_4inwx")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 1.5000000712500001
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipw72"]
 atlas = ExtResource("1_upaf8")
@@ -122,6 +137,7 @@ autoplay = "def"
 frame_progress = 0.88747734
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=797093381]
+material = SubResource("ShaderMaterial_ipw72")
 position = Vector2(0.095, 0.125)
 scale = Vector2(0.23, 0.23)
 sprite_frames = SubResource("SpriteFrames_7klet")

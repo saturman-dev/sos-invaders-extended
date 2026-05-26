@@ -12,14 +12,12 @@ var ptoff = 0.2
 @onready var multi1 := $VBoxContainer2/HBoxContainer/VBoxContainer/multiplyer
 @onready var multi2 := $multiplyer2
 @onready var bonuses := $everythingButTime/thewholedown/staminaHpBonuses/bonusesH/bonusesV
-@onready var bossbarcontainer := $everythingButTime/bossBars
 @onready var diffLabel = $VBoxContainer3/HBoxContainer/diffLabel
 @onready var ptBonuses := $scoreV/ptBonuses
 
 var ATween: Tween
 
 func _ready() -> void:
-	Events.bossfight_start.connect(func(type): add_hpbar(type))
 	Events.points_added.connect(func(diff): update_points(diff))
 	if score > 0:
 		highest.text = str("/ ", int(score))
@@ -105,12 +103,3 @@ func addBonus(bonus_type: String):
 	if bonus_type == "splash":
 		var SplashUI = splashUI.instantiate()
 		bonuses.add_child(SplashUI)
-
-const bossbar = preload("res://UI/bosshpbar/bosshpbar.tscn")
-
-func add_hpbar(type):
-	await Events.boss_animation_finished
-	var Bossbar = bossbar.instantiate()
-	bossbarcontainer.add_child(Bossbar)
-	if type == "flseye":
-		Bossbar.label.text = "FLSEYE"

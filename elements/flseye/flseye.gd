@@ -18,7 +18,7 @@ var bar1 = 0.2
 var fullsize = 0.0
 var undam = 0.3
 
-var givepts = 50
+var givepts = 100
 var died = false
 var bar2 = 0.4
 var expltime = 0.5
@@ -55,6 +55,7 @@ const flbulletScene = preload("res://elements/flseye/flbullet.tscn")
 @onready var dot = $dot
 @onready var laserManager := $laserManager
 @onready var shieldcd := $shieldCD
+@onready var contactDamager := $contactDamager
 
 
 
@@ -113,13 +114,14 @@ var dmgtween: Tween
 func damageAnimation():
 	Functions.def_enemy_explosion(self)
 	Events.boss_damaged.emit(hp/fullhp)
-	sprite.material.set_shader_parameter("flash_modifier", 1.0)
+	sprite.material.set_shader_parameter("flash_brightness", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()
 	dmgtween = create_tween()
-	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.3)
+	dmgtween.tween_property(sprite.material, "shader_parameter/flash_brightness", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func _ready() -> void:
+	contactDamager.position.y -= 500
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Events.flseye_shield_broken.connect(func(): shield_broken())
 	Saves.data["ever_met_flseye"] = true
@@ -132,6 +134,7 @@ func _ready() -> void:
 	hpbar2.size.x = hpbar.size.x
 	fullsize = hpbar.size.x
 	await get_tree().create_timer(4.0, false).timeout
+	contactDamager.position.y += 500
 	Events.boss_animation_finished.emit()
 	moving = true
 	hitbox.disabled = false

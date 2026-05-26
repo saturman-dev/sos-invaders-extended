@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://buens7m5wwctf" path="res://sounds/flseyeLaserLoop.mp3" id="3_lcqc4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grg43"]
+resource_local_to_scene = true
 size = Vector2(2, 398)
 
 [node name="flseyeLaser" type="Area2D" unique_id=1631263153]

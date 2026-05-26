@@ -13,7 +13,7 @@ func ghosts():
 func _ready() -> void:
 	ghosts()
 	var defsize = sprite.scale
-	sprite.scale *= 4
+	sprite.scale *= 7
 	var t = create_tween()
 	t.tween_property(sprite, "scale", defsize, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 

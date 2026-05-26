@@ -50,7 +50,7 @@ func _ready():
 	# POINTS
 	ptst.visible = true
 	var LPts = 0
-	var Ptime = float(0.5 / pts)
+	var Ptime = float(0.1 / pts)
 	if pts >= 1:
 		ptst.text = "1"
 		counterSfx()
@@ -71,22 +71,16 @@ func _ready():
 	await get_tree().create_timer(between).timeout
 	# TIME
 	time.visible = true
-	var Ttime = float(0.4 / times)
-	while not (time.text) == timee:
-		timetime += 1
-		if timetime >= minmin:
-			minmin += 60
-			time1 += 1
-			time2 = 0
-		else:
-			time2 += 1
-		if time2 < 10:
-			time.text = str(time1, ":0", time2)
-			counterSfxCheck()
-		else:
-			time.text = str(time1, ":", time2)
-			counterSfxCheck()
-		if not time.text == timee:
+	var Ttime = float(0.2 / times)
+	time.text = "00:00"
+	var time_elapsed = 0.0
+	while not (time.text) == Globals.time:
+		time_elapsed += 1
+		var minutes := int(time_elapsed) / 60
+		var seconds := int(time_elapsed) % 60
+		time.text = "%02d:%02d" % [minutes, seconds]
+		counterSfxCheck()
+		if not time.text == Globals.time:
 			await get_tree().create_timer(Ttime / modd).timeout
 	await get_tree().create_timer(between).timeout
 	# OTHER
@@ -95,14 +89,14 @@ func _ready():
 	precounterSfx()
 
 func counterSfxCheck():
-	if firstSound == 3:
+	if firstSound == 2:
 		counterSfx()
 		firstSound = 0
 	else:
 		firstSound += 1
 
 func counterSfxCheck2():
-	if firstSound2 == 1:
+	if firstSound2 == 2:
 		counterSfx()
 		firstSound2 = 0
 	else:

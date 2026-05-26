@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://07wvypqskijj" path="res://elements/flseye/flseye.gd" id="1_1jm5v"]
 [ext_resource type="Texture2D" uid="uid://bylip2xfir8of" path="res://textures/flseyeSquare.png" id="2_iqko2"]
+[ext_resource type="Shader" uid="uid://ddc0scbtuh2l8" path="res://shaders/gradient.gdshader" id="2_ntvc6"]
 [ext_resource type="Texture2D" uid="uid://c2w2itvx7qp1d" path="res://textures/flseye.png" id="2_xh75u"]
-[ext_resource type="Shader" uid="uid://ropoguyfcyr3" path="res://elements/flseye/flseye.gdshader" id="3_cdnvc"]
+[ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_c3kk1"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="4_y32xs"]
 [ext_resource type="Texture2D" uid="uid://dyb52tl0f7epw" path="res://textures/haroushGeze.png" id="5_cdnvc"]
 [ext_resource type="Texture2D" uid="uid://ccs21h62xd5bk" path="res://textures/enrageEffect.png" id="6_8d3pq"]
@@ -11,10 +12,39 @@
 [ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_rafyv"]
 [ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="10_c3kk1"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkh8s"]
+resource_local_to_scene = true
+shader = ExtResource("2_ntvc6")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 10.0
+shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 0.0
+shader_parameter/flash_brightness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6os6c"]
+resource_local_to_scene = true
+shader = ExtResource("2_ntvc6")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 10.0
+shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 0.0
+shader_parameter/flash_brightness = 0.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iqko2"]
-shader = ExtResource("3_cdnvc")
-shader_parameter/flash_modifier = 0.0
-shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader = ExtResource("3_c3kk1")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 5.0
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iphg8"]
 atlas = ExtResource("2_xh75u")
@@ -345,11 +375,13 @@ script = ExtResource("1_1jm5v")
 [node name="square1" type="Sprite2D" parent="." unique_id=1520993890]
 visible = false
 modulate = Color(1, 1, 1, 0.5)
+material = SubResource("ShaderMaterial_kkh8s")
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_iqko2")
 
 [node name="square2" type="Sprite2D" parent="." unique_id=1453484808]
 visible = false
+material = SubResource("ShaderMaterial_6os6c")
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_iqko2")
 
@@ -357,9 +389,9 @@ texture = ExtResource("2_iqko2")
 material = SubResource("ShaderMaterial_iqko2")
 scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_g3hy8")
-animation = &"laserAttack"
+animation = &"spawn"
 autoplay = "spawn"
-frame = 3
+frame = 5
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2145923726]

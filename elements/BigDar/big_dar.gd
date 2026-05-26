@@ -98,11 +98,11 @@ func beam_dmg(dmg: float):
 var dmgtween: Tween
 func damageAnimation():
 	Functions.def_enemy_explosion(self)
-	sprite.material.set_shader_parameter("flash_modifier", 1.0)
+	sprite.material.set_shader_parameter("flash_brightness", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()
 	dmgtween = create_tween()
-	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.2)
+	dmgtween.tween_property(sprite.material, "shader_parameter/flash_brightness", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func die():
 	if not hitbox:
@@ -151,28 +151,23 @@ var offpos = 6.5
 var color1 := Color.BLACK
 var color2 := Color.GREEN_YELLOW
 
+var stw: Tween
 func shot():
-	if global_position.y > 175.0:
-		return
-	BTween = create_tween().set_parallel(true)
-	BTween.tween_property(sprite, "modulate", color1, 1.5)
-	await BTween.finished
+	var defscale = sprite.scale
+	if stw and stw.is_running():
+		stw.kill()
+	stw = create_tween()
+	stw.tween_property(sprite, "scale", Vector2(defscale.x * 1.75, defscale.y * 0.65), 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	stw.tween_callback(spawn_bullet)
+	stw.tween_property(sprite, "scale", Vector2(defscale.x * 0.65, defscale.y * 1.75), 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	stw.chain().tween_property(sprite, "scale", defscale, 2.0).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+
+func spawn_bullet():
 	if died == false:
 		Functions.sfx_play("res://sounds/bigDarFire.mp3")
 		var bullet = bulletScene.instantiate()
 		bullet.global_position += global_position + Vector2(0, 5.0)
 		get_parent().add_child(bullet)
-		ATween = create_tween().set_parallel(true)
-		ATween.tween_property(self, "position", Vector2(0.0, -offpos), 0.15).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		await ATween.finished
-		ATween = create_tween().set_parallel(true)
-		ATween.tween_property(self, "position", Vector2(0.0, offpos), 0.4).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		BTween = create_tween().set_parallel(true)
-		BTween.tween_property(sprite, "modulate", color2, 0.0)
-		await BTween.finished
-		CTween = create_tween().set_parallel(true)
-		CTween.tween_property(sprite, "modulate", Color.WHITE, 0.5)
-
 
 func _on_dmgstop_timeout() -> void:
 	ETween = create_tween()

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bhdxu4wm1tq7t"]
+
+[ext_resource type="Script" uid="uid://dggfmi4p4wr3t" path="res://UI/bgui/back_ground_ui.gd" id="1_rpx5y"]
+
+[node name="backGroundUI" type="ParallaxBackground" unique_id=2142687779]
+layer = -90
+script = ExtResource("1_rpx5y")
+
+[node name="bossBars" type="VBoxContainer" parent="." unique_id=23476077]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2

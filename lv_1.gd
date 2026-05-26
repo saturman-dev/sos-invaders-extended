@@ -66,6 +66,8 @@ func check_game_over():
 
 var bossfight_checked = false
 func check_bossfighting():
+	if not get_tree():
+		return
 	await get_tree().process_frame
 	if bossfighting == true and get_tree().get_nodes_in_group("enemies").size() <= 0:
 		print("stage 1")

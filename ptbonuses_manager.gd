@@ -60,10 +60,10 @@ func _process_queue() -> void:
 	var container = get_tree().get_first_node_in_group("ptBonusesContainer")
 	
 	if container:
-		var bbcode_text = "+ [color=#%s]%s[/color]" % [bonus.color, bonus.text]
+		var bbcode_text = "+  [color=#%s]%s[/color]" % [bonus.color, bonus.text]
 		
 		if bonus.streak > 0:
-			bbcode_text += " x%d" % bonus.streak
+			bbcode_text += "  x%d" % bonus.streak
 		
 		container.add(bbcode_text)
 	

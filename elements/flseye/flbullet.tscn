@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://3kol16p3xhhr"]
 
 [ext_resource type="Script" uid="uid://upo1y78svrxv" path="res://elements/flseye/flbullet.gd" id="1_prfsv"]
-[ext_resource type="Texture2D" uid="uid://c2w2itvx7qp1d" path="res://textures/flseye.png" id="2_prfsv"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wu3pw"]
-atlas = ExtResource("2_prfsv")
-region = Rect2(785, 1139, 15, 13)
+[ext_resource type="Texture2D" uid="uid://cqngkcn7h7kwp" path="res://textures/flseyeBullet.png" id="2_prfsv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3842"]
 size = Vector2(4, 2)
@@ -19,7 +15,7 @@ script = ExtResource("1_prfsv")
 [node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=1702569268]
 rotation = 3.1415927
 scale = Vector2(0.5, 0.5)
-texture = SubResource("AtlasTexture_wu3pw")
+texture = ExtResource("2_prfsv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1358312238]
 shape = SubResource("RectangleShape2D_l3842")

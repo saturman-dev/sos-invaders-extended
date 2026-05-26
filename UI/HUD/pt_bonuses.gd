@@ -32,6 +32,6 @@ func add(text: String):
 	var t = create_tween()
 	t.parallel().tween_property(label, "modulate:a", 1.0, 0.12).set_trans(Tween.TRANS_CUBIC)
 	t.parallel().tween_property(label, "position:x", 0.0, 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	t.tween_interval(2.0)
+	t.tween_interval(3.0)
 	t.tween_property(item_wrapper, "modulate:a", 0.0, 0.2)
 	t.tween_callback(item_wrapper.queue_free)

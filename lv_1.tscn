@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cv7wq84xi14u4" path="res://lv_1.gd" id="1_c4o0f"]
 [ext_resource type="PackedScene" uid="uid://dmig5vpy262nd" path="res://UI/HUD/ui.tscn" id="1_iefvx"]
+[ext_resource type="PackedScene" uid="uid://bhdxu4wm1tq7t" path="res://UI/bgui/back_ground_ui.tscn" id="2_3c8v5"]
 [ext_resource type="PackedScene" uid="uid://c5xrlrt7b8bpg" path="res://elements/spaceship/spaceship.tscn" id="2_if3o6"]
 [ext_resource type="PackedScene" uid="uid://1wk747i66jxe" path="res://elements/wall/wall.tscn" id="3_m5q4o"]
 [ext_resource type="PackedScene" uid="uid://bblyfxu1uls66" path="res://elements/floor/floor.tscn" id="5_iefvx"]
@@ -9,6 +10,8 @@
 
 [node name="lv1" type="Node2D" unique_id=2077539137]
 script = ExtResource("1_c4o0f")
+
+[node name="backGroundUI" parent="." unique_id=2142687779 instance=ExtResource("2_3c8v5")]
 
 [node name="UI" parent="." unique_id=1498106473 instance=ExtResource("1_iefvx")]
 

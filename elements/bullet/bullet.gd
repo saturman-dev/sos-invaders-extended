@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D):
 	if body in hit_guys:
 		return
+	hit_guys.append(body)
 	if "hp" in body:
 		Functions.dmg(body, damage)
 		Functions.sfx_play("res://sounds/niceBullet.mp3", -15.0, randf_range(0.8, 1.2))
@@ -51,10 +52,11 @@ func _on_body_entered(body: Node2D):
 		if body.has_method("warn"):
 			body.warn()
 		Functions.hitstop(0.5)
+		if splashing == false:
+			set_deferred("hitbox/disabled", true)
 		await Functions.unhitstopped
 		body.explode()
 		Globals.apply_shake(7.5)
-	hit_guys.append(body)
 	if splashing == false:
 		queue_free()
 

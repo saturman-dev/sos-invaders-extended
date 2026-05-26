@@ -1,18 +1,32 @@
 [gd_scene format=3 uid="uid://o5xip0drl264"]
 
+[ext_resource type="Texture2D" uid="uid://bdp728ydjhp5g" path="res://textures/wertueWing.png" id="1_8b46h"]
 [ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="1_nhqvb"]
+[ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="1_nqdsm"]
 [ext_resource type="Script" uid="uid://dnmuhb0pkmsaa" path="res://elements/wertue/wing_right.gd" id="2_dc2uy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dc2uy"]
-atlas = ExtResource("1_nhqvb")
-region = Rect2(271, 89, 129, 111)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1o5i5"]
+resource_local_to_scene = true
+shader = ExtResource("1_nqdsm")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 7.0000003325
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhqvb"]
 atlas = ExtResource("1_nhqvb")
 region = Rect2(0, 0, 94, 200)
 
 [node name="wingRight" type="Sprite2D" unique_id=1902289196]
-texture = SubResource("AtlasTexture_dc2uy")
+material = SubResource("ShaderMaterial_1o5i5")
+texture = ExtResource("1_8b46h")
 offset = Vector2(110, -30)
 script = ExtResource("2_dc2uy")
 

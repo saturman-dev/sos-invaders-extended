@@ -147,11 +147,11 @@ func die():
 var dmgtween: Tween
 func damageAnimation():
 	Functions.def_enemy_explosion(self)
-	sprite.material.set_shader_parameter("flash_modifier", 1.0)
+	sprite.material.set_shader_parameter("flash_brightness", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()
 	dmgtween = create_tween()
-	dmgtween.tween_property(sprite.material, "shader_parameter/flash_modifier", 0.0, 0.2)
+	dmgtween.tween_property(sprite.material, "shader_parameter/flash_brightness", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 var ATween: Tween
 var BTween: Tween

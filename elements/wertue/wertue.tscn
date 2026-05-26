@@ -4,18 +4,26 @@
 [ext_resource type="PackedScene" uid="uid://o5xip0drl264" path="res://elements/wertue/wing_right.tscn" id="2_3hj3l"]
 [ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="3_a763e"]
 [ext_resource type="PackedScene" uid="uid://b3dhf571n7g2o" path="res://elements/villain/hpfull.tscn" id="3_f7mvn"]
+[ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_p4ll1"]
 [ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_q74va"]
 [ext_resource type="Texture2D" uid="uid://ccs21h62xd5bk" path="res://textures/enrageEffect.png" id="6_a763e"]
 [ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_7rjny"]
 [ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="8_h36qe"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7rjny"]
-atlas = ExtResource("3_a763e")
-region = Rect2(0, 0, 94, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3hj3l"]
-atlas = ExtResource("3_a763e")
-region = Rect2(94, 53, 94, 94)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2pupj"]
+resource_local_to_scene = true
+shader = ExtResource("3_p4ll1")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 8.00000038
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h36qe"]
 radius = 59.999992
@@ -57,12 +65,9 @@ position = Vector2(0, 3.8146973e-06)
 scale = Vector2(-1.25, 1.25)
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=1212913958]
+material = SubResource("ShaderMaterial_2pupj")
 scale = Vector2(1.25, 1.25)
-texture = SubResource("AtlasTexture_7rjny")
-
-[node name="circle" type="Sprite2D" parent="AnimatedSprite2D" unique_id=863114329]
-visible = false
-texture = SubResource("AtlasTexture_3hj3l")
+texture = ExtResource("3_a763e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2145923726]
 rotation = 1.5707964
