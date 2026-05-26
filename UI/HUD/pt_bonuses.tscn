@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c6tqmptox0vky"]
+
+[ext_resource type="Script" uid="uid://bnm177gkrseg1" path="res://UI/HUD/pt_bonuses.gd" id="1_cq03e"]
+
+[node name="ptBonuses" type="VBoxContainer" unique_id=879256944]
+alignment = 2
+script = ExtResource("1_cq03e")

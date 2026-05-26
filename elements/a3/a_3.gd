@@ -91,8 +91,7 @@ func periodic_dmg(dmg: float):
 	if dmgcldown.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			pass
- 			#Functions.style_bonus("exploded")
+			PtbonusesManager.ptbonus(givepts, "EXPLODED", Color("18ff3b"))
 		dmgcldown.wait_time = 1.0
 		dmgcldown.start()
 
@@ -101,13 +100,14 @@ func beam_dmg(dmg: float):
 	if dmgcldown2.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			Globals.change_points(givepts / 2)
+			PtbonusesManager.ptbonus(givepts * 2, "MADE IN HEAVEN", Color("00ffdc"))
 		dmgcldown2.wait_time = 0.5
 		dmgcldown2.start()
 
 func die():
 	if not hitbox:
 		return
+	Events.enemy_killed.emit()
 	remove_from_group("enemies")
 	Functions.big_enemy_explosion(self)
 	Saves.data["killed_a3s"] += 1

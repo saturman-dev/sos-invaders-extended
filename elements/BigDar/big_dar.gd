@@ -85,14 +85,15 @@ func periodic_dmg(dmg: float):
 			Functions.add_bonus("splash", global_position)
 			bonus_blocked = true
 		Functions.dmg(self, fullhp)
-		Globals.change_points(givepts / 2)
+		PtbonusesManager.ptbonus(givepts, "EXPLODED", Color("18ff3b"))
+		PtbonusesManager.ptbonus(givepts/2, "SELFHARM", Color("ff003b"))
 
 @onready var dmgcldown2 := $dmgCldown2
 func beam_dmg(dmg: float):
 	if dmgcldown2.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			Globals.change_points(givepts / 2)
+			PtbonusesManager.ptbonus(givepts * 2, "MADE IN HEAVEN", Color("00ffdc"))
 
 var dmgtween: Tween
 func damageAnimation():
@@ -107,6 +108,7 @@ func die():
 	if not hitbox:
 		return
 	remove_from_group("enemies")
+	Events.enemy_killed.emit()
 	Functions.mid_enemy_explosion(self)
 	Saves.data["killed_bigdars"] += 1
 	Functions.checkHeal()

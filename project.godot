@@ -25,6 +25,7 @@ Events="*uid://4vb8ga1xjbuf"
 Globals="*uid://biipd8y0af2iw"
 Saves="*uid://3bjc448xuoqj"
 Functions="*uid://ctwxpxw0mjenk"
+PtbonusesManager="*uid://ckhpbu53j815b"
 
 [display]
 
@@ -44,6 +45,7 @@ flash=""
 endedLivesManager=""
 lives_bar=""
 stamina_bar=""
+ptBonusesContainer=""
 
 [input]
 

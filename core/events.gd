@@ -3,6 +3,7 @@ extends Node
 
 signal points_changed(points: int)
 signal points_added(diff: int)
+signal enemy_killed()
 signal lives_changed(lives: int)
 signal deflives_changed(lives: int)
 signal overlives_changed(lives: int)

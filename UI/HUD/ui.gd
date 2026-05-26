@@ -2,8 +2,8 @@ extends CanvasLayer
 
 var score = Saves.data["score"]
 var ptsize = 1.5
-var pton = 0.1
-var ptoff = 0.3
+var pton = 0.05
+var ptoff = 0.2
 
 @onready var scoreV := $scoreV
 @onready var highest := $scoreV/scoreH/highscore
@@ -14,6 +14,7 @@ var ptoff = 0.3
 @onready var bonuses := $everythingButTime/thewholedown/staminaHpBonuses/bonusesH/bonusesV
 @onready var bossbarcontainer := $everythingButTime/bossBars
 @onready var diffLabel = $VBoxContainer3/HBoxContainer/diffLabel
+@onready var ptBonuses := $scoreV/ptBonuses
 
 var ATween: Tween
 
