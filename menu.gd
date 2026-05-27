@@ -10,15 +10,95 @@ var able = false
 @onready var logo := $CanvasLayer/Logo
 @onready var buttons := $CanvasLayer/buttons
 
+@onready var scrollPoints := $CanvasLayer/scrollPoints
+@onready var scrollKills := $CanvasLayer/scrollKills
+@onready var scrollTime := $CanvasLayer/scrollTime
+@onready var scrollBonus := $CanvasLayer/scrollBonus
+@onready var scrollDamage := $CanvasLayer/scrollDamage
+@onready var scrollSpeed := $CanvasLayer/scrollSpeed
+
 func _ready() -> void:
 	best.bbcode_enabled = true
 	while Saves.is_loading == true:
 		await get_tree().process_frame
 	var score = Saves.data["score"]
 	if score > 0:
-		best.text = str("Highest score: [color=#e5ff00]%s[/color]" % str(int(score)))
+		best.text = str("Highest score: [color=#ffffff]%s[/color]" % str(int(score)))
 	else:
 		best.queue_free()
+	
+	scrollBonus.modulate.a = 0.0
+	scrollDamage.modulate.a = 0.0
+	scrollSpeed.modulate.a = 0.0
+	scrollPoints.modulate.a = 0.0
+	scrollKills.modulate.a = 0.0
+	scrollTime.modulate.a = 0.0
+	scrollBonus.text = "[color=#181d7ab3]   BONUS MOD: [/color][color=#f7f700]%s[/color]" % (Functions.floor_to(Saves.data["bonus_modifier"]) + "x")
+	scrollDamage.text = "[color=#181d7ab3]   DAMAGE MOD: [/color][color=#f61900]%s[/color]" % (Functions.floor_to(Saves.data["damage_modifier"]) + "x")
+	scrollSpeed.text = "[color=#181d7ab3]   SPEED MOD: [/color][color=#00d2db]%s[/color]" % (Functions.floor_to(Saves.data["speed_modifier"]) + "x")
+	scrollPoints.text = "[color=#181d7ab3]   MAX POINTS: [/color][color=#f7f700]%s[/color]" % str(int(Saves.data["score"]))
+	scrollKills.text = "[color=#181d7ab3]   MAX KILLS: [/color][color=#f61900]%s[/color]" % str(int(Saves.data["max_kills"]))
+	scrollTime.text = "[color=#181d7ab3]   MAX TIME: [/color][color=#00d2db]%s[/color]" % Functions.time_to(Saves.data["max_time"])
+	shimmer()
+
+var shimmer_time := 4.0
+var shimmer_speed := 0.3
+var shimmer_between := 0.01
+var st: Tween
+var stt: Tween
+func shimmer():
+	
+	stt = create_tween()
+	stt.tween_property(scrollPoints, "modulate:a", 1.0, shimmer_speed)
+	stt.tween_interval(shimmer_between)
+	stt.parallel().tween_property(scrollKills, "modulate:a", 1.0, shimmer_speed)
+	stt.tween_interval(shimmer_between)
+	stt.parallel().tween_property(scrollTime, "modulate:a", 1.0, shimmer_speed)
+	
+	while self:
+		st = create_tween()
+		st.tween_interval(shimmer_time)
+		
+		st.chain().tween_property(scrollBonus, "modulate:a", 1.0, shimmer_speed)
+		st.parallel().tween_property(scrollPoints, "modulate:a", 0.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollDamage, "modulate:a", 1.0, shimmer_speed)
+		st.parallel().tween_property(scrollKills, "modulate:a", 0.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollSpeed, "modulate:a", 1.0, shimmer_speed)
+		st.parallel().tween_property(scrollTime, "modulate:a", 0.0, shimmer_speed)
+		
+		st.tween_interval(shimmer_time)
+		
+		st.chain().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed)
+		st.parallel().tween_property(scrollPoints, "modulate:a", 1.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed)
+		st.parallel().tween_property(scrollKills, "modulate:a", 1.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollSpeed, "modulate:a", 0.0, shimmer_speed)
+		st.parallel().tween_property(scrollTime, "modulate:a", 1.0, shimmer_speed)
+		
+		await st.finished
+
+func unshimmer():
+	if st and st.is_running():
+		st.kill()
+	if stt and stt.is_running():
+		stt.kill()
+	st = create_tween()
+	st.tween_property(scrollPoints, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed / 2)
+	st.tween_interval(shimmer_between)
+	st.tween_property(scrollKills, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed / 2)
+	st.tween_interval(shimmer_between)
+	st.tween_property(scrollTime, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollSpeed, "modulate:a", 0.0, shimmer_speed / 2)
 
 var loadedTime := 0.7
 var betweenLoaded := 0.1
@@ -58,6 +138,7 @@ func _on_play_pressed() -> void:
 	able = false
 	menuClick_play()
 	get_parent().start()
+	unshimmer()
 	s = create_tween()
 	s.tween_property(playAnim, "modulate:a", 0.0, stspeed)
 	s.parallel().tween_property(playAnim, "scale", Vector2.ONE*2, stspeed * 1.5).set_trans(trans).set_ease(Tween.EASE_OUT)

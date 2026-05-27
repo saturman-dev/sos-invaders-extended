@@ -220,6 +220,8 @@ func unenrage():
 	if not sprite:
 		return
 	var unetween = create_tween()
+	if not unetween or not sprite:
+		return
 	unetween.tween_property(sprite, "shader_parameter/rage_intencity", 0.0, 0.5)
 	unetween.parallel().tween_property(wingLeft, "shader_parameter/rage_intencity", 0.0, 0.5)
 	unetween.parallel().tween_property(wingRight, "shader_parameter/rage_intencity", 0.0, 0.5)

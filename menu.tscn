@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://cwdcfcmrhun02" path="res://menu.gd" id="1_ouk20"]
 [ext_resource type="Texture2D" uid="uid://ckmsik3fprhvd" path="res://textures/logo.png" id="2_ouk20"]
 [ext_resource type="Texture2D" uid="uid://v7s7l28idnrd" path="res://textures/PlayQuit.png" id="3_mae5d"]
+[ext_resource type="Shader" uid="uid://ddc0scbtuh2l8" path="res://shaders/gradient.gdshader" id="5_l48gv"]
 [ext_resource type="Texture2D" uid="uid://b11o2ly0s3cxn" path="res://textures/ExtraSettings.png" id="5_ytr4m"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="6_l48gv"]
+[ext_resource type="PackedScene" uid="uid://c3m1t2vsioi1" path="res://UI/scrollTextLine/scroll_text_line.tscn" id="7_ecwwl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c8pol"]
 atlas = ExtResource("5_ytr4m")
@@ -383,6 +385,15 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ecwwl"]
+shader = ExtResource("5_l48gv")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 4.00000018674012
+shader_parameter/blend_strength = 0.0
+shader_parameter/flash_brightness = 0.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mae5d"]
 atlas = ExtResource("3_mae5d")
 region = Rect2(102, 0, 102, 25)
@@ -539,6 +550,70 @@ script = ExtResource("1_ouk20")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=559639958]
 
+[node name="scrollPoints" parent="CanvasLayer" unique_id=2063077015 instance=ExtResource("7_ecwwl")]
+offset_left = 19.0
+offset_top = 240.0
+offset_right = 108.0
+offset_bottom = 251.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "POINTS  "
+speed = 20.0
+
+[node name="scrollKills" parent="CanvasLayer" unique_id=586026118 instance=ExtResource("7_ecwwl")]
+offset_left = 59.0
+offset_top = 240.0
+offset_right = 148.0
+offset_bottom = 251.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "KILLS  "
+speed = -20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="scrollTime" parent="CanvasLayer" unique_id=1835542164 instance=ExtResource("7_ecwwl")]
+offset_left = 99.0
+offset_top = 240.0
+offset_right = 188.0
+offset_bottom = 251.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "TIME  "
+speed = 20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="scrollBonus" parent="CanvasLayer" unique_id=1317362608 instance=ExtResource("7_ecwwl")]
+offset_left = 19.0
+offset_top = 240.0
+offset_right = 108.0
+offset_bottom = 251.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "POINTS  "
+speed = 20.0
+
+[node name="scrollDamage" parent="CanvasLayer" unique_id=347144738 instance=ExtResource("7_ecwwl")]
+offset_left = 59.0
+offset_top = 240.0
+offset_right = 148.0
+offset_bottom = 251.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "KILLS  "
+speed = -20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="scrollSpeed" parent="CanvasLayer" unique_id=1975648564 instance=ExtResource("7_ecwwl")]
+offset_left = 99.0
+offset_top = 240.0
+offset_right = 188.0
+offset_bottom = 251.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "TIME  "
+speed = 20.0
+metadata/_edit_use_anchors_ = true
+
 [node name="Logo" type="Sprite2D" parent="CanvasLayer" unique_id=2026627514]
 position = Vector2(197, 70)
 scale = Vector2(0.5, 0.5)
@@ -607,6 +682,7 @@ flat = true
 text_overrun_behavior = 1
 
 [node name="playAnim" type="AnimatedSprite2D" parent="CanvasLayer/buttons" unique_id=156799393]
+material = SubResource("ShaderMaterial_ecwwl")
 position = Vector2(0, 12.5)
 sprite_frames = SubResource("SpriteFrames_xhgcl")
 animation = &"hover"
@@ -626,6 +702,7 @@ flat = true
 text_overrun_behavior = 1
 
 [node name="BEST" type="RichTextLabel" parent="CanvasLayer/buttons/playAnim" unique_id=1382198640]
+visible = false
 offset_left = -48.0
 offset_top = -19.5
 offset_right = 96.0

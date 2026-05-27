@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="9_f3lx7"]
 [ext_resource type="Texture2D" uid="uid://h5jirjw1c7uy" path="res://textures/a3.png" id="9_oa725"]
 [ext_resource type="PackedScene" uid="uid://o5xip0drl264" path="res://elements/wertue/wing_right.tscn" id="10_f3lx7"]
+[ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="12_altx8"]
 [ext_resource type="Texture2D" uid="uid://c2w2itvx7qp1d" path="res://textures/flseye.png" id="12_f11j0"]
 [ext_resource type="Texture2D" uid="uid://cdmi8edk3ityv" path="res://textures/bonusHeal.png" id="12_xr6wq"]
 [ext_resource type="Texture2D" uid="uid://bylip2xfir8of" path="res://textures/flseyeSquare.png" id="13_iwq1c"]
@@ -228,9 +229,35 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kwec3"]
-atlas = ExtResource("9_f3lx7")
-region = Rect2(0, 0, 93, 200)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_337yk"]
+resource_local_to_scene = true
+shader = ExtResource("12_altx8")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 7.0000003325
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qua0r"]
+resource_local_to_scene = true
+shader = ExtResource("12_altx8")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 7.0000003325
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofxwr"]
 atlas = ExtResource("12_f11j0")
@@ -611,8 +638,8 @@ position = Vector2(20, 20)
 texture = SubResource("AtlasTexture_f11j0")
 
 [node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin/icon" unique_id=1146859379]
-position = Vector2(20, 20)
-scale = Vector2(0.2, 0.2)
+position = Vector2(20, 21)
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_altx8")
 autoplay = "default"
 frame_progress = 0.27184823
@@ -688,7 +715,7 @@ texture = SubResource("AtlasTexture_f11j0")
 
 [node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/icon" unique_id=1084436180]
 position = Vector2(20, 20)
-scale = Vector2(0.135, 0.135)
+scale = Vector2(0.18, 0.18)
 sprite_frames = SubResource("SpriteFrames_qout1")
 autoplay = "default"
 frame_progress = 0.6202625
@@ -772,7 +799,7 @@ texture = SubResource("AtlasTexture_f11j0")
 
 [node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3/icon" unique_id=1806867053]
 position = Vector2(20, 20)
-scale = Vector2(0.135, 0.135)
+scale = Vector2(0.18, 0.18)
 sprite_frames = SubResource("SpriteFrames_e3bvy")
 autoplay = "default"
 frame_progress = 0.19687344
@@ -848,11 +875,13 @@ texture = SubResource("AtlasTexture_f11j0")
 [node name="enemy" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon" unique_id=2070076250]
 position = Vector2(20, 20)
 scale = Vector2(0.135, 0.135)
-texture = SubResource("AtlasTexture_kwec3")
+texture = ExtResource("9_f3lx7")
 
 [node name="wingRight" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=1902289196 instance=ExtResource("10_f3lx7")]
+material = SubResource("ShaderMaterial_337yk")
 
 [node name="wingLeft" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=2043273702 instance=ExtResource("10_f3lx7")]
+material = SubResource("ShaderMaterial_qua0r")
 scale = Vector2(-1, 1)
 
 [node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon" unique_id=1190709882]

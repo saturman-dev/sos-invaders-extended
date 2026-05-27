@@ -111,6 +111,8 @@ func sfx_play(soundPath, volume: float = 0.0, pitch: float = 1.0, play_on_hitsto
 	player.pitch_scale = pitch
 	if play_on_hitstop == true:
 		player.process_mode = Node.PROCESS_MODE_ALWAYS
+	else:
+		player.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(player)
 	player.play()
 	player.finished.connect(player.queue_free)
@@ -309,9 +311,11 @@ func dash():
 func nodash():
 	sfx_play("res://sounds/nodash.mp3", 1.0, randf_range(0.9, 1.1))
 
-func floor_to(value: float, decimals: int = 2) -> float:
+func floor_to(value: float, decimals: int = 2) -> String:
 	var multiplier = pow(10.0, decimals)
-	return floorf(value * multiplier) / multiplier
+	var floored_float = floorf(value * multiplier) / multiplier
+	var format_string = "%." + str(decimals) + "f"
+	return format_string % floored_float
 
 func time_to(value: int) -> String:
 	var minutes := int(value) / 60
