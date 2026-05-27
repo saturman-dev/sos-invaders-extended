@@ -11,6 +11,7 @@ var dashable := true
 var game_running: bool = false
 var instart: bool = false
 var pts = 0
+var kills := 0
 var newbest: bool = false
 var time: String = " "
 var secs: int = 0
@@ -66,6 +67,7 @@ var overlives := 0
 func change_points(diff: int):
 	points += diff
 	pts += diff
+	Events.enemy_killed.connect(func(): kills += 1)
 	Events.points_added.emit(diff)
 	Events.points_changed.emit(points)
 	if Saves.data["ever_got_overheal_bonus"] == false and Saves.data["killed_enemies"] >= needForOverheal:
@@ -86,7 +88,7 @@ func change_overlives(diff: int):
 	Events.overlives_changed.emit(overlives)
 
 func apply_shake(strength: float):
-	shake_str = strength
+	shake_str += strength
 
 func update_volume():
 	var master = AudioServer.get_bus_index("Master")

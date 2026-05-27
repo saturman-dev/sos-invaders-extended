@@ -21,3 +21,5 @@ func add_live():
 	
 func remove_live():
 	get_child(0).end()
+	if get_child_count() == 0:
+		get_parent().add_theme_constant_override("separation", 0)

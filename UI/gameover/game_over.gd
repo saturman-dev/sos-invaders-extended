@@ -72,9 +72,8 @@ func _ready():
 	# TIME
 	time.visible = true
 	var Ttime = float(0.2 / times)
-	time.text = "00:00"
 	var time_elapsed = 0.0
-	while not (time.text) == Globals.time:
+	while not time.text == Globals.time:
 		time_elapsed += 1
 		var minutes := int(time_elapsed) / 60
 		var seconds := int(time_elapsed) % 60

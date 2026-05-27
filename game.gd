@@ -135,21 +135,5 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		if Globals.game_running == true:
 			$pauseC.add_child(pause.instantiate())
-	if event.is_action_pressed("fullscreen"):
-		toggle_fullscreen()
 	if event.is_action_pressed("ui_accept"):
 		pass
-
-func toggle_fullscreen():
-	var current = DisplayServer.window_get_mode()
-	if current == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		var base_size = get_viewport_rect().size
-		DisplayServer.window_set_size(base_size * 3)
-		
-		var screen = DisplayServer.window_get_current_screen()
-		var screen_size = DisplayServer.screen_get_size(screen)
-		var window_size = DisplayServer.window_get_size()
-		DisplayServer.window_set_position(screen_size / 2 - window_size / 2)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)

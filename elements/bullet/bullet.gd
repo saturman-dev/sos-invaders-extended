@@ -47,17 +47,13 @@ func _on_body_entered(body: Node2D):
 	if "hp" in body:
 		Functions.dmg(body, damage)
 		Functions.sfx_play("res://sounds/niceBullet.mp3", -15.0, randf_range(0.8, 1.2))
-	if body.has_method("explode"):
+	elif body.has_method("explode"):
 		Functions.sfx_play("res://sounds/niceBullet.mp3", -15.0, 1.0, true)
 		if body.has_method("warn"):
-			body.warn()
-		Functions.hitstop(0.5)
-		if splashing == false:
-			set_deferred("hitbox/disabled", true)
-		await Functions.unhitstopped
-		body.explode()
-		Globals.apply_shake(7.5)
+			body.get_hit()
 	if splashing == false:
+		await get_tree().process_frame
+		await get_tree().process_frame
 		queue_free()
 
 func speedup():
@@ -67,7 +63,7 @@ func speedup():
 func splash():
 	splashing = true
 	sprite.modulate = Color.DEEP_SKY_BLUE
-	global_scale *= 1.2
+	global_scale *= 1.5
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

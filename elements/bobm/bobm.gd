@@ -69,7 +69,15 @@ func explode():
 	var Expl = explosion.instantiate()
 	Expl.global_position = global_position
 	get_parent().add_child(Expl)
+	Globals.apply_shake(4.0)
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
+
+func get_hit():
+	warn()
+	Functions.hitstop(0.5)
+	await Functions.unhitstopped
+	explode()
+	Globals.apply_shake(3.0)

@@ -17,109 +17,203 @@ position = Vector2(195.00002, 120)
 scale = Vector2(1.5390626, 1.0166668)
 texture = ExtResource("2_67l1h")
 
-[node name="VBOX" type="VBoxContainer" parent="." unique_id=340293695]
-offset_left = 120.0
-offset_top = 40.0
-offset_right = 270.0
-offset_bottom = 200.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1582155670]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="VBOX" type="VBoxContainer" parent="MarginContainer" unique_id=340293695]
+layout_mode = 2
+theme_override_constants/separation = -3
 alignment = 1
 
-[node name="Gameo" type="HBoxContainer" parent="VBOX" unique_id=875289774]
+[node name="Gameo" type="HBoxContainer" parent="MarginContainer/VBOX" unique_id=875289774]
 layout_mode = 2
 alignment = 1
 
-[node name="Gameov" type="Control" parent="VBOX/Gameo" unique_id=400810243]
+[node name="Gameov" type="Control" parent="MarginContainer/VBOX/Gameo" unique_id=400810243]
 custom_minimum_size = Vector2(97, 13)
 layout_mode = 2
 
-[node name="Gameover" type="Sprite2D" parent="VBOX/Gameo/Gameov" unique_id=443453848]
+[node name="Gameover" type="Sprite2D" parent="MarginContainer/VBOX/Gameo/Gameov" unique_id=443453848]
 position = Vector2(48.5, 6.5)
 texture = ExtResource("3_pb6xu")
 
-[node name="Spacer" type="Control" parent="VBOX" unique_id=650814760]
-custom_minimum_size = Vector2(0, 20)
+[node name="Spacer" type="Control" parent="MarginContainer/VBOX" unique_id=650814760]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Pt" type="HBoxContainer" parent="VBOX" unique_id=621816580]
+[node name="POINTS" type="HBoxContainer" parent="MarginContainer/VBOX" unique_id=1440373966]
 layout_mode = 2
 
-[node name="PtsL" type="Label" parent="VBOX/Pt" unique_id=965399767]
-visible = false
+[node name="Pt" type="HBoxContainer" parent="MarginContainer/VBOX/POINTS" unique_id=621816580]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PtsL" type="Label" parent="MarginContainer/VBOX/POINTS/Pt" unique_id=965399767]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 10
 text = "Points:"
 
-[node name="Spacer2" type="Control" parent="VBOX/Pt" unique_id=1290273067]
+[node name="Pts2" type="Label" parent="MarginContainer/VBOX/POINTS/Pt/PtsL" unique_id=321359003]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 11.0
+offset_right = 150.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 5
+text = "New best!"
+
+[node name="Spacer2" type="Control" parent="MarginContainer/VBOX/POINTS/Pt" unique_id=1290273067]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Pts" type="Label" parent="VBOX/Pt" unique_id=1740704678]
-visible = false
+[node name="Pts" type="Label" parent="MarginContainer/VBOX/POINTS/Pt" unique_id=1740704678]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 10
 text = "0"
 
-[node name="Pts2" type="Label" parent="VBOX/Pt/Pts" unique_id=321359003]
-visible = false
+[node name="spacer" type="Control" parent="MarginContainer/VBOX/POINTS" unique_id=1345116808]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="bar" type="Control" parent="MarginContainer/VBOX/POINTS" unique_id=984814404]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="bar" type="ColorRect" parent="MarginContainer/VBOX/POINTS/bar" unique_id=1147166372]
 layout_mode = 0
-offset_left = 3.0000153
-offset_top = -14.0
-offset_right = 35.000015
-offset_bottom = -9.0
-rotation = 0.34906584
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0, 0, 0, 1)
+
+[node name="KILLS" type="HBoxContainer" parent="MarginContainer/VBOX" unique_id=493906475]
+layout_mode = 2
+
+[node name="Kil" type="HBoxContainer" parent="MarginContainer/VBOX/KILLS" unique_id=562858924]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="KilL" type="Label" parent="MarginContainer/VBOX/KILLS/Kil" unique_id=1489316866]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 10
+text = "Kills:"
+
+[node name="Kil2" type="Label" parent="MarginContainer/VBOX/KILLS/Kil/KilL" unique_id=856184122]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 11.0
+offset_right = 150.0
+offset_bottom = 16.0
 theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 5
 text = "New best!"
 
-[node name="Tim" type="HBoxContainer" parent="VBOX" unique_id=97803792]
+[node name="Spacer2" type="Control" parent="MarginContainer/VBOX/KILLS/Kil" unique_id=1943932790]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Kills" type="Label" parent="MarginContainer/VBOX/KILLS/Kil" unique_id=152279133]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="spacer" type="Control" parent="MarginContainer/VBOX/KILLS" unique_id=1804819588]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="bar" type="Control" parent="MarginContainer/VBOX/KILLS" unique_id=1647127347]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="TimeL" type="Label" parent="VBOX/Tim" unique_id=1289527671]
-visible = false
+[node name="bar" type="ColorRect" parent="MarginContainer/VBOX/KILLS/bar" unique_id=1490593400]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0, 0, 0, 1)
+
+[node name="TIME" type="HBoxContainer" parent="MarginContainer/VBOX" unique_id=1609807925]
+layout_mode = 2
+
+[node name="Tim" type="HBoxContainer" parent="MarginContainer/VBOX/TIME" unique_id=97803792]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="TimeL" type="Label" parent="MarginContainer/VBOX/TIME/Tim" unique_id=1289527671]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 10
 text = "Time:"
 
-[node name="Spacer2" type="Control" parent="VBOX/Tim" unique_id=768341026]
+[node name="Time2" type="Label" parent="MarginContainer/VBOX/TIME/Tim/TimeL" unique_id=2112781340]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 11.0
+offset_right = 150.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("4_pb6xu")
+theme_override_font_sizes/font_size = 5
+text = "New best!"
+
+[node name="Spacer2" type="Control" parent="MarginContainer/VBOX/TIME/Tim" unique_id=768341026]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Time" type="Label" parent="VBOX/Tim" unique_id=1718062772]
-visible = false
+[node name="Time" type="Label" parent="MarginContainer/VBOX/TIME/Tim" unique_id=1718062772]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 10
-text = "0:00"
+text = "0"
 
-[node name="Spacer2" type="Control" parent="VBOX" unique_id=1253672713]
-custom_minimum_size = Vector2(0, 15)
+[node name="spacer" type="Control" parent="MarginContainer/VBOX/TIME" unique_id=56815430]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="bar" type="Control" parent="MarginContainer/VBOX/TIME" unique_id=1679202379]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="Text" type="Control" parent="VBOX" unique_id=1030063266]
-custom_minimum_size = Vector2(0, 21)
-layout_mode = 2
-
-[node name="Press" type="Label" parent="VBOX/Text" unique_id=1048616128]
-visible = false
+[node name="bar" type="ColorRect" parent="MarginContainer/VBOX/TIME/bar" unique_id=306203845]
 layout_mode = 0
+offset_top = 10.0
 offset_right = 150.0
-offset_bottom = 10.0
+offset_bottom = 20.0
+color = Color(0, 0, 0, 1)
+
+[node name="Spacer3" type="Control" parent="MarginContainer/VBOX" unique_id=658749227]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="BOTTOM" type="HBoxContainer" parent="MarginContainer/VBOX" unique_id=1748826710]
+layout_mode = 2
+alignment = 1
+
+[node name="text" type="VBoxContainer" parent="MarginContainer/VBOX/BOTTOM" unique_id=273748477]
+layout_mode = 2
+
+[node name="Press" type="Label" parent="MarginContainer/VBOX/BOTTOM/text" unique_id=1048616128]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 10
 text = "Press [R] to restart"
 horizontal_alignment = 1
 
-[node name="esc to exit" type="Label" parent="VBOX/Text" unique_id=773523160]
-visible = false
-layout_mode = 0
-offset_top = 14.0
-offset_right = 150.0
-offset_bottom = 21.0
+[node name="esc to exit" type="Label" parent="MarginContainer/VBOX/BOTTOM/text" unique_id=773523160]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("4_pb6xu")
 theme_override_font_sizes/font_size = 7
 text = "[esc] - back to menu"

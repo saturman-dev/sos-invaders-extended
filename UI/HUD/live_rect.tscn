@@ -302,8 +302,9 @@ animations = [{
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0
+offset_top = -43.0
 offset_right = 20.0
-offset_bottom = 20.0
+offset_bottom = -23.0
 scale = Vector2(0.25, 0.25)
 script = ExtResource("3_om4dx")
 

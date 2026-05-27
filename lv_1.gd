@@ -36,6 +36,7 @@ func _input(event):
 
 func _ready() -> void:
 	Globals.shake_str = 0.0
+	Globals.kills = 0
 	print("Game started!")
 	Events.lives_changed.connect(func(lives): check_game_over())
 	Events.points_changed.connect(func(points): check_bossfighting())
