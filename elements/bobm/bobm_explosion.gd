@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 			body.periodic_dmg(5.0)
 		if body.has_method("explode"):
 			Globals.shake_str += 5.0
-			body.explode()
+			body.get_hit()
 
 func _ready() -> void: #fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 	Functions.particle_explosion(self, global_position, randi_range(20, 30), Color("8fd94e"), 500, 0.8, 100.0, 0.7, 1.5, true, 0.1)

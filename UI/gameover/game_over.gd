@@ -2,10 +2,6 @@ extends CanvasLayer
 
 const game = preload("res://game.tscn")
 
-var pts = Globals.points
-var newbest = Globals.newbest
-var times = Globals.secs
-var timee = Globals.time
 var mod = 1.0
 var modd = 1.0
 
@@ -14,16 +10,39 @@ var BTween: Tween
 var CTween: Tween
 
 var between = 0.5 / mod
-var timetime = 0
-var minmin = 60
-var time1 = 0
-var time2 = 0
 
-@onready var gameover = $VBOX/Gameo/Gameov/Gameover
+@onready var gameover = $MarginContainer/VBOX/Gameo/Gameov/Gameover
 @onready var a6 = $A6
-@onready var ptst = $VBOX/Pt/Pts
-@onready var nb = $VBOX/Pt/Pts/Pts2
-@onready var time = $VBOX/Tim/Time
+
+@onready var pointsText := $MarginContainer/VBOX/POINTS/Pt/PtsL
+@onready var pointsCountText := $MarginContainer/VBOX/POINTS/Pt/Pts
+@onready var pointsNewBest := $MarginContainer/VBOX/POINTS/Pt/PtsL/Pts2
+@onready var bonusChancesBar := $MarginContainer/VBOX/POINTS/bar/bar
+@onready var bonusChancesText := $"MarginContainer/VBOX/POINTS/bar/BONUS CHANCES"
+@onready var bonusChancesMin := $MarginContainer/VBOX/POINTS/bar/min
+@onready var bonusChancesMax := $MarginContainer/VBOX/POINTS/bar/max
+@onready var bonusChancesCurrent := $MarginContainer/VBOX/POINTS/bar/current
+
+@onready var killsText := $MarginContainer/VBOX/KILLS/Kil/KilL
+@onready var killsCountText := $MarginContainer/VBOX/KILLS/Kil/Kills
+@onready var killsNewBest := $MarginContainer/VBOX/KILLS/Kil/KilL/Kil2
+@onready var damageBar := $MarginContainer/VBOX/KILLS/bar/bar
+@onready var damageText := $MarginContainer/VBOX/KILLS/bar/DAMAGE
+@onready var damageMin := $MarginContainer/VBOX/KILLS/bar/min
+@onready var damageMax := $MarginContainer/VBOX/KILLS/bar/max
+@onready var damageCurrent := $MarginContainer/VBOX/KILLS/bar/current
+
+@onready var timeText := $MarginContainer/VBOX/TIME/Tim/TimeL
+@onready var timeCountText := $MarginContainer/VBOX/TIME/Tim/Time
+@onready var timeNewBest := $MarginContainer/VBOX/TIME/Tim/TimeL/Time2
+@onready var cooldownsTimeBar := $MarginContainer/VBOX/TIME/bar/bar
+@onready var cooldownsTimeText := $"MarginContainer/VBOX/TIME/bar/COOLDOWNS SPEED"
+@onready var cooldownsTimeMin := $MarginContainer/VBOX/TIME/bar/min
+@onready var cooldownsTimeMax := $MarginContainer/VBOX/TIME/bar/max
+@onready var cooldownsTimeCurrent := $MarginContainer/VBOX/TIME/bar/current
+
+@onready var bottom := $MarginContainer/VBOX/BOTTOM
+
 
 var counting = false
 var skipping = false

@@ -35,14 +35,22 @@ func _input(event):
 			get_tree().reload_current_scene()
 
 func _ready() -> void:
+	
 	Globals.shake_str = 0.0
+	
 	Globals.kills = 0
+	Globals.timeSeconds = 0
+	Globals.points = 0
+	Globals.oldMaxKills = Saves.data["max_kills"]
+	Globals.oldMaxPoints = Saves.data["score"]
+	Globals.oldMaxTime = Saves.data["max_time"]
+	
 	print("Game started!")
 	Events.lives_changed.connect(func(lives): check_game_over())
 	Events.points_changed.connect(func(points): check_bossfighting())
+	Events.enemy_killed.connect(func(): Globals.kills += 1)
 	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	Events.bossfight_end.connect(func(): end_bossfight())
-	Globals.newbest = false
 	ready_animation()
 
 func ready_animation():
@@ -78,9 +86,12 @@ func check_bossfighting():
 			Events.bossfight_start.emit("flseye")
 
 func gameOver():
-	if Globals.points > Saves.data["score"]:
+	if Globals.points > Globals.oldMaxPoints:
 		Saves.data["score"] = Globals.points
-		Globals.newbest = true
+	if Globals.kills > Globals.oldMaxKills:
+		Saves.data["max_kills"] = Globals.kills
+	if Globals.timeSeconds > Globals.oldMaxTime:
+		Saves.data["max_time"] = Globals.timeSeconds
 	Functions.stop_all_sfx()
 	get_tree().paused = true
 	print("RIP Saraf")

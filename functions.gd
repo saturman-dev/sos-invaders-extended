@@ -22,9 +22,11 @@ const single_particle = preload("res://elements/particles/single_particle.tscn")
 
 func hitstop(seconds: float):
 	hitstopping = true
-	get_tree().paused = true
-	await get_tree().create_timer(seconds, true).timeout
-	get_tree().paused = false
+	#get_tree().paused = true
+	Engine.time_scale = 0
+	await get_tree().create_timer(seconds, true, false, true).timeout
+	#get_tree().paused = false
+	Engine.time_scale = 1
 	hitstopping = false
 	unhitstopped.emit()
 

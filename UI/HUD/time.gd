@@ -37,3 +37,4 @@ func _process(delta: float) -> void:
 	text = "%02d:%02d" % [minutes, seconds]
 	Globals.secs = seconds
 	Globals.time = text
+	Globals.timeSeconds = int(time_elapsed)

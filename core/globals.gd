@@ -11,13 +11,26 @@ var dashable := true
 var game_running: bool = false
 var instart: bool = false
 var pts = 0
-var kills := 0
 var newbest: bool = false
 var time: String = " "
 var secs: int = 0
 var shake_str := 0.0
 var shake_fad := 3.0
 var diffi := 0.0
+
+# STATS
+var maxBonusModifier := 2.5
+var maxDamageModifier := 4.0
+var maxSpeedModifier := 3.5
+var maxBonusModifierNeedPoints := 800
+var maxDamageModifierNeedKills := 100
+var maxSpeedModifierNeedSeconds := 600
+var oldMaxPoints := 0
+var oldMaxKills := 0
+var oldMaxTime := 0
+var points := 0
+var kills := 0
+var timeSeconds := 0
 
 var notification_running := false
 
@@ -59,7 +72,6 @@ func setDefHp():
 	deflives = def_hp
 	overlives = 0
 
-var points := 0
 var lives := def_hp
 var deflives := def_hp
 var overlives := 0

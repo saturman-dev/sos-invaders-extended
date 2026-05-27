@@ -4,6 +4,8 @@ const SAVE_PATH = "user://save.json"
 
 var data = {
 	"score": 0,
+	"max_time": 0.0,
+	"max_kills": 0,
 	"v_all": 50.0,
 	"v_sfx": 50.0,
 	"v_mus": 25.0,
