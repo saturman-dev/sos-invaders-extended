@@ -308,3 +308,12 @@ func dash():
 
 func nodash():
 	sfx_play("res://sounds/nodash.mp3", 1.0, randf_range(0.9, 1.1))
+
+func floor_to(value: float, decimals: int = 2) -> float:
+	var multiplier = pow(10.0, decimals)
+	return floorf(value * multiplier) / multiplier
+
+func time_to(value: int) -> String:
+	var minutes := int(value) / 60
+	var seconds := int(value) % 60
+	return "%02d:%02d" % [minutes, seconds]

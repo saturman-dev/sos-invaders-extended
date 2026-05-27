@@ -1,22 +1,13 @@
 extends CanvasLayer
 
-const game = preload("res://game.tscn")
-
-var mod = 1.0
-var modd = 1.0
-
-var ATween: Tween
-var BTween: Tween
-var CTween: Tween
-
-var between = 0.5 / mod
-
 @onready var gameover = $MarginContainer/VBOX/Gameo/Gameov/Gameover
 @onready var a6 = $A6
 
 @onready var pointsText := $MarginContainer/VBOX/POINTS/Pt/PtsL
 @onready var pointsCountText := $MarginContainer/VBOX/POINTS/Pt/Pts
+@onready var pointsMax := $MarginContainer/VBOX/POINTS/maxPts
 @onready var pointsNewBest := $MarginContainer/VBOX/POINTS/Pt/PtsL/Pts2
+@onready var bonusChances := $MarginContainer/VBOX/POINTS/bar
 @onready var bonusChancesBar := $MarginContainer/VBOX/POINTS/bar/bar
 @onready var bonusChancesText := $"MarginContainer/VBOX/POINTS/bar/BONUS CHANCES"
 @onready var bonusChancesMin := $MarginContainer/VBOX/POINTS/bar/min
@@ -25,7 +16,9 @@ var between = 0.5 / mod
 
 @onready var killsText := $MarginContainer/VBOX/KILLS/Kil/KilL
 @onready var killsCountText := $MarginContainer/VBOX/KILLS/Kil/Kills
+@onready var killsMax := $MarginContainer/VBOX/KILLS/maxKills
 @onready var killsNewBest := $MarginContainer/VBOX/KILLS/Kil/KilL/Kil2
+@onready var damage := $MarginContainer/VBOX/KILLS/bar
 @onready var damageBar := $MarginContainer/VBOX/KILLS/bar/bar
 @onready var damageText := $MarginContainer/VBOX/KILLS/bar/DAMAGE
 @onready var damageMin := $MarginContainer/VBOX/KILLS/bar/min
@@ -34,118 +27,272 @@ var between = 0.5 / mod
 
 @onready var timeText := $MarginContainer/VBOX/TIME/Tim/TimeL
 @onready var timeCountText := $MarginContainer/VBOX/TIME/Tim/Time
+@onready var timeMax := $MarginContainer/VBOX/TIME/maxTime
 @onready var timeNewBest := $MarginContainer/VBOX/TIME/Tim/TimeL/Time2
-@onready var cooldownsTimeBar := $MarginContainer/VBOX/TIME/bar/bar
-@onready var cooldownsTimeText := $"MarginContainer/VBOX/TIME/bar/COOLDOWNS SPEED"
-@onready var cooldownsTimeMin := $MarginContainer/VBOX/TIME/bar/min
-@onready var cooldownsTimeMax := $MarginContainer/VBOX/TIME/bar/max
-@onready var cooldownsTimeCurrent := $MarginContainer/VBOX/TIME/bar/current
+@onready var cooldownsSpeed := $MarginContainer/VBOX/TIME/bar
+@onready var cooldownsSpeedBar := $MarginContainer/VBOX/TIME/bar/bar
+@onready var cooldownsSpeedText := $"MarginContainer/VBOX/TIME/bar/COOLDOWNS SPEED"
+@onready var cooldownsSpeedMin := $MarginContainer/VBOX/TIME/bar/min
+@onready var cooldownsSpeedMax := $MarginContainer/VBOX/TIME/bar/max
+@onready var cooldownsSpeedCurrent := $MarginContainer/VBOX/TIME/bar/current
 
 @onready var bottom := $MarginContainer/VBOX/BOTTOM
 
+var a6tween: Tween
+var between = 1.0
+var is_skipped = false
+var current_tween: Tween = null
 
-var counting = false
-var skipping = false
+func skip_sequence():
+	is_skipped = true
+	if current_tween and current_tween.is_valid():
+		current_tween.set_speed_scale(100.0)
 
-func counterSfx():
-	Functions.sfx_play("res://sounds/counter.mp3", -4.0)
+
 
 func precounterSfx():
 	Functions.sfx_play("res://sounds/preCounter.mp3")
 
-var firstSound := 0
-var firstSound2 := 0
-func _ready():
-	ATween = create_tween()
-	ATween.tween_property(a6, "modulate:a", 0.85, 3.0)
-	shimmer()
-	await get_tree().create_timer(1.5).timeout
-	$VBOX/Pt/PtsL.visible = true
-	precounterSfx()
-	counting = true
-	await get_tree().create_timer(between).timeout
-	if skipping == true:
+var lastSoundTime := 0.0
+var sound_interval := 0.025
+
+func _play_buffered_tick() -> void:
+	if is_skipped: return
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - lastSoundTime >= sound_interval:
+		Functions.sfx_play("res://sounds/counter.mp3", -4.0, randf_range(0.9, 1.1))
+		lastSoundTime = current_time
+
+func _play_buffered_tick_bar(pitch: float) -> void:
+	if is_skipped: return
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - lastSoundTime >= sound_interval:
+		Functions.sfx_play("res://sounds/counter.mp3", -4.0, pitch)
+		lastSoundTime = current_time
+
+
+
+func animate_points():
+	
+	if Globals.points == 0:
+		pointsCountText.text = "0"
 		return
-	# POINTS
-	ptst.visible = true
-	var LPts = 0
-	var Ptime = float(0.1 / pts)
-	if pts >= 1:
-		ptst.text = "1"
-		counterSfx()
-	while not int(ptst.text) == pts:
-		ptst.text = str(LPts)
-		LPts += 1
-		counterSfxCheck2()
-		if not int(ptst.text) == pts:
-			await get_tree().create_timer(Ptime / modd).timeout
-	if newbest == true:
-		await get_tree().create_timer(between).timeout
-		nb.visible = true
-		Functions.sfx_play("res://sounds/newBest.mp3")
-		nb_flash()
-	await get_tree().create_timer(between).timeout
-	$VBOX/Tim/TimeL.visible = true
-	precounterSfx()
-	await get_tree().create_timer(between).timeout
-	# TIME
-	time.visible = true
-	var Ttime = float(0.2 / times)
-	var time_elapsed = 0.0
-	while not time.text == Globals.time:
-		time_elapsed += 1
-		var minutes := int(time_elapsed) / 60
-		var seconds := int(time_elapsed) % 60
-		time.text = "%02d:%02d" % [minutes, seconds]
-		counterSfxCheck()
-		if not time.text == Globals.time:
-			await get_tree().create_timer(Ttime / modd).timeout
-	await get_tree().create_timer(between).timeout
-	# OTHER
-	$VBOX/Text/Press.visible = true
-	$"VBOX/Text/esc to exit".visible = true
-	precounterSfx()
+	
+	var target_value = Globals.points
+	var duration = 0.05 if is_skipped else clamp(float(target_value) / 100, 0.5, 4.0)
+	var last_displayed_int: int = -1
+	
+	current_tween = create_tween()
+	current_tween.tween_method(
+		func(val: float):
+			var current_int = int(val)
+			pointsCountText.text = str(int(val))
+			
+			if current_int != last_displayed_int:
+				last_displayed_int = current_int
+				print(current_int)
+				_play_buffered_tick(),
+				
+		0.0,
+		float(target_value),
+		duration
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	
+	await current_tween.finished
 
-func counterSfxCheck():
-	if firstSound == 2:
-		counterSfx()
-		firstSound = 0
-	else:
-		firstSound += 1
+func animate_kills():
+	
+	if Globals.kills == 0:
+		killsCountText.text = "0"
+		return
+	
+	var target_value = Globals.kills
+	var duration = 0.05 if is_skipped else clamp(float(target_value) / 20, 0.5, 4.0)
+	var last_displayed_int: int = -1
+	
+	current_tween = create_tween()
+	current_tween.tween_method(
+		func(val: float):
+			var current_int = int(val)
+			killsCountText.text = str(int(val))
+			if current_int != last_displayed_int:
+				last_displayed_int = current_int
+				_play_buffered_tick(),
+				
+		0.0,
+		float(target_value),
+		duration
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	
+	await current_tween.finished
 
-func counterSfxCheck2():
-	if firstSound2 == 2:
-		counterSfx()
-		firstSound2 = 0
-	else:
-		firstSound2 += 1
+func animate_time():
+	
+	var target_value = Globals.timeSeconds
+	var duration = 0.05 if is_skipped else clamp((float(target_value) / 60) * 0.5, 0.5, 4.0)
+	
+	var last_displayed_int: String = Functions.time_to(-1)
+	
+	current_tween = create_tween()
+	current_tween.tween_method(
+		func(val: float):
+			var current_int = Functions.time_to(val)
+			var total_secs = int(val)
+			timeCountText.text = Functions.time_to(total_secs)
+			
+			if current_int != last_displayed_int:
+				last_displayed_int = current_int
+				_play_buffered_tick(),
+			
+		0.0,
+		float(target_value),
+		duration
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	
+	await current_tween.finished
 
+func animate_bar(bar: ProgressBar, label: Label, target_val: float, min_val: float, max_val: float):
+	var val_range = max_val - min_val
+	var progress_needed = target_val - min_val
+	var duration = 0.05 if is_skipped else clampf((progress_needed / val_range) * 2.0, 0.1, 2.5)
+	
+	current_tween = create_tween()
+	current_tween.tween_method(
+		func(val: float):
+			
+			bar.value = val
+			var ratio = bar.get_as_ratio()
+			
+			label.text = str(Functions.floor_to(val)) + "x"
+			
+			var filled_width = bar.size.x * ratio
+			label.position.x = filled_width + 2
+			
+			var dynamic_pitch = remap(ratio, 0.0, 1.0, 0.7, 1.6),
+		min_val,
+		target_val,
+		duration
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	
+	await current_tween.finished
+
+func animate_delay(duration: float = between):
+	
+	if is_skipped:
+		return
+	
+	current_tween = create_tween()
+	current_tween.tween_interval(duration)
+	
+	await current_tween.finished
+
+func show_and_flash(node: Object, duration: float = 0.5, brightness: float = 5):
+	node.modulate.a = 1.0
+	var flashTween = create_tween()
+	flashTween.tween_property(node, "modulate", node.modulate, duration).from(Color(brightness, brightness, brightness))
+
+
+
+func _ready() -> void:
+	
+	# HIDING EVERYTHING
+	pointsText.modulate.a = 0.0
+	pointsCountText.modulate.a = 0.0
+	pointsMax.modulate.a = 0.0
+	pointsNewBest.modulate.a = 0.0
+	bonusChances.modulate.a = 0.0
+	killsText.modulate.a = 0.0
+	killsCountText.modulate.a = 0.0
+	killsMax.modulate.a = 0.0
+	killsNewBest.modulate.a = 0.0
+	damage.modulate.a = 0.0
+	timeText.modulate.a = 0.0
+	timeCountText.modulate.a = 0.0
+	timeMax.modulate.a = 0.0
+	timeNewBest.modulate.a = 0.0
+	cooldownsSpeed.modulate.a = 0.0
+	bottom.modulate.a = 0.0
+	
+	# TEXT SETUP
+	bonusChancesMax.text = str(Globals.maxBonusModifier) + "x"
+	damageMax.text = str(Globals.maxDamageModifier) + "x"
+	cooldownsSpeedMax.text = str(Globals.maxSpeedModifier) + "x"
+	bonusChancesBar.max_value = Globals.maxBonusModifier
+	damageBar.max_value = Globals.maxDamageModifier
+	cooldownsSpeedBar.max_value = Globals.maxSpeedModifier
+	pointsMax.text = "/ " + str(Globals.oldMaxPoints)
+	killsMax.text = "/ " + str(Globals.oldMaxKills)
+	timeMax.text = "/ " + "%02d:%02d" % [int(Globals.oldMaxTime) / 60, int(Globals.oldMaxTime) % 60]
+	
+	start_animation()
+
+
+
+func start_animation():
+	
+	a6tween = create_tween()
+	a6tween.tween_property(a6, "modulate:a", 1.0, 3.0)
+	
+	shimmer()
+	await animate_delay(between * 1.5)
+	
+	show_and_flash(pointsText)
+	await animate_delay()
+	
+	pointsCountText.modulate.a = 1.0
+	pointsMax.modulate.a = 1.0
+	await animate_points()
+	await animate_delay()
+	
+	show_and_flash(bonusChances)
+	if Globals.points > Globals.oldMaxPoints:
+		show_and_flash(pointsNewBest)
+		await animate_delay()
+		await animate_bar(bonusChancesBar, bonusChancesCurrent, Saves.data["bonus_modifier"], 1.0, Globals.maxBonusModifier)
+	await animate_delay()
+	
+	show_and_flash(killsText)
+	await animate_delay()
+	
+	killsCountText.modulate.a = 1.0
+	killsMax.modulate.a = 1.0
+	await animate_kills()
+	await animate_delay()
+	
+	show_and_flash(damage)
+	if Globals.kills > Globals.oldMaxKills:
+		show_and_flash(killsNewBest)
+		await animate_delay()
+		await animate_bar(damageBar, damageCurrent, Saves.data["damage_modifier"], 1.0, Globals.maxDamageModifier)
+	await animate_delay()
+	
+	show_and_flash(timeText)
+	await animate_delay()
+	
+	timeCountText.modulate.a = 1.0
+	timeMax.modulate.a = 1.0
+	await animate_time()
+	await animate_delay()
+	
+	show_and_flash(cooldownsSpeed)
+	if Globals.timeSeconds > Globals.oldMaxTime:
+		show_and_flash(timeNewBest)
+		await animate_delay()
+		await animate_bar(cooldownsSpeedBar, cooldownsSpeedCurrent, Saves.data["speed_modifier"], 1.0, Globals.maxSpeedModifier)
+	await animate_delay()
+	
+	show_and_flash(bottom)
+	
+	current_tween = null
+
+
+var GOt: Tween
 func shimmer():
 	while 1>0:
-		BTween = create_tween()
-		BTween.tween_property(gameover, "modulate:a", 0.7, 0.8)
-		await BTween.finished
-		BTween = create_tween()
-		BTween.tween_property(gameover, "modulate:a", 1.0, 0.8)
-		await BTween.finished
-
-func Skip():
-	between = 0.0
-	skipping = true
-	ptst.text = str(pts)
-	time.text = Globals.time
-	ptst.visible = true
-	$VBOX/Tim/TimeL.visible = true
-	$VBOX/Tim/Time.visible = true
-	$VBOX/Text/Press.visible = true
-	$"VBOX/Text/esc to exit".visible = true
-
-func nb_flash():
-	while 1>0:
-		nb.modulate = Color.SPRING_GREEN
-		await get_tree().create_timer(0.1).timeout
-		nb.modulate = Color.SKY_BLUE
-		await get_tree().create_timer(0.1).timeout
+		GOt = create_tween()
+		GOt.tween_property(gameover, "modulate:a", 0.7, 0.8)
+		GOt.chain().tween_property(gameover, "modulate:a", 1.0, 0.8)
+		await GOt.finished
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -164,5 +311,5 @@ func _input(event):
 			Globals.instart = true
 			get_tree().reload_current_scene()
 		if event.keycode == KEY_SPACE:
-			if counting == true:
-				Skip()
+			if not is_skipped:
+				skip_sequence()

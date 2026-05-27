@@ -92,8 +92,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 10
 
 [node name="VBOX" type="VBoxContainer" parent="MarginContainer" unique_id=340293695]
 layout_mode = 2
@@ -151,7 +151,15 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 20
-text = "242"
+text = "0"
+
+[node name="maxPts" type="Label" parent="MarginContainer/VBOX/POINTS" unique_id=765099756]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5)
+theme_override_fonts/font = ExtResource("5_idpvd")
+theme_override_font_sizes/font_size = 7
+text = "/ maxPts"
+vertical_alignment = 1
 
 [node name="spacer" type="Control" parent="MarginContainer/VBOX/POINTS" unique_id=1345116808]
 layout_mode = 2
@@ -168,7 +176,9 @@ offset_right = 150.0
 offset_bottom = 20.0
 theme_override_styles/background = SubResource("StyleBoxTexture_0b4p0")
 theme_override_styles/fill = SubResource("StyleBoxTexture_idpvd")
+min_value = 1.0
 max_value = 2.5
+value = 1.0
 show_percentage = false
 
 [node name="BONUS CHANCES" type="Label" parent="MarginContainer/VBOX/POINTS/bar" unique_id=313232725]
@@ -190,7 +200,7 @@ offset_bottom = 26.0
 theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "1.0x"
+text = "1.00x"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -203,7 +213,7 @@ offset_bottom = 26.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "2.5x"
+text = "?.??x"
 vertical_alignment = 1
 
 [node name="current" type="Label" parent="MarginContainer/VBOX/POINTS/bar" unique_id=718869697]
@@ -215,7 +225,7 @@ offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "1.0x"
+text = "1.00x"
 vertical_alignment = 1
 
 [node name="KILLS" type="HBoxContainer" parent="MarginContainer/VBOX" unique_id=493906475]
@@ -252,7 +262,15 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 20
-text = "94"
+text = "0"
+
+[node name="maxKills" type="Label" parent="MarginContainer/VBOX/KILLS" unique_id=1125075749]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5)
+theme_override_fonts/font = ExtResource("5_idpvd")
+theme_override_font_sizes/font_size = 7
+text = "/ maxKills"
+vertical_alignment = 1
 
 [node name="spacer" type="Control" parent="MarginContainer/VBOX/KILLS" unique_id=1804819588]
 layout_mode = 2
@@ -269,7 +287,9 @@ offset_right = 150.0
 offset_bottom = 20.0
 theme_override_styles/background = SubResource("StyleBoxTexture_1mqre")
 theme_override_styles/fill = SubResource("StyleBoxTexture_bokkp")
+min_value = 1.0
 max_value = 2.5
+value = 1.0
 show_percentage = false
 
 [node name="DAMAGE" type="Label" parent="MarginContainer/VBOX/KILLS/bar" unique_id=1670201571]
@@ -291,7 +311,7 @@ offset_bottom = 26.0
 theme_override_colors/font_color = Color(0.9647059, 0.09803922, 0, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "1.0x"
+text = "1.00x"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -304,7 +324,7 @@ offset_bottom = 26.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "2.5x"
+text = "?.??x"
 vertical_alignment = 1
 
 [node name="current" type="Label" parent="MarginContainer/VBOX/KILLS/bar" unique_id=2079773233]
@@ -316,7 +336,7 @@ offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.9647059, 0.09803922, 0, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "1.0x"
+text = "1.00x"
 vertical_alignment = 1
 
 [node name="TIME" type="HBoxContainer" parent="MarginContainer/VBOX" unique_id=1609807925]
@@ -353,7 +373,15 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 20
-text = "02:43"
+text = "0"
+
+[node name="maxTime" type="Label" parent="MarginContainer/VBOX/TIME" unique_id=421864237]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5)
+theme_override_fonts/font = ExtResource("5_idpvd")
+theme_override_font_sizes/font_size = 7
+text = "/ maxTime"
+vertical_alignment = 1
 
 [node name="spacer" type="Control" parent="MarginContainer/VBOX/TIME" unique_id=56815430]
 layout_mode = 2
@@ -370,7 +398,9 @@ offset_right = 150.0
 offset_bottom = 20.0
 theme_override_styles/background = SubResource("StyleBoxTexture_sd7yn")
 theme_override_styles/fill = SubResource("StyleBoxTexture_4ylwc")
+min_value = 1.0
 max_value = 2.5
+value = 1.0
 show_percentage = false
 
 [node name="COOLDOWNS SPEED" type="Label" parent="MarginContainer/VBOX/TIME/bar" unique_id=1147698030]
@@ -392,7 +422,7 @@ offset_bottom = 26.0
 theme_override_colors/font_color = Color(0, 0.8235294, 0.85882354, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "1.0x"
+text = "1.00x"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -405,7 +435,7 @@ offset_bottom = 26.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "2.5x"
+text = "?.??x"
 vertical_alignment = 1
 
 [node name="current" type="Label" parent="MarginContainer/VBOX/TIME/bar" unique_id=620801231]
@@ -417,7 +447,7 @@ offset_bottom = 20.0
 theme_override_colors/font_color = Color(0, 0.8235294, 0.85882354, 1)
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 12
-text = "1.0x"
+text = "1.00x"
 vertical_alignment = 1
 
 [node name="Spacer3" type="Control" parent="MarginContainer/VBOX" unique_id=658749227]
