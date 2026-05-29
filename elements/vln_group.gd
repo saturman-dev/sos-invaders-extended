@@ -1,5 +1,8 @@
 extends Node2D
 
+var SPEEDMOD := 1.0
+var NEO := 0
+
 @onready var cldown := $cldown
 @onready var shotTimer := $shotTimer
 
@@ -18,9 +21,17 @@ func _ready() -> void:
 		$villain4.queue_free()
 
 func _process(delta: float) -> void:
-	global_position.x += direction * speed * delta
-	global_position.y += yspeed * delta
+	var ySPEEDMOD = 1 + ((SPEEDMOD - 1) / 2)
+	global_position.x += direction * speed * delta * SPEEDMOD
+	global_position.y += yspeed * delta * ySPEEDMOD
 	yspeed -= delta * 1.0 if yspeed > 0.1 else 0.0
+
+func set_neo(NEO2: int):
+	shotTimer.wait_time /= SPEEDMOD
+	shotTimer.start()
+	for child in get_children():
+		if "NEO" in child:
+			Functions.set_neo(child, NEO2)
 
 func change_direction():
 	if cldown.time_left > 0:
@@ -30,6 +41,9 @@ func change_direction():
 	cldown.start()
 
 func _on_shot_timer_timeout() -> void:
+	shot()
+
+func shot():
 	var avln = get_children()
 	var tvln = []
 	for child in avln:

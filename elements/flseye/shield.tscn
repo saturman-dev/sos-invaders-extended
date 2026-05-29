@@ -91,10 +91,6 @@ rotation = 1.5707964
 shape = SubResource("CircleShape2D_h36qe")
 debug_color = Color(0.80784315, 0.3372549, 0.6313726, 0.39215687)
 
-[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("4_jrls3")]
-offset_top = 103.00005
-offset_bottom = 121.00005
-
 [node name="dmgstop" type="Timer" parent="." unique_id=810226505]
 one_shot = true
 
@@ -111,5 +107,8 @@ autostart = true
 [node name="cldown" type="Timer" parent="." unique_id=1540107542]
 wait_time = 3.0
 one_shot = true
+
+[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("4_jrls3")]
+y_offset = -45
 
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]

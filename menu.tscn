@@ -582,26 +582,26 @@ text = "TIME  "
 speed = 20.0
 metadata/_edit_use_anchors_ = true
 
-[node name="scrollBonus" parent="CanvasLayer" unique_id=1317362608 instance=ExtResource("7_ecwwl")]
+[node name="scrollDamage" parent="CanvasLayer" unique_id=347144738 instance=ExtResource("7_ecwwl")]
 offset_left = 19.0
 offset_top = 240.0
 offset_right = 108.0
 offset_bottom = 251.0
 rotation = -0.7853982
 scale = Vector2(2, 2)
-text = "POINTS  "
-speed = 20.0
+text = "KILLS  "
+speed = -20.0
+metadata/_edit_use_anchors_ = true
 
-[node name="scrollDamage" parent="CanvasLayer" unique_id=347144738 instance=ExtResource("7_ecwwl")]
+[node name="scrollBonus" parent="CanvasLayer" unique_id=1317362608 instance=ExtResource("7_ecwwl")]
 offset_left = 59.0
 offset_top = 240.0
 offset_right = 148.0
 offset_bottom = 251.0
 rotation = -0.7853982
 scale = Vector2(2, 2)
-text = "KILLS  "
-speed = -20.0
-metadata/_edit_use_anchors_ = true
+text = "POINTS  "
+speed = 20.0
 
 [node name="scrollSpeed" parent="CanvasLayer" unique_id=1975648564 instance=ExtResource("7_ecwwl")]
 offset_left = 99.0

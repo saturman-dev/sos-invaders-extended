@@ -33,11 +33,11 @@ func _ready() -> void:
 	scrollPoints.modulate.a = 0.0
 	scrollKills.modulate.a = 0.0
 	scrollTime.modulate.a = 0.0
-	scrollBonus.text = "[color=#181d7ab3]   BONUS MOD: [/color][color=#f7f700]%s[/color]" % (Functions.floor_to(Saves.data["bonus_modifier"]) + "x")
 	scrollDamage.text = "[color=#181d7ab3]   DAMAGE MOD: [/color][color=#f61900]%s[/color]" % (Functions.floor_to(Saves.data["damage_modifier"]) + "x")
+	scrollBonus.text = "[color=#181d7ab3]   BONUS MOD: [/color][color=#f7f700]%s[/color]" % (Functions.floor_to(Saves.data["bonus_modifier"]) + "x")
 	scrollSpeed.text = "[color=#181d7ab3]   SPEED MOD: [/color][color=#00d2db]%s[/color]" % (Functions.floor_to(Saves.data["speed_modifier"]) + "x")
-	scrollPoints.text = "[color=#181d7ab3]   MAX POINTS: [/color][color=#f7f700]%s[/color]" % str(int(Saves.data["score"]))
-	scrollKills.text = "[color=#181d7ab3]   MAX KILLS: [/color][color=#f61900]%s[/color]" % str(int(Saves.data["max_kills"]))
+	scrollPoints.text = "[color=#181d7ab3]   MAX POINTS: [/color][color=#f61900]%s[/color]" % str(int(Saves.data["score"]))
+	scrollKills.text = "[color=#181d7ab3]   MAX KILLS: [/color][color=#f7f700]%s[/color]" % str(int(Saves.data["max_kills"]))
 	scrollTime.text = "[color=#181d7ab3]   MAX TIME: [/color][color=#00d2db]%s[/color]" % Functions.time_to(Saves.data["max_time"])
 	shimmer()
 
@@ -59,11 +59,11 @@ func shimmer():
 		st = create_tween()
 		st.tween_interval(shimmer_time)
 		
-		st.chain().tween_property(scrollBonus, "modulate:a", 1.0, shimmer_speed)
+		st.chain().tween_property(scrollDamage, "modulate:a", 1.0, shimmer_speed)
 		st.parallel().tween_property(scrollPoints, "modulate:a", 0.0, shimmer_speed)
 		st.tween_interval(shimmer_between)
 		
-		st.parallel().tween_property(scrollDamage, "modulate:a", 1.0, shimmer_speed)
+		st.parallel().tween_property(scrollBonus, "modulate:a", 1.0, shimmer_speed)
 		st.parallel().tween_property(scrollKills, "modulate:a", 0.0, shimmer_speed)
 		st.tween_interval(shimmer_between)
 		
@@ -72,11 +72,11 @@ func shimmer():
 		
 		st.tween_interval(shimmer_time)
 		
-		st.chain().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed)
+		st.chain().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed)
 		st.parallel().tween_property(scrollPoints, "modulate:a", 1.0, shimmer_speed)
 		st.tween_interval(shimmer_between)
 		
-		st.parallel().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed)
+		st.parallel().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed)
 		st.parallel().tween_property(scrollKills, "modulate:a", 1.0, shimmer_speed)
 		st.tween_interval(shimmer_between)
 		
@@ -92,10 +92,10 @@ func unshimmer():
 		stt.kill()
 	st = create_tween()
 	st.tween_property(scrollPoints, "modulate:a", 0.0, shimmer_speed / 2)
-	st.parallel().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed / 2)
 	st.tween_interval(shimmer_between)
 	st.tween_property(scrollKills, "modulate:a", 0.0, shimmer_speed / 2)
-	st.parallel().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed / 2)
 	st.tween_interval(shimmer_between)
 	st.tween_property(scrollTime, "modulate:a", 0.0, shimmer_speed / 2)
 	st.parallel().tween_property(scrollSpeed, "modulate:a", 0.0, shimmer_speed / 2)

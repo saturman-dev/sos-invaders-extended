@@ -52,7 +52,7 @@ func _ready() -> void:
 	
 	print("Game started!")
 	Events.lives_changed.connect(func(lives): check_game_over())
-	Events.points_changed.connect(func(points): check_bossfighting())
+	Events.enemy_killed.connect(func(): check_bossfighting())
 	Events.enemy_killed.connect(func(): Globals.kills += 1)
 	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	Events.bossfight_end.connect(func(): end_bossfight())
@@ -84,9 +84,7 @@ func check_bossfighting():
 		return
 	await get_tree().process_frame
 	if bossfighting == true and get_tree().get_nodes_in_group("enemies").size() <= 0:
-		print("stage 1")
 		if diffi < flseye_diffi + 50 and bossfight_checked == false:
-			print("stage 2")
 			bossfight_checked = true
 			Events.bossfight_start.emit("flseye")
 
@@ -270,6 +268,7 @@ func spawn_darsinGroup():
 	var Darsin = darsin.instantiate()
 	Darsin.position = Vector2(randf_range(62, 328), -20)
 	add_child(Darsin)
+	Functions.set_neo(Darsin, 10)
 
 func spawn_bigDar():
 	var BigDar = bigDar.instantiate()
@@ -287,9 +286,8 @@ func spawn_wertue():
 	add_child(Wertue)
 
 func spawn_boss_flseye():
-	print("stage 3")
 	await get_tree().create_timer(3.0, false).timeout
 	print("BOSSFIGHT FLSEYE")
 	var Flseye = flseye.instantiate()
-	Flseye.position = Vector2(390.0/2, 50.0)
+	Flseye.position = Vector2(390.0/2, 70.0)
 	add_child(Flseye)

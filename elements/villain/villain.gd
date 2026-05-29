@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 const color = Color("ffc472")
 
+var SPEEDMOD := 1.0
+var NEO := 0
+
 # FOR DAMAGE
 var fullhp = 2.5
 var hp = fullhp
@@ -38,7 +41,11 @@ var enabled = true
 func _ready() -> void:
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Saves.data["ever_met_darsin"] = true
-	fullsize = hpbar.size.x
+	sethp()
+
+func sethp():
+	hp = fullhp
+	hpbar1.set_hp(fullhp)
 
 func _physics_process(_delta: float) -> void:
 	if not raycast_left == null:
@@ -84,7 +91,7 @@ func die():
 	Functions.addRandomBonus(self, 0.33)
 	Functions.sfx_play("res://sounds/darsinDead.mp3", 0.0, randf_range(0.9, 1.1))
 	died = true
-	Globals.change_points(givepts)
+	Globals.change_points(givepts * NEO)
 	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()
@@ -123,10 +130,10 @@ func shot():
 	if stw and stw.is_running():
 		stw.kill()
 	stw = create_tween()
-	stw.tween_property(sprite, "scale", Vector2(defscale.x * 1.5, defscale.y * 0.75), 1.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	stw.tween_property(sprite, "scale", Vector2(defscale.x * 1.5, defscale.y * 0.75), 1.0 / SPEEDMOD).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	stw.tween_callback(spawn_bullet)
-	stw.tween_property(sprite, "scale", Vector2(defscale.x * 0.75, defscale.y * 1.5), 0.1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	stw.chain().tween_property(sprite, "scale", defscale, 1.0).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	stw.tween_property(sprite, "scale", Vector2(defscale.x * 0.75, defscale.y * 1.5), 0.1 / SPEEDMOD).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	stw.chain().tween_property(sprite, "scale", defscale, 1.0 / SPEEDMOD).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func spawn_bullet():
 	if died == false:
@@ -134,6 +141,8 @@ func spawn_bullet():
 		var bullet = bulletScene.instantiate()
 		bullet.global_position += global_position + Vector2(0, 5.0)
 		get_parent().add_child(bullet)
+		bullet.SPEEDMOD = SPEEDMOD
+		bullet.scale *= SPEEDMOD
 
 func _on_dmgstop_timeout() -> void:
 	ETween = create_tween()

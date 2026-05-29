@@ -69,7 +69,6 @@ func die():
 		return
 	Events.flseye_shield_broken.emit()
 	Functions.addRandomBonus(self, 3.0)
-	#Functions.sfx_play("res://sounds/wertueDead.mp3")
 	died = true
 	hitbox.queue_free()
 	ATween = create_tween()
@@ -81,6 +80,7 @@ func die():
 	ETween = create_tween()
 	ETween.tween_property(hpbar2, "size:x", (fullsize / fullhp) * hp, bar2 * 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await ATween.finished
+	await get_tree().create_timer(afterdead).timeout
 	queue_free()
 
 

@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 const color = Color("18ff3b")
 
+var SPEEDMOD := 1.0
+var NEO := false
+
 # FOR DAMAGE
 var fullhp = 10.0
 var hp = fullhp
@@ -56,7 +59,13 @@ var enabled = true
 
 func _ready() -> void:
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
+	
 	Saves.data["ever_met_bigdar"] = true
+	
+	sethp()
+
+func sethp():
+	hp = fullhp
 	var bar1PreSize = hpbar1.size.x
 	hpbar.size.x *= fullhp / 3.5
 	hpbar1.size.x = hpbar.size.x + 8.0

@@ -10,6 +10,36 @@
 [ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_7rjny"]
 [ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="8_h36qe"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4ll1"]
+resource_local_to_scene = true
+shader = ExtResource("3_p4ll1")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 7.0000003325
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jw2qr"]
+resource_local_to_scene = true
+shader = ExtResource("3_p4ll1")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 7.0000003325
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2pupj"]
 resource_local_to_scene = true
 shader = ExtResource("3_p4ll1")
@@ -57,10 +87,12 @@ collision_mask = 3
 script = ExtResource("1_3hj3l")
 
 [node name="wingRight" parent="." unique_id=1902289196 instance=ExtResource("2_3hj3l")]
+material = SubResource("ShaderMaterial_p4ll1")
 position = Vector2(0, 3.8146973e-06)
 scale = Vector2(1.25, 1.25)
 
 [node name="wingLeft" parent="." unique_id=1355497482 instance=ExtResource("2_3hj3l")]
+material = SubResource("ShaderMaterial_jw2qr")
 position = Vector2(0, 3.8146973e-06)
 scale = Vector2(-1.25, 1.25)
 
@@ -83,6 +115,7 @@ target_position = Vector2(250, 0)
 [node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("3_f7mvn")]
 offset_top = -103.99997
 offset_bottom = -85.99997
+y_offset = 20
 
 [node name="dmgstop" type="Timer" parent="." unique_id=810226505]
 one_shot = true

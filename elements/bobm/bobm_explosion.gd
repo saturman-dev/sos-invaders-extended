@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		if body.has_method("periodic_dmg"):
 			body.periodic_dmg(5.0)
 		if body.has_method("explode"):
-			Globals.shake_str += 5.0
+			Globals.apply_shake(8.0)
 			body.get_hit()
 
 func _ready() -> void: #fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff

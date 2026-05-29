@@ -128,7 +128,7 @@ func takeDmg():
 	Functions.flash(0.0, 1.0, 0.05, 0.7, Color("a60000"))
 	is_invincible = true
 	set_collision_layer_value(2, false)
-	Globals.apply_shake(5.0)
+	Globals.apply_shake(7.0)
 	if Globals.overlives == 0:
 		Globals.change_lives(-1)
 	else:

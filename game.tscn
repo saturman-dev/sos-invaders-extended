@@ -23,6 +23,7 @@ position = Vector2(195, 120)
 
 [node name="Title" type="AudioStreamPlayer" parent="." unique_id=1916955955]
 stream = ExtResource("4_fc0e3")
+volume_db = -80.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true

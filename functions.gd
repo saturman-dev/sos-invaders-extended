@@ -321,3 +321,48 @@ func time_to(value: int) -> String:
 	var minutes := int(value) / 60
 	var seconds := int(value) % 60
 	return "%02d:%02d" % [minutes, seconds]
+
+
+
+func set_neo(object: Object, NEO: int):
+	
+	if NEO < 1:
+		print("NEO WAS BELOW 1 WHEN SETTING NEO. IM NOT DOING THIS SHI")
+		return
+	
+	if not "NEO" in object:
+		print("ERROR: VARIABLE 'NEO' NOT FOUND WHEN SETTING NEO")
+		return
+	
+	NEO = clamp(NEO, 1, 10)
+	object.NEO = NEO
+	
+	if not "SPEEDMOD" in object:
+		print("ERROR: VARIABLE 'SPEEDMOD' NOT FOUND WHEN SETTING NEO")
+	else:
+		object.SPEEDMOD = 1 + float(NEO) / 4
+	
+	if not "sprite" in object:
+		if object.NEO is int:
+			object.set_neo(NEO)
+			return
+		else:
+			print("ERROR: VARIABLE 'SPRITE' NOT FOUND WHEN SETTING NEO")
+	else:
+		var sprite = object.sprite
+		if is_instance_valid(sprite) and sprite is CanvasItem:
+			if sprite.material == null:
+				print("ERROR: MATERIAL NOT FOUND WHEN SETTING NEO")
+			else:
+				object.sprite.material.set_shader_parameter("enable_outline", true)
+				object.sprite.material.set_shader_parameter("outline_thickness", NEO)
+				object.sprite.material.set_shader_parameter("gradient_speed", 5 + float(NEO) / 2)
+				if NEO > 5:
+					object.sprite.material.set_shader_parameter("blend_strength", float(NEO) / 10)
+	
+	if not "fullhp" in object:
+		print("ERROR: VARIABLE 'fullhp' NOT FOUND WHEN SETTING NEO")
+	else:
+		object.fullhp *= NEO
+		object.sethp()
+		print(object.fullhp)

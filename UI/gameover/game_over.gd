@@ -7,23 +7,24 @@ extends CanvasLayer
 @onready var pointsCountText := $MarginContainer/VBOX/POINTS/Pt/Pts
 @onready var pointsMax := $MarginContainer/VBOX/POINTS/maxPts
 @onready var pointsNewBest := $MarginContainer/VBOX/POINTS/Pt/PtsL/Pts2
-@onready var bonusChances := $MarginContainer/VBOX/POINTS/bar
-@onready var bonusChancesBar := $MarginContainer/VBOX/POINTS/bar/bar
-@onready var bonusChancesText := $"MarginContainer/VBOX/POINTS/bar/BONUS CHANCES"
-@onready var bonusChancesMin := $MarginContainer/VBOX/POINTS/bar/min
-@onready var bonusChancesMax := $MarginContainer/VBOX/POINTS/bar/max
-@onready var bonusChancesCurrent := $MarginContainer/VBOX/POINTS/bar/current
+@onready var damage := $MarginContainer/VBOX/POINTS/bar
+@onready var damageBar := $MarginContainer/VBOX/POINTS/bar/bar
+@onready var damageText := $MarginContainer/VBOX/POINTS/bar/DAMAGE
+@onready var damageMin := $MarginContainer/VBOX/POINTS/bar/min
+@onready var damageMax := $MarginContainer/VBOX/POINTS/bar/max
+@onready var damageCurrent := $MarginContainer/VBOX/POINTS/bar/current
+@onready var unlimited := $MarginContainer/VBOX/POINTS/bar/unlimited
 
 @onready var killsText := $MarginContainer/VBOX/KILLS/Kil/KilL
 @onready var killsCountText := $MarginContainer/VBOX/KILLS/Kil/Kills
 @onready var killsMax := $MarginContainer/VBOX/KILLS/maxKills
 @onready var killsNewBest := $MarginContainer/VBOX/KILLS/Kil/KilL/Kil2
-@onready var damage := $MarginContainer/VBOX/KILLS/bar
-@onready var damageBar := $MarginContainer/VBOX/KILLS/bar/bar
-@onready var damageText := $MarginContainer/VBOX/KILLS/bar/DAMAGE
-@onready var damageMin := $MarginContainer/VBOX/KILLS/bar/min
-@onready var damageMax := $MarginContainer/VBOX/KILLS/bar/max
-@onready var damageCurrent := $MarginContainer/VBOX/KILLS/bar/current
+@onready var bonusChances := $MarginContainer/VBOX/KILLS/bar
+@onready var bonusChancesBar := $MarginContainer/VBOX/KILLS/bar/bar
+@onready var bonusChancesText := $"MarginContainer/VBOX/KILLS/bar/BONUS CHANCES"
+@onready var bonusChancesMin := $MarginContainer/VBOX/KILLS/bar/min
+@onready var bonusChancesMax := $MarginContainer/VBOX/KILLS/bar/max
+@onready var bonusChancesCurrent := $MarginContainer/VBOX/KILLS/bar/current
 
 @onready var timeText := $MarginContainer/VBOX/TIME/Tim/TimeL
 @onready var timeCountText := $MarginContainer/VBOX/TIME/Tim/Time
@@ -39,7 +40,7 @@ extends CanvasLayer
 @onready var bottom := $MarginContainer/VBOX/BOTTOM
 
 var a6tween: Tween
-var between = 0.75
+var between = 0.5
 var is_skipped = false
 var current_tween: Tween = null
 
@@ -93,7 +94,6 @@ func animate_points():
 			
 			if current_int != closure_state["last_int"]:
 				closure_state["last_int"] = current_int
-				print(current_int)
 				_play_buffered_tick()
 			,
 		0.0,
@@ -121,7 +121,6 @@ func animate_kills():
 			
 			if current_int != closure_state["last_int"]:
 				closure_state["last_int"] = current_int
-				print(current_int)
 				_play_buffered_tick()
 			,
 		0.0,
@@ -167,6 +166,31 @@ func set_bar(bar: ProgressBar, label: Label, target_val: float, min_val: float, 
 	var ratio = bar.get_as_ratio()
 	var filled_width = bar.size.x * ratio
 	label.position.x = filled_width + 2
+
+func set_damage_bar():
+	var min_val = 1.0
+	var max_val = Globals.maxDamageModifier
+	
+	damageBar.min_value = min_val
+	damageBar.max_value = min_val + (max_val - min_val) * 2.0
+	damageBar.value = Globals.oldDamageMod
+	
+	var displayed_val = Functions.floor_to(damageBar.value)
+	damageCurrent.text = displayed_val + "x"
+	
+	var ratio = damageBar.get_as_ratio()
+	
+	var target_x = (damageBar.size.x * ratio) + 2
+	var max_width = (damageBar.size.x / 2) + 2
+	
+	if target_x > max_width:
+		damageCurrent.force_update_transform()
+		damageCurrent.position.x = 179 - damageCurrent.size.x
+		damageCurrent.position.y = 2
+		unlimited.modulate.a = 1.0
+		already_unlimited = true
+	else:
+		damageCurrent.position.x = target_x
 
 func animate_bar(bar: ProgressBar, label: Label, target_val: float, min_val: float, max_val: float):
 	
@@ -219,6 +243,71 @@ func animate_bar(bar: ProgressBar, label: Label, target_val: float, min_val: flo
 		Functions.sfx_play("res://sounds/newBest.mp3", 5.0, 0.7)
 		await flashTween.finished
 
+
+var already_unlimited = false
+
+func unlimit():
+	if already_unlimited: return
+	
+	already_unlimited = true
+	show_and_flash(unlimited)
+	show_and_flash(damageCurrent)
+
+func animate_damage_bar():
+	var target_val = Saves.data["damage_modifier"]
+	var min_val = 1.0
+	var max_val = Globals.maxDamageModifier
+	var bar = damageBar
+	var label = damageCurrent
+	
+	bar.min_value = min_val
+	bar.max_value = min_val + (max_val - min_val) * 2.0
+	
+	if abs(bar.value - target_val) < 0.01:
+		return
+		
+	var val_range = max_val - min_val
+	var progress_needed = target_val - bar.value
+	var duration = 0.05 if is_skipped else clampf((progress_needed / val_range) * 7.0, 0.5, 2.5)
+	
+	var closure_state = {"last_text": ""}
+	
+	current_tween = create_tween()
+	current_tween.tween_method(
+		func(val: float):
+			bar.value = val
+			var ratio = bar.get_as_ratio()
+			
+			var current_text = Functions.floor_to(val) + "x"
+			label.text = current_text
+			
+			var filled_width = bar.size.x * ratio
+			var target_x = filled_width + 2
+			
+			var max_width = bar.size.x / 2 + 2
+			
+			if target_x > max_width:
+				label.position.x = 179 - label.size.x
+				label.position.y = 2
+				unlimit()
+			else:
+				label.position.x = target_x
+				label.position.y = 10
+			
+			var pitch_ratio = clampf(ratio, 0.0, 0.5)
+			var dynamic_pitch = remap(pitch_ratio, 0.0, 0.5, 0.7, 1.6)
+			
+			if current_text != closure_state["last_text"]:
+				closure_state["last_text"] = current_text
+				_play_buffered_tick_bar(dynamic_pitch)
+			,
+		bar.value,
+		target_val,
+		duration
+	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	
+	await current_tween.finished
+
 func animate_delay(duration: float = between):
 	
 	if is_skipped:
@@ -256,6 +345,7 @@ func _ready() -> void:
 	timeNewBest.modulate.a = 0.0
 	cooldownsSpeed.modulate.a = 0.0
 	bottom.modulate.a = 0.0
+	unlimited.modulate.a = 0.0
 	
 	# TEXT SETUP
 	bonusChancesMax.text = Functions.floor_to(Globals.maxBonusModifier) + "x"
@@ -270,7 +360,7 @@ func _ready() -> void:
 	
 	# BAR SETUP
 	set_bar(bonusChancesBar, bonusChancesCurrent, Globals.oldBonusMod, 1.0, Globals.maxBonusModifier)
-	set_bar(damageBar, damageCurrent, Globals.oldDamageMod, 1.0, Globals.maxDamageModifier)
+	set_damage_bar()
 	set_bar(cooldownsSpeedBar, cooldownsSpeedCurrent, Globals.oldSpeedMod, 1.0, Globals.maxSpeedModifier)
 	
 	start_animation()
@@ -294,14 +384,16 @@ func start_animation():
 	await animate_points()
 	await animate_delay()
 	
-	show_and_flash(bonusChances)
+	damage.modulate.a = 1.0
+	unlimited.show()
 	precounterSfx()
 	if Globals.points > Globals.oldMaxPoints:
+		show_and_flash(damage)
 		show_and_flash(pointsNewBest)
 		newbestSfx()
-		if Globals.oldBonusMod != Globals.maxBonusModifier: 
+		if Globals.oldDamageMod != Globals.maxDamageModifier: 
 			await animate_delay()
-			await animate_bar(bonusChancesBar, bonusChancesCurrent, Saves.data["bonus_modifier"], 1.0, Globals.maxBonusModifier)
+			await animate_damage_bar()
 	await animate_delay()
 	
 	show_and_flash(killsText)
@@ -313,14 +405,15 @@ func start_animation():
 	await animate_kills()
 	await animate_delay()
 	
-	show_and_flash(damage)
+	bonusChances.modulate.a = 1.0
 	precounterSfx()
 	if Globals.kills > Globals.oldMaxKills:
+		show_and_flash(bonusChances)
 		show_and_flash(killsNewBest)
 		newbestSfx()
-		if Globals.oldDamageMod != Globals.maxDamageModifier: 
+		if Globals.oldBonusMod != Globals.maxBonusModifier: 
 			await animate_delay()
-			await animate_bar(damageBar, damageCurrent, Saves.data["damage_modifier"], 1.0, Globals.maxDamageModifier)
+			await animate_bar(bonusChancesBar, bonusChancesCurrent, Saves.data["bonus_modifier"], 1.0, Globals.maxBonusModifier)
 	await animate_delay()
 	
 	show_and_flash(timeText)
@@ -332,9 +425,10 @@ func start_animation():
 	await animate_time()
 	await animate_delay()
 	
-	show_and_flash(cooldownsSpeed)
+	cooldownsSpeed.modulate.a = 1.0
 	precounterSfx()
 	if Globals.timeSeconds > Globals.oldMaxTime:
+		show_and_flash(cooldownsSpeed)
 		show_and_flash(timeNewBest)
 		newbestSfx()
 		if Globals.oldSpeedMod != Globals.maxSpeedModifier: 

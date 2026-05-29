@@ -55,7 +55,7 @@ func update_points(points: int):
 	
 	pts1.modulate.a = 0.0
 	Globals.pts = points
-	pts2.modulate = Color.YELLOW
+	pts2.modulate = Color("f61900")
 	
 	ATween = create_tween()
 	

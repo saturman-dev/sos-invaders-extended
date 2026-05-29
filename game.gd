@@ -22,6 +22,7 @@ const pause = preload ("res://menu/pause/pause.tscn")
 
 var strl: Tween
 func _ready() -> void:
+	music_fade_in()
 	menuu.able = true
 	menuu.loaded()
 	Functions.remove_flashes()
@@ -37,6 +38,10 @@ func _ready() -> void:
 	strlogo.global_position.y += 20
 	strl = create_tween()
 	strl.tween_property(strlogo, "global_position:y", -20.0, 2.0).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
+func music_fade_in():
+	var mt = create_tween()
+	mt.tween_property($Title, "volume_db", 0.0, 0.5)
 
 func staart():
 	var lv_1 = lv_1_scene.instantiate()

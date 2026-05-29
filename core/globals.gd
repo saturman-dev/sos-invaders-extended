@@ -3,6 +3,8 @@ extends Node
 var needForOverheal = 40
 var nodeath: bool = false
 
+var hpBarScreenTop := 5.0
+
 var def_hp: int = 3
 var staminas := 3.0
 var currentStaminas := 0.0
@@ -22,9 +24,9 @@ var diffi := 0.0
 var maxBonusModifier := 2.50
 var maxDamageModifier := 4.00
 var maxSpeedModifier := 3.50
-var maxBonusModifierNeedPoints := 1200
-var maxDamageModifierNeedKills := 300
-var maxSpeedModifierNeedSeconds := 540
+var maxBonusModifierNeedKills := 400
+var maxDamageModifierNeedPoints := 2000
+var maxSpeedModifierNeedSeconds := 720
 var oldMaxPoints := 0
 var oldMaxKills := 0
 var oldMaxTime := 0
@@ -102,7 +104,7 @@ func change_overlives(diff: int):
 	Events.overlives_changed.emit(overlives)
 
 func apply_shake(strength: float):
-	shake_str += strength
+	shake_str = strength
 
 func update_volume():
 	var master = AudioServer.get_bus_index("Master")
@@ -116,9 +118,9 @@ func update_volume():
 	AudioServer.set_bus_volume_db(sfx, linear_to_db(v_sfx))
 
 func update_stats():
-	var p_ratio = clampf(float(Saves.data["score"]) / maxBonusModifierNeedPoints, 0.0, 1.0)
-	Saves.data["bonus_modifier"] = remap(p_ratio, 0.0, 1.0, 1.0, maxBonusModifier)
-	var k_ratio = clampf(float(Saves.data["max_kills"]) / maxDamageModifierNeedKills, 0.0, 1.0)
-	Saves.data["damage_modifier"] = remap(k_ratio, 0.0, 1.0, 1.0, maxDamageModifier)
+	var p_ratio = float(Saves.data["score"]) / maxDamageModifierNeedPoints
+	Saves.data["damage_modifier"] = remap(p_ratio, 0.0, 1.0, 1.0, maxDamageModifier)
+	var k_ratio = clampf(float(Saves.data["max_kills"]) / maxBonusModifierNeedKills, 0.0, 1.0)
+	Saves.data["bonus_modifier"] = remap(k_ratio, 0.0, 1.0, 1.0, maxBonusModifier)
 	var t_ratio = clampf(float(Saves.data["max_time"]) / maxSpeedModifierNeedSeconds, 0.0, 1.0)
 	Saves.data["speed_modifier"] = remap(t_ratio, 0.0, 1.0, 1.0, maxSpeedModifier)
