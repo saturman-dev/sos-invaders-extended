@@ -64,27 +64,44 @@ func add_ghost(source: Object, visibility: float, duration: float):
 
 
 
-func dmg(source: Object, dam: float):
-	var ATween: Tween
-	var BTween: Tween
-	source.timer.start(source.yellwait)
-	source.hp -= dam
-	if source.hp <= 0:
-		source.hp = 0
-		if source.has_method("die"):
-			if source.has_method("damageAnimation"):
-				source.damageAnimation()
-			source.die()
-	else:
-		if source.has_method("damageAnimation"):
-			source.damageAnimation()
+func dmg(object: Object, dam: float):
+	
+	if "fullhp" in object:
+		
+		if "hp" in object:
+			object.hp -= dam
+			
+			if object.hp <= 0:
+				if object.has_method("die"):
+					object.die()
+				else:
+					print("Error: no method 'die' found when damaging.")
+				
 		else:
-			source.sprite.modulate = source.dmgColor
-			ATween = create_tween().set_parallel(true)
-			ATween.tween_property(source.sprite, "modulate", Color.WHITE, source.undam)
-		BTween = create_tween().set_parallel(true)
-		BTween.tween_property(source.hpbar, "size:x", (source.fullsize / source.fullhp) * source.hp, source.bar1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		Functions.sfx_play("res://sounds/enemyDamage.mp3", -5.0)
+			print("Error: no 'hp' found when damaging.")
+			return
+	else:
+		print("Error: no 'fullhp' found when damaging.")
+		return
+	
+	if "hpbar" in object:
+		
+		var hpbar = object.hpbar
+		
+		if hpbar.has_method("damage"):
+			object.hpbar.damage(object.hp / object.fullhp)
+		else:
+			print("Error: no method 'damage' found in 'hpbar' when damaging.")
+		
+	else:
+		print("Error: no 'hpbar' found when damaging.")
+	
+	if object.has_method("damageAnimation"):
+		object.damageAnimation()
+	else:
+		print("Error: no method 'damageAnimation' found when damaging.")
+	
+	Functions.sfx_play("res://sounds/enemyDamage.mp3", -4.0, randf_range(0.8, 1.2))
 
 
 
@@ -354,15 +371,21 @@ func set_neo(object: Object, NEO: int):
 			if sprite.material == null:
 				print("ERROR: MATERIAL NOT FOUND WHEN SETTING NEO")
 			else:
-				object.sprite.material.set_shader_parameter("enable_outline", true)
-				object.sprite.material.set_shader_parameter("outline_thickness", NEO)
-				object.sprite.material.set_shader_parameter("gradient_speed", 5 + float(NEO) / 2)
-				if NEO > 5:
-					object.sprite.material.set_shader_parameter("blend_strength", float(NEO) / 10)
+				var sprites := []
+				sprites.append(sprite)
+				if "wingLeft" in object:
+					sprites.append(object.wingLeft)
+					sprites.append(object.wingRight)
+				for s in sprites:
+					s.material.set_shader_parameter("enable_outline", true)
+					s.material.set_shader_parameter("outline_thickness", 1 + NEO)
+					s.material.set_shader_parameter("gradient_speed", 5 + float(NEO) / 2)
+					if NEO >= 5:
+						s.material.set_shader_parameter("blend_strength", float(NEO) / 10)
 	
 	if not "fullhp" in object:
 		print("ERROR: VARIABLE 'fullhp' NOT FOUND WHEN SETTING NEO")
 	else:
-		object.fullhp *= NEO
+		object.fullhp *=  (1 + NEO)
 		object.sethp()
-		print(object.fullhp)
+		#print(object.fullhp)

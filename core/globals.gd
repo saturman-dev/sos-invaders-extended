@@ -51,10 +51,10 @@ var hp_animation = false
 
 
 func _process(delta: float) -> void:
-	
 	# CAMERA SHAKE
 	if shake_str > 0:
 		shake_str = lerp(shake_str, 0.0, shake_fad * delta)
+		shake_str = clamp(shake_str, 0.0, 10.0)
 		var camera = get_viewport().get_camera_2d()
 		if camera:
 			camera.offset = Vector2(

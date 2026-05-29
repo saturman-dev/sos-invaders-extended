@@ -175,7 +175,7 @@ func spawn_enemy():
 	if bossfighting == true:
 		return
 	if diffi < diffi_range[0]:
-		spawn_darsinGroup()
+		spawn_bigDar()
 	elif diffi < diffi_range[1]:
 		if Saves.data["ever_met_bigdar"] == false:
 			spawn_bigDar()
@@ -268,22 +268,25 @@ func spawn_darsinGroup():
 	var Darsin = darsin.instantiate()
 	Darsin.position = Vector2(randf_range(62, 328), -20)
 	add_child(Darsin)
-	Functions.set_neo(Darsin, 10)
+	#Functions.set_neo(Darsin, 1)
 
 func spawn_bigDar():
 	var BigDar = bigDar.instantiate()
 	BigDar.position = Vector2(randf_range(20, 370), -20)
 	add_child(BigDar)
+	Functions.set_neo(BigDar, 1)
 
 func spawn_a3():
 	var A3 = a3.instantiate()
 	A3.position = Vector2(randf_range(60, 330), -20)
 	add_child(A3)
+	Functions.set_neo(A3, 1)
 
 func spawn_wertue():
 	var Wertue = wertue.instantiate()
 	Wertue.position = Vector2(randf_range(60, 330), -30)
 	add_child(Wertue)
+	#Functions.set_neo(Wertue, 1)
 
 func spawn_boss_flseye():
 	await get_tree().create_timer(3.0, false).timeout

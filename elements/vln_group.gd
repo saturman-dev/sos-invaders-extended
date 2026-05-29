@@ -21,13 +21,13 @@ func _ready() -> void:
 		$villain4.queue_free()
 
 func _process(delta: float) -> void:
-	var ySPEEDMOD = 1 + ((SPEEDMOD - 1) / 2)
+	var ySPEEDMOD = 1 + ((SPEEDMOD - 1) / 5)
 	global_position.x += direction * speed * delta * SPEEDMOD
 	global_position.y += yspeed * delta * ySPEEDMOD
 	yspeed -= delta * 1.0 if yspeed > 0.1 else 0.0
 
 func set_neo(NEO2: int):
-	shotTimer.wait_time /= SPEEDMOD
+	shotTimer.wait_time /= (1 + (SPEEDMOD - 1) * 2)
 	shotTimer.start()
 	for child in get_children():
 		if "NEO" in child:

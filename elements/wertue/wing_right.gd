@@ -1,5 +1,8 @@
 extends Sprite2D
 
+var SPEEDMOD := 1.0
+var NEO := 0
+
 var Atween: Tween
 var rot = 30.0
 var rottime = 0.75
@@ -18,12 +21,12 @@ func left():
 	x *= -1
 
 func rotatee():
-	while 1>0:
+	while self:
 		Atween = create_tween()
-		Atween.tween_property(self, "rotation_degrees", rot, rottime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		Atween.tween_property(self, "rotation_degrees", rot, rottime / get_parent().SPEEDMOD).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		await Atween.finished
 		Atween = create_tween()
-		Atween.tween_property(self, "rotation_degrees", -rot, rottime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		Atween.tween_property(self, "rotation_degrees", -rot, rottime / get_parent().SPEEDMOD).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		await Atween.finished
 
 func die():

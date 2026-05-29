@@ -2,23 +2,17 @@ extends CharacterBody2D
 
 const color = Color("00ffdc")
 
-var NEO = false
+var SPEEDMOD := 1.0
+var NEO := 0
 
 # FOR DAMAGE
 var fullhp = 10.0
 var hp = fullhp
-var yellwait = 0.7
-@onready var timer := $dmgstop
 @onready var sprite := $AnimatedSprite2D
-var dmgColor = Color.RED
-@onready var hpbar := $hpfull/hp
-var bar1 = 0.2
-var fullsize = 0.0
-var undam = 0.3
+@onready var hpbar := $hpfull
 
 var givepts = 7
 var died = false
-var bar2 = 0.4
 var expltime = 0.2
 var explsize = 3.0
 var explstay = 0.2
@@ -35,8 +29,6 @@ const bulletScene = preload("res://elements/wertue/wertueBeam.tscn")
 
 @onready var raycast_left := $RayCastLeft
 @onready var raycast_right := $RayCastRight
-@onready var hpbar1 := $hpfull
-@onready var hpbar2 := $hpfull/hp2
 @onready var expl := $NormTema
 @onready var cldown := $cldown
 @onready var shotTimer := $shotTimer
@@ -62,9 +54,9 @@ func _process(delta: float) -> void:
 			raycast = false
 			speed *= -1
 			direction *= -1
-	global_position.x += direction * speed * delta
-	global_position.y += yspeed * delta
-	yspeed -= delta * 0.8 if yspeed > 0.1 else 0.0
+	global_position.x += direction * speed * delta * SPEEDMOD
+	global_position.y += yspeed * delta * (1 + (SPEEDMOD - 1) / 4)
+	yspeed -= delta * 0.8 * (1 + (SPEEDMOD - 1) / 8) if yspeed > 0.1 else 0.0
 
 func _on_shot_timer_timeout() -> void:
 		shot()
@@ -84,13 +76,15 @@ func damageAnimation():
 func _ready() -> void:
 	Saves.data["ever_met_wertue"] = true
 	wingLeft.left()
-	var bar1PreSize = hpbar1.size.x
-	hpbar.size.x *= fullhp / 3.5
-	hpbar1.size.x = hpbar.size.x + 8.0
-	var bar1NewSize = hpbar1.size.x
-	hpbar1.position.x -= (bar1NewSize - bar1PreSize) / 2
-	hpbar2.size.x = hpbar.size.x
-	fullsize = hpbar.size.x
+	
+	await hpbar.setted_default
+	sethp()
+	shotTimer.wait_time /= SPEEDMOD
+	shotTimer.start()
+
+func sethp():
+	hp = fullhp
+	hpbar.set_hp(fullhp)
 
 func _physics_process(_delta: float) -> void:
 	if not raycast_left == null:
@@ -122,9 +116,13 @@ func beam_dmg(dmg: float):
 		dmgcldown2.wait_time = 0.5
 		dmgcldown2.start()
 
+var dietween: Tween
+var dietween2: Tween
+
 func die():
-	if not hitbox:
+	if died:
 		return
+	died = true
 	enrageLoop.stop()
 	remove_from_group("enemies")
 	Events.enemy_killed.emit()
@@ -141,27 +139,19 @@ func die():
 	else:
 		Functions.addRandomBonus(self, 2.0)
 	Functions.sfx_play("res://sounds/wertueDead.mp3", -5.0, randf_range(0.9, 1.1))
-	died = true
 	Globals.change_points(givepts)
 	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()
-	CTween = create_tween()
-	CTween.tween_property(hpbar, "size:x", (fullsize / fullhp) * hp, bar1 * 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	ETween = create_tween()
-	ETween.tween_property(hpbar2, "size:x", (fullsize / fullhp) * hp, bar2 * 2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	expl.visible = true
-	expl.rotation_degrees = -rot
-	FTween = create_tween()
-	FTween.tween_property(expl, "rotation_degrees", rot * 2, expltime + explstay + unexpltime).as_relative()
-	ATween = create_tween()
-	ATween.tween_property(expl, "scale", Vector2(explsize, explsize), expltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	BTween = create_tween()
-	BTween.tween_property(sprite, "modulate:a", 0.0, expltime)
-	await get_tree().create_timer(expltime + explstay, false).timeout
+	dietween = create_tween()
+	dietween.tween_property(expl, "rotation_degrees", rot * 2, expltime + explstay + unexpltime).as_relative()
+	dietween.parallel().tween_property(expl, "scale", Vector2(explsize, explsize), expltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	dietween.parallel().tween_property(sprite, "scale", Vector2.ZERO, expltime)
+	await get_tree().create_timer(expltime + explstay).timeout
 	sprite.visible = false
-	ATween = create_tween()
-	ATween.tween_property(expl, "scale", Vector2(0.0, 0.0), unexpltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	dietween2 = create_tween()
+	dietween2.tween_property(expl, "scale", Vector2(0.0, 0.0), unexpltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(afterdead, false).timeout
 	queue_free()
 
@@ -180,21 +170,22 @@ func shot():
 		var bullet = bulletScene.instantiate()
 		get_parent().add_child(bullet)
 		bullet.parentConnect(self)
-		if NEO == true:
+		bullet.NEO2 = NEO
+		bullet.SPEEDMOD = SPEEDMOD
+		if NEO > 0:
 			var bullet2 = bulletScene.instantiate()
 			get_parent().add_child(bullet2)
 			bullet2.parentConnect(self)
-			bullet.turn90()
+			bullet2.turn90()
+			bullet2.NEO = NEO
+			bullet2.NEO2 = NEO
+			bullet2.SPEEDMOD = SPEEDMOD
 
 func newShot():
 	if failedAttacks >= maxFailedAttacks:
 		enrage()
-	await get_tree().create_timer(betweenAttacks, false).timeout
+	await get_tree().create_timer(betweenAttacks / SPEEDMOD, false).timeout
 	shot()
-
-func _on_dmgstop_timeout() -> void:
-	ETween = create_tween()
-	ETween.tween_property(hpbar2, "size:x", (fullsize / fullhp) * hp, bar2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func enrage():
 	if enraged == true or died == true:
@@ -222,6 +213,6 @@ func unenrage():
 	var unetween = create_tween()
 	if not unetween or not sprite:
 		return
-	unetween.tween_property(sprite, "shader_parameter/rage_intencity", 0.0, 0.5)
-	unetween.parallel().tween_property(wingLeft, "shader_parameter/rage_intencity", 0.0, 0.5)
-	unetween.parallel().tween_property(wingRight, "shader_parameter/rage_intencity", 0.0, 0.5)
+	unetween.tween_property(sprite.material, "shader_parameter/rage_intensity", 0.0, 0.5)
+	unetween.parallel().tween_property(wingLeft.material, "shader_parameter/rage_intensity", 0.0, 0.5)
+	unetween.parallel().tween_property(wingRight.material, "shader_parameter/rage_intensity", 0.0, 0.5)

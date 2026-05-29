@@ -95,10 +95,6 @@ target_position = Vector2(-70, 0)
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=545216706]
 target_position = Vector2(70, 0)
 
-[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("3_5tfog")]
-offset_top = -71.999985
-offset_bottom = -57.999985
-
 [node name="dmgstop" type="Timer" parent="." unique_id=2087813103]
 one_shot = true
 
@@ -123,5 +119,7 @@ autostart = true
 [node name="contactDamager" parent="." unique_id=64047935 instance=ExtResource("6_judyc")]
 visible = false
 scale = Vector2(4.5, 4.5)
+
+[node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("3_5tfog")]
 
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]

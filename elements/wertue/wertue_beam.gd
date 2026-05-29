@@ -1,6 +1,10 @@
 extends Area2D
 
-var NEO = false
+var NEO := 0
+var NEO2 := 0
+var SPEEDMOD := 1.0
+var speedmodmod := 2
+
 signal warrned
 var is_attacking := false
 
@@ -16,6 +20,7 @@ var target_pos := Vector2.ZERO
 @onready var laserTime := $laserTime
 @onready var beamLoop := $beamLoop
 @onready var attackLoop := $attackLoop
+@onready var aimer := $aimer
 
 var wertue = 0
 var enragedColor = Color.RED
@@ -50,6 +55,9 @@ func _ready() -> void:
 		laserTime.wait_time /= 2
 		
 	current_state = "WAIT"
+	waitTime.wait_time /= (1 + (SPEEDMOD - 1) / speedmodmod)
+	warningTime.wait_time /= (1 + (SPEEDMOD - 1) / speedmodmod)
+	laserTime.wait_time /= (1 + (SPEEDMOD - 1) / speedmodmod)
 	waitTime.start()
 
 func _physics_process(delta: float) -> void:
@@ -83,6 +91,7 @@ func _handle_death_during_wait():
 	killedBefore = true
 	var stoptween = create_tween()
 	stoptween.tween_property(slabost, "modulate:a", 0.0, 1.0)
+	stoptween.parallel().tween_property(aimer, "modulate:a", 0.0, 1.0)
 	var looptween = create_tween()
 	looptween.tween_property(beamLoop, "pitch_scale", 0.7, 1.0)
 	await stoptween.finished
@@ -109,9 +118,10 @@ func _handle_interruption_trigger():
 # --- БЛОК МИГАНИЯ ПРЕДУПРЕЖДЕНИЙ ---
 
 func _run_warning_flashing():
+	aimer.visible = false
 	while current_state == "WARNING":
 		warning.visible = true
-		if NEO == false:
+		if NEO == 0:
 			Functions.sfx_play("res://sounds/wertueWarning.mp3")
 		await get_tree().create_timer(warnTickTime, false).timeout
 		if current_state != "WARNING": break
@@ -124,7 +134,7 @@ func _run_warning_flashing():
 func _run_interruption_flashing():
 	while current_state == "INTERRUPTION":
 		warning.visible = true
-		if NEO == false:
+		if NEO == 0:
 			Functions.sfx_play("res://sounds/wertueInterruption.mp3")
 		await get_tree().create_timer(warnTickTime, false).timeout
 		if current_state != "INTERRUPTION": break
@@ -156,7 +166,7 @@ func _on_warning_time_timeout() -> void:
 		is_attacking = true
 		laserTime.start()
 		
-		if NEO == false:
+		if NEO == 0:
 			Functions.sfx_play("res://sounds/wertueAttack.mp3", -5.0)
 		attackLoop.play()
 		
@@ -169,21 +179,21 @@ func _on_laser_time_timeout() -> void:
 	current_state = "FINISHED"
 	
 	var looptween = create_tween()
-	looptween.tween_property(attackLoop, "pitch_scale", 0.7, laserTime.wait_time/2)
+	looptween.tween_property(attackLoop, "pitch_scale", 0.7, laserTime.wait_time/2 / (1 + ((SPEEDMOD - 1) / 3)))
 	var lasertween = create_tween()
-	lasertween.tween_property(self, "global_scale:x", 0.0, laserTime.wait_time/2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	lasertween.tween_property(self, "global_scale:x", 0.0, laserTime.wait_time/2 / (1 + ((SPEEDMOD - 1) / 3))).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await lasertween.finished
 	attackLoop.stop()
 	
 	if wertue:
 		if hitted == false:
-			if NEO == false:
+			if NEO == 0:
 				wertue.failedAttacks += 1
 		else:
 			if wertue.enraged == true:
 				wertue.unenrage()
 			wertue.failedAttacks = 0
-		if NEO == false:
+		if NEO == 0:
 			wertue.newShot()
 	queue_free()
 
@@ -197,10 +207,9 @@ func _handle_damage_logic():
 			if body.is_invincible == false:
 				body.takeDmg()
 		if body.has_method("beam_dmg"):
-			body.beam_dmg(5.0)
+			body.beam_dmg(5.0 * get_parent().SPEEDMOD)
 		if body.has_method("explode"):
-			Globals.shake_str += 5.0
-			body.explode()
+			body.get_hit()
 	if get_overlapping_bodies().size() > 0 and is_attacking == true:
 		hitted = true
 
@@ -211,6 +220,7 @@ func _handle_player_tracking(delta: float):
 		global_position.x = lerp(global_position.x, target_pos.x, tracking_speed * delta)
 		target_pos.y = player.global_position.y
 		global_position.y = lerp(global_position.y, target_pos.y, tracking_speed * delta)
+		aimer.global_position = player.global_position
 
 func turn90():
 	rotation_degrees = 90.0

@@ -6,9 +6,32 @@
 [ext_resource type="AudioStream" uid="uid://heha5l0mrh3x" path="res://sounds/wertuePreparing.mp3" id="3_8wmr8"]
 [ext_resource type="Texture2D" uid="uid://dyko52r2gcngr" path="res://textures/wertueLaser.png" id="4_5b0o4"]
 [ext_resource type="AudioStream" uid="uid://cummi6ocb8wi4" path="res://sounds/wertueAttackLoop.mp3" id="4_cnmiy"]
+[ext_resource type="Texture2D" uid="uid://c4iy1rrlkklcr" path="res://textures/wertueAimer.png" id="7_oqk33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqk33"]
-size = Vector2(35.38462, 238.46156)
+size = Vector2(35.385, 700)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d0jn"]
+atlas = ExtResource("7_oqk33")
+region = Rect2(0, 0, 25, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d0o7"]
+atlas = ExtResource("7_oqk33")
+region = Rect2(25, 0, 25, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5b0o4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2d0jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d0o7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [node name="wertueBeam" type="Area2D" unique_id=195225025]
 z_index = 2
@@ -21,9 +44,9 @@ script = ExtResource("1_e1pic")
 modulate = Color(1, 1, 1, 0.702)
 texture_repeat = 2
 offset_left = -18.0
-offset_top = -240.0
+offset_top = -360.0
 offset_right = 27.0
-offset_bottom = 360.0
+offset_bottom = 540.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_2d0jn")
 stretch_mode = 1
@@ -33,9 +56,9 @@ visible = false
 modulate = Color(1, 1, 1, 0.7019608)
 texture_repeat = 2
 offset_left = -18.0
-offset_top = -240.0
+offset_top = -360.0
 offset_right = 27.0
-offset_bottom = 360.0
+offset_bottom = 540.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_4d0o7")
 stretch_mode = 1
@@ -44,15 +67,14 @@ stretch_mode = 1
 visible = false
 texture_repeat = 2
 offset_left = -18.0
-offset_top = -240.0
+offset_top = -360.0
 offset_right = 27.0
-offset_bottom = 360.0
+offset_bottom = 540.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_5b0o4")
 stretch_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1297896626]
-visible = false
 shape = SubResource("RectangleShape2D_oqk33")
 debug_color = Color(0.99607843, 0, 0.20392157, 0.5882353)
 
@@ -76,6 +98,10 @@ bus = &"SFX"
 stream = ExtResource("4_cnmiy")
 volume_db = 20.0
 bus = &"SFX"
+
+[node name="aimer" type="AnimatedSprite2D" parent="." unique_id=751309825]
+sprite_frames = SubResource("SpriteFrames_5b0o4")
+frame_progress = 0.71806026
 
 [connection signal="timeout" from="waitTime" to="." method="_on_wait_time_timeout"]
 [connection signal="timeout" from="warningTime" to="." method="_on_warning_time_timeout"]

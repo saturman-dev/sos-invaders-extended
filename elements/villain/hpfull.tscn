@@ -3,15 +3,13 @@
 [ext_resource type="Script" uid="uid://csmflkcus0h6b" path="res://elements/villain/hpfull.gd" id="1_pmm4v"]
 
 [node name="hpfull" type="ColorRect" unique_id=39752477]
-offset_left = -21.0
-offset_top = -11.0
-offset_right = 21.0
-offset_bottom = 11.0
+offset_right = 42.0
+offset_bottom = 22.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_pmm4v")
 
-[node name="hp2" type="ColorRect" parent="." unique_id=722326008]
+[node name="yellow" type="ColorRect" parent="." unique_id=722326008]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -19,10 +17,16 @@ offset_right = 36.0
 offset_bottom = 16.0
 color = Color(1, 1, 0, 1)
 
-[node name="hp" type="ColorRect" parent="." unique_id=518042600]
+[node name="red" type="ColorRect" parent="." unique_id=518042600]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
 offset_right = 36.0
 offset_bottom = 16.0
 color = Color(1, 0, 0, 1)
+
+[node name="yellowwaiter" type="Timer" parent="." unique_id=862997076]
+wait_time = 0.7
+one_shot = true
+
+[connection signal="timeout" from="yellowwaiter" to="." method="_on_yellowwaiter_timeout"]
