@@ -6,7 +6,7 @@ var SPEEDMOD := 1.0
 var NEO := 0
 
 # FOR DAMAGE
-var fullhp = 10.0
+var fullhp = 25.0
 var hp = fullhp
 @onready var sprite := $AnimatedSprite2D
 @onready var hpbar := $hpfull
@@ -44,7 +44,7 @@ var direction := int([-1, 1].pick_random())
 var defspeed := 25.0
 var speed := defspeed
 var yspeed = defyspeed
-var defyspeed = 15.0
+var defyspeed = 13.5
 var raycast = false
 var dirChanging := 40.0
 
@@ -145,7 +145,7 @@ func die():
 	else:
 		Functions.addRandomBonus(self, 2.0)
 	Functions.sfx_play("res://sounds/wertueDead.mp3", -5.0, randf_range(0.9, 1.1))
-	Globals.change_points(givepts)
+	Globals.change_points(givepts * (1 + NEO))
 	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()

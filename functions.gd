@@ -2,11 +2,11 @@ extends Node
 
 # BONUS CHANCES, %
 var bonus_chances = {
-	"heal": 5.0,
-	"overheal": 4.0,
-	"splash": 2.0,
-	"trio": 1.5,
-	"speed": 1.5
+	"heal": 10.0,
+	"overheal": 4.5,
+	"splash": 3.5,
+	"trio": 2.5,
+	"speed": 2.5
 }
 
 var hitstopping = false
@@ -399,7 +399,7 @@ func spawn_boss(type: String):
 		bg.flseye_animation()
 		await fg.flseye_animation()
 		
-		var Flseye = flseye.instanciate()
+		var Flseye = flseye.instantiate()
 		get_tree().get_first_node_in_group("level").add_child(Flseye)
 		
 	else:

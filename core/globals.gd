@@ -21,12 +21,12 @@ var shake_fad := 3.0
 var diffi := 0.0
 
 # STATS
-var maxBonusModifier := 2.50
-var maxDamageModifier := 4.00
-var maxSpeedModifier := 3.50
+var maxBonusModifier := 2.0
+var maxDamageModifier := 3.5
+var maxSpeedModifier := 2.5
 var maxBonusModifierNeedKills := 400
-var maxDamageModifierNeedPoints := 2000
-var maxSpeedModifierNeedSeconds := 720
+var maxDamageModifierNeedPoints := 3000
+var maxSpeedModifierNeedSeconds := 600
 var oldMaxPoints := 0
 var oldMaxKills := 0
 var oldMaxTime := 0
@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
 	
 	# STAMINA
 	if currentStaminas < staminas and game_running == true:
-		currentStaminas += delta / staminaTime
+		currentStaminas += delta / staminaTime * Saves.data["speed_modifier"]
 		if currentStaminas >= 1:
 			dashable = true
 		else:

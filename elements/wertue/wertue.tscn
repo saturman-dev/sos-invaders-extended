@@ -25,6 +25,7 @@ shader_parameter/blend_strength = 0.0
 shader_parameter/rage_intensity = 0.0
 shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jw2qr"]
 resource_local_to_scene = true
@@ -41,6 +42,7 @@ shader_parameter/blend_strength = 0.0
 shader_parameter/rage_intensity = 0.0
 shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2pupj"]
 resource_local_to_scene = true
@@ -57,6 +59,7 @@ shader_parameter/blend_strength = 0.0
 shader_parameter/rage_intensity = 0.0
 shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h36qe"]
 radius = 59.999992
@@ -86,7 +89,7 @@ animations = [{
 [node name="wertue" type="CharacterBody2D" unique_id=73654707 groups=["enemies"]]
 scale = Vector2(0.2, 0.2)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 259
 script = ExtResource("1_3hj3l")
 
 [node name="wingRight" parent="." unique_id=1902289196 instance=ExtResource("2_3hj3l")]

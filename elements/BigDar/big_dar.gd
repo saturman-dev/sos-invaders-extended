@@ -6,7 +6,7 @@ var SPEEDMOD := 1.0
 var NEO := 0
 
 # FOR DAMAGE
-var fullhp = 10.0
+var fullhp = 15.0
 var hp = fullhp
 @onready var sprite := $AnimatedSprite2D
 @onready var hpbar := $hpfull
@@ -34,7 +34,7 @@ const bulletScene = preload("res://elements/bobm/bobm.tscn")
 
 var direction := int([-1, 1].pick_random())
 var speed := 20.0
-var defyspeed = 15.0
+var defyspeed = 8.0
 var yspeed = defyspeed
 
 func _process(delta: float) -> void:
@@ -125,7 +125,7 @@ func die():
 	if bonus_blocked == false:
 		Functions.addRandomBonus(self)
 	Functions.sfx_play("res://sounds/bigDarDead.mp3", 0.0, randf_range(0.9, 1.1))
-	Globals.change_points(givepts * NEO)
+	Globals.change_points(givepts * (1 + NEO))
 	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()

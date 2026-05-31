@@ -7,7 +7,7 @@ var bullet_angle := 20
 const color = Color("fb00cf")
 
 # FOR DAMAGE
-var fullhp = 7.5
+var fullhp = 15.0
 var hp = fullhp
 @onready var sprite := $AnimatedSprite2D
 
@@ -40,7 +40,7 @@ var direction := int([-1, 1].pick_random())
 var defspeed := 40.0
 var speed := defspeed
 var yspeed = defyspeed
-var defyspeed = 18.0
+var defyspeed = 12.5
 var raycast = false
 var dirChanging := 80.0
 
@@ -129,7 +129,7 @@ func die():
 	else:
 		Functions.addRandomBonus(self)
 	Functions.sfx_play("res://sounds/A3Dead.mp3", -8.0, randf_range(0.9, 1.1))
-	Globals.change_points(givepts * NEO)
+	Globals.change_points(givepts * (1 + NEO))
 	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()

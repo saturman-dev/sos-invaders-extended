@@ -11,7 +11,7 @@ var defTrailColor: Color
 var trailDashTween: Tween
 var dashTrailWidth := 70.0
 var dashTrailColor := Color("59a5ff")
-var cd = 0.2
+var cd = 0.2 / Saves.data["speed_modifier"]
 var defcd  = cd
 var INVINCIBLE := 1.5
 var dmg = 1.0

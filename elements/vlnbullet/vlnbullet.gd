@@ -6,6 +6,7 @@ var SPEEDMOD := 1.0
 var direction := Vector2.DOWN
 
 @onready var sprite = $AnimatedSprite2D
+@onready var hitbox := $CollisionShape2D
 
 var gh = 0.15
 func ghosts():
@@ -40,4 +41,11 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func set_direction(dir: Vector2):
 	direction = dir.normalized()
 	rotation = direction.angle()
+	
+func fade():
+	var fadetw = create_tween()
+	fadetw.tween_property(self, "scale", Vector2.ZERO, 2.0 / SPEEDMOD).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	fadetw.tween_callback(queue_free)
+	await get_tree().create_timer(1.5 / SPEEDMOD, false).timeout
+	hitbox.disabled = true
 	

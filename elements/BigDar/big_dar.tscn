@@ -22,6 +22,7 @@ shader_parameter/blend_strength = 0.0
 shader_parameter/rage_intensity = 0.0
 shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ljn8a"]
 atlas = ExtResource("2_i6iqp")
@@ -74,7 +75,7 @@ animations = [{
 [node name="BigDar" type="CharacterBody2D" unique_id=582401852 groups=["enemies"]]
 scale = Vector2(0.2, 0.2)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 259
 script = ExtResource("1_54n7x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1304707848]

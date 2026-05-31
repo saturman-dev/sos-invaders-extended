@@ -23,7 +23,7 @@ const NEO_GAP := 150.0
 var introduced_variants = {}
 
 var boss_timeline = [
-	{"threshold": 149.99, "anim_func": "flseye", "done": false}
+	{"threshold": 149.8, "anim_func": "flseye", "done": false}
 ]
 
 func _process(delta: float) -> void:
@@ -46,11 +46,11 @@ func _process(delta: float) -> void:
 	
 	diffi += 1.0 * growth_modifier * delta
 	spawn_credits += diffi * 2 * delta
-	
+	Globals.diffi = diffi
 	_check_boss_timeline()
 	_check_dynamic_intros()
 	
-	spawn_timer.wait_time = clamp((5.0 - diffi * 0.02) / growth_modifier, 4.0 / growth_modifier, 10.0 / growth_modifier)
+	spawn_timer.wait_time = clamp((7 - diffi * 0.02) / growth_modifier, clamp(5.0 / growth_modifier, 0.5, 11.0), 12.0)
 
 func _execute_spawn(enemy_scene: PackedScene, neo_tier: int) -> void:
 	if not enemy_scene: return
@@ -58,7 +58,7 @@ func _execute_spawn(enemy_scene: PackedScene, neo_tier: int) -> void:
 	var new_enemy = enemy_scene.instantiate()
 	add_child(new_enemy)
 	
-	new_enemy.add_to_group("enemies")
+	#new_enemy.add_to_group("enemies")
 	
 	if neo_tier > 0 and is_instance_valid(new_enemy):
 		Functions.set_neo(new_enemy, neo_tier)

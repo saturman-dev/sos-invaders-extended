@@ -35,8 +35,8 @@ func _process(delta: float) -> void:
 		return
 	scroll_base_offset.y += speed * delta
 	if Globals.game_running == true:
-		speed = defspeed + Globals.diffi
-		huespeed = Globals.diffi / 360
+		speed = clamp(defspeed + Globals.diffi, 0, 400)
+		huespeed = clamp(Globals.diffi / 500, 0, 400)
 		if Globals.diffi > 0:
 			hue += huespeed * delta
 			sprite.material.set_shader_parameter("hue_offset", hue)

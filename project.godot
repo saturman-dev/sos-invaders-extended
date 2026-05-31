@@ -78,6 +78,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_3="enemies"
 2d_physics/layer_6="bonuses"
 2d_physics/layer_8="walls only"
+2d_physics/layer_9="mob floor"
 
 [physics]
 

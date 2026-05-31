@@ -28,7 +28,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_011pn"]
 radius = 2.0
 
-[node name="vlnbullet" type="CharacterBody2D" unique_id=378099452]
+[node name="vlnbullet" type="CharacterBody2D" unique_id=378099452 groups=["flseye_attack"]]
 top_level = true
 collision_layer = 0
 collision_mask = 2

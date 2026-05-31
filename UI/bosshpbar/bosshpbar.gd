@@ -34,7 +34,7 @@ func damage(health_percent: float):
 		ytween.tween_property(yell, "size:x", red.size.x, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		var labelPos = label.position
 		afterdead.start()
-		while afterdead.time_left > 0.0:
+		while afterdead.time_left > 0.0 and get_tree():
 			label.position.x = labelPos.x + randf_range(-10.0, 10.0)
 			label.position.y = labelPos.y + randf_range(-5.0, 5.0)
 			await get_tree().process_frame

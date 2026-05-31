@@ -7,7 +7,7 @@ var NEO = false
 var last_attack = -1
 
 # FOR DAMAGE
-var fullhp = 100.0
+var fullhp = 300.0
 var hp = fullhp
 
 var givepts = 100
@@ -212,7 +212,7 @@ func die():
 	Functions.checkHeal()
 	Globals.bgStay = false
 	Functions.sfx_play("res://sounds/flseyeDead.mp3", 10.0)
-	PtbonusesManager.ptbonus(givepts, "BIG KILL", Color.ORANGE)
+	PtbonusesManager.ptbonus(givepts, "BYE FLSEYE", color)
 	expl.visible = true
 	expl.rotation_degrees = -rot
 	FTween = create_tween()
@@ -226,7 +226,7 @@ func die():
 	ATween = create_tween()
 	ATween.tween_property(expl, "scale", Vector2(0.0, 0.0), unexpltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(afterdead, false).timeout
-	Events.bossfight_end.emit()
+	get_tree().get_first_node_in_group("level").boss_defeated()
 	queue_free()
 
 var shakestrength = 10.0

@@ -21,12 +21,14 @@ func left():
 	x *= -1
 
 func rotatee():
+	if "SPEEDMOD" in get_parent():
+		SPEEDMOD = get_parent().SPEEDMOD
 	while self:
 		Atween = create_tween()
-		Atween.tween_property(self, "rotation_degrees", rot, rottime / get_parent().SPEEDMOD).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		Atween.tween_property(self, "rotation_degrees", rot, rottime / SPEEDMOD).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		await Atween.finished
 		Atween = create_tween()
-		Atween.tween_property(self, "rotation_degrees", -rot, rottime / get_parent().SPEEDMOD).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		Atween.tween_property(self, "rotation_degrees", -rot, rottime / SPEEDMOD).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		await Atween.finished
 
 func die():

@@ -10,7 +10,7 @@ const rowstep = 15.0
 var direction := int([-1, 1].pick_random())
 var speed := 30.0
 var yspeed = defyspeed
-var defyspeed = 15.0
+var defyspeed = 10.0
 var amnt = 0
 
 func _ready() -> void:

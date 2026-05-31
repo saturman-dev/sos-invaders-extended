@@ -26,6 +26,10 @@ position = Vector2(405, 0)
 
 [node name="floor" parent="." unique_id=270879483 instance=ExtResource("5_iefvx")]
 
+[node name="floormobs" parent="." unique_id=2068460452 instance=ExtResource("5_iefvx")]
+position = Vector2(0, -47)
+collision_layer = 256
+
 [node name="floor2" parent="." unique_id=2041952918 instance=ExtResource("5_iefvx")]
 position = Vector2(0, -245)
 

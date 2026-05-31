@@ -33,6 +33,7 @@ shader_parameter/blend_strength = 0.0
 shader_parameter/flash_brightness = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iqko2"]
+resource_local_to_scene = true
 shader = ExtResource("3_c3kk1")
 shader_parameter/enable_outline = false
 shader_parameter/outline_thickness = 0.0
@@ -418,6 +419,7 @@ offset_bottom = -85.99997
 one_shot = true
 
 [node name="NormTema" type="AnimatedSprite2D" parent="." unique_id=241245243]
+visible = false
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_apj7r")
 autoplay = "default"

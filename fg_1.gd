@@ -18,10 +18,10 @@ var loadOffset = 40
 var loadTrans = Tween.TRANS_EXPO
 var loadTime = 5.0
 func _ready() -> void:
-	wall1.material.set_shader_parameter("hue_offset", hue)
-	wall2.material.set_shader_parameter("hue_offset", hue)
-	wall3.material.set_shader_parameter("hue_offset", hue)
-	wall4.material.set_shader_parameter("hue_offset", hue)
+	wall1.material.set_shader_parameter("hue_offset", 0)
+	wall2.material.set_shader_parameter("hue_offset", 0)
+	wall3.material.set_shader_parameter("hue_offset", 0)
+	wall4.material.set_shader_parameter("hue_offset", 0)
 	wall1.position.x -= loadOffset
 	wall2.position.x -= loadOffset
 	wall3.position.x += loadOffset
@@ -37,8 +37,8 @@ func _process(delta: float) -> void:
 		return
 	scroll_base_offset.y += speed * delta
 	if Globals.game_running == true:
-		speed = defspeed + Globals.diffi
-		huespeed = Globals.diffi / 360
+		speed = clamp(defspeed + Globals.diffi, 0, 400)
+		huespeed = clamp(Globals.diffi / 400, 0, 600)
 		if Globals.diffi > 0:
 			hue += huespeed * delta
 			wall1.material.set_shader_parameter("hue_offset", hue)

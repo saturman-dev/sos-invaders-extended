@@ -53,6 +53,7 @@ func _ready() -> void:
 			
 			get_parent().add_child(bullet)
 			bullet.set_direction(shoot_dir)
+			bullet.fade()
 			
 	ATween = create_tween()
 	ATween.tween_property(self, "global_scale", defscale, 0.7).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)

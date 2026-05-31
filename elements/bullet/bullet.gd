@@ -45,7 +45,7 @@ func _on_body_entered(body: Node2D):
 		return
 	hit_guys.append(body)
 	if "hp" in body:
-		Functions.dmg(body, damage)
+		Functions.dmg(body, damage * Saves.data["damage_modifier"])
 		Functions.sfx_play("res://sounds/niceBullet.mp3", -15.0, randf_range(0.8, 1.2))
 	elif body.has_method("explode"):
 		Functions.sfx_play("res://sounds/niceBullet.mp3", -15.0, 1.0, true)

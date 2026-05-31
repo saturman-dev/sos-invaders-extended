@@ -99,7 +99,7 @@ func die():
 	Saves.data["killed_enemies"] += 1
 	Functions.addRandomBonus(self, 0.33)
 	Functions.sfx_play("res://sounds/darsinDead.mp3", 0.0, randf_range(0.9, 1.1))
-	Globals.change_points(givepts * NEO)
+	Globals.change_points(givepts * (1 + NEO))
 	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()
