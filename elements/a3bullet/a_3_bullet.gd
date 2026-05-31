@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	global_position.x += speed * delta / 4 * direction * SPEEDMOD
-	var collision = move_and_collide(Vector2.DOWN * delta * speed * SPEEDMOD)
+	var collision = move_and_collide(Vector2.DOWN * delta * speed * SPEEDMOD / (1 + abs(direction)))
 	if collision:
 		var collider = collision.get_collider()
 		if collider.has_method("takeDmg"):
@@ -29,16 +29,16 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func left():
-	direction = -1
+	direction = -1.2
 
 func lleft():
-	direction = -sqrt(5)
+	direction = -2.5
 
 func right():
-	direction = 1
+	direction = 1.2
 
 func rright():
-	direction = sqrt(5)
+	direction = 2.5
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

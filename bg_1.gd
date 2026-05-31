@@ -17,7 +17,6 @@ var loadOffset = 30
 var loadTrans = Tween.TRANS_EXPO
 var loadTime = 7.5
 func _ready() -> void:
-	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	sprite.material.set_shader_parameter("hue_offset", hue)
 	wall1.material.set_shader_parameter("hue_offset", hue)
 	wall3.material.set_shader_parameter("hue_offset", hue)
@@ -44,8 +43,14 @@ func _process(delta: float) -> void:
 			wall1.material.set_shader_parameter("hue_offset", hue)
 			wall3.material.set_shader_parameter("hue_offset", hue)
 
-func spawn_boss_flseye():
-	var btween := create_tween()
-	btween.tween_property(black, "modulate:a", 1.0, 2.0)
-	await Events.boss_animation_finished
+var fgblacktween: Tween
+func flseye_animation():
+	if fgblacktween and fgblacktween.is_running():
+		fgblacktween.kill()
+	
+	fgblacktween = create_tween()
+	fgblacktween.tween_property(black, "modulate:a", 1.0, 2.0)
+	await fgblacktween.finished
+
+func flseye_animation_finished():
 	black.modulate.a = 0.0

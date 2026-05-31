@@ -20,7 +20,7 @@ shader_parameter/hue_offset = 0.0
 shader = ExtResource("2_denuw")
 shader_parameter/hue_offset = 0.0
 
-[node name="fg_1" type="ParallaxBackground" unique_id=979325285]
+[node name="fg_1" type="ParallaxBackground" unique_id=979325285 groups=["foreground"]]
 layer = 70
 script = ExtResource("1_h2ymu")
 

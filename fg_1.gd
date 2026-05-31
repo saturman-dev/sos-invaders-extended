@@ -18,7 +18,6 @@ var loadOffset = 40
 var loadTrans = Tween.TRANS_EXPO
 var loadTime = 5.0
 func _ready() -> void:
-	Events.bossfight_start.connect(func(type): spawn_boss_flseye())
 	wall1.material.set_shader_parameter("hue_offset", hue)
 	wall2.material.set_shader_parameter("hue_offset", hue)
 	wall3.material.set_shader_parameter("hue_offset", hue)
@@ -47,13 +46,19 @@ func _process(delta: float) -> void:
 			wall3.material.set_shader_parameter("hue_offset", hue)
 			wall4.material.set_shader_parameter("hue_offset", hue)
 
-func spawn_boss_flseye():
-	var t = create_tween()
-	t.tween_property(wallB, "modulate:a", 1.0, 2.0)
-	t.parallel().tween_property(wallB2, "modulate:a", 1.0, 2.0)
-	t.parallel().tween_property(wallB3, "modulate:a", 1.0, 2.0)
-	t.parallel().tween_property(wallB4, "modulate:a", 1.0, 2.0)
-	await Events.boss_animation_finished
+var bgblacktween: Tween
+func flseye_animation():
+	if bgblacktween and bgblacktween.is_running():
+		bgblacktween.kill()
+	
+	bgblacktween = create_tween()
+	bgblacktween.tween_property(wallB, "modulate:a", 1.0, 2.0)
+	bgblacktween.parallel().tween_property(wallB2, "modulate:a", 1.0, 2.0)
+	bgblacktween.parallel().tween_property(wallB3, "modulate:a", 1.0, 2.0)
+	bgblacktween.parallel().tween_property(wallB4, "modulate:a", 1.0, 2.0)
+	await bgblacktween.finished
+
+func flseye_animation_finished():
 	wallB.modulate.a = 0.0
 	wallB2.modulate.a = 0.0
 	wallB3.modulate.a = 0.0

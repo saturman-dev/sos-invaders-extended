@@ -22,6 +22,7 @@ var afterdead = 2.0
 var rot = randf_range(10.0, 30.0)
 
 const bulletScene = preload("res://elements/a3bullet/a_3_bullet.tscn")
+const linkerScene = preload("res://elements/bulletLinker/bullet_linker.tscn")
 
 @onready var raycast_left := $RayCastLeft
 @onready var raycast_right := $RayCastRight
@@ -38,11 +39,16 @@ const bulletScene = preload("res://elements/a3bullet/a_3_bullet.tscn")
 var direction := int([-1, 1].pick_random())
 var defspeed := 40.0
 var speed := defspeed
-var yspeed = 18.0
+var yspeed = defyspeed
+var defyspeed = 18.0
 var raycast = false
 var dirChanging := 80.0
 
 func _process(delta: float) -> void:
+	if global_position.y < 15:
+		yspeed = defyspeed * 5
+	else:
+		yspeed = defyspeed
 	if raycast == true:
 		speed -= dirChanging * delta
 		if speed < -defspeed:
@@ -61,6 +67,7 @@ func _on_shot_timer_timeout() -> void:
 var enabled = true
 
 func _ready() -> void:
+	global_position = Vector2(randf_range(51, get_viewport_rect().size.x - 51), -16)
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Saves.data["ever_met_a3"] = true
 	
@@ -182,10 +189,10 @@ func spawn_bullets():
 		bullet.global_position += global_position + Vector2(0, 5.0)
 		bullet.SPEEDMOD = SPEEDMOD
 		var bulletl = bulletScene.instantiate()
-		bulletl.global_position += global_position + Vector2(-7.0, 5.0)
+		bulletl.global_position += global_position + Vector2(-4.0, 5.0)
 		bulletl.SPEEDMOD = SPEEDMOD
 		var bulletr = bulletScene.instantiate()
-		bulletr.global_position += global_position + Vector2(7.0, 5.0)
+		bulletr.global_position += global_position + Vector2(4.0, 5.0)
 		bulletr.SPEEDMOD = SPEEDMOD
 		get_parent().add_child(bullet)
 		get_parent().add_child(bulletl)
@@ -195,12 +202,18 @@ func spawn_bullets():
 		
 		if NEO > 0:
 			var bulletll = bulletScene.instantiate()
-			bulletll.global_position += global_position + Vector2(-11.0, 5.0)
+			bulletll.global_position += global_position + Vector2(-8.0, 5.0)
 			bulletll.SPEEDMOD = SPEEDMOD
 			var bulletrr = bulletScene.instantiate()
-			bulletrr.global_position += global_position + Vector2(11.0, 5.0)
+			bulletrr.global_position += global_position + Vector2(8.0, 5.0)
 			bulletrr.SPEEDMOD = SPEEDMOD
 			get_parent().add_child(bulletll)
 			get_parent().add_child(bulletrr)
 			bulletll.lleft()
 			bulletrr.rright()
+			
+			var linker = linkerScene.instantiate()
+			var allbullets: Array[Node2D] = [bulletll, bulletl, bullet, bulletr, bulletrr]
+			linker.base_width *= SPEEDMOD
+			get_parent().add_child(linker)
+			linker.tracked_bullets = allbullets

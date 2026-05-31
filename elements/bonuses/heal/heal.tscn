@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ba3yp044i7mqa" path="res://elements/bonuses/heal/heal.gd" id="1_xno0u"]
 [ext_resource type="Texture2D" uid="uid://cdmi8edk3ityv" path="res://textures/bonusHeal.png" id="2_8f0wi"]
+[ext_resource type="Texture2D" uid="uid://lu554cummowp" path="res://textures/bonus.png" id="3_vunfs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1g8u"]
 atlas = ExtResource("2_8f0wi")
@@ -49,6 +50,78 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpoca"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bim4r"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h71em"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rhj7"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of7bj"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk7fa"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(240, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_215jn"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(160, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_481eu"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(80, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ilb"]
+atlas = ExtResource("3_vunfs")
+region = Rect2(0, 80, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7rtxe"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bim4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h71em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rhj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of7bj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk7fa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_215jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_481eu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7ilb")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 14.0
+}]
+
 [node name="heal" type="Area2D" unique_id=562743611 groups=["bonuses"]]
 collision_layer = 0
 collision_mask = 32
@@ -67,10 +140,21 @@ autoplay = "default"
 frame_progress = 0.6639607
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=263828784]
+visible = false
 rect = Rect2(-35, -34, 70, 68)
 
 [node name="hitbox" type="CollisionShape2D" parent="." unique_id=1227902090]
+visible = false
 shape = SubResource("CircleShape2D_wpoca")
 debug_color = Color(0.3259149, 0.99999994, 0.29823202, 0.42000002)
+
+[node name="bonusGained" type="AnimatedSprite2D" parent="." unique_id=1476179828]
+modulate = Color(0, 1, 0.13333334, 1)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_7rtxe")
+animation = &"new_animation"
+autoplay = "default"
+frame = 8
+frame_progress = 1.0
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

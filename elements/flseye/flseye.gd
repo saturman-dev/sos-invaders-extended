@@ -9,20 +9,12 @@ var last_attack = -1
 # FOR DAMAGE
 var fullhp = 100.0
 var hp = fullhp
-var yellwait = 0.7
-@onready var timer := $dmgstop
-@onready var sprite := $AnimatedSprite2D
-var dmgColor = Color.RED
-@onready var hpbar := $hpfull/hp
-var bar1 = 0.2
-var fullsize = 0.0
-var undam = 0.3
 
 var givepts = 100
 var died = false
 var bar2 = 0.4
 var expltime = 0.5
-var explsize = 1.5
+var explsize = 1.3
 var explstay = 0.4
 var unexpltime = 1.5
 var afterdead = 2.0
@@ -42,8 +34,7 @@ const flbulletScene = preload("res://elements/flseye/flbullet.tscn")
 
 @onready var raycast_left := $RayCastLeft
 @onready var raycast_right := $RayCastRight
-@onready var hpbar1 := $hpfull
-@onready var hpbar2 := $hpfull/hp2
+@onready var hpbar := $hpfull
 @onready var expl := $NormTema
 @onready var cldown := $cldown
 @onready var shotTimer := $shotTimer
@@ -56,6 +47,7 @@ const flbulletScene = preload("res://elements/flseye/flbullet.tscn")
 @onready var laserManager := $laserManager
 @onready var shieldcd := $shieldCD
 @onready var contactDamager := $contactDamager
+@onready var sprite := $AnimatedSprite2D
 
 
 
@@ -113,7 +105,7 @@ var dmgtween: Tween
 
 func damageAnimation():
 	Functions.def_enemy_explosion(self)
-	Events.boss_damaged.emit(hp/fullhp)
+	if healthbar: healthbar.damage(hp/fullhp)
 	sprite.material.set_shader_parameter("flash_brightness", 1.0)
 	if dmgtween and dmgtween.is_running():
 		dmgtween.kill()
@@ -121,27 +113,30 @@ func damageAnimation():
 	dmgtween.tween_property(sprite.material, "shader_parameter/flash_brightness", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func _ready() -> void:
-	contactDamager.position.y -= 500
+	global_position = Vector2(390.0/2, 70)
+	contactDamager.disabled = true
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Events.flseye_shield_broken.connect(func(): shield_broken())
 	Saves.data["ever_met_flseye"] = true
 	dotScale = dot.scale
-	var bar1PreSize = hpbar1.size.x
-	hpbar.size.x *= fullhp / 3.5
-	hpbar1.size.x = hpbar.size.x + 8.0
-	var bar1NewSize = hpbar1.size.x
-	hpbar1.position.x -= (bar1NewSize - bar1PreSize) / 2
-	hpbar2.size.x = hpbar.size.x
-	fullsize = hpbar.size.x
 	await get_tree().create_timer(4.0, false).timeout
-	contactDamager.position.y += 500
-	Events.boss_animation_finished.emit()
+	contactDamager.disabled = false
+	get_tree().get_first_node_in_group("background").flseye_animation_finished()
+	get_tree().get_first_node_in_group("foreground").flseye_animation_finished()
+	add_bar()
 	moving = true
 	hitbox.disabled = false
 	square1.visible = true
 	square2.visible = true
 	shotTimer.start()
 	shieldcd.start()
+
+const barScene := preload("res://UI/bosshpbar/bosshpbar.tscn")
+var healthbar: Object
+func add_bar():
+	healthbar = barScene.instantiate()
+	get_tree().get_first_node_in_group("bossbars").add_child(healthbar)
+	healthbar.label.text = "FLSEYE"
 
 func _physics_process(_delta: float) -> void:
 	if not raycast_left == null:
@@ -469,10 +464,6 @@ func attackCircle0():
 		bullet.direction = Vector2.RIGHT.rotated(current_angle)
 		bullet.speed = circleSpeed
 		get_parent().add_child(bullet)
-
-func _on_dmgstop_timeout() -> void:
-	ETween = create_tween()
-	ETween.tween_property(hpbar2, "size:x", (fullsize / fullhp) * hp, bar2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func enrage():
 	if enraged == true:

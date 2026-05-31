@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dggfmi4p4wr3t" path="res://UI/bgui/back_ground_ui.gd" id="1_rpx5y"]
 
-[node name="backGroundUI" type="ParallaxBackground" unique_id=2142687779]
+[node name="backGroundUI" type="ParallaxBackground" unique_id=2142687779 groups=["bgui"]]
 layer = -90
 script = ExtResource("1_rpx5y")
 
-[node name="bossBars" type="VBoxContainer" parent="." unique_id=23476077]
+[node name="bossBars" type="VBoxContainer" parent="." unique_id=23476077 groups=["bossbars"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

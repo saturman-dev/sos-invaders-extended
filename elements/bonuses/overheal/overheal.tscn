@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bg4abwub8ndo" path="res://elements/bonuses/overheal/overheal.gd" id="1_6tfdu"]
 [ext_resource type="Texture2D" uid="uid://4d6u251a4gex" path="res://textures/bonusOverheal.png" id="2_nkutp"]
+[ext_resource type="Texture2D" uid="uid://lu554cummowp" path="res://textures/bonus.png" id="3_uu0ka"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1g8u"]
 atlas = ExtResource("2_nkutp")
@@ -49,6 +50,78 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpoca"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bim4r"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h71em"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rhj7"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of7bj"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk7fa"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(240, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_215jn"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(160, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_481eu"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(80, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ilb"]
+atlas = ExtResource("3_uu0ka")
+region = Rect2(0, 80, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmr14"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bim4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h71em")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rhj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of7bj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk7fa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_215jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_481eu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7ilb")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 14.0
+}]
+
 [node name="overheal" type="Area2D" unique_id=562743611 groups=["bonuses"]]
 collision_layer = 0
 collision_mask = 32
@@ -67,10 +140,18 @@ autoplay = "default"
 frame_progress = 0.6460932
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=263828784]
+visible = false
 rect = Rect2(-35, -34, 70, 68)
 
 [node name="hitbox" type="CollisionShape2D" parent="." unique_id=1227902090]
+visible = false
 shape = SubResource("CircleShape2D_wpoca")
 debug_color = Color(0.3259149, 0.99999994, 0.29823202, 0.42000002)
+
+[node name="bonusGained" type="AnimatedSprite2D" parent="." unique_id=1291229702]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_bmr14")
+autoplay = "default"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

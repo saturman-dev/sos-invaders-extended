@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cgxlit60vbwto" path="res://UI/HUD/liver_0_bar.tscn" id="7_g81w3"]
 [ext_resource type="PackedScene" uid="uid://b3om6yevg4tt7" path="res://UI/HUD/stamina_bar.tscn" id="9_g81w3"]
 
-[node name="UI" type="CanvasLayer" unique_id=1498106473]
+[node name="UI" type="CanvasLayer" unique_id=1498106473 groups=["ui"]]
 layer = 71
 script = ExtResource("1_3frql")
 

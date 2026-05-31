@@ -47,6 +47,12 @@ endedLivesManager=""
 lives_bar=""
 stamina_bar=""
 ptBonusesContainer=""
+level=""
+background=""
+foreground=""
+ui=""
+bgui=""
+bossbars=""
 
 [input]
 

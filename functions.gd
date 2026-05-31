@@ -389,3 +389,18 @@ func set_neo(object: Object, NEO: int):
 		object.fullhp *=  (1 + NEO)
 		object.sethp()
 		#print(object.fullhp)
+
+const flseye = preload("res://elements/flseye/flseye.tscn")
+func spawn_boss(type: String):
+	if type == "flseye":
+		
+		var bg = get_tree().get_first_node_in_group("background")
+		var fg = get_tree().get_first_node_in_group("foreground")
+		bg.flseye_animation()
+		await fg.flseye_animation()
+		
+		var Flseye = flseye.instanciate()
+		get_tree().get_first_node_in_group("level").add_child(Flseye)
+		
+	else:
+		print("INCORRECT BOSS TYPE")

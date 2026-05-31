@@ -43,11 +43,16 @@ const bulletScene = preload("res://elements/wertue/wertueBeam.tscn")
 var direction := int([-1, 1].pick_random())
 var defspeed := 25.0
 var speed := defspeed
-var yspeed = 15.0
+var yspeed = defyspeed
+var defyspeed = 15.0
 var raycast = false
 var dirChanging := 40.0
 
 func _process(delta: float) -> void:
+	if global_position.y < 15:
+		yspeed = defyspeed * 5
+	else:
+		yspeed = defyspeed
 	if raycast == true:
 		speed -= dirChanging * delta
 		if speed < -defspeed:
@@ -74,6 +79,7 @@ func damageAnimation():
 	dmgtween.tween_property(sprite.material, "shader_parameter/flash_brightness", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func _ready() -> void:
+	global_position = Vector2(randf_range(54, get_viewport_rect().size.x - 55), -26)
 	Saves.data["ever_met_wertue"] = true
 	wingLeft.left()
 	

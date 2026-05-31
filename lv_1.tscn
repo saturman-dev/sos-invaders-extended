@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bblyfxu1uls66" path="res://elements/floor/floor.tscn" id="5_iefvx"]
 [ext_resource type="PackedScene" uid="uid://dsbux52b0ajtv" path="res://UI/Education/education.tscn" id="6_c4o0f"]
 
-[node name="lv1" type="Node2D" unique_id=2077539137]
+[node name="lv1" type="Node2D" unique_id=2077539137 groups=["level"]]
 script = ExtResource("1_c4o0f")
 
 [node name="backGroundUI" parent="." unique_id=2142687779 instance=ExtResource("2_3c8v5")]
@@ -30,3 +30,8 @@ position = Vector2(405, 0)
 position = Vector2(0, -245)
 
 [node name="Education" parent="." unique_id=31455989 instance=ExtResource("6_c4o0f")]
+
+[node name="spawntimer" type="Timer" parent="." unique_id=1146965206]
+wait_time = 0.5
+
+[connection signal="timeout" from="spawntimer" to="." method="_on_spawntimer_timeout"]

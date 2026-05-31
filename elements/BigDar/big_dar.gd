@@ -34,9 +34,14 @@ const bulletScene = preload("res://elements/bobm/bobm.tscn")
 
 var direction := int([-1, 1].pick_random())
 var speed := 20.0
-var yspeed = 15.0
+var defyspeed = 15.0
+var yspeed = defyspeed
 
 func _process(delta: float) -> void:
+	if global_position.y < 15:
+		yspeed = defyspeed * 5
+	else:
+		yspeed = defyspeed
 	global_position.x += direction * speed * delta * SPEEDMOD
 	global_position.y += yspeed * delta * (1 + ((SPEEDMOD - 1) / 2))
 	yspeed -= delta * 1.0 if yspeed > 0.1 else 0.0
@@ -49,6 +54,9 @@ func _on_shot_timer_timeout() -> void:
 var enabled = true
 
 func _ready() -> void:
+	
+	global_position = Vector2(randf_range(20, get_viewport_rect().size.x - 20), -13)
+	
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	
 	Saves.data["ever_met_bigdar"] = true
@@ -159,7 +167,7 @@ func spawn_bullet():
 	if died == false:
 		Functions.sfx_play("res://sounds/bigDarFire.mp3")
 		var bullet = bulletScene.instantiate()
-		bullet.global_position += global_position + Vector2(0, 5.0)
-		get_parent().add_child(bullet)
+		bullet.global_position = global_position + Vector2(0, 5.0)
 		bullet.SPEEDMOD = SPEEDMOD
 		bullet.NEO = NEO
+		get_parent().add_child(bullet)

@@ -9,10 +9,12 @@ var NEO := 0
 const rowstep = 15.0
 var direction := int([-1, 1].pick_random())
 var speed := 30.0
-var yspeed = 17.5
+var yspeed = defyspeed
+var defyspeed = 15.0
 var amnt = 0
 
 func _ready() -> void:
+	global_position = Vector2(randf_range(70, get_viewport_rect().size.x - 70), -13)
 	amnt = randi_range(0, 5)
 	if amnt == 3 or amnt == 4:
 		$villain1.queue_free()
@@ -21,6 +23,10 @@ func _ready() -> void:
 		$villain4.queue_free()
 
 func _process(delta: float) -> void:
+	if global_position.y < 15:
+		yspeed = defyspeed * 5
+	else:
+		yspeed = defyspeed
 	var ySPEEDMOD = 1 + ((SPEEDMOD - 1) / 5)
 	global_position.x += direction * speed * delta * SPEEDMOD
 	global_position.y += yspeed * delta * ySPEEDMOD

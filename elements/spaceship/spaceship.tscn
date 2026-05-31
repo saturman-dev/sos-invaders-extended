@@ -3,10 +3,27 @@
 [ext_resource type="Script" uid="uid://bfc70u5w4dnn6" path="res://elements/spaceship/spaceship.gd" id="1_44xa4"]
 [ext_resource type="Texture2D" uid="uid://k5ahhlm4kbx3" path="res://textures/nickname.png" id="1_uypcs"]
 [ext_resource type="Texture2D" uid="uid://cquyi4h5570h8" path="res://textures/nicknameTrio.png" id="2_a7wa0"]
+[ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_sjns3"]
 [ext_resource type="Texture2D" uid="uid://b5lrd0wgykfk8" path="res://textures/dmg.png" id="3_yhm16"]
 [ext_resource type="Texture2D" uid="uid://cp5jumw332i01" path="res://textures/shootEffect.png" id="4_oe7yg"]
 [ext_resource type="Texture2D" uid="uid://lu554cummowp" path="res://textures/bonus.png" id="6_g1k5q"]
 [ext_resource type="PackedScene" uid="uid://ck7ioqmrjuli0" path="res://elements/trail/trail.tscn" id="7_g1k5q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_do6qd"]
+shader = ExtResource("3_sjns3")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 2.0
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0
+shader_parameter/gradient_scale = 5.0
+shader_parameter/blend_strength = 0.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y7ddx"]
 atlas = ExtResource("3_yhm16")
@@ -181,11 +198,10 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_a7wa0")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=96751793]
+material = SubResource("ShaderMaterial_do6qd")
 sprite_frames = SubResource("SpriteFrames_x3hdb")
-animation = &"dmg"
+animation = &"def"
 autoplay = "def"
-frame = 2
-frame_progress = 0.2698379
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1340923221]
 scale = Vector2(2.5, 2.5)
@@ -205,9 +221,13 @@ frame = 2
 frame_progress = 1.0
 
 [node name="bonusGained" type="AnimatedSprite2D" parent="." unique_id=2106915875]
-scale = Vector2(2, 2)
+visible = false
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_7ulr5")
+animation = &"new_animation"
 autoplay = "default"
+frame = 8
+frame_progress = 1.0
 
 [node name="Trail" parent="." unique_id=1681703106 instance=ExtResource("7_g1k5q")]
 width = 15.0

@@ -4,10 +4,10 @@ extends Area2D
 var Atween: Tween
 var Btween: Tween
 var circleTime := 0.75
-var circleSizeUp := 1.25
+var circleSizeUp := 1.5
 var circleSizeDown := 0.75
-var circleAlphaUp := 0.7
-var circleAlphaDown := 0.3
+var circleAlphaUp := 0.5
+var circleAlphaDown := 0.1
 
 var speed := 40.0
 
@@ -21,8 +21,24 @@ func _physics_process(delta: float) -> void:
 	for body in bodies:
 		if body.has_method("bonusHeal") and Globals.overlives < 3:
 			body.bonusOverheal()
-			queue_free()
+			animate()
 
+@onready var sprite := $sprite
+@onready var outline := $outline
+@onready var hitbox := $hitbox
+@onready var effect := $bonusGained
+var anim := false
+func animate():
+	if anim: return
+	anim = true
+	speed = 0
+	hitbox.disabled = true
+	circle.hide()
+	sprite.hide()
+	outline.hide()
+	effect.play("new_animation")
+	await effect.animation_finished
+	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

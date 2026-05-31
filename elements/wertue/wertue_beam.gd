@@ -207,9 +207,9 @@ func _handle_damage_logic():
 			if body.is_invincible == false:
 				body.takeDmg()
 		if body.has_method("beam_dmg"):
-			body.beam_dmg(5.0 * get_parent().SPEEDMOD)
+			body.beam_dmg(5.0 * SPEEDMOD)
 		if body.has_method("explode"):
-			body.get_hit()
+			body.get_hit(true)
 	if get_overlapping_bodies().size() > 0 and is_attacking == true:
 		hitted = true
 

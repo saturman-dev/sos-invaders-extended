@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dssg0qatvkw4y"]
+
+[ext_resource type="Script" uid="uid://bhc7f2hb6pu5o" path="res://elements/bulletLinker/bullet_linker.gd" id="1_yq2qx"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yq2qx"]
+blend_mode = 1
+
+[node name="bulletLinker" type="Node2D" unique_id=2092908305]
+script = ExtResource("1_yq2qx")
+
+[node name="glowline" type="Line2D" parent="." unique_id=1597767856]
+material = SubResource("CanvasItemMaterial_yq2qx")
+
+[node name="line" type="Line2D" parent="." unique_id=867110995]
+z_index = -1
+
+[node name="area" type="Area2D" parent="." unique_id=778459068]
+collision_layer = 0
+collision_mask = 2

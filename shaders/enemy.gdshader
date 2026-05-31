@@ -18,7 +18,9 @@ uniform float blend_strength : hint_range(0.0, 1.0) = 0.0; // 0.0 - нет гр�
 uniform float rage_intensity : hint_range(0.0, 1.0) = 0.0; 
 uniform vec4 rage_color : source_color = vec4(1.0, 0.0, 0.1, 1.0); 
 
-uniform float flash_brightness : hint_range(0.0, 1.0) = 0.0; // Получение урона
+// --- НАСТРОЙКА ВСПЫШКИ УРОНА (Hit Flash) ---
+uniform float flash_brightness : hint_range(0.0, 1.0) = 0.0; // Сила вспышки урона
+uniform vec4 flash_color : source_color = vec4(1.0, 1.0, 1.0, 1.0); // ЦВЕТ ВСПЫШКИ (По дефолту белый)
 
 void fragment() {
 	vec2 uv = UV;
@@ -75,7 +77,8 @@ void fragment() {
 	final_outline_color.rgb = mix(final_outline_color.rgb, vec3(1.0, 0.0, 0.0), rage_intensity * 0.5);
 	
 	// 4. ЭФФЕКТ СВЕЧЕНИЯ ПРИ УРОНЕ (Hit Flash)
-	vec3 flash_rgb = mix(base_with_rage, vec3(1.0, 1.0, 1.0), flash_brightness);
+	// Заменили vec3(1.0, 1.0, 1.0) на flash_color.rgb
+	vec3 flash_rgb = mix(base_with_rage, flash_color.rgb, flash_brightness);
 	vec4 final_sprite = vec4(flash_rgb, sprite_color.a);
 	
 	// 5. СБОРКА ФИНАЛЬНОГО ЦВЕТА

@@ -13,7 +13,7 @@ shader_parameter/hue_offset = 0.0
 shader = ExtResource("2_x85p0")
 shader_parameter/hue_offset = 0.0
 
-[node name="bg1" type="ParallaxBackground" unique_id=266714418]
+[node name="bg1" type="ParallaxBackground" unique_id=266714418 groups=["background"]]
 script = ExtResource("1_qjax3")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="." unique_id=1880675626]

@@ -17,7 +17,6 @@ func _ready() -> void:
 	shieldown()
 	Events.flseye_shield_made.connect(func(): shieldup())
 	Events.flseye_shield_broken.connect(func(): shieldown())
-	Events.boss_damaged.connect(func(health_percent): damage(health_percent))
 	defred = red.size.x
 	defcolor = red.color
 	add.color = Color.SKY_BLUE

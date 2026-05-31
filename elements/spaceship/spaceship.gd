@@ -167,6 +167,7 @@ func bonusTrio():
 	playBonusGained()
 	get_parent().addBonus("trio")
 	bonusGained.modulate = Color("FF00DD")
+	bonusEffect(Color("FF00DD"))
 	bonusGained.frame = 0
 	bonusGained.play("new_animation")
 	Globals.bonusTrioActive = true
@@ -186,6 +187,7 @@ func bonusSpeed():
 	playBonusGained()
 	get_parent().addBonus("speed")
 	bonusGained.modulate = Color("00FFF6")
+	bonusEffect(Color("00FFF6"))
 	bonusGained.frame = 0
 	bonusGained.play("new_animation")
 	Globals.bonusSpeedActive = true
@@ -200,6 +202,7 @@ func bonusSpeed():
 func bonusHeal():
 	Functions.sfx_play("res://sounds/bonusHeal.mp3")
 	bonusGained.modulate = Color("00ff22")
+	bonusEffect(Color("00ff22"))
 	bonusGained.frame = 0
 	bonusGained.play("new_animation")
 	Globals.change_lives(1)
@@ -209,12 +212,14 @@ func bonusOverheal():
 	bonusGained.modulate = Color("ffff00")
 	bonusGained.frame = 0
 	bonusGained.play("new_animation")
+	bonusEffect(Color("ffff00"))
 	Globals.change_overlives(1)
 
 func bonusSplash():
 	playBonusGained()
 	get_parent().addBonus("splash")
 	bonusGained.modulate = Color("ff0009")
+	bonusEffect(Color("ff0009"))
 	bonusGained.frame = 0
 	bonusGained.play("new_animation")
 	shit.modulate = Color.DEEP_SKY_BLUE
@@ -223,3 +228,26 @@ func bonusSplash():
 	Globals.bonusSplashActive = false
 	shit.modulate = Color.WHITE
 	playBonusEnded()
+
+var bontw: Tween
+var bntimes = 10
+func bonusEffect(color: Color):
+	sprite.material.set_shader_parameter("flash_color", color)
+	
+	if bontw and bontw.is_running():
+		bontw.kill()
+		bntimes = 0
+	
+	var trgt = sprite.material
+	var flsh = "shader_parameter/flash_brightness"
+	var interval = 0.05
+	
+	bntimes = 10
+	while bntimes > 0:
+		bontw = create_tween()
+		bontw.tween_property(trgt, flsh, 1.0, 0.0)
+		bontw.tween_interval(interval)
+		bontw.chain().tween_property(trgt, flsh, 0.0, 0.0)
+		bontw.tween_interval(interval)
+		await bontw.finished
+		bntimes -= 1

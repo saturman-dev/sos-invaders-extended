@@ -19,6 +19,9 @@ func tick_sound(volume: float = 0.0, hitstop: bool = false):
 	Functions.sfx_play("res://sounds/bobmTick.mp3", volume - 0.0, 1.0, hitstop)
 
 func _ready() -> void:
+	if NEO > 0:
+		sprite.material.set_shader_parameter("enable_outline", true)
+		hits = 2
 	ghosts()
 	var defsize = sprite.scale
 	sprite.scale *= 4
@@ -69,19 +72,29 @@ func explode():
 	Functions.sfx_play("res://sounds/bobmExplosion.mp3")
 	var Expl = explosion.instantiate()
 	Expl.global_position = global_position
-	get_parent().add_child(Expl)
 	Expl.SPEEDMOD = SPEEDMOD
+	get_parent().add_child(Expl)
 	Globals.shake_str += 4
 	queue_free()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
+var hits := 1
 var getting_hit = false
-func get_hit():
+func get_hit(instant := false):
 	if getting_hit: return
 	getting_hit = true
-	warn()
+	hits -= 1
+	sprite.material.set_shader_parameter("enable_outline", false)
+	if hits > 0:
+		if instant == true:
+			pass
+		else:
+			getting_hit = false
+			return
+	tick_sound(5.0, true)
+	sprite.play("warn")
 	Functions.hitstop(0.5)
 	await Functions.unhitstopped
 	Globals.shake_str += 2
