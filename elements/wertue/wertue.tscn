@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ccs21h62xd5bk" path="res://textures/enrageEffect.png" id="6_a763e"]
 [ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_7rjny"]
 [ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="8_h36qe"]
+[ext_resource type="Texture2D" uid="uid://bacc4rq30qa2o" path="res://textures/interruptable.png" id="10_2pupj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p4ll1"]
 resource_local_to_scene = true
@@ -86,8 +87,77 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw2qr"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgt0q"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5621"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuvqd"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fporb"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq85o"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lh21"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76ixf"]
+atlas = ExtResource("10_2pupj")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r6nku"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw2qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgt0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5621")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuvqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fporb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq85o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lh21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76ixf")
+}],
+"loop": false,
+"name": &"int",
+"speed": 10.0
+}]
+
 [node name="wertue" type="CharacterBody2D" unique_id=73654707 groups=["enemies"]]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.15, 0.15)
 collision_layer = 4
 collision_mask = 259
 script = ExtResource("1_3hj3l")
@@ -160,6 +230,12 @@ bus = &"SFX"
 scale = Vector2(6.35, 6.35)
 
 [node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("3_f7mvn")]
+
+[node name="blink" type="AnimatedSprite2D" parent="." unique_id=2052278763]
+modulate = Color(0.6509804, 1, 0.9490196, 1)
+scale = Vector2(15, 15)
+sprite_frames = SubResource("SpriteFrames_r6nku")
+autoplay = "default"
 
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_havno"]
 [ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_y2la4"]
 [ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="6_xaife"]
+[ext_resource type="PackedScene" uid="uid://co5s2qrotioho" path="res://elements/interzone/inter_zone.tscn" id="8_apj7r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xaife"]
 shader = ExtResource("1_6u462")
@@ -104,7 +105,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0j076"]
 radius = 56.0
-height = 158.0
+height = 173.33333
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7s1q"]
 atlas = ExtResource("4_y2la4")
@@ -130,7 +131,7 @@ animations = [{
 
 [node name="a3" type="CharacterBody2D" unique_id=73654707 groups=["enemies"]]
 material = SubResource("ShaderMaterial_xaife")
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.15, 0.15)
 collision_layer = 4
 collision_mask = 259
 script = ExtResource("1_y2la4")
@@ -188,5 +189,11 @@ size_horizontal = 28.0
 [node name="hpfull" parent="." unique_id=39752477 instance=ExtResource("2_y2la4")]
 y_offset = 25
 
+[node name="interZone" parent="." unique_id=1288284615 instance=ExtResource("8_apj7r")]
+modulate = Color(0.9647059, 0.16470589, 0.8117647, 1)
+position = Vector2(0, 60)
+scale = Vector2(1.5, 1.5)
+
 [connection signal="timeout" from="dmgstop" to="." method="_on_dmgstop_timeout"]
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="body_entered" from="interZone" to="." method="_on_inter_zone_body_entered"]

@@ -10,8 +10,8 @@ const particle = preload("res://elements/particles/speed_particle.tscn")
 const ENEMY_CATALOG = {
 	"darsin": {"cost": 10, "min_diffi": 0, "scene": preload("res://elements/vln_group.tscn")},
 	"bigdar": {"cost": 15, "min_diffi": 20, "scene": preload("res://elements/BigDar/big_dar.tscn")},
-	"a3": {"cost": 20, "min_diffi": 55, "scene": preload("res://elements/a3/a_3.tscn")},
-	"wertue": {"cost": 30, "min_diffi": 100, "scene": preload("res://elements/wertue/wertue.tscn")}
+	"a3": {"cost": 30, "min_diffi": 55, "scene": preload("res://elements/a3/a_3.tscn")},
+	"wertue": {"cost": 45, "min_diffi": 100, "scene": preload("res://elements/wertue/wertue.tscn")}
 }
 
 var is_boss_fight := false
@@ -45,12 +45,12 @@ func _process(delta: float) -> void:
 		growth_modifier = 0.5
 	
 	diffi += 1.0 * growth_modifier * delta
-	spawn_credits += diffi * 2 * delta
+	spawn_credits += diffi * 0.5 * delta * growth_modifier
 	Globals.diffi = diffi
 	_check_boss_timeline()
 	_check_dynamic_intros()
 	
-	spawn_timer.wait_time = clamp((7 - diffi * 0.02) / growth_modifier, clamp(5.0 / growth_modifier, 0.5, 11.0), 12.0)
+	spawn_timer.wait_time = clamp((8.0 - diffi * 0.02) / growth_modifier, clamp(7.5 / growth_modifier, 1.0, 11.0), 12.0)
 
 func _execute_spawn(enemy_scene: PackedScene, neo_tier: int) -> void:
 	if not enemy_scene: return
@@ -132,6 +132,7 @@ func _ready() -> void:
 	Globals.kills = 0
 	Globals.timeSeconds = 0
 	Globals.points = 0
+	Globals.pointMultiplyer = 1.0
 	Globals.oldMaxKills = Saves.data["max_kills"]
 	Globals.oldMaxPoints = Saves.data["score"]
 	Globals.oldMaxTime = Saves.data["max_time"]

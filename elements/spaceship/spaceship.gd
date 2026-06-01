@@ -16,10 +16,10 @@ var defcd  = cd
 var INVINCIBLE := 1.5
 var dmg = 1.0
 
-@export var speed = 160.0
+@export var speed = 200.0
 @export var acceleration = speed * 8
 @export var dash_speed := 900.0
-@export var dash_duration := 0.09
+@export var dash_duration := 0.1
 
 var dash_time_left := 0.0
 var dash_direction := Vector2.UP
@@ -124,9 +124,10 @@ func shot():
 var is_invincible := false
 
 func takeDmg():
+	if is_invincible: return
+	is_invincible = true
 	Functions.sfx_play("res://sounds/damage.mp3")
 	Functions.flash(0.0, 1.0, 0.05, 0.7, Color("a60000"))
-	is_invincible = true
 	set_collision_layer_value(2, false)
 	Globals.apply_shake(7.0)
 	if Globals.overlives == 0:

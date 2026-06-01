@@ -3,6 +3,14 @@ extends Node2D
 var speed = 1.0
 var scrollStrength := 270.0
 
+@onready var scrollPoints := $scrollsManager/scrollPoints
+@onready var scrollKills := $scrollsManager/scrollKills
+@onready var scrollTime := $scrollsManager/scrollTime
+@onready var scrollBonus := $scrollsManager/scrollBonus
+@onready var scrollDamage := $scrollsManager/scrollDamage
+@onready var scrollSpeed := $scrollsManager/scrollSpeed
+@onready var scrollMan := $scrollsManager
+
 var fade_tween: Tween
 var fade_tween1: Tween
 var fade_tween2: Tween
@@ -11,6 +19,7 @@ var move_tween2: Tween
 
 @onready var menuu := $menu
 @onready var strlogo := $CanvasLayer/StrLogo
+@onready var music := $Title
 var setting: Object
 var extr: Object
 
@@ -39,9 +48,86 @@ func _ready() -> void:
 	strl = create_tween()
 	strl.tween_property(strlogo, "global_position:y", -20.0, 2.0).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
+	scrollBonus.modulate.a = 0.0
+	scrollDamage.modulate.a = 0.0
+	scrollSpeed.modulate.a = 0.0
+	scrollPoints.modulate.a = 0.0
+	scrollKills.modulate.a = 0.0
+	scrollTime.modulate.a = 0.0
+	scrollDamage.text = "[color=#181d7ab3]   DAMAGE MOD: [/color][color=#f61900]%s[/color]" % (Functions.floor_to(Saves.data["damage_modifier"]) + "x")
+	scrollBonus.text = "[color=#181d7ab3]   BONUS MOD: [/color][color=#f7f700]%s[/color]" % (Functions.floor_to(Saves.data["bonus_modifier"]) + "x")
+	scrollSpeed.text = "[color=#181d7ab3]   SPEED MOD: [/color][color=#00d2db]%s[/color]" % (Functions.floor_to(Saves.data["speed_modifier"]) + "x")
+	scrollPoints.text = "[color=#181d7ab3]   MAX POINTS: [/color][color=#f61900]%s[/color]" % str(int(Saves.data["score"]))
+	scrollKills.text = "[color=#181d7ab3]   MAX KILLS: [/color][color=#f7f700]%s[/color]" % str(int(Saves.data["max_kills"]))
+	scrollTime.text = "[color=#181d7ab3]   MAX TIME: [/color][color=#00d2db]%s[/color]" % Functions.time_to(Saves.data["max_time"])
+	shimmer()
+
+var shimmer_time := 4.0
+var shimmer_speed := 0.3
+var shimmer_between := 0.01
+var st: Tween
+var stt: Tween
+func shimmer():
+	
+	stt = create_tween()
+	stt.tween_property(scrollPoints, "modulate:a", 1.0, shimmer_speed)
+	stt.tween_interval(shimmer_between)
+	stt.parallel().tween_property(scrollKills, "modulate:a", 1.0, shimmer_speed)
+	stt.tween_interval(shimmer_between)
+	stt.parallel().tween_property(scrollTime, "modulate:a", 1.0, shimmer_speed)
+	
+	while self:
+		st = create_tween()
+		st.tween_interval(shimmer_time)
+		
+		st.chain().tween_property(scrollDamage, "modulate:a", 1.0, shimmer_speed)
+		st.parallel().tween_property(scrollPoints, "modulate:a", 0.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollBonus, "modulate:a", 1.0, shimmer_speed)
+		st.parallel().tween_property(scrollKills, "modulate:a", 0.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollSpeed, "modulate:a", 1.0, shimmer_speed)
+		st.parallel().tween_property(scrollTime, "modulate:a", 0.0, shimmer_speed)
+		
+		st.tween_interval(shimmer_time)
+		
+		st.chain().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed)
+		st.parallel().tween_property(scrollPoints, "modulate:a", 1.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed)
+		st.parallel().tween_property(scrollKills, "modulate:a", 1.0, shimmer_speed)
+		st.tween_interval(shimmer_between)
+		
+		st.parallel().tween_property(scrollSpeed, "modulate:a", 0.0, shimmer_speed)
+		st.parallel().tween_property(scrollTime, "modulate:a", 1.0, shimmer_speed)
+		
+		await st.finished
+
+func unshimmer():
+	if st and st.is_running():
+		st.kill()
+	if stt and stt.is_running():
+		stt.kill()
+	st = create_tween()
+	st.tween_property(scrollPoints, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollDamage, "modulate:a", 0.0, shimmer_speed / 2)
+	st.tween_interval(shimmer_between)
+	st.tween_property(scrollKills, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollBonus, "modulate:a", 0.0, shimmer_speed / 2)
+	st.tween_interval(shimmer_between)
+	st.tween_property(scrollTime, "modulate:a", 0.0, shimmer_speed / 2)
+	st.parallel().tween_property(scrollSpeed, "modulate:a", 0.0, shimmer_speed / 2)
+
+
 func music_fade_in():
+	await get_tree().process_frame
+	if not music: return
+	music.play()
 	var mt = create_tween()
-	mt.tween_property($Title, "volume_db", 0.0, 0.5)
+	mt.tween_property(music, "volume_db", 0.0, 0.25)
 
 func staart():
 	var lv_1 = lv_1_scene.instantiate()
@@ -59,12 +145,14 @@ func staart():
 
 func instart():
 	menuu.queue_free()
-	$Title.queue_free()
+	music.queue_free()
 	strlogo.queue_free()
+	scrollMan.modulate.a = 0.0
 	staart()
 
 func start():
-	Functions.fade_music($Title, 1.0)
+	unshimmer()
+	Functions.fade_music(music, 1.0)
 	if strl and strl.is_running:
 		strl.kill()
 	var s = create_tween()
@@ -83,6 +171,8 @@ func extra():
 	var t = create_tween()
 	t.tween_property(ecanv, "offset:x", 0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	t.parallel().tween_property(mcanv, "offset:x", scrollStrength, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(scrollMan, "position:x", scrollStrength/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(scrollMan, "rotation_degrees", -45, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(speed / 2, false).timeout
 	menuu.queue_free()
 	extr.able = true
@@ -100,6 +190,8 @@ func settings():
 	var t = create_tween()
 	t.tween_property(scanv, "offset:x", 0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	t.parallel().tween_property(mcanv, "offset:x", -scrollStrength, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(scrollMan, "position:x", -scrollStrength/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(scrollMan, "rotation_degrees", -45, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(speed / 2, false).timeout
 	menuu.queue_free()
 	settingss.able = true
@@ -118,6 +210,8 @@ func back(direction: int):
 		var t = create_tween()
 		t.tween_property(mcanv, "offset:x", 0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		t.parallel().tween_property(scanv, "offset:x", scrollStrength*direction, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		t.parallel().tween_property(scrollMan, "position:x", scrollStrength*direction/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		t.parallel().tween_property(scrollMan, "rotation_degrees", 0.0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		await get_tree().create_timer(speed / 2, false).timeout
 		setting.queue_free()
 		menuu.able = true
@@ -132,6 +226,8 @@ func back(direction: int):
 		var t = create_tween()
 		t.tween_property(mcanv, "offset:x", 0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		t.parallel().tween_property(ecanv, "offset:x", scrollStrength*direction, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		t.parallel().tween_property(scrollMan, "position:x", scrollStrength*direction/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		t.parallel().tween_property(scrollMan, "rotation_degrees", 0.0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		await get_tree().create_timer(speed / 2, false).timeout
 		extr.queue_free()
 		menuu.able = true

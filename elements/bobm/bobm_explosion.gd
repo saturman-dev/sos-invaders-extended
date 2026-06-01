@@ -69,3 +69,7 @@ func _ready() -> void:
 	hitbox.disabled = true
 	await CTween.finished
 	queue_free()
+
+func set_hue_offset(hue: float):
+	okrestnosti.material.set_shader_parameter("hue_offset", hue)
+	znak.material.set_shader_parameter("hue_offset", hue)

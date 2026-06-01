@@ -370,7 +370,7 @@ animations = [{
 }]
 
 [node name="flseye" type="CharacterBody2D" unique_id=73654707 groups=["bosses", "enemies"]]
-scale = Vector2(0.35, 0.35)
+scale = Vector2(0.3, 0.3)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_1jm5v")

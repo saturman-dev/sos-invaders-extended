@@ -38,17 +38,13 @@ var defyspeed = 8.0
 var yspeed = defyspeed
 
 func _process(delta: float) -> void:
-	if global_position.y < 15:
-		yspeed = defyspeed * 5
-	else:
-		yspeed = defyspeed
 	global_position.x += direction * speed * delta * SPEEDMOD
-	global_position.y += yspeed * delta * (1 + ((SPEEDMOD - 1) / 2))
+	global_position.y += yspeed * delta * (1 + ((SPEEDMOD - 1) / 5))
 	yspeed -= delta * 1.0 if yspeed > 0.1 else 0.0
 
 func _on_shot_timer_timeout() -> void:
 		shot()
-		shotTimer.wait_time = randf_range(5.0, 7.5) / SPEEDMOD
+		shotTimer.wait_time = randf_range(3.5, 5.0) / SPEEDMOD
 		shotTimer.start()
 
 var enabled = true
@@ -56,7 +52,9 @@ var enabled = true
 func _ready() -> void:
 	
 	global_position = Vector2(randf_range(20, get_viewport_rect().size.x - 20), -13)
-	
+	yspeed = defyspeed * 10
+	var spawntw = create_tween()
+	spawntw.tween_property(self, "yspeed", defyspeed, 0.5 / 1 + ((SPEEDMOD - 1) / 5))
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	
 	Saves.data["ever_met_bigdar"] = true
@@ -90,8 +88,8 @@ func periodic_dmg(dmg: float):
 			Functions.add_bonus("splash", global_position)
 			bonus_blocked = true
 		Functions.dmg(self, fullhp)
-		PtbonusesManager.ptbonus(givepts, "EXPLODED", Color("18ff3b"))
-		PtbonusesManager.ptbonus(givepts/2, "SELFHARM", Color("d03e79"))
+		PtbonusesManager.ptbonus(givepts * (NEO + 1), "EXPLODED", Color("18ff3b"))
+		PtbonusesManager.ptbonus(givepts * 2 * (NEO + 1), "BIG DARWIN AWARD", Color("18ff3b").darkened(0.5))
 
 @onready var dmgcldown2 := $dmgCldown2
 func beam_dmg(dmg: float):
@@ -152,9 +150,10 @@ var offpos = 6.5
 var color1 := Color.BLACK
 var color2 := Color.GREEN_YELLOW
 
+@onready var defscale = sprite.scale
+
 var stw: Tween
 func shot():
-	var defscale = sprite.scale
 	if stw and stw.is_running():
 		stw.kill()
 	stw = create_tween()

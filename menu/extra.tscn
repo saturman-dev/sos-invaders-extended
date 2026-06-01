@@ -229,6 +229,23 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_altx8"]
+resource_local_to_scene = true
+shader = ExtResource("12_altx8")
+shader_parameter/enable_outline = false
+shader_parameter/outline_thickness = 7.0000003325
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 0.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_337yk"]
 resource_local_to_scene = true
 shader = ExtResource("12_altx8")
@@ -240,24 +257,11 @@ shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
 shader_parameter/gradient_speed = 5.0000002375
 shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 0.0
 shader_parameter/rage_intensity = 0.0
 shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qua0r"]
-resource_local_to_scene = true
-shader = ExtResource("12_altx8")
-shader_parameter/enable_outline = false
-shader_parameter/outline_thickness = 7.0000003325
-shader_parameter/color_solid = Color(1, 1, 1, 1)
-shader_parameter/use_gradient = true
-shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
-shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
-shader_parameter/gradient_speed = 5.0000002375
-shader_parameter/gradient_scale = 10.0
-shader_parameter/rage_intensity = 0.0
-shader_parameter/rage_color = Color(1, 0, 0.1, 1)
-shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofxwr"]
 atlas = ExtResource("12_f11j0")
@@ -843,6 +847,15 @@ theme_override_font_sizes/font_size = 6
 text = "special note"
 horizontal_alignment = 2
 
+[node name="a3" type="ColorRect" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info/specialNote/a3" unique_id=43953686]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
 [node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3" unique_id=236776686]
 layout_mode = 2
 mouse_filter = 1
@@ -878,10 +891,10 @@ scale = Vector2(0.135, 0.135)
 texture = ExtResource("9_f3lx7")
 
 [node name="wingRight" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=1902289196 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_337yk")
+material = SubResource("ShaderMaterial_altx8")
 
 [node name="wingLeft" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=2043273702 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_qua0r")
+material = SubResource("ShaderMaterial_337yk")
 scale = Vector2(-1, 1)
 
 [node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon" unique_id=1190709882]
@@ -1479,6 +1492,8 @@ vertical_alignment = 1
 [connection signal="pressed" from="CanvasLayer2/back" to="." method="_on_back_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/specialNote/bigdar/bigdar" to="." method="_on_bigdar_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/specialNote/bigdar/bigdar" to="." method="_on_bigdar_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info/specialNote/a3/a3" to="." method="_on_a_3_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info/specialNote/a3/a3" to="." method="_on_a_3_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info/specialNote/wertue/wertue" to="." method="_on_wertue_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info/specialNote/wertue/wertue" to="." method="_on_wertue_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand/Control/Sprite2D/flseyeExpand" to="." method="_on_flseye_expand_pressed"]

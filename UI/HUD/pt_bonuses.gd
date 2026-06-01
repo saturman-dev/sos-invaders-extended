@@ -2,7 +2,7 @@ extends VBoxContainer
 
 @export var max_bonuses := 5
 @export var custom_font: Font
-@export var font_size := 18
+@export var font_size := 14
 
 func add(text: String):
 	if get_child_count() >= max_bonuses:

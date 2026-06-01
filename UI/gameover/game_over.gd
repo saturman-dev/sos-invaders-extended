@@ -252,6 +252,7 @@ func unlimit():
 	already_unlimited = true
 	show_and_flash(unlimited)
 	show_and_flash(damageCurrent)
+	Functions.sfx_play("res://sounds/newBest.mp3", 2.0, 1.2)
 
 func animate_damage_bar():
 	var target_val = Saves.data["damage_modifier"]

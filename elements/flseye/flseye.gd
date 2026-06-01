@@ -52,12 +52,12 @@ const flbulletScene = preload("res://elements/flseye/flbullet.tscn")
 
 
 var direction := int([-1, 1].pick_random())
-var defspeed := 50.0
+var defspeed := 70
 var speed := defspeed
 var yspeed = 7.5
 var defyspeed = yspeed
 var raycast = false
-var dirChanging := 80.0
+var dirChanging := 110
 var dirYup = false
 var dotScale := Vector2.ZERO
 
@@ -171,6 +171,8 @@ var exploded = false
 var explosionsTime = 4.0
 var afterExplosionsTime = 2.0
 func die():
+	if died: return
+	died = true
 	shake_str = 0.0
 	shieldcd.stop()
 	Globals.bgStay = true
@@ -425,7 +427,7 @@ func attackMovingBeams():
 
 var circleCount := 12
 var betweenCircles := 0.4
-var circleSpeed := 80.0
+var circleSpeed := 120.0
 var sqt: Tween
 func attackCircle():
 	stopped = true
@@ -485,8 +487,10 @@ func unenrage():
 	enraged = false
 	sprite.modulate = Color.WHITE
 
+var broken_shields := 0
 func shield_broken():
-	PtbonusesManager.ptbonus(5, "GUARD BREAK", Color("7200ff"))
+	broken_shields += 1
+	PtbonusesManager.ptbonus(40 / broken_shields, "GUARD BREAK", Color("7200ff"))
 	shieldcd.start()
 
 func _on_shield_cd_timeout() -> void:

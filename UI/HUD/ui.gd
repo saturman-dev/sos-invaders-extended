@@ -9,7 +9,7 @@ var ptoff = 0.2
 @onready var highest := $scoreV/scoreH/highscore
 @onready var pts1 := $scoreV/scoreH/score
 @onready var pts2 := $Label2
-@onready var multi1 := $VBoxContainer2/HBoxContainer/VBoxContainer/multiplyer
+@onready var multi1 := $scoreV/scoreH/multiplyer
 @onready var multi2 := $multiplyer2
 @onready var bonuses := $everythingButTime/thewholedown/staminaHpBonuses/bonusesH/bonusesV
 @onready var diffLabel = $VBoxContainer3/HBoxContainer/diffLabel
@@ -68,6 +68,8 @@ func update_points(points: int):
 		ATween.chain().tween_property(pts2, "scale", Vector2.ONE, ptoff)
 		ATween.parallel().tween_property(pts2, "modulate", Color.WHITE, pton + ptoff)
 
+var multiOffset := Vector2.ZERO
+var multiShakeStr := 1.25
 var diffsec = 0.01
 var multiplyer := 1.0
 func _process(delta: float) -> void:
@@ -75,8 +77,26 @@ func _process(delta: float) -> void:
 	if Globals.diffi > diffsec:
 		diffLabel.text = str("Difficulty: ", str(round(diffsec * 100) / 100))
 		diffsec += 0.01
-	#multiplyer += delta / 5
-	#update_multi(multiplyer)
+	multi2.text = Functions.floor_to(Globals.pointMultiplyer) + "x"
+	multi2.global_position.x = multi1.global_position.x + multiOffset.x
+	multi2.global_position.y = multi1.global_position.y + (multi1.size.y - (multi2.scale.y * multi1.size.y)) / 2.0 + multiOffset.y
+	if Globals.pointMultiplyer == 1.0:
+		multiOffset = Vector2.ZERO
+		multi2.scale = Vector2(0.75, 0.75)
+		multi2.add_theme_color_override("font_color", Color.WEB_GRAY)
+	elif Globals.pointMultiplyer < 2.0:
+		multiOffset = Vector2.ZERO
+		multi2.scale = Vector2(1, 1)
+		multi2.add_theme_color_override("font_color", Color.WHITE)
+	elif Globals.pointMultiplyer < 3.0:
+		multiOffset = Vector2.ZERO
+		multi2.scale = Vector2(1.35, 1.35)
+		multi2.add_theme_color_override("font_color", Color.ORANGE)
+	elif Globals.pointMultiplyer >= 3.0:
+		multi2.scale = Vector2(1.7, 1.7)
+		multi2.add_theme_color_override("font_color", Color.RED)
+		multiOffset.x = randf_range(-multiShakeStr * 5, multiShakeStr * 5)
+		multiOffset.y = randf_range(-multiShakeStr, multiShakeStr)
 
 func update_multi(multi: float):
 	multi1.text = "x%.2f" % multi

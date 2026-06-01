@@ -31,13 +31,14 @@ const linkerScene = preload("res://elements/bulletLinker/bullet_linker.tscn")
 @onready var cldown := $cldown
 @onready var shotTimer := $shotTimer
 @onready var hitbox := $CollisionShape2D
+@onready var interZone := $interZone
 
 # HPBAR SETUP
 
 
 
 var direction := int([-1, 1].pick_random())
-var defspeed := 40.0
+var defspeed := 32.0
 var speed := defspeed
 var yspeed = defyspeed
 var defyspeed = 12.5
@@ -45,10 +46,6 @@ var raycast = false
 var dirChanging := 80.0
 
 func _process(delta: float) -> void:
-	if global_position.y < 15:
-		yspeed = defyspeed * 5
-	else:
-		yspeed = defyspeed
 	if raycast == true:
 		speed -= dirChanging * delta
 		if speed < -defspeed:
@@ -68,12 +65,16 @@ var enabled = true
 
 func _ready() -> void:
 	global_position = Vector2(randf_range(51, get_viewport_rect().size.x - 51), -16)
+	yspeed = defyspeed * 10
+	var spawntw = create_tween()
+	spawntw.tween_property(self, "yspeed", defyspeed, 0.5 / 1 + ((SPEEDMOD - 1) / 10))
+	
 	sprite.material.set_shader_parameter("flash_modifier", 0.0)
 	Saves.data["ever_met_a3"] = true
 	
 	await hpbar.setted_default
 	sethp()
-	shotTimer.wait_time = 1.0 / SPEEDMOD
+	shotTimer.wait_time = 0.5 / SPEEDMOD
 	shotTimer.start()
 
 func sethp():
@@ -96,7 +97,7 @@ func periodic_dmg(dmg: float):
 	if dmgcldown.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			PtbonusesManager.ptbonus(givepts, "EXPLODED", Color("18ff3b"))
+			PtbonusesManager.ptbonus(givepts * 2 * (NEO + 1), "EXPLODED", Color("18ff3b"))
 		dmgcldown.wait_time = 1.0
 		dmgcldown.start()
 
@@ -105,7 +106,7 @@ func beam_dmg(dmg: float):
 	if dmgcldown2.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			PtbonusesManager.ptbonus(givepts * 2, "MADE IN HEAVEN", Color("00ffdc"))
+			PtbonusesManager.ptbonus(givepts * 3 * (NEO + 1), "MADE IN HEAVEN", Color("00ffdc"))
 		dmgcldown2.wait_time = 0.5
 		dmgcldown2.start()
 
@@ -173,9 +174,11 @@ func shot():
 	if died == false:
 		sprite.play("preshot3")
 		Functions.sfx_play("res://sounds/A3Reload2.mp3", -10.0)
-	await get_tree().create_timer(0.5 / SPEEDMOD, false).timeout
+		interZone.get_ready()
+	await get_tree().create_timer(0.75 / SPEEDMOD, false).timeout
 	sprite.play("def")
 	spawn_bullets()
+	interZone.get_unready()
 	ATween = create_tween().set_parallel(true)
 	ATween.tween_property(self, "position", Vector2(0.0, -offpos), 0.10 / SPEEDMOD).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await ATween.finished
@@ -184,6 +187,9 @@ func shot():
 
 func spawn_bullets():
 	if died == false:
+		if interrupted == true:
+			interrupted = false
+			return
 		Functions.sfx_play("res://sounds/A3Fire.mp3", -7.5)
 		var bullet = bulletScene.instantiate()
 		bullet.global_position += global_position + Vector2(0, 5.0)
@@ -217,3 +223,23 @@ func spawn_bullets():
 			linker.base_width *= SPEEDMOD
 			get_parent().add_child(linker)
 			linker.tracked_bullets = allbullets
+
+var interrupted := false
+const explScene = preload("res://elements/bobm/bobm_explosion.tscn")
+func interrupt():
+	interZone.get_unready()
+	Functions.sfx_play("res://sounds/unterruptable.mp3", 4.0, randf_range(1.1, 1.3), true)
+	Functions.hitstop(0.4)
+	await Functions.unhitstopped
+	if NEO == 0:
+		Functions.dmg(self, fullhp)
+	PtbonusesManager.ptbonus(givepts * 2 * (NEO + 1), "FOLDED", color)
+	interrupted = true
+	Globals.apply_shake(4.0)
+	var explosion = explScene.instantiate()
+	explosion.global_scale *= 1.2
+	explosion.global_position = global_position
+	explosion.SPEEDMOD = SPEEDMOD
+	get_parent().add_child(explosion)
+	explosion.set_hue_offset(0.65)
+	Functions.sfx_play("res://sounds/bobmExplosion.mp3")

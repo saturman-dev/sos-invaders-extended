@@ -113,7 +113,14 @@ func fade_music(player: AudioStreamPlayer, duration: float):
 
 
 func sfx_play(soundPath, volume: float = 0.0, pitch: float = 1.0, play_on_hitstop: bool = false, reverb_power: float = 0.0):
-	var player = AudioStreamPlayer.new()
+	
+	var player: Object
+	
+	if play_on_hitstop == true:
+		player = AudioStreamPlayer.new()
+	else:
+		player = ScaledAudioPlayer.new()
+	
 	if reverb_power == 0.0:
 		player.bus = "SFX"
 	else:
@@ -386,7 +393,7 @@ func set_neo(object: Object, NEO: int):
 	if not "fullhp" in object:
 		print("ERROR: VARIABLE 'fullhp' NOT FOUND WHEN SETTING NEO")
 	else:
-		object.fullhp *=  (1 + NEO)
+		object.fullhp *=  (1 + float(NEO) / 2)
 		object.sethp()
 		#print(object.fullhp)
 

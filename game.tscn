@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ccgr3yvi0bmri" path="res://bg_1.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bktmndbpcxpil" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bfralhkxlh1nj" path="res://menu.tscn" id="2_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c3m1t2vsioi1" path="res://UI/scrollTextLine/scroll_text_line.tscn" id="2_j5wjh"]
 [ext_resource type="AudioStream" uid="uid://choif40dlwxeb" path="res://sounds/Title.mp3" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://cdse5spa6ogel" path="res://fg_1.tscn" id="5_7jktm"]
 [ext_resource type="Texture2D" uid="uid://bo1g1rpdcg3x7" path="res://textures/StrLogo.png" id="6_eow3j"]
@@ -10,6 +11,72 @@
 
 [node name="game" type="Node2D" unique_id=2020904288]
 script = ExtResource("1_feb5d")
+
+[node name="scrollsManager" type="Node2D" parent="." unique_id=742336038]
+position = Vector2(195, 120)
+
+[node name="scrollPoints" parent="scrollsManager" unique_id=2063077015 instance=ExtResource("2_j5wjh")]
+offset_left = -176.0
+offset_top = 120.0
+offset_right = -87.0
+offset_bottom = 131.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "POINTS  "
+speed = 20.0
+
+[node name="scrollKills" parent="scrollsManager" unique_id=284631148 instance=ExtResource("2_j5wjh")]
+offset_left = -136.0
+offset_top = 120.0
+offset_right = -47.0
+offset_bottom = 131.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "KILLS  "
+speed = -20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="scrollTime" parent="scrollsManager" unique_id=640993946 instance=ExtResource("2_j5wjh")]
+offset_left = -96.0
+offset_top = 120.0
+offset_right = -7.0
+offset_bottom = 131.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "TIME  "
+speed = 20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="scrollDamage" parent="scrollsManager" unique_id=1631322643 instance=ExtResource("2_j5wjh")]
+offset_left = -176.0
+offset_top = 120.0
+offset_right = -87.0
+offset_bottom = 131.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "KILLS  "
+speed = 20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="scrollBonus" parent="scrollsManager" unique_id=1643202077 instance=ExtResource("2_j5wjh")]
+offset_left = -136.0
+offset_top = 120.0
+offset_right = -47.0
+offset_bottom = 131.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "POINTS  "
+speed = -20.0
+
+[node name="scrollSpeed" parent="scrollsManager" unique_id=1830055661 instance=ExtResource("2_j5wjh")]
+offset_left = -96.0
+offset_top = 120.0
+offset_right = -7.0
+offset_bottom = 131.0
+rotation = -0.7853982
+scale = Vector2(2, 2)
+text = "TIME  "
+speed = 20.0
 
 [node name="menu" parent="." unique_id=2077539137 instance=ExtResource("2_fc0e3")]
 
@@ -24,7 +91,6 @@ position = Vector2(195, 120)
 [node name="Title" type="AudioStreamPlayer" parent="." unique_id=1916955955]
 stream = ExtResource("4_fc0e3")
 volume_db = -80.0
-autoplay = true
 bus = &"Music"
 parameters/looping = true
 

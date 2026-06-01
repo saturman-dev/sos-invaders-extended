@@ -63,7 +63,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="yellwait" type="Timer" parent="." unique_id=59300858]
-wait_time = 0.35
+wait_time = 0.25
 one_shot = true
 
 [node name="afterdead" type="Timer" parent="." unique_id=1185811146]

@@ -21,12 +21,12 @@ var shake_fad := 3.0
 var diffi := 0.0
 
 # STATS
-var maxBonusModifier := 2.0
-var maxDamageModifier := 3.5
-var maxSpeedModifier := 2.5
-var maxBonusModifierNeedKills := 400
-var maxDamageModifierNeedPoints := 3000
-var maxSpeedModifierNeedSeconds := 600
+var maxBonusModifier := 2.5
+var maxDamageModifier := 3.0
+var maxSpeedModifier := 2.0
+var maxBonusModifierNeedKills := 500
+var maxDamageModifierNeedPoints := 4000
+var maxSpeedModifierNeedSeconds := 420
 var oldMaxPoints := 0
 var oldMaxKills := 0
 var oldMaxTime := 0
@@ -36,6 +36,9 @@ var oldSpeedMod := 0.0
 var points := 0
 var kills := 0
 var timeSeconds := 0
+
+var pointMultiplyer := 1.0
+var pointMultiWaiting := false
 
 var notification_running := false
 
@@ -70,7 +73,10 @@ func _process(delta: float) -> void:
 		else:
 			dashable = false
 		#print(currentStaminas)
-
+	
+	# POINT MULTIPLYER
+	if game_running == true and pointMultiWaiting == false:
+		pointMultiplyer = clamp(pointMultiplyer - delta * 0.33, 1.0, 3.0)
 
 func setDefHp():
 	lives = def_hp
@@ -81,15 +87,26 @@ var lives := def_hp
 var deflives := def_hp
 var overlives := 0
 
+var waitptw: Tween
 func change_points(diff: int):
-	points += diff
-	pts += diff
+	points += diff * pointMultiplyer
+	pts += diff * pointMultiplyer
 	Events.points_added.emit(diff)
 	Events.points_changed.emit(points)
+	
 	if Saves.data["ever_got_overheal_bonus"] == false and Saves.data["killed_enemies"] >= needForOverheal:
 		Saves.data["ever_got_overheal_bonus"] = true
 		Functions.notify("New \"Overheal\" bonus added!!", "Go catch it!")
 		Functions.add_bonus("overheal", Vector2(195.0, 70.0))
+	
+	pointMultiplyer = clamp(pointMultiplyer + diff / 25.0 * pointMultiplyer, 1.0, 3.0)
+	if pointMultiplyer >= 3.0:
+		if waitptw and waitptw.is_running(): waitptw.kill()
+		pointMultiWaiting = true
+		waitptw = create_tween()
+		waitptw.tween_interval(1.5)
+		waitptw.tween_callback(func(): pointMultiWaiting = false)
+
 
 func change_lives(diff: int):
 	deflives += diff

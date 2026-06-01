@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cg321wcdfpwpc"]
+
+[ext_resource type="Script" uid="uid://d0knbn5yrgpjv" path="res://elements/bonuses/magnet/bonus_magnet.gd" id="1_mdstj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0qqdg"]
+radius = 42.047592
+
+[node name="bonusMagnet" type="Area2D" unique_id=106444193]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_mdstj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2107033695]
+shape = SubResource("CircleShape2D_0qqdg")

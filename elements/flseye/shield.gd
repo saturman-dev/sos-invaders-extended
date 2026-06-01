@@ -60,7 +60,7 @@ func die():
 	if not hitbox:
 		return
 	Events.flseye_shield_broken.emit()
-	Functions.addRandomBonus(self, 3.0)
+	Functions.addRandomBonus(self, 100)
 	died = true
 	hitbox.queue_free()
 	ATween = create_tween()

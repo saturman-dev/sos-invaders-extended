@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 45.0
+var speed = 140.0
 var direction := Vector2.RIGHT
 var sizeout := 2.0
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	t = create_tween()
 	t.tween_property(sprite, "scale", defsize, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.chain().tween_property(self, "scale", Vector2(0, 0), sizeout).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	t.parallel().tween_property(self, "speed", 0.0, sizeout).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	t.parallel().tween_property(self, "speed", 0.0, sizeout) #.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	t.chain().tween_callback(queue_free)
 
 func _physics_process(delta: float) -> void:

@@ -3,6 +3,71 @@
 [ext_resource type="Script" uid="uid://cndcfgjvtpmpn" path="res://elements/bobm/bobm.gd" id="1_43eun"]
 [ext_resource type="Texture2D" uid="uid://ca7o6vjcraxb6" path="res://textures/bobm.png" id="1_upaf8"]
 [ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_4inwx"]
+[ext_resource type="Texture2D" uid="uid://bacc4rq30qa2o" path="res://textures/interruptable.png" id="4_ipw72"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io1dw"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n0rf"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adtfg"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybfjg"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20eav"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tu0yw"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehlkk"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb7rq"]
+atlas = ExtResource("4_ipw72")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_clb54"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_io1dw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n0rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adtfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybfjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20eav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tu0yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehlkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pb7rq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_upaf8"]
 atlas = ExtResource("1_upaf8")
@@ -40,6 +105,7 @@ shader_parameter/blend_strength = 0.0
 shader_parameter/rage_intensity = 0.0
 shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipw72"]
 atlas = ExtResource("1_upaf8")
@@ -129,6 +195,14 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_43eun")
 
+[node name="blink" type="AnimatedSprite2D" parent="." unique_id=1565856595]
+modulate = Color(1, 0.4862745, 0.2, 1)
+position = Vector2(1.6666665, -2.0000002)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_clb54")
+autoplay = "default"
+frame_progress = 0.8515649
+
 [node name="outline" type="AnimatedSprite2D" parent="." unique_id=1003039304]
 position = Vector2(0.095, 0.125)
 scale = Vector2(0.23, 0.23)
@@ -146,11 +220,13 @@ animation = &"2"
 autoplay = "def"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1246345991]
+visible = false
 scale = Vector2(1.2, 1.2)
 shape = SubResource("CircleShape2D_io1dw")
 debug_color = Color(0.99607843, 0, 0.20392157, 0.5882353)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=156828600]
+visible = false
 scale = Vector2(0.305, 0.305)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -43,6 +43,7 @@ animations = [{
 radius = 3.0
 
 [node name="a3bullet" type="CharacterBody2D" unique_id=1100232692]
+scale = Vector2(0.8, 0.8)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_bky8w")
@@ -54,8 +55,10 @@ autoplay = "default"
 frame_progress = 0.32424203
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1000598997]
+visible = false
 shape = SubResource("CircleShape2D_6m2hd")
 debug_color = Color(0.99607843, 0, 0.20392157, 0.5882353)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1685424050]
+visible = false
 scale = Vector2(0.305, 0.305)

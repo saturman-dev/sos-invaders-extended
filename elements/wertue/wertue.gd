@@ -6,7 +6,7 @@ var SPEEDMOD := 1.0
 var NEO := 0
 
 # FOR DAMAGE
-var fullhp = 25.0
+var fullhp = 20.0
 var hp = fullhp
 @onready var sprite := $AnimatedSprite2D
 @onready var hpbar := $hpfull
@@ -37,11 +37,12 @@ const bulletScene = preload("res://elements/wertue/wertueBeam.tscn")
 @onready var enrageEffect := $enrageEffect
 @onready var enrageLoop := $ENRAGED
 @onready var hitbox := $CollisionShape2D
+@onready var blink := $blink
 
 
 
 var direction := int([-1, 1].pick_random())
-var defspeed := 25.0
+var defspeed := 20.0
 var speed := defspeed
 var yspeed = defyspeed
 var defyspeed = 13.5
@@ -49,10 +50,6 @@ var raycast = false
 var dirChanging := 40.0
 
 func _process(delta: float) -> void:
-	if global_position.y < 15:
-		yspeed = defyspeed * 5
-	else:
-		yspeed = defyspeed
 	if raycast == true:
 		speed -= dirChanging * delta
 		if speed < -defspeed:
@@ -80,6 +77,9 @@ func damageAnimation():
 
 func _ready() -> void:
 	global_position = Vector2(randf_range(54, get_viewport_rect().size.x - 55), -26)
+	yspeed = defyspeed * 10
+	var spawntw = create_tween()
+	spawntw.tween_property(self, "yspeed", defyspeed, 0.5 / 1 + ((SPEEDMOD - 1) / 4))
 	Saves.data["ever_met_wertue"] = true
 	wingLeft.left()
 	
@@ -108,7 +108,7 @@ func periodic_dmg(dmg: float):
 	if dmgcldown.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			PtbonusesManager.ptbonus(givepts, "EXPLODED", Color("18ff3b"))
+			PtbonusesManager.ptbonus(givepts * 2 * (NEO + 1), "EXPLODED", Color("18ff3b"))
 		dmgcldown.wait_time = 1.0
 		dmgcldown.start()
 
@@ -117,8 +117,8 @@ func beam_dmg(dmg: float):
 	if dmgcldown2.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			PtbonusesManager.ptbonus(givepts, "MADE IN HEAVEN", Color("00ffdc"))
-			PtbonusesManager.ptbonus(givepts, "FRIENDLY BEAMING", Color("1873fe"))
+			PtbonusesManager.ptbonus(givepts * (NEO + 1), "MADE IN HEAVEN", Color("00ffdc"))
+			PtbonusesManager.ptbonus(givepts * 3 * (NEO + 1), "FRIENDLY BEAMING", Color("1873fe"))
 		dmgcldown2.wait_time = 0.5
 		dmgcldown2.start()
 
@@ -131,6 +131,13 @@ func die():
 	died = true
 	enrageLoop.stop()
 	remove_from_group("enemies")
+	
+	if warning == true:
+		Functions.sfx_play("res://sounds/unterruptable.mp3", 4.0, randf_range(1.15, 1.35), true)
+		Functions.hitstop(0.9)
+		await Functions.unhitstopped
+		PtbonusesManager.ptbonus(givepts * (NEO + 1), "LOSS OF CONTROL", color.darkened(0.5))
+	
 	Events.enemy_killed.emit()
 	Functions.big_enemy_explosion(self)
 	Saves.data["killed_wertues"] += 1
@@ -197,7 +204,7 @@ func enrage():
 	if enraged == true or died == true:
 		return
 	Functions.sfx_play("res://sounds/ENRAGE.mp3", -5.0, 0.8)
-	PtbonusesManager.ptbonus(givepts / 2, "ENRAGED", Color.RED)
+	PtbonusesManager.ptbonus(givepts, "ENRAGED", Color.RED)
 	enrageLoop.play()
 	enraged = true
 	enrageEffect.visible = true
@@ -222,3 +229,10 @@ func unenrage():
 	unetween.tween_property(sprite.material, "shader_parameter/rage_intensity", 0.0, 0.5)
 	unetween.parallel().tween_property(wingLeft.material, "shader_parameter/rage_intensity", 0.0, 0.5)
 	unetween.parallel().tween_property(wingRight.material, "shader_parameter/rage_intensity", 0.0, 0.5)
+
+var warning := false
+func interruptable():
+	blink.speed_scale = SPEEDMOD if enraged == false else SPEEDMOD / 2
+	blink.play("int")
+	Functions.sfx_play("res://sounds/unterruptable.mp3", -2.0, randf_range(0.8, 0.9))
+	warning = true

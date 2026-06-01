@@ -127,6 +127,7 @@ func _on_quit_mouse_exited() -> void:
 	quitAnim.play("unhover")
 
 func _on_quit_pressed() -> void:
+	Globals.instart = false
 	Functions.stop_all_sfx()
 	get_tree().paused = false
 	get_tree().reload_current_scene()

@@ -42,6 +42,7 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider.has_method("takeDmg"):
 			explode()
+			PtbonusesManager.ptbonus(5, "SELFHARM", Color("d03e79"))
 	if global_position.y >= 100.0 and global_position.y < 137.5 and second == false:
 		sprite.play("2")
 		second = true

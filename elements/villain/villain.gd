@@ -62,7 +62,7 @@ func periodic_dmg(dmg: float):
 	if dmgcldown.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			PtbonusesManager.ptbonus(givepts, "EXPLODED", Color("18ff3b"))
+			PtbonusesManager.ptbonus(givepts * 2 * (NEO + 1), "EXPLODED", Color("18ff3b"))
 		dmgcldown.wait_time = 1.0
 		dmgcldown.start()
 
@@ -71,7 +71,7 @@ func beam_dmg(dmg: float):
 	if dmgcldown2.time_left <= 0:
 		Functions.dmg(self, dmg)
 		if hp <= 0:
-			PtbonusesManager.ptbonus(givepts * 2, "MADE IN HEAVEN", Color("00ffdc"))
+			PtbonusesManager.ptbonus(givepts * 3 * (NEO + 1), "MADE IN HEAVEN", Color("00ffdc"))
 		dmgcldown2.wait_time = 0.5
 		dmgcldown2.start()
 
@@ -126,13 +126,13 @@ var FTween: Tween
 var offpos = 5.0
 
 var stw: Tween
+@onready var defscale = sprite.scale
 
 func shot():
 	if not is_instance_valid(player): return
 	
 	AIMING = true
 	
-	var defscale = sprite.scale
 	if stw and stw.is_running():
 		stw.kill()
 	stw = create_tween()

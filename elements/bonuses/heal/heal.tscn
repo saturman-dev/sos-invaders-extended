@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ba3yp044i7mqa" path="res://elements/bonuses/heal/heal.gd" id="1_xno0u"]
 [ext_resource type="Texture2D" uid="uid://cdmi8edk3ityv" path="res://textures/bonusHeal.png" id="2_8f0wi"]
 [ext_resource type="Texture2D" uid="uid://lu554cummowp" path="res://textures/bonus.png" id="3_vunfs"]
+[ext_resource type="PackedScene" uid="uid://cg321wcdfpwpc" path="res://elements/bonuses/magnet/bonus_magnet.tscn" id="4_7rtxe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1g8u"]
 atlas = ExtResource("2_8f0wi")
@@ -156,5 +157,7 @@ animation = &"new_animation"
 autoplay = "default"
 frame = 8
 frame_progress = 1.0
+
+[node name="bonusMagnet" parent="." unique_id=106444193 instance=ExtResource("4_7rtxe")]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

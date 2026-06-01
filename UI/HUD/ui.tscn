@@ -26,18 +26,16 @@ theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
-[node name="multiplyer2" type="Label" parent="." unique_id=1287901546]
-visible = false
-offset_left = 25.0
-offset_top = 14.0
-offset_right = 79.0
-offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("2_kmbvj")
-theme_override_font_sizes/font_size = 7
+[node name="multiplyer2" type="Label" parent="." unique_id=1449358124]
+offset_left = 120.0
+offset_top = 222.0
+offset_right = 142.0
+offset_bottom = 231.0
+theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 12
 text = "x1.00"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1556699986]
-visible = false
 offset_left = 10.0
 offset_top = 5.0
 offset_right = 380.0
@@ -57,14 +55,6 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="multiplyer" type="Label" parent="VBoxContainer2/HBoxContainer/VBoxContainer" unique_id=1909489025]
-visible = false
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_kmbvj")
-theme_override_font_sizes/font_size = 7
-text = "x1.00"
 
 [node name="Control" type="Control" parent="VBoxContainer2/HBoxContainer" unique_id=190741398]
 layout_mode = 2
@@ -137,6 +127,17 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_iho6x")
 theme_override_font_sizes/font_size = 12
 text = "/ *HIGHEST*"
+
+[node name="spacer" type="Control" parent="scoreV/scoreH" unique_id=924760723]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="multiplyer" type="Label" parent="scoreV/scoreH" unique_id=1909489025]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 12
+text = "x1.00"
 
 [node name="everythingButTime" type="VBoxContainer" parent="." unique_id=1076433339]
 anchors_preset = 15

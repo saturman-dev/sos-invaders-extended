@@ -27,8 +27,9 @@ var bigdarInfoText := "[color=18ff3b]BigDar:[/color]   Fires a bomb that leaves 
 var bigdarNoText := "[color=18ff3b]?????[/color]"
 var bigdarSpecialNote := "[color=18ff3b]Shoot the bomb to instantly detonate it! This can be used to defeat groups of enemies.[/color]"
 
-var a3InfoText := "[color=fb00cf]A3:[/color]   Shoots 3 bullets and has a lot of HP. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 1 second."
+var a3InfoText := "[color=fb00cf]A3:[/color]   Shoots 3 bullets in a V-shaped pattern. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 0.5 seconds."
 var a3NoText := "[color=fb00cf]?????[/color]"
+var a3SpecialNote := "[color=fb00cf]Shoot the right spot at the right time to explode it! This also cancels the attack.[/color]"
 
 var wertueInfoText := "[color=00ffdc]Wertue:[/color]   Creates a beam of light that follows the player. The beam stops after a few seconds and activates for a moment, dealing damage. After 3 failed attacks it becomes enraged, doubling its attack speed."
 var wertueNoText := "[color=00ffdc]?????[/color]"
@@ -206,6 +207,8 @@ func _ready() -> void:
 		trioLockedText = trioUnlockedText
 		a3Info.text = a3InfoText
 		a3SpecialButton.text = noSpecial
+		a3SpecialButton.text = yesSpecial
+		a3SpecialButton.add_theme_color_override("font_color", Color("fb00cf"))
 	else:
 		a3Count.visible = false
 		a3Info.text = a3NoText
@@ -280,6 +283,16 @@ func _on_bigdar_mouse_entered() -> void:
 	special.visible = true
 
 func _on_bigdar_mouse_exited() -> void:
+	special.visible = false
+
+
+
+func _on_a_3_mouse_entered() -> void:
+	specialText.text = a3SpecialNote
+	special.visible = true
+
+
+func _on_a_3_mouse_exited() -> void:
 	special.visible = false
 
 

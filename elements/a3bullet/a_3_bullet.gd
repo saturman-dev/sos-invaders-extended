@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 70.0
+var speed = 125.0
 var direction = 0
 var SPEEDMOD = 1.0
 
@@ -17,7 +17,9 @@ func _ready() -> void:
 	var defsize = sprite.scale
 	sprite.scale *= 4 * (1 + (SPEEDMOD - 1) / 2)
 	var t = create_tween()
-	t.tween_property(sprite, "scale", defsize * (1 + (SPEEDMOD - 1) / 2), 0.5 / SPEEDMOD).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(sprite, "scale", defsize * (1 + (SPEEDMOD - 1) / 2), 0.3 / SPEEDMOD).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_callback(func(): set_collision_layer_value(3, true))
+
 
 func _physics_process(delta: float) -> void:
 	global_position.x += speed * delta / 4 * direction * SPEEDMOD
@@ -29,16 +31,24 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func left():
-	direction = -1.2
+	direction = -1
 
 func lleft():
-	direction = -2.5
+	direction = -2
 
 func right():
-	direction = 1.2
+	direction = 1
 
 func rright():
-	direction = 2.5
+	direction = 2
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
+
+const breakParticleScene = preload("res://elements/particles/inter_particle.tscn")
+func get_out():
+	var p = breakParticleScene.instantiate()
+	p.modulate = Color("ff00b6")
+	p.global_position = global_position
+	get_parent().add_child(p)
 	queue_free()

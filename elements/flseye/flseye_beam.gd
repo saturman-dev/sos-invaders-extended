@@ -18,7 +18,7 @@ signal fin
 var enragedColor = Color.RED
 
 var warnTickTime = 0.025
-var movingTime = 4.0
+var movingTime = 2.5
 
 func _ready() -> void:
 	if alter == true:

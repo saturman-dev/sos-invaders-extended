@@ -2,6 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://cajutxuv4x35k" path="res://textures/bobmExplosion.png" id="1_6htae"]
 [ext_resource type="Script" uid="uid://bwo1oyk3hkaw5" path="res://elements/bobm/bobm_explosion.gd" id="1_icl8u"]
+[ext_resource type="Shader" uid="uid://dljubrf2svfww" path="res://bg_1.gdshader" id="2_bwjco"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6p6b7"]
+resource_local_to_scene = true
+shader = ExtResource("2_bwjco")
+shader_parameter/hue_offset = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_icl8u"]
 atlas = ExtResource("1_6htae")
@@ -17,6 +23,11 @@ animations = [{
 "name": &"default",
 "speed": 0.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iw181"]
+resource_local_to_scene = true
+shader = ExtResource("2_bwjco")
+shader_parameter/hue_offset = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6p6b7"]
 atlas = ExtResource("1_6htae")
@@ -44,11 +55,13 @@ script = ExtResource("1_icl8u")
 
 [node name="okrestnosti" type="AnimatedSprite2D" parent="." unique_id=730199100]
 modulate = Color(1, 1, 1, 0.78431374)
+material = SubResource("ShaderMaterial_6p6b7")
 position = Vector2(0.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_bwjco")
 
 [node name="znak" type="AnimatedSprite2D" parent="." unique_id=1532124376]
 modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_iw181")
 position = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_iw181")
 

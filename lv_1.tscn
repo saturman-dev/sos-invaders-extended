@@ -17,7 +17,7 @@ script = ExtResource("1_c4o0f")
 
 [node name="spaceship" parent="." unique_id=1792907597 instance=ExtResource("2_if3o6")]
 position = Vector2(195, 255)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.3, 0.3)
 
 [node name="wallL" parent="." unique_id=1864108173 instance=ExtResource("3_m5q4o")]
 

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b1yisf6hadkd6" path="res://elements/bonuses/speed/speed.gd" id="1_xvjgd"]
 [ext_resource type="Texture2D" uid="uid://dc6jfily6xwa3" path="res://textures/bonusSpeed.png" id="2_xvjgd"]
 [ext_resource type="Texture2D" uid="uid://lu554cummowp" path="res://textures/bonus.png" id="3_elo5k"]
+[ext_resource type="PackedScene" uid="uid://cg321wcdfpwpc" path="res://elements/bonuses/magnet/bonus_magnet.tscn" id="4_deh5u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1g8u"]
 atlas = ExtResource("2_xvjgd")
@@ -153,5 +154,7 @@ modulate = Color(0, 1, 0.9647059, 1)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_deh5u")
 autoplay = "default"
+
+[node name="bonusMagnet" parent="." unique_id=106444193 instance=ExtResource("4_deh5u")]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -8,7 +8,7 @@ var speedmodmod := 2
 signal warrned
 var is_attacking := false
 
-@export var tracking_speed := 20.0
+@export var tracking_speed := 13.0
 var target_pos := Vector2.ZERO
 
 @onready var slabost := $slabost
@@ -102,12 +102,11 @@ func _handle_interruption_trigger():
 	current_state = "INTERRUPTION"
 	warningTime.stop() # КРИТИЧЕСКИ ВАЖНО: сбрасываем старый таймер, предотвращая досрочную атаку!
 	
-	PtbonusesManager.ptbonus(wertue.givepts / 2, "INTERRUPTION", Color.WHITE)
 	interruption = true
 	warning.modulate.a = 1.0
 	
 	# Корректируем масштабы и время
-	laserTime.wait_time *= 2
+	laserTime.wait_time *= 4
 	var warntween = create_tween()
 	warntween.tween_property(self, "scale:x", scale.x * 1.5, warningTime.wait_time)
 	
@@ -118,6 +117,7 @@ func _handle_interruption_trigger():
 # --- БЛОК МИГАНИЯ ПРЕДУПРЕЖДЕНИЙ ---
 
 func _run_warning_flashing():
+	if wertue: wertue.interruptable()
 	aimer.visible = false
 	while current_state == "WARNING":
 		warning.visible = true
@@ -165,6 +165,7 @@ func _on_warning_time_timeout() -> void:
 		laser.visible = true
 		is_attacking = true
 		laserTime.start()
+		if wertue: wertue.warning = false
 		
 		if NEO == 0:
 			Functions.sfx_play("res://sounds/wertueAttack.mp3", -5.0)

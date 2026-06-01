@@ -8,13 +8,16 @@ var NEO := 0
 
 const rowstep = 15.0
 var direction := int([-1, 1].pick_random())
-var speed := 30.0
+var speed := 24.0
 var yspeed = defyspeed
-var defyspeed = 10.0
+var defyspeed = 8.0
 var amnt = 0
 
 func _ready() -> void:
 	global_position = Vector2(randf_range(70, get_viewport_rect().size.x - 70), -13)
+	yspeed = defyspeed * 10
+	var spawntw = create_tween()
+	spawntw.tween_property(self, "yspeed", defyspeed, 0.5 / 1 + ((SPEEDMOD - 1) / 5))
 	amnt = randi_range(0, 5)
 	if amnt == 3 or amnt == 4:
 		$villain1.queue_free()
@@ -23,10 +26,6 @@ func _ready() -> void:
 		$villain4.queue_free()
 
 func _process(delta: float) -> void:
-	if global_position.y < 15:
-		yspeed = defyspeed * 5
-	else:
-		yspeed = defyspeed
 	var ySPEEDMOD = 1 + ((SPEEDMOD - 1) / 5)
 	global_position.x += direction * speed * delta * SPEEDMOD
 	global_position.y += yspeed * delta * ySPEEDMOD

@@ -51,9 +51,16 @@ func _on_body_entered(body: Node2D):
 		Functions.sfx_play("res://sounds/niceBullet.mp3", -15.0, 1.0, true)
 		if body.has_method("warn"):
 			body.get_hit()
+	elif body.has_method("get_out"):
+		body.get_out()
 	if splashing == false:
 		await get_tree().process_frame
 		await get_tree().process_frame
+		queue_free()
+
+func _on_area_entered(area: Area2D):
+	if area.has_method("interrupt"):
+		area.interrupt()
 		queue_free()
 
 func speedup():
