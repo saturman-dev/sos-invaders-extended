@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@export var max_bonuses := 5
+@export var max_bonuses := 7
 @export var custom_font: Font
 @export var font_size := 14
 

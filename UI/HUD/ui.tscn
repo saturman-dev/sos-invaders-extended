@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="2_kmbvj"]
 [ext_resource type="PackedScene" uid="uid://6o0apg1kop5v" path="res://UI/HUD/overlives_bar.tscn" id="3_0xfy4"]
 [ext_resource type="Script" uid="uid://ivg0l8msg6aa" path="res://UI/HUD/time.gd" id="4_8pomw"]
+[ext_resource type="Script" uid="uid://rl3xnbpftogj" path="res://UI/HUD/diffi.gd" id="4_gjbdv"]
 [ext_resource type="PackedScene" uid="uid://s1ut3vxfcggr" path="res://UI/HUD/oberlives_0_bar.tscn" id="5_f67e7"]
 [ext_resource type="PackedScene" uid="uid://c6tqmptox0vky" path="res://UI/HUD/pt_bonuses.tscn" id="5_vw7f5"]
 [ext_resource type="PackedScene" uid="uid://cgxlit60vbwto" path="res://UI/HUD/liver_0_bar.tscn" id="7_g81w3"]
@@ -89,6 +90,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = -2
 alignment = 2
 
 [node name="timeH" type="HBoxContainer" parent="timeV" unique_id=543622971]
@@ -98,8 +100,19 @@ alignment = 1
 [node name="time" type="Label" parent="timeV/timeH" unique_id=787700631]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 12
 text = "0:00"
 script = ExtResource("4_8pomw")
+
+[node name="diffiH" type="HBoxContainer" parent="timeV" unique_id=1194405604]
+layout_mode = 2
+alignment = 1
+
+[node name="diffi" type="Label" parent="timeV/diffiH" unique_id=351012690]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_iho6x")
+text = "0.00%"
+script = ExtResource("4_gjbdv")
 
 [node name="scoreV" type="VBoxContainer" parent="." unique_id=1101744757]
 offset_left = 10.0

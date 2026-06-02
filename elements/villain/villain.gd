@@ -44,6 +44,7 @@ func _ready() -> void:
 func sethp():
 	hp = fullhp
 	hpbar.set_hp(fullhp)
+	if NEO > 0: Saves.data["ever_met_darsin_neo"] = true
 
 func _process(delta: float) -> void:
 	if AIMING and is_instance_valid(player) and NEO > 0:
@@ -95,6 +96,7 @@ func die():
 	Events.enemy_killed.emit()
 	Functions.dead_enemy_explosion(self)
 	Saves.data["killed_darsins"] += 1
+	if NEO > 0: Saves.data["killed_darsins_neo"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1
 	Functions.addRandomBonus(self, 0.33)

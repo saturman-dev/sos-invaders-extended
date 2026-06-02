@@ -370,7 +370,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_idpvd")
 theme_override_font_sizes/font_size = 20
-text = "Time:"
+text = "Difficulty:"
 
 [node name="Time2" type="Label" parent="MarginContainer/VBOX/TIME/Tim/TimeL" unique_id=2112781340]
 layout_mode = 0

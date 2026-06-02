@@ -132,17 +132,16 @@ func animate_kills():
 
 func animate_time():
 	
-	var target_value = Globals.timeSeconds
+	var target_value = Globals.diffi / 150 * 100
 	var duration = 0.05 if is_skipped else clamp((float(target_value) / 55) * 0.5, 0.5, 4.0)
 	
-	var closure_state = {"last_int": Functions.time_to(-1)}
+	var closure_state = {"last_int": -1}
 	
 	current_tween = create_tween()
 	current_tween.tween_method(
 		func(val: float):
-			var current_int = Functions.time_to(val)
-			var total_secs = int(val)
-			timeCountText.text = Functions.time_to(total_secs)
+			var current_int = int(val)
+			timeCountText.text = str(current_int) + "%"
 			
 			if current_int != closure_state["last_int"]:
 				closure_state["last_int"] = current_int
@@ -357,7 +356,7 @@ func _ready() -> void:
 	cooldownsSpeedBar.max_value = Globals.maxSpeedModifier
 	pointsMax.text = "/ " + str(Globals.oldMaxPoints)
 	killsMax.text = "/ " + str(Globals.oldMaxKills)
-	timeMax.text = "/ " + "%02d:%02d" % [int(Globals.oldMaxTime) / 60, int(Globals.oldMaxTime) % 60]
+	timeMax.text = "/ " + str(Globals.oldMaxDiffi) + "%"
 	
 	# BAR SETUP
 	set_bar(bonusChancesBar, bonusChancesCurrent, Globals.oldBonusMod, 1.0, Globals.maxBonusModifier)
@@ -428,7 +427,7 @@ func start_animation():
 	
 	cooldownsSpeed.modulate.a = 1.0
 	precounterSfx()
-	if Globals.timeSeconds > Globals.oldMaxTime:
+	if Globals.diffi > Globals.oldMaxDiffi:
 		show_and_flash(cooldownsSpeed)
 		show_and_flash(timeNewBest)
 		newbestSfx()

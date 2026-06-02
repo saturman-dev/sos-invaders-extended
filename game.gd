@@ -31,6 +31,7 @@ const pause = preload ("res://menu/pause/pause.tscn")
 
 var strl: Tween
 func _ready() -> void:
+	Globals.update_stats()
 	music_fade_in()
 	menuu.able = true
 	menuu.loaded()
@@ -59,7 +60,7 @@ func _ready() -> void:
 	scrollSpeed.text = "[color=#181d7ab3]   SPEED MOD: [/color][color=#00d2db]%s[/color]" % (Functions.floor_to(Saves.data["speed_modifier"]) + "x")
 	scrollPoints.text = "[color=#181d7ab3]   MAX POINTS: [/color][color=#f61900]%s[/color]" % str(int(Saves.data["score"]))
 	scrollKills.text = "[color=#181d7ab3]   MAX KILLS: [/color][color=#f7f700]%s[/color]" % str(int(Saves.data["max_kills"]))
-	scrollTime.text = "[color=#181d7ab3]   MAX TIME: [/color][color=#00d2db]%s[/color]" % Functions.time_to(Saves.data["max_time"])
+	scrollTime.text = "[color=#181d7ab3]   MAX DIFFICULTY: [/color][color=#00d2db]%s[/color]" % (Functions.floor_to(Saves.data["max_diffi"] / 150 * 100) + "%")
 	shimmer()
 
 var shimmer_time := 4.0

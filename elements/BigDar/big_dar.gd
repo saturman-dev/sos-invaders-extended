@@ -67,6 +67,7 @@ func _ready() -> void:
 func sethp():
 	hp = fullhp
 	hpbar.set_hp(fullhp)
+	if NEO > 0: Saves.data["ever_met_bigdar_neo"] = true
 
 func _physics_process(_delta: float) -> void:
 	if not raycast_left == null:
@@ -118,12 +119,13 @@ func die():
 	Events.enemy_killed.emit()
 	Functions.mid_enemy_explosion(self)
 	Saves.data["killed_bigdars"] += 1
+	if NEO > 0: Saves.data["killed_bigdars_neo"] += 1
 	Functions.checkHeal()
 	Saves.data["killed_enemies"] += 1
 	if bonus_blocked == false:
 		Functions.addRandomBonus(self)
 	Functions.sfx_play("res://sounds/bigDarDead.mp3", 0.0, randf_range(0.9, 1.1))
-	Globals.change_points(givepts * (1 + NEO))
+	Globals.change_points(givepts / 2 * (1 + NEO))
 	hitbox.queue_free()
 	raycast_left.queue_free()
 	raycast_right.queue_free()

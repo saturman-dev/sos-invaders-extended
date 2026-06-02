@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dwgbyh6vadcd5" path="res://textures/jarsin.png" id="6_qout1"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="7_xr6wq"]
 [ext_resource type="Texture2D" uid="uid://l2clt1eillu2" path="res://textures/bigDar.png" id="8_gsxb3"]
+[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="8_qua0r"]
 [ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="9_f3lx7"]
 [ext_resource type="Texture2D" uid="uid://h5jirjw1c7uy" path="res://textures/a3.png" id="9_oa725"]
 [ext_resource type="PackedScene" uid="uid://o5xip0drl264" path="res://elements/wertue/wing_right.tscn" id="10_f3lx7"]
@@ -230,7 +231,7 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_altx8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_337yk"]
 resource_local_to_scene = true
 shader = ExtResource("12_altx8")
 shader_parameter/enable_outline = false
@@ -247,7 +248,7 @@ shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_337yk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_txeds"]
 resource_local_to_scene = true
 shader = ExtResource("12_altx8")
 shader_parameter/enable_outline = false
@@ -363,8 +364,74 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0.69917375, 0.46534687, 1.347661e-06, 1)
-shader_parameter/gradient_speed = 5.0000002375
-shader_parameter/gradient_scale = 2.00000009174012
+shader_parameter/gradient_speed = 3.0000001425
+shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 1.0
+shader_parameter/flash_brightness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_113gv"]
+shader = ExtResource("16_337yk")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(0.09411765, 1, 0.23137255, 1)
+shader_parameter/gradient_speed = 3.0000001425
+shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 1.0
+shader_parameter/flash_brightness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o28lg"]
+shader = ExtResource("16_337yk")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(0.9843137, 0, 0.8117647, 1)
+shader_parameter/gradient_speed = 3.0000001425
+shader_parameter/gradient_scale = 10.0
+shader_parameter/blend_strength = 1.0
+shader_parameter/flash_brightness = 0.0
+
+[sub_resource type="Shader" id="Shader_qua0r"]
+code = "shader_type canvas_item;
+
+// --- НАСТРОЙКИ ГРАДИЕНТА ---
+uniform vec4 gradient_color1 : source_color = vec4(1.0, 0.9, 0.0, 1.0); // Желтый
+uniform vec4 gradient_color2 : source_color = vec4(1.0, 0.4, 0.0, 1.0); // Оранжевый
+uniform float gradient_speed : hint_range(0.0, 10.0) = 2.5; 
+uniform float gradient_scale : hint_range(0.1, 10.0) = 1.5; 
+
+// --- НАСТРОЙКИ СМЕШИВАНИЯ ---
+uniform float blend_strength : hint_range(0.0, 1.0) = 0.6; 
+uniform float flash_brightness : hint_range(0.0, 1.0) = 0.0; 
+
+void fragment() {
+ // Вытаскиваем ТОЛЬКО альфа-канал модулейта (управление прозрачностью из Твинов/Инспектора)
+ float node_alpha = COLOR.a;
+
+ // 1. Берем чистый базовый пиксель текстуры (без сторонних искажений цвета)
+ vec4 sprite_color = texture(TEXTURE, UV);
+	
+ // 2. Логика движения градиента
+ float movement = TIME * gradient_speed;
+ float diagonal_pos = (UV.x + UV.y) * gradient_scale + movement;
+ float t = sin(diagonal_pos) * 0.5 + 0.5; 
+	
+ vec3 grad_rgb = mix(gradient_color1.rgb, gradient_color2.rgb, t);
+	
+ // 3. Смешивание с сохранением теней арта
+ vec3 tinted_rgb = sprite_color.rgb * grad_rgb * 1.4;
+ vec3 final_rgb = mix(sprite_color.rgb, tinted_rgb, blend_strength);
+	
+ // 4. Эффект вспышки урона
+ final_rgb = mix(final_rgb, vec3(1.0, 1.0, 1.0), flash_brightness);
+	
+ // 5. СБОРКА ИТОГОВОГО ПИКСЕЛЯ
+ // RGB берем чистый, а итоговую прозрачность умножаем на node_alpha
+ COLOR = vec4(final_rgb, sprite_color.a * node_alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qda8b"]
+shader = SubResource("Shader_qua0r")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(0, 1, 0.8627451, 1)
+shader_parameter/gradient_speed = 3.0000001425
+shader_parameter/gradient_scale = 10.0
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -631,7 +698,6 @@ offset_top = 51.0
 offset_right = 268.0
 offset_bottom = 197.0
 theme = SubResource("Theme_e3bvy")
-scroll_vertical = 176
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer" unique_id=590071018]
 layout_mode = 2
@@ -692,6 +758,12 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin/info" unique_id=807427961]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.76862746, 0.44705883, 1)
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "Darsin"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin/info" unique_id=1421334362]
 layout_mode = 2
@@ -767,6 +839,12 @@ vertical_alignment = 2
 [node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar" unique_id=2132678154]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info" unique_id=660904697]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.09411765, 1, 0.23137255, 1)
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "BigDar"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info" unique_id=364328232]
 layout_mode = 2
@@ -852,6 +930,12 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info" unique_id=1623546352]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9843137, 0, 0.8117647, 1)
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "A3"
+
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info" unique_id=646875474]
 layout_mode = 2
 mouse_filter = 1
@@ -919,10 +1003,10 @@ scale = Vector2(0.135, 0.135)
 texture = ExtResource("9_f3lx7")
 
 [node name="wingRight" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=1902289196 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_altx8")
+material = SubResource("ShaderMaterial_337yk")
 
 [node name="wingLeft" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=2043273702 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_337yk")
+material = SubResource("ShaderMaterial_txeds")
 scale = Vector2(-1, 1)
 
 [node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon" unique_id=1190709882]
@@ -940,6 +1024,12 @@ vertical_alignment = 2
 [node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue" unique_id=1154912040]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info" unique_id=1804261360]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.8627451, 1)
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "Wertue"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info" unique_id=1628967762]
 layout_mode = 2
@@ -1037,6 +1127,12 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=798010904]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54509807, 0.40784314, 1, 1)
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "FLSEYE"
+
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=85419031]
 layout_mode = 2
 mouse_filter = 1
@@ -1104,33 +1200,33 @@ horizontal_alignment = 2
 layout_mode = 2
 mouse_filter = 1
 
-[node name="darsin2" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=394460574]
+[node name="darsinNEO" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=394460574]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="beginner" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2" unique_id=29944612]
+[node name="beginner" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO" unique_id=29944612]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="icon" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2" unique_id=1660040430]
+[node name="icon" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO" unique_id=1660040430]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="bg" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/icon" unique_id=1548483405]
+[node name="bg" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon" unique_id=1548483405]
 position = Vector2(20, 20)
 scale = Vector2(0.4, 0.4)
 texture = SubResource("AtlasTexture_f3em0")
 
-[node name="lock" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/icon" unique_id=2139549035]
+[node name="lock" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon" unique_id=2139549035]
 visible = false
 position = Vector2(20, 20)
 texture = SubResource("AtlasTexture_f11j0")
 
-[node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/icon" unique_id=2084162515]
+[node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon" unique_id=2084162515]
 material = SubResource("ShaderMaterial_qua0r")
 position = Vector2(20, 21)
 scale = Vector2(0.3, 0.3)
@@ -1138,7 +1234,7 @@ sprite_frames = SubResource("SpriteFrames_altx8")
 autoplay = "default"
 frame_progress = 0.27184823
 
-[node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/icon" unique_id=1383061250]
+[node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon" unique_id=1383061250]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 34.0
@@ -1150,37 +1246,33 @@ theme_override_font_sizes/font_size = 6
 text = "0"
 vertical_alignment = 2
 
-[node name="NEO" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/icon" unique_id=630276863]
-material = SubResource("ShaderMaterial_kwec3")
-layout_mode = 0
-offset_left = 42.0
-offset_right = 94.0
-offset_bottom = 7.0
-theme_override_fonts/font = ExtResource("7_xr6wq")
-theme_override_font_sizes/font_size = 6
-text = "Darsin NEO:"
-
-[node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2" unique_id=360404854]
+[node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO" unique_id=360404854]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/info" unique_id=1513685837]
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info" unique_id=630276863]
+material = SubResource("ShaderMaterial_kwec3")
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "Darsin NEO"
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info" unique_id=1513685837]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/line_separation = 2
 theme_override_fonts/normal_font = ExtResource("7_xr6wq")
 theme_override_font_sizes/normal_font_size = 6
 bbcode_enabled = true
-text = "                  enemy info enemy info enemy info enemy info enemy info enemy info "
+text = "enemy info enemy info enemy info enemy info enemy info enemy info "
 fit_content = true
 
-[node name="specialNote" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/info" unique_id=435697632]
+[node name="specialNote" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info" unique_id=435697632]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="darsin" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2/info/specialNote" unique_id=1430503029]
+[node name="darsin" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info/specialNote" unique_id=1430503029]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
 theme_override_fonts/font = ExtResource("7_xr6wq")
@@ -1188,9 +1280,289 @@ theme_override_font_sizes/font_size = 6
 text = "special note"
 horizontal_alignment = 2
 
-[node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin2" unique_id=965579434]
+[node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO" unique_id=965579434]
 layout_mode = 2
 mouse_filter = 2
+
+[node name="bigdarNEO" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=1345625850]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="beginner" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO" unique_id=1449437618]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="icon" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO" unique_id=141244106]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="bg" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon" unique_id=1961809763]
+position = Vector2(20, 20)
+scale = Vector2(0.4, 0.4)
+texture = SubResource("AtlasTexture_f3em0")
+
+[node name="lock" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon" unique_id=1593158017]
+visible = false
+position = Vector2(20, 20)
+texture = SubResource("AtlasTexture_f11j0")
+
+[node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon" unique_id=2070482880]
+material = SubResource("ShaderMaterial_qua0r")
+position = Vector2(20, 20)
+scale = Vector2(0.18, 0.18)
+sprite_frames = SubResource("SpriteFrames_qout1")
+autoplay = "default"
+frame_progress = 0.6202625
+
+[node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon" unique_id=2040136809]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 34.0
+offset_right = 5.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.09411765, 1, 0.23137255, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "0"
+vertical_alignment = 2
+
+[node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO" unique_id=1779933572]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info" unique_id=895444672]
+material = SubResource("ShaderMaterial_113gv")
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "BigDar NEO"
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info" unique_id=761193589]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("7_xr6wq")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "enemy info enemy info enemy info enemy info enemy info enemy info enemy info "
+fit_content = true
+
+[node name="specialNote" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info" unique_id=1985318275]
+layout_mode = 2
+alignment = 2
+
+[node name="bigdar" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info/specialNote" unique_id=475814117]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "special note"
+horizontal_alignment = 2
+
+[node name="bigdarNEO" type="ColorRect" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info/specialNote/bigdar" unique_id=541428160]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO" unique_id=878998982]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="a3NEO" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=1538160749]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="beginner" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO" unique_id=515004073]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="icon" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO" unique_id=649945656]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="bg" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon" unique_id=1499622052]
+position = Vector2(20, 20)
+scale = Vector2(0.4, 0.4)
+texture = SubResource("AtlasTexture_f3em0")
+
+[node name="lock" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon" unique_id=1931536367]
+visible = false
+position = Vector2(20, 20)
+texture = SubResource("AtlasTexture_f11j0")
+
+[node name="enemy" type="AnimatedSprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon" unique_id=1688921994]
+material = SubResource("ShaderMaterial_qua0r")
+position = Vector2(20, 20)
+scale = Vector2(0.18, 0.18)
+sprite_frames = SubResource("SpriteFrames_e3bvy")
+autoplay = "default"
+frame_progress = 0.19687344
+
+[node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon" unique_id=1239000473]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 34.0
+offset_right = 5.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.9843137, 0, 0.8117647, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "0"
+vertical_alignment = 2
+
+[node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO" unique_id=175079835]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info" unique_id=739676820]
+material = SubResource("ShaderMaterial_o28lg")
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9843137, 0, 0.8117647, 1)
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "A3 NEO"
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info" unique_id=556359276]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("7_xr6wq")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "enemy info enemy info enemy info enemy info enemy info enemy info enemy info "
+fit_content = true
+
+[node name="specialNote" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info" unique_id=2019977707]
+layout_mode = 2
+alignment = 2
+
+[node name="a3" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info/specialNote" unique_id=2089743634]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "special note"
+horizontal_alignment = 2
+
+[node name="a3NEO" type="ColorRect" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info/specialNote/a3" unique_id=977921123]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO" unique_id=211393996]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="wertueNEO" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=1252587111]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="beginner" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO" unique_id=2088219509]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="icon" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO" unique_id=743625306]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="bg" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon" unique_id=151745453]
+position = Vector2(20, 20)
+scale = Vector2(0.4, 0.4)
+texture = SubResource("AtlasTexture_f3em0")
+
+[node name="lock" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon" unique_id=441600765]
+visible = false
+position = Vector2(20, 20)
+texture = SubResource("AtlasTexture_f11j0")
+
+[node name="enemy" type="Sprite2D" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon" unique_id=1802192784]
+material = SubResource("ShaderMaterial_qua0r")
+position = Vector2(20, 20)
+scale = Vector2(0.135, 0.135)
+texture = ExtResource("9_f3lx7")
+
+[node name="wingRight" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/enemy" unique_id=509823787 instance=ExtResource("10_f3lx7")]
+material = SubResource("ShaderMaterial_qua0r")
+
+[node name="wingLeft" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/enemy" unique_id=1933847352 instance=ExtResource("10_f3lx7")]
+material = SubResource("ShaderMaterial_qua0r")
+scale = Vector2(-1, 1)
+
+[node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon" unique_id=2068884918]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 34.0
+offset_right = 5.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 1, 0.8627451, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "0"
+vertical_alignment = 2
+
+[node name="info" type="VBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO" unique_id=1978629869]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info" unique_id=749092791]
+material = SubResource("ShaderMaterial_qda8b")
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.8627451, 1)
+theme_override_fonts/font = ExtResource("8_qua0r")
+text = "Wertue NEO"
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info" unique_id=48575469]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("7_xr6wq")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "enemy info enemy info enemy info enemy info enemy info enemy info enemy info "
+fit_content = true
+
+[node name="specialNote" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info" unique_id=999046916]
+layout_mode = 2
+alignment = 2
+
+[node name="wertue" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info/specialNote" unique_id=425302116]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+theme_override_fonts/font = ExtResource("7_xr6wq")
+theme_override_font_sizes/font_size = 6
+text = "special note"
+horizontal_alignment = 2
+
+[node name="wertueNEO" type="ColorRect" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info/specialNote/wertue" unique_id=1196939969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO" unique_id=845456324]
+layout_mode = 2
+mouse_filter = 1
 
 [node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=1900620452]
 custom_minimum_size = Vector2(0, 40)

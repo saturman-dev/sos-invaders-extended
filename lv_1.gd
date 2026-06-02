@@ -62,6 +62,9 @@ func _execute_spawn(enemy_scene: PackedScene, neo_tier: int) -> void:
 	
 	if neo_tier > 0 and is_instance_valid(new_enemy):
 		Functions.set_neo(new_enemy, neo_tier)
+		
+		if Saves.data["greatest_neo_tier"] < neo_tier:
+			Saves.data["greatest_neo_tier"] = neo_tier
 
 func _check_dynamic_intros() -> void:
 	for enemy_name in ENEMY_CATALOG:
@@ -136,6 +139,7 @@ func _ready() -> void:
 	Globals.oldMaxKills = Saves.data["max_kills"]
 	Globals.oldMaxPoints = Saves.data["score"]
 	Globals.oldMaxTime = Saves.data["max_time"]
+	Globals.oldMaxDiffi = Saves.data["max_diffi"]
 	Globals.oldBonusMod = Saves.data["bonus_modifier"]
 	Globals.oldDamageMod = Saves.data["damage_modifier"]
 	Globals.oldSpeedMod = Saves.data["speed_modifier"]
@@ -171,8 +175,8 @@ func gameOver():
 		Saves.data["score"] = Globals.points
 	if Globals.kills > Globals.oldMaxKills:
 		Saves.data["max_kills"] = Globals.kills
-	if Globals.timeSeconds > Globals.oldMaxTime:
-		Saves.data["max_time"] = Globals.timeSeconds
+	if Globals.diffi > Globals.oldMaxDiffi:
+		Saves.data["max_diffi"] = Globals.diffi
 	Globals.update_stats()
 	
 	Functions.stop_all_sfx()

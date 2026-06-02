@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bhr3hnt2lvmod"]
+
+[ext_resource type="Texture2D" uid="uid://dqq8n7ui5v5o6" path="res://textures/window2.png" id="1_1mjf0"]
+[ext_resource type="Script" uid="uid://di4eo1vwinmr3" path="res://menu/neo_selection.gd" id="1_6hu48"]
+[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="2_akkcm"]
+[ext_resource type="Texture2D" uid="uid://ccg2slv5gj30f" path="res://textures/GO.png" id="2_bmefg"]
+[ext_resource type="Texture2D" uid="uid://dwgbyh6vadcd5" path="res://textures/jarsin.png" id="3_akkcm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hu48"]
+atlas = ExtResource("3_akkcm")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0y6g"]
+atlas = ExtResource("3_akkcm")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3pmag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hu48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0y6g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="neoSelection" type="Node2D" unique_id=1842104591]
+script = ExtResource("1_6hu48")
+
+[node name="window" type="Sprite2D" parent="." unique_id=864545769]
+texture = ExtResource("1_1mjf0")
+
+[node name="vbox" type="VBoxContainer" parent="." unique_id=309018900]
+offset_left = -55.0
+offset_top = -33.0
+offset_right = 55.0
+offset_bottom = 28.0
+theme_override_constants/separation = 9
+
+[node name="text" type="Label" parent="vbox" unique_id=1699504694]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.7411765, 0, 1)
+theme_override_fonts/font = ExtResource("2_akkcm")
+text = "Select NEO tier"
+horizontal_alignment = 1
+
+[node name="spriteAndNumber" type="HBoxContainer" parent="vbox" unique_id=2053668020]
+layout_mode = 2
+alignment = 1
+
+[node name="sprite" type="Control" parent="vbox/spriteAndNumber" unique_id=544186119]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="sprite" type="AnimatedSprite2D" parent="vbox/spriteAndNumber/sprite" unique_id=8415801]
+position = Vector2(15, 15)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_3pmag")
+
+[node name="buttons" type="VBoxContainer" parent="vbox/spriteAndNumber" unique_id=613265509]
+layout_mode = 2
+
+[node name="up" type="Control" parent="vbox/spriteAndNumber/buttons" unique_id=216901627]
+layout_mode = 2
+
+[node name="up" type="Sprite2D" parent="vbox/spriteAndNumber/buttons/up" unique_id=805956693]
+position = Vector2(0, 4)
+
+[node name="up" type="Button" parent="vbox/spriteAndNumber/buttons/up/up" unique_id=685854508]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="text2" type="Label" parent="." unique_id=963682086]
+offset_left = -55.0
+offset_top = 56.0
+offset_right = 55.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0.5568628, 0.8, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_akkcm")
+theme_override_font_sizes/font_size = 7
+text = "You'll start from
+???% difficulty"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="go" type="Sprite2D" parent="." unique_id=2034076961]
+position = Vector2(0, 43)
+texture = ExtResource("2_bmefg")
+
+[node name="go" type="Button" parent="go" unique_id=600638850]
+offset_right = 8.0
+offset_bottom = 8.0
+flat = true

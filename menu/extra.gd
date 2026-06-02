@@ -17,29 +17,26 @@ var noEnemyInfoText := "[color=7f7f7f]?????[/color]"
 var bgNoEnemyColor := Color("#7f7f7f")
 var noSpecial := "No special note"
 var yesSpecial := "See special note"
+var noText := "?????"
 
 
 
-var darsinInfoText := "[color=ffc472]Darsin:[/color]   Spawns in groups of 2-4 darsins. Teleports a bit down after hitting a wall. Shoots slow tiny bullets."
-var darsinNoText := "[color=ffc472]?????[/color]"
+var darsinInfoText := "Spawns in groups of 2-4 darsins. Teleports a bit down after hitting a wall. Shoots slow tiny bullets."
 var darsinNeoInfoText := "Can aim now."
 
-var bigdarInfoText := "[color=18ff3b]BigDar:[/color]   Fires a bomb that leaves a damaging area briefly after detonating. Has a lot of HP, but his own bomb can instantly kill him."
-var bigdarNoText := "[color=18ff3b]?????[/color]"
+var bigdarInfoText := "Fires a bomb that leaves a damaging area briefly after detonating. Has a lot of HP, but his own bomb can instantly kill him."
 var bigdarSpecialNote := "[color=18ff3b]Shoot the bomb to instantly detonate it! This can be used to defeat groups of enemies.[/color]"
 var bigdarNeoInfoText := "The bomb requires 2 bullets to explode and breaks into damaging fragments."
 
-var a3InfoText := "[color=fb00cf]A3:[/color]   Shoots 3 breakable bullets in a V-shaped pattern. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 0.5 seconds."
-var a3NoText := "[color=fb00cf]?????[/color]"
+var a3InfoText := "Shoots 3 breakable bullets in a V-shaped pattern. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 0.5 seconds."
 var a3SpecialNote := "[color=fb00cf]Shoot the right spot at the right time to explode it! This also cancels the attack.[/color]"
-var a3NeoInfoText := "Shoots 5 bullets. Now they are connected."
+var a3NeoInfoText := "Shoots 5 bullets. They are connected now."
 
-var wertueInfoText := "[color=00ffdc]Wertue:[/color]   Creates a beam of light that follows the player. The beam stops after a few seconds and activates for a moment, dealing damage. After 3 failed attacks it becomes enraged, doubling its attack speed."
-var wertueNoText := "[color=00ffdc]?????[/color]"
+var wertueInfoText := "Creates a beam of light that follows the player. The beam stops after a few seconds and activates for a moment, dealing damage. After 3 failed attacks it becomes enraged, doubling its attack speed."
 var wertueSpecialNote := "[color=00ffdc]If you kill Wertue right before the beam activates, it will attack significantly harder, damaging enemies.[/color]"
 var wertueNeoInfoText := "Creates 2 beams instead of 1, making a cross out of them."
 
-var flseyeInfoText := "[color=7200ff]FLSEYE:[/color]   Creates a shield every 10 seconds, has 4 attacks."
+var flseyeInfoText := "The only boss in the game. Creates a shield every 10 seconds, has 4 attacks."
 var flseyeAttacksText := "[color=a999ff]Attack 1:[/color]   Fires 2 lasers pointing upward and then symmetrically rotates them downward. Each laser creates four bullets and disappears upon impact.
 
 [color=a999ff]Attack 2:[/color]   Creates 3 static wertue's beams.
@@ -47,7 +44,6 @@ var flseyeAttacksText := "[color=a999ff]Attack 1:[/color]   Fires 2 lasers point
 [color=a999ff]Attack 3:[/color]   Creates 2 wertue's beams on the sides of the arena that move towards the center.
 
 [color=a999ff]Attack 4:[/color]   Shoots 12 bullets 3 times around itself."
-var flseyeNoText := "[color=7200ff]?????[/color]"
 
 
 var neoInfoText := "NEO enemies have increased speed and HP. Also they've got special behaviour."
@@ -74,6 +70,7 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 
 
 
+@onready var darsinName := $CanvasLayer2/ScrollContainer/VBoxContainer/darsin/info/name
 @onready var darsinInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/darsin/info/text
 @onready var darsinSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/darsin/info/specialNote/darsin
 @onready var darsinIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/darsin/icon/enemy
@@ -81,6 +78,7 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var darsinBg := $CanvasLayer2/ScrollContainer/VBoxContainer/darsin/icon/bg
 @onready var darsinCount := $CanvasLayer2/ScrollContainer/VBoxContainer/darsin/icon/count
 
+@onready var bigdarName := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/name
 @onready var bigdarInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/text
 @onready var bigdarSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/specialNote/bigdar
 @onready var bigdarIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/icon/enemy
@@ -88,6 +86,7 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var bigdarBg := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/icon/bg
 @onready var bigdarCount := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/icon/count
 
+@onready var a3Name := $CanvasLayer2/ScrollContainer/VBoxContainer/a3/info/name
 @onready var a3Info := $CanvasLayer2/ScrollContainer/VBoxContainer/a3/info/text
 @onready var a3SpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/a3/info/specialNote/a3
 @onready var a3Icon := $CanvasLayer2/ScrollContainer/VBoxContainer/a3/icon/enemy
@@ -95,6 +94,7 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var a3Bg := $CanvasLayer2/ScrollContainer/VBoxContainer/a3/icon/bg
 @onready var a3Count := $CanvasLayer2/ScrollContainer/VBoxContainer/a3/icon/count
 
+@onready var wertueName := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info/name
 @onready var wertueInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info/text
 @onready var wertueSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info/specialNote/wertue
 @onready var wertueIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy
@@ -103,6 +103,7 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var wertueCount := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/count
 @onready var wertueLeftWing := $CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy/wingLeft
 
+@onready var flseyeName := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/name
 @onready var flseyeInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/text
 @onready var flseyeSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/specialNote/flseye
 @onready var flseyeIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/icon/enemy
@@ -114,6 +115,39 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var flseyeExpand := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand
 @onready var flseyeExpandSprite := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand/Control/Sprite2D
 @onready var flseyeAttacks := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/textAttacks
+
+@onready var darsinNeoName := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info/name
+@onready var darsinNeoInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info/text
+@onready var darsinNeoSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info/specialNote/darsin
+@onready var darsinNeoIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon/enemy
+@onready var darsinNeoLock := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon/lock
+@onready var darsinNeoBg := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon/bg
+@onready var darsinNeoCount := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/icon/count
+
+@onready var bigdarNeoName := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info/name
+@onready var bigdarNeoInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info/text
+@onready var bigdarNeoSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info/specialNote/bigdar
+@onready var bigdarNeoIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon/enemy
+@onready var bigdarNeoLock := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon/lock
+@onready var bigdarNeoBg := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon/bg
+@onready var bigdarNeoCount := $CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/icon/count
+
+@onready var a3NeoName := $CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info/name
+@onready var a3NeoInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info/text
+@onready var a3NeoSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info/specialNote/a3
+@onready var a3NeoIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon/enemy
+@onready var a3NeoLock := $CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon/lock
+@onready var a3NeoBg := $CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon/bg
+@onready var a3NeoCount := $CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/icon/count
+
+@onready var wertueNeoName := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info/name
+@onready var wertueNeoInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info/text
+@onready var wertueNeoSpecialButton := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info/specialNote/wertue
+@onready var wertueNeoIcon := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/enemy
+@onready var wertueNeoLock := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/lock
+@onready var wertueNeoBg := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/bg
+@onready var wertueNeoCount := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/count
+@onready var wertueNeoLeftWing := $CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/enemy/wingLeft
 
 
 
@@ -183,6 +217,10 @@ func _ready() -> void:
 	wertueCount.text = str(int(Saves.data["killed_wertues"]))
 	flseyeCount.text = str(int(Saves.data["killed_flseyes"]))
 	flseyeAttacks.text = flseyeAttacksText
+	darsinNeoCount.text = str(int(Saves.data["killed_darsins_neo"]))
+	bigdarNeoCount.text = str(int(Saves.data["killed_bigdars_neo"]))
+	a3NeoCount.text = str(int(Saves.data["killed_a3s_neo"]))
+	wertueNeoCount.text = str(int(Saves.data["killed_wertues_neo"]))
 	healCount.text = str(int(Saves.data["gotten_heals"]))
 	overhealCount.text = str(int(Saves.data["gotten_overheals"]))
 	splashCount.text = str(int(Saves.data["gotten_splashes"]))
@@ -193,7 +231,7 @@ func _ready() -> void:
 		darsinSpecialButton.text = noSpecial
 	else:
 		darsinCount.visible = false
-		darsinInfo.text = darsinNoText
+		darsinName.text = noText
 		darsinSpecialButton.queue_free()
 		darsinBg.modulate = bgNoEnemyColor
 		darsinLock.visible = true
@@ -205,7 +243,7 @@ func _ready() -> void:
 		bigdarSpecialButton.add_theme_color_override("font_color", Color("18ff3b"))
 	else:
 		bigdarCount.visible = false
-		bigdarInfo.text = bigdarNoText
+		bigdarName.text = noText
 		bigdarSpecialButton.queue_free()
 		bigdarBg.modulate = bgNoEnemyColor
 		bigdarLock.visible = true
@@ -218,7 +256,7 @@ func _ready() -> void:
 		a3SpecialButton.add_theme_color_override("font_color", Color("fb00cf"))
 	else:
 		a3Count.visible = false
-		a3Info.text = a3NoText
+		a3Name.text = noText
 		a3SpecialButton.queue_free()
 		a3Bg.modulate = bgNoEnemyColor
 		a3Lock.visible = true
@@ -231,7 +269,7 @@ func _ready() -> void:
 		wertueSpecialButton.add_theme_color_override("font_color", Color("00ffdc"))
 	else:
 		wertueCount.visible = false
-		wertueInfo.text = wertueNoText
+		wertueName.text = noText
 		wertueSpecialButton.queue_free()
 		wertueBg.modulate = bgNoEnemyColor
 		wertueLock.visible = true
@@ -241,12 +279,57 @@ func _ready() -> void:
 		flseyeSpecialButton.text = noSpecial
 	else:
 		flseyeCount.visible = false
-		flseyeInfo.text = flseyeNoText
+		flseyeName.text = noText
 		flseyeSpecialButton.queue_free()
 		flseyeExpand.queue_free()
 		flseyeBg.modulate = bgNoEnemyColor
 		flseyeLock.visible = true
 		flseyeIcon.visible = false
+	if Saves.data["ever_met_darsin_neo"] == true:
+		darsinNeoInfo.text = darsinNeoInfoText
+		darsinNeoSpecialButton.text = noSpecial
+	else:
+		darsinNeoCount.visible = false
+		darsinNeoInfo.queue_free()
+		darsinNeoSpecialButton.queue_free()
+		darsinNeoBg.modulate = bgNoEnemyColor
+		darsinNeoLock.visible = true
+		darsinNeoIcon.visible = false
+		darsinNeoName.text = noText
+	if Saves.data["ever_met_bigdar_neo"] == true:
+		bigdarNeoInfo.text = bigdarNeoInfoText
+		bigdarNeoSpecialButton.text = noSpecial
+	else:
+		bigdarNeoCount.visible = false
+		bigdarNeoInfo.queue_free()
+		bigdarNeoSpecialButton.queue_free()
+		bigdarNeoBg.modulate = bgNoEnemyColor
+		bigdarNeoLock.visible = true
+		bigdarNeoIcon.visible = false
+		bigdarNeoName.text = noText
+	if Saves.data["ever_met_a3_neo"] == true:
+		a3NeoInfo.text = a3NeoInfoText
+		a3NeoSpecialButton.text = noSpecial
+	else:
+		a3NeoCount.visible = false
+		a3NeoInfo.queue_free()
+		a3NeoSpecialButton.queue_free()
+		a3NeoBg.modulate = bgNoEnemyColor
+		a3NeoLock.visible = true
+		a3NeoIcon.visible = false
+		a3NeoName.text = noText
+	if Saves.data["ever_met_wertue_neo"] == true:
+		wertueNeoInfo.text = wertueNeoInfoText
+		wertueNeoSpecialButton.text = noSpecial
+		wertueNeoLeftWing.left()
+	else:
+		wertueNeoCount.visible = false
+		wertueNeoInfo.queue_free()
+		wertueNeoSpecialButton.queue_free()
+		wertueNeoBg.modulate = bgNoEnemyColor
+		wertueNeoLock.visible = true
+		wertueNeoIcon.visible = false
+		wertueNeoName.text = noText
 	if Saves.data["ever_got_heal_bonus"] == true:
 		healInfo.text = healInfoText
 	else:

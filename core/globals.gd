@@ -25,11 +25,12 @@ var maxBonusModifier := 2.5
 var maxDamageModifier := 3.0
 var maxSpeedModifier := 2.0
 var maxBonusModifierNeedKills := 500
-var maxDamageModifierNeedPoints := 4000
-var maxSpeedModifierNeedSeconds := 420
+var maxDamageModifierNeedPoints := 10000
+var maxSpeedModifierNeedSeconds := 750
 var oldMaxPoints := 0
 var oldMaxKills := 0
 var oldMaxTime := 0
+var oldMaxDiffi := 0
 var oldBonusMod := 0.0
 var oldDamageMod := 0.0
 var oldSpeedMod := 0.0
@@ -99,12 +100,12 @@ func change_points(diff: int):
 		Functions.notify("New \"Overheal\" bonus added!!", "Go catch it!")
 		Functions.add_bonus("overheal", Vector2(195.0, 70.0))
 	
-	pointMultiplyer = clamp(pointMultiplyer + diff / 25.0 * pointMultiplyer, 1.0, 3.0)
+	pointMultiplyer = clamp(pointMultiplyer + diff / 35.0 * pointMultiplyer, 1.0, 3.0)
 	if pointMultiplyer >= 3.0:
 		if waitptw and waitptw.is_running(): waitptw.kill()
 		pointMultiWaiting = true
 		waitptw = create_tween()
-		waitptw.tween_interval(1.5)
+		waitptw.tween_interval(0.5)
 		waitptw.tween_callback(func(): pointMultiWaiting = false)
 
 
@@ -139,5 +140,5 @@ func update_stats():
 	Saves.data["damage_modifier"] = remap(p_ratio, 0.0, 1.0, 1.0, maxDamageModifier)
 	var k_ratio = clampf(float(Saves.data["max_kills"]) / maxBonusModifierNeedKills, 0.0, 1.0)
 	Saves.data["bonus_modifier"] = remap(k_ratio, 0.0, 1.0, 1.0, maxBonusModifier)
-	var t_ratio = clampf(float(Saves.data["max_time"]) / maxSpeedModifierNeedSeconds, 0.0, 1.0)
+	var t_ratio = clampf(float(Saves.data["max_diffi"]) / maxSpeedModifierNeedSeconds, 0.0, 1.0)
 	Saves.data["speed_modifier"] = remap(t_ratio, 0.0, 1.0, 1.0, maxSpeedModifier)

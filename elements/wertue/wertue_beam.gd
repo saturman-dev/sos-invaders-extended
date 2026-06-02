@@ -8,7 +8,7 @@ var speedmodmod := 2
 signal warrned
 var is_attacking := false
 
-@export var tracking_speed := 13.0
+@export var tracking_speed := 8.5
 var target_pos := Vector2.ZERO
 
 @onready var slabost := $slabost
