@@ -32,6 +32,8 @@ func ready_animation():
 	scoreV.position.x -= scoreVoffsetx
 	var scoreTween = create_tween()
 	scoreTween.tween_property(scoreV, "position", Vector2(scoreVoffsetx, -scoreVoffsety), 3.0).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	await get_tree().create_timer(2.0, false).timeout
+	Globals.paused = false
 
 func align_position():
 	multi2.global_position = multi1.global_position

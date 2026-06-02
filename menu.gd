@@ -9,6 +9,9 @@ var able = false
 @onready var settingsAnim := $CanvasLayer/buttons/settingsAnim
 @onready var logo := $CanvasLayer/Logo
 @onready var buttons := $CanvasLayer/buttons
+@onready var canv := $CanvasLayer
+
+const neo_sel := preload("res://menu/neo_selection.tscn")
 
 func _ready() -> void:
 	best.bbcode_enabled = true
@@ -19,6 +22,14 @@ func _ready() -> void:
 		best.text = str("Highest score: [color=#ffffff]%s[/color]" % str(int(score)))
 	else:
 		best.queue_free()
+	#Saves.data["greatest_neo_tier"] = 0
+	if Saves.data["greatest_neo_tier"] > 0:
+		playAnim.material.set_shader_parameter("blend_strength", 0.35)
+		if Saves.data["greatest_neo_tier"] >= 5:
+			playAnim.material.set_shader_parameter("blend_strength", 1)
+			if Saves.data["greatest_neo_tier"] >= 10:
+				playAnim.material.set_shader_parameter("gradient_color1", Color("ffe600").inverted())
+				playAnim.material.set_shader_parameter("gradient_color2", Color("ff6600").inverted())
 	
 
 var loadedTime := 0.7
@@ -54,10 +65,20 @@ var trans := Tween.TRANS_CUBIC
 var s: Tween
 var stspeed := 0.5
 func _on_play_pressed() -> void:
+	menuClick_play()
+	if Saves.data["greatest_neo_tier"] > 0:
+		var neo_select := neo_sel.instantiate()
+		neo_select.global_position = get_viewport_rect().size / 2
+		neo_select.global_position.y -= 10
+		neo_select.scale *= 1.2
+		canv.add_child(neo_select)
+		return
+	start()
+
+func start():
 	if able == false:
 		return
 	able = false
-	menuClick_play()
 	get_parent().start()
 	s = create_tween()
 	s.tween_property(playAnim, "modulate:a", 0.0, stspeed)
@@ -92,6 +113,7 @@ var pt: Tween
 var hovspeed := 0.5
 var unhovspeed := 0.8
 func _on_play_mouse_entered() -> void:
+	if able == false: return
 	playAnim.play("hover")
 	if pt and pt.is_running():
 		pt.kill()
@@ -104,6 +126,7 @@ func _on_play_mouse_entered() -> void:
 
 
 func _on_play_mouse_exited() -> void:
+	if able == false: return
 	if s and s.is_running():
 		return
 	playAnim.play("unhover")

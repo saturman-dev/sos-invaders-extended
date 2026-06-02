@@ -8,15 +8,15 @@ const GAME_OVER_SCENE = preload("res://UI/gameover/game_over.tscn")
 const particle = preload("res://elements/particles/speed_particle.tscn")
 
 const ENEMY_CATALOG = {
-	"darsin": {"cost": 10, "min_diffi": 0, "scene": preload("res://elements/vln_group.tscn")},
+	"darsin": {"cost": 10, "min_diffi": 1, "scene": preload("res://elements/vln_group.tscn")},
 	"bigdar": {"cost": 15, "min_diffi": 20, "scene": preload("res://elements/BigDar/big_dar.tscn")},
 	"a3": {"cost": 30, "min_diffi": 55, "scene": preload("res://elements/a3/a_3.tscn")},
 	"wertue": {"cost": 45, "min_diffi": 100, "scene": preload("res://elements/wertue/wertue.tscn")}
 }
 
 var is_boss_fight := false
-var diffi := 0.0
-var spawn_credits := 10.0
+var diffi = 0.0
+var spawn_credits := 9.9
 @onready var spawn_timer := $spawntimer
 
 const NEO_GAP := 150.0
@@ -26,9 +26,32 @@ var boss_timeline = [
 	{"threshold": 149.8, "anim_func": "flseye", "done": false}
 ]
 
+func skip(target_diffi: float):
+	
+	diffi = target_diffi
+	Globals.diffi = diffi
+	
+	for enemy_name in ENEMY_CATALOG:
+		var data = ENEMY_CATALOG[enemy_name]
+		
+		for tier in range(11):
+			var required_diffi = data.min_diffi + (NEO_GAP * tier)
+			
+			if diffi > required_diffi:
+				var key = enemy_name + "_tier_" + str(tier)
+				if not introduced_variants.has(key):
+					introduced_variants[key] = true
+		
+	for boss_event in boss_timeline:
+		if diffi > boss_event["threshold"]:
+			boss_event["done"] = true
+
 func _process(delta: float) -> void:
 	
 	if diffi > NEO_GAP: _spawn_particles(delta)
+	
+	if Globals.paused: return
+	if Saves.data["educated"] == false: return
 	
 	if is_boss_fight: return
 	
@@ -45,7 +68,7 @@ func _process(delta: float) -> void:
 		growth_modifier = 0.5
 	
 	diffi += 1.0 * growth_modifier * delta
-	spawn_credits += diffi * 0.5 * delta * growth_modifier
+	spawn_credits += diffi * 0.1 * delta * growth_modifier
 	Globals.diffi = diffi
 	_check_boss_timeline()
 	_check_dynamic_intros()

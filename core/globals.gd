@@ -1,7 +1,7 @@
 extends Node
 
 var needForOverheal = 40
-var nodeath: bool = false
+var nodeath: bool = true
 
 var hpBarScreenTop := 5.0
 
@@ -23,10 +23,10 @@ var diffi := 0.0
 # STATS
 var maxBonusModifier := 2.5
 var maxDamageModifier := 3.0
-var maxSpeedModifier := 2.0
+var maxSpeedModifier := 3.0
 var maxBonusModifierNeedKills := 500
 var maxDamageModifierNeedPoints := 10000
-var maxSpeedModifierNeedSeconds := 750
+var maxSpeedModifierNeedSeconds := 1500
 var oldMaxPoints := 0
 var oldMaxKills := 0
 var oldMaxTime := 0
@@ -52,7 +52,7 @@ var splashTimer := 9.0
 
 var bgStay = false
 var hp_animation = false
-
+var paused := false
 
 func _process(delta: float) -> void:
 	# CAMERA SHAKE

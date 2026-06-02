@@ -45,7 +45,7 @@ var data = {
 	"gotten_splashes": 0,
 	"gotten_trios": 0,
 	"gotten_speeds": 0,
-	"greatest_neo_tier": 0,
+	"greatest_neo_tier": 99,
 	"last_selected_neo": 0,
 }
 

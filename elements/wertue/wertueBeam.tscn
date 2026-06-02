@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dyko52r2gcngr" path="res://textures/wertueLaser.png" id="4_5b0o4"]
 [ext_resource type="AudioStream" uid="uid://cummi6ocb8wi4" path="res://sounds/wertueAttackLoop.mp3" id="4_cnmiy"]
 [ext_resource type="Texture2D" uid="uid://c4iy1rrlkklcr" path="res://textures/wertueAimer.png" id="7_oqk33"]
+[ext_resource type="Texture2D" uid="uid://ba6kt3a21imh3" path="res://textures/progressRing.png" id="8_2d0jn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqk33"]
 size = Vector2(35.385, 954.4445)
@@ -102,7 +103,17 @@ bus = &"SFX"
 
 [node name="aimer" type="AnimatedSprite2D" parent="." unique_id=751309825]
 sprite_frames = SubResource("SpriteFrames_5b0o4")
-frame_progress = 0.71806026
+autoplay = "default"
+frame_progress = 0.7116505
+
+[node name="bar" type="TextureProgressBar" parent="." unique_id=1613916551]
+modulate = Color(0.98624766, 1, 0.9995603, 0.4)
+offset_left = -17.499996
+offset_top = -17.500004
+offset_right = 17.500004
+offset_bottom = 17.499996
+fill_mode = 4
+texture_progress = ExtResource("8_2d0jn")
 
 [connection signal="timeout" from="waitTime" to="." method="_on_wait_time_timeout"]
 [connection signal="timeout" from="warningTime" to="." method="_on_warning_time_timeout"]

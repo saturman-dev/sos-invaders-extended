@@ -9,3 +9,4 @@ func _process(delta: float) -> void:
 			if get_parent().anim: return
 			get_parent().global_position.x = lerp(pos.x, body.global_position.x, tracking_speed * delta)
 			get_parent().global_position.y = lerp(pos.y, body.global_position.y, tracking_speed * delta)
+			scale = Vector2.ONE * 3

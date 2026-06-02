@@ -389,7 +389,7 @@ shader = ExtResource("5_l48gv")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
 shader_parameter/gradient_speed = 5.0000002375
-shader_parameter/gradient_scale = 4.00000018674012
+shader_parameter/gradient_scale = 0.007000000332500001
 shader_parameter/blend_strength = 0.0
 shader_parameter/flash_brightness = 0.0
 

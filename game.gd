@@ -131,8 +131,11 @@ func music_fade_in():
 	mt.tween_property(music, "volume_db", 0.0, 0.25)
 
 func staart():
+	Globals.paused = true
 	var lv_1 = lv_1_scene.instantiate()
 	lv_1.global_position = Vector2(0, 0)
+	#lv_1.skip(Saves.data["last_selected_neo"] * 150)
+	lv_1.skip(2000)
 	add_child(lv_1)
 	Globals.game_running = true
 	var staminaTween = create_tween()

@@ -6,7 +6,7 @@ extends Sprite2D
 func _ready() -> void:
 	scale *= randf_range(3, 8)
 	var s = create_tween()
-	s.tween_property(self, "modulate:a", randf_range(0.5, 1.0), lifetime/4)
+	s.tween_property(self, "modulate:a", randf_range(0.7, 1.0), lifetime/10)
 	s.parallel().tween_property(self, "scale:x", 0.0, lifetime)
 	s.chain().tween_callback(queue_free)
 

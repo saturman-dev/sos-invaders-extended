@@ -356,7 +356,7 @@ func _ready() -> void:
 	cooldownsSpeedBar.max_value = Globals.maxSpeedModifier
 	pointsMax.text = "/ " + str(Globals.oldMaxPoints)
 	killsMax.text = "/ " + str(Globals.oldMaxKills)
-	timeMax.text = "/ " + str(Globals.oldMaxDiffi) + "%"
+	timeMax.text = "/ " + str(Globals.oldMaxDiffi / 150 * 100) + "%"
 	
 	# BAR SETUP
 	set_bar(bonusChancesBar, bonusChancesCurrent, Globals.oldBonusMod, 1.0, Globals.maxBonusModifier)

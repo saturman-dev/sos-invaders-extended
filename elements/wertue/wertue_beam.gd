@@ -228,3 +228,13 @@ func turn90():
 	NEO = true
 	beamLoop.volume_db -= 80.0
 	attackLoop.volume_db -= 80.0
+
+@onready var bar := $bar
+@onready var waittime := $waitTime
+func _process(delta: float) -> void:
+	if not waittime.is_stopped() and rotation_degrees != 90:
+		bar.global_position.x = aimer.global_position.x - 16
+		bar.global_position.y = aimer.global_position.y - 16
+		bar.value = (waittime.wait_time - waittime.time_left) / waittime.wait_time * 100
+	else:
+		bar.modulate.a = 0

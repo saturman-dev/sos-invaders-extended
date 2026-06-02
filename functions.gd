@@ -389,6 +389,9 @@ func set_neo(object: Object, NEO: int):
 					s.material.set_shader_parameter("gradient_speed", 5 + float(NEO) / 2)
 					if NEO >= 5:
 						s.material.set_shader_parameter("blend_strength", float(NEO) / 10)
+					if NEO >= 10:
+						s.material.set_shader_parameter("gradient_color1", Color("ffe600").inverted())
+						s.material.set_shader_parameter("gradient_color2", Color("ff6600").inverted())
 	
 	if not "fullhp" in object:
 		print("ERROR: VARIABLE 'fullhp' NOT FOUND WHEN SETTING NEO")
@@ -396,6 +399,7 @@ func set_neo(object: Object, NEO: int):
 		object.fullhp *=  (1 + float(NEO) / 2)
 		object.sethp()
 		#print(object.fullhp)
+
 
 const flseye = preload("res://elements/flseye/flseye.tscn")
 func spawn_boss(type: String):

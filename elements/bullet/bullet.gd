@@ -5,16 +5,16 @@ var hit_guys: Array = []
 @onready var sprite := $Sprite2D
 @onready var hitbox := $CollisionShape2D
 
-var SPEED = 300.0
+var SPEED = 750.0
 var rotdir = [1, -1].pick_random()
 var rotspeed = randf_range(200.0, 400.0) * rotdir
 var damage = 0.0
-var trioMod = 0.75
+var trioMod = 0.5
 var trioSize = 0.75
 var direction = 0
 var splashing = false
 
-var gh = 0.035
+var gh = 0.015
 func ghosts():
 	while 1>0:
 		Functions.add_ghost(self, 0.5, 0.3)

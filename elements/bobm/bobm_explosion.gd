@@ -34,11 +34,12 @@ func _physics_process(delta: float) -> void:
 		if body.has_method("explode"):
 			body.get_hit(true)
 
+var fragments := true
 func _ready() -> void:
 	var defscale = global_scale
 	global_scale *= 0.2
 	Functions.particle_explosion(self, global_position, randi_range(20, 30), Color("8fd94e"), 500, 0.8, 100.0, 0.7, 1.5, true, 0.1)
-	if SPEEDMOD > 1.0:
+	if SPEEDMOD > 1.0 and fragments == true:
 		#defscale *= 1.3
 		var angle_step = TAU / bullet_count
 		for i in range(bullet_count):

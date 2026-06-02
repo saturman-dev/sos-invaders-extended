@@ -118,6 +118,7 @@ func die():
 	if died:
 		return
 	died = true
+	interZone.get_unready()
 	Events.enemy_killed.emit()
 	remove_from_group("enemies")
 	Functions.big_enemy_explosion(self)
@@ -180,7 +181,6 @@ func shot():
 	await get_tree().create_timer(0.75 / SPEEDMOD, false).timeout
 	sprite.play("def")
 	spawn_bullets()
-	interZone.get_unready()
 	ATween = create_tween().set_parallel(true)
 	ATween.tween_property(self, "position", Vector2(0.0, -offpos), 0.10 / SPEEDMOD).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await ATween.finished
@@ -192,6 +192,7 @@ func spawn_bullets():
 		if interrupted == true:
 			interrupted = false
 			return
+		interZone.get_unready()
 		Functions.sfx_play("res://sounds/A3Fire.mp3", -7.5)
 		var bullet = bulletScene.instantiate()
 		bullet.global_position += global_position + Vector2(0, 5.0)
@@ -242,6 +243,7 @@ func interrupt():
 	explosion.global_scale *= 1.2
 	explosion.global_position = global_position
 	explosion.SPEEDMOD = SPEEDMOD
+	explosion.fragments = false
 	get_parent().add_child(explosion)
 	explosion.set_hue_offset(0.65)
 	Functions.sfx_play("res://sounds/bobmExplosion.mp3")

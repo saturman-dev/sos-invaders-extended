@@ -23,109 +23,6 @@
 [ext_resource type="Shader" uid="uid://ddc0scbtuh2l8" path="res://shaders/gradient.gdshader" id="16_337yk"]
 [ext_resource type="Texture2D" uid="uid://dc6jfily6xwa3" path="res://textures/bonusSpeed.png" id="16_f3em0"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oovj8"]
-bg_color = Color(0.05000019, 0, 1, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.70000005, 1, 0, 0)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lwjig"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qxoij"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oksnb"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mottj"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fredc"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ymyge"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(32, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4tiin"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_frxcm"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y331f"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_06g33"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pd76h"]
-atlas = ExtResource("2_4pisr")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_14r56"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lwjig")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qxoij")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oksnb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mottj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fredc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ymyge")
-}],
-"loop": false,
-"name": &"hover",
-"speed": 30.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4tiin")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_frxcm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y331f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_06g33")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pd76h")
-}],
-"loop": false,
-"name": &"unhover",
-"speed": 30.0
-}]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qxoij"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oksnb"]
@@ -231,7 +128,7 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_337yk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_txeds"]
 resource_local_to_scene = true
 shader = ExtResource("12_altx8")
 shader_parameter/enable_outline = false
@@ -248,7 +145,7 @@ shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_txeds"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3kls"]
 resource_local_to_scene = true
 shader = ExtResource("12_altx8")
 shader_parameter/enable_outline = false
@@ -364,8 +261,8 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0.69917375, 0.46534687, 1.347661e-06, 1)
-shader_parameter/gradient_speed = 3.0000001425
-shader_parameter/gradient_scale = 10.0
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 0.020000000950000003
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -373,8 +270,8 @@ shader_parameter/flash_brightness = 0.0
 shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0.09411765, 1, 0.23137255, 1)
-shader_parameter/gradient_speed = 3.0000001425
-shader_parameter/gradient_scale = 10.0
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 0.020000000950000003
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -382,56 +279,51 @@ shader_parameter/flash_brightness = 0.0
 shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0.9843137, 0, 0.8117647, 1)
-shader_parameter/gradient_speed = 3.0000001425
-shader_parameter/gradient_scale = 10.0
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 0.020000000950000003
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
-[sub_resource type="Shader" id="Shader_qua0r"]
-code = "shader_type canvas_item;
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6o2xc"]
+resource_local_to_scene = true
+shader = ExtResource("12_altx8")
+shader_parameter/enable_outline = true
+shader_parameter/outline_thickness = 2.0
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.50000026125
+shader_parameter/gradient_scale = 5.0
+shader_parameter/blend_strength = 0.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-// --- НАСТРОЙКИ ГРАДИЕНТА ---
-uniform vec4 gradient_color1 : source_color = vec4(1.0, 0.9, 0.0, 1.0); // Желтый
-uniform vec4 gradient_color2 : source_color = vec4(1.0, 0.4, 0.0, 1.0); // Оранжевый
-uniform float gradient_speed : hint_range(0.0, 10.0) = 2.5; 
-uniform float gradient_scale : hint_range(0.1, 10.0) = 1.5; 
-
-// --- НАСТРОЙКИ СМЕШИВАНИЯ ---
-uniform float blend_strength : hint_range(0.0, 1.0) = 0.6; 
-uniform float flash_brightness : hint_range(0.0, 1.0) = 0.0; 
-
-void fragment() {
- // Вытаскиваем ТОЛЬКО альфа-канал модулейта (управление прозрачностью из Твинов/Инспектора)
- float node_alpha = COLOR.a;
-
- // 1. Берем чистый базовый пиксель текстуры (без сторонних искажений цвета)
- vec4 sprite_color = texture(TEXTURE, UV);
-	
- // 2. Логика движения градиента
- float movement = TIME * gradient_speed;
- float diagonal_pos = (UV.x + UV.y) * gradient_scale + movement;
- float t = sin(diagonal_pos) * 0.5 + 0.5; 
-	
- vec3 grad_rgb = mix(gradient_color1.rgb, gradient_color2.rgb, t);
-	
- // 3. Смешивание с сохранением теней арта
- vec3 tinted_rgb = sprite_color.rgb * grad_rgb * 1.4;
- vec3 final_rgb = mix(sprite_color.rgb, tinted_rgb, blend_strength);
-	
- // 4. Эффект вспышки урона
- final_rgb = mix(final_rgb, vec3(1.0, 1.0, 1.0), flash_brightness);
-	
- // 5. СБОРКА ИТОГОВОГО ПИКСЕЛЯ
- // RGB берем чистый, а итоговую прозрачность умножаем на node_alpha
- COLOR = vec4(final_rgb, sprite_color.a * node_alpha);
-}"
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twbye"]
+resource_local_to_scene = true
+shader = ExtResource("12_altx8")
+shader_parameter/enable_outline = true
+shader_parameter/outline_thickness = 2.0
+shader_parameter/color_solid = Color(1, 1, 1, 1)
+shader_parameter/use_gradient = true
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 0.4, 0, 1)
+shader_parameter/gradient_speed = 5.50000026125
+shader_parameter/gradient_scale = 5.0
+shader_parameter/blend_strength = 0.0
+shader_parameter/rage_intensity = 0.0
+shader_parameter/rage_color = Color(1, 0, 0.1, 1)
+shader_parameter/flash_brightness = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qda8b"]
-shader = SubResource("Shader_qua0r")
+shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0, 1, 0.8627451, 1)
-shader_parameter/gradient_speed = 3.0000001425
-shader_parameter/gradient_scale = 10.0
+shader_parameter/gradient_speed = 5.0000002375
+shader_parameter/gradient_scale = 0.020000000950000003
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -663,30 +555,115 @@ region = Rect2(141, 28, 49, 6)
 atlas = ExtResource("5_f3lx7")
 region = Rect2(92, 0, 49, 18)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oovj8"]
+bg_color = Color(0.05000019, 0, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.70000005, 1, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwjig"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxoij"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oksnb"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mottj"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fredc"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymyge"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tiin"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frxcm"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y331f"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06g33"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd76h"]
+atlas = ExtResource("2_4pisr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_14r56"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwjig")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxoij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oksnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mottj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fredc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymyge")
+}],
+"loop": false,
+"name": &"hover",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tiin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frxcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y331f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06g33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pd76h")
+}],
+"loop": false,
+"name": &"unhover",
+"speed": 30.0
+}]
+
 [node name="extra" type="Node2D" unique_id=422740755]
 script = ExtResource("1_xxdh5")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=71000740]
 process_mode = 3
 layer = 5
-
-[node name="back" type="Button" parent="CanvasLayer2" unique_id=508617228]
-offset_left = 120.0
-offset_top = 33.0
-offset_right = 136.0
-offset_bottom = 49.0
-focus_mode = 0
-theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0.7019608, 1, 0, 1)
-theme_override_font_sizes/font_size = 8
-theme_override_styles/normal = SubResource("StyleBoxFlat_oovj8")
-text_overrun_behavior = 1
-
-[node name="backAnim" type="AnimatedSprite2D" parent="CanvasLayer2" unique_id=490217095]
-position = Vector2(128, 41)
-sprite_frames = SubResource("SpriteFrames_14r56")
-autoplay = "default"
 
 [node name="Window" type="Sprite2D" parent="CanvasLayer2" unique_id=2100293702]
 position = Vector2(195, 124)
@@ -1003,10 +980,10 @@ scale = Vector2(0.135, 0.135)
 texture = ExtResource("9_f3lx7")
 
 [node name="wingRight" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=1902289196 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_337yk")
+material = SubResource("ShaderMaterial_txeds")
 
 [node name="wingLeft" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon/enemy" unique_id=2043273702 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_txeds")
+material = SubResource("ShaderMaterial_c3kls")
 scale = Vector2(-1, 1)
 
 [node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/icon" unique_id=1190709882]
@@ -1427,7 +1404,6 @@ size_flags_horizontal = 3
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info" unique_id=739676820]
 material = SubResource("ShaderMaterial_o28lg")
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9843137, 0, 0.8117647, 1)
 theme_override_fonts/font = ExtResource("8_qua0r")
 text = "A3 NEO"
 
@@ -1499,10 +1475,10 @@ scale = Vector2(0.135, 0.135)
 texture = ExtResource("9_f3lx7")
 
 [node name="wingRight" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/enemy" unique_id=509823787 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_qua0r")
+material = SubResource("ShaderMaterial_6o2xc")
 
 [node name="wingLeft" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon/enemy" unique_id=1933847352 instance=ExtResource("10_f3lx7")]
-material = SubResource("ShaderMaterial_qua0r")
+material = SubResource("ShaderMaterial_twbye")
 scale = Vector2(-1, 1)
 
 [node name="count" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/icon" unique_id=2068884918]
@@ -1524,7 +1500,6 @@ size_flags_horizontal = 3
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info" unique_id=749092791]
 material = SubResource("ShaderMaterial_qda8b")
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 1, 0.8627451, 1)
 theme_override_fonts/font = ExtResource("8_qua0r")
 text = "Wertue NEO"
 
@@ -1946,6 +1921,24 @@ visible = false
 position = Vector2(245.5, 43)
 texture = SubResource("AtlasTexture_altx8")
 
+[node name="back" type="Button" parent="CanvasLayer2" unique_id=508617228]
+offset_left = 117.0
+offset_top = 38.0
+offset_right = 133.0
+offset_bottom = 54.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.70000005, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.7019608, 1, 0, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_oovj8")
+text_overrun_behavior = 1
+
+[node name="backAnim" type="AnimatedSprite2D" parent="CanvasLayer2" unique_id=490217095]
+position = Vector2(125, 46)
+sprite_frames = SubResource("SpriteFrames_14r56")
+autoplay = "default"
+
 [node name="specialNote" type="ColorRect" parent="CanvasLayer2" unique_id=377457247]
 visible = false
 offset_left = 124.0
@@ -1975,9 +1968,6 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="mouse_entered" from="CanvasLayer2/back" to="." method="_on_back_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer2/back" to="." method="_on_back_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer2/back" to="." method="_on_back_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/specialNote/bigdar/bigdar" to="." method="_on_bigdar_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info/specialNote/bigdar/bigdar" to="." method="_on_bigdar_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info/specialNote/a3/a3" to="." method="_on_a_3_mouse_entered"]
@@ -1991,3 +1981,6 @@ vertical_alignment = 1
 [connection signal="mouse_entered" from="CanvasLayer2/bonuses" to="." method="_on_bonuses_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer2/bonuses" to="." method="_on_bonuses_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer2/bonuses" to="." method="_on_bonuses_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer2/back" to="." method="_on_back_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer2/back" to="." method="_on_back_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer2/back" to="." method="_on_back_pressed"]

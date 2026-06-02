@@ -4,8 +4,7 @@ var time_elapsed := 0.0
 
 func _ready() -> void:
 	ready_animation()
-	if Saves.data["educated"] == false:
-		text = "00:00"
+	text = "00:00"
 
 @onready var parent = get_parent().get_parent()
 
@@ -31,6 +30,7 @@ func ready_animation():
 	parent.show()
 
 func _process(delta: float) -> void:
+	if Globals.paused: return
 	if Saves.data["educated"] == false:
 		return
 	time_elapsed += delta
