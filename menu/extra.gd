@@ -22,18 +22,22 @@ var yesSpecial := "See special note"
 
 var darsinInfoText := "[color=ffc472]Darsin:[/color]   Spawns in groups of 2-4 darsins. Teleports a bit down after hitting a wall. Shoots slow tiny bullets."
 var darsinNoText := "[color=ffc472]?????[/color]"
+var darsinNeoInfoText := "Can aim now."
 
 var bigdarInfoText := "[color=18ff3b]BigDar:[/color]   Fires a bomb that leaves a damaging area briefly after detonating. Has a lot of HP, but his own bomb can instantly kill him."
 var bigdarNoText := "[color=18ff3b]?????[/color]"
 var bigdarSpecialNote := "[color=18ff3b]Shoot the bomb to instantly detonate it! This can be used to defeat groups of enemies.[/color]"
+var bigdarNeoInfoText := "The bomb requires 2 bullets to explode and breaks into damaging fragments."
 
-var a3InfoText := "[color=fb00cf]A3:[/color]   Shoots 3 bullets in a V-shaped pattern. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 0.5 seconds."
+var a3InfoText := "[color=fb00cf]A3:[/color]   Shoots 3 breakable bullets in a V-shaped pattern. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 0.5 seconds."
 var a3NoText := "[color=fb00cf]?????[/color]"
 var a3SpecialNote := "[color=fb00cf]Shoot the right spot at the right time to explode it! This also cancels the attack.[/color]"
+var a3NeoInfoText := "Shoots 5 bullets. Now they are connected."
 
 var wertueInfoText := "[color=00ffdc]Wertue:[/color]   Creates a beam of light that follows the player. The beam stops after a few seconds and activates for a moment, dealing damage. After 3 failed attacks it becomes enraged, doubling its attack speed."
 var wertueNoText := "[color=00ffdc]?????[/color]"
 var wertueSpecialNote := "[color=00ffdc]If you kill Wertue right before the beam activates, it will attack significantly harder, damaging enemies.[/color]"
+var wertueNeoInfoText := "Creates 2 beams instead of 1, making a cross out of them."
 
 var flseyeInfoText := "[color=7200ff]FLSEYE:[/color]   Creates a shield every 10 seconds, has 4 attacks."
 var flseyeAttacksText := "[color=a999ff]Attack 1:[/color]   Fires 2 lasers pointing upward and then symmetrically rotates them downward. Each laser creates four bullets and disappears upon impact.
@@ -44,6 +48,9 @@ var flseyeAttacksText := "[color=a999ff]Attack 1:[/color]   Fires 2 lasers point
 
 [color=a999ff]Attack 4:[/color]   Shoots 12 bullets 3 times around itself."
 var flseyeNoText := "[color=7200ff]?????[/color]"
+
+
+var neoInfoText := "NEO enemies have increased speed and HP. Also they've got special behaviour."
 
 
 
