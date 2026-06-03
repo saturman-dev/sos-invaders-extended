@@ -31,6 +31,7 @@ const pause = preload ("res://menu/pause/pause.tscn")
 
 var strl: Tween
 func _ready() -> void:
+	Globals.diffi = 0
 	Globals.update_stats()
 	music_fade_in()
 	menuu.able = true
@@ -134,8 +135,8 @@ func staart():
 	Globals.paused = true
 	var lv_1 = lv_1_scene.instantiate()
 	lv_1.global_position = Vector2(0, 0)
-	#lv_1.skip(Saves.data["last_selected_neo"] * 150)
-	lv_1.skip(2000)
+	lv_1.skip(Saves.data["last_selected_neo"] * 150)
+	#lv_1.skip()
 	add_child(lv_1)
 	Globals.game_running = true
 	var staminaTween = create_tween()

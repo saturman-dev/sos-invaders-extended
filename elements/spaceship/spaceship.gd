@@ -126,6 +126,9 @@ var is_invincible := false
 func takeDmg():
 	if is_invincible: return
 	is_invincible = true
+	if Globals.waitptw and Globals.waitptw.is_running(): Globals.waitptw.kill()
+	Globals.pointMultiWaiting = false
+	Globals.pointMultiplyer = clamp(Globals.pointMultiplyer - 1, 0.0, 3.0)
 	Functions.sfx_play("res://sounds/damage.mp3")
 	Functions.flash(0.0, 1.0, 0.05, 0.7, Color("a60000"))
 	set_collision_layer_value(2, false)

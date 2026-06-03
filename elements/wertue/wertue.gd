@@ -135,7 +135,7 @@ func die():
 	
 	if warning == true:
 		Functions.sfx_play("res://sounds/unterruptable.mp3", 4.0, randf_range(1.15, 1.35), true)
-		Functions.hitstop(0.9)
+		Functions.hitstop(0.8)
 		await Functions.unhitstopped
 		PtbonusesManager.ptbonus(givepts * (NEO + 1), "LOSS OF CONTROL", color.darkened(0.5))
 	

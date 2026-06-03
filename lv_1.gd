@@ -28,22 +28,23 @@ var boss_timeline = [
 
 func skip(target_diffi: float):
 	
-	diffi = target_diffi
-	Globals.diffi = diffi
+	var skiptw = create_tween()
+	skiptw.tween_property(self, "diffi", target_diffi, 2.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	skiptw.parallel().tween_property(Globals, "diffi", target_diffi, 2.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	
 	for enemy_name in ENEMY_CATALOG:
 		var data = ENEMY_CATALOG[enemy_name]
 		
-		for tier in range(11):
+		for tier in range(100):
 			var required_diffi = data.min_diffi + (NEO_GAP * tier)
 			
-			if diffi > required_diffi:
+			if target_diffi > required_diffi:
 				var key = enemy_name + "_tier_" + str(tier)
 				if not introduced_variants.has(key):
 					introduced_variants[key] = true
 		
 	for boss_event in boss_timeline:
-		if diffi > boss_event["threshold"]:
+		if target_diffi > boss_event["threshold"]:
 			boss_event["done"] = true
 
 func _process(delta: float) -> void:
@@ -93,7 +94,7 @@ func _check_dynamic_intros() -> void:
 	for enemy_name in ENEMY_CATALOG:
 		var data = ENEMY_CATALOG[enemy_name]
 		
-		for tier in range(11):
+		for tier in range(100):
 			var required_diffi = data.min_diffi + (NEO_GAP * tier)
 			
 			if diffi >= required_diffi:
@@ -111,7 +112,7 @@ func _on_spawntimer_timeout() -> void:
 	var shopping_list = []
 	for enemy_name in ENEMY_CATALOG:
 		var data = ENEMY_CATALOG[enemy_name]
-		for tier in range(11):
+		for tier in range(100):
 			var required_diffi = data.min_diffi + (NEO_GAP * tier)
 			
 			if diffi >= required_diffi:

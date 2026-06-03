@@ -92,6 +92,7 @@ animations = [{
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ipw72"]
+resource_local_to_scene = true
 shader = ExtResource("3_4inwx")
 shader_parameter/enable_outline = false
 shader_parameter/outline_thickness = 1.50000007125
