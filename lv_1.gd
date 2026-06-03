@@ -136,8 +136,10 @@ func _check_boss_timeline() -> void:
 func _prepare_boss_fight(name: String) -> void:
 	is_boss_fight = true
 	
-	while get_tree().get_nodes_in_group("enemies").size() > 0:
+	while get_tree().get_nodes_in_group("enemies").size() > 0 or is_inside_tree():
+		if not is_inside_tree(): return
 		await get_tree().process_frame
+		if not is_inside_tree(): return
 	
 	Functions.spawn_boss(name)
 
@@ -180,9 +182,11 @@ func ready_animation():
 	Globals.change_lives(-2)
 	Functions.sfx_play("res://sounds/hpStart.mp3", 0.0)
 	await get_tree().create_timer(0.2, false).timeout
+	if not is_inside_tree(): return
 	Globals.change_lives(1)
 	Functions.sfx_play("res://sounds/hpStart.mp3", 0.0, 1.1)
 	await get_tree().create_timer(0.2, false).timeout
+	if not is_inside_tree(): return
 	Globals.change_lives(1)
 	Functions.sfx_play("res://sounds/hpStart.mp3", 0.0, 1.2)
 	Globals.hp_animation = false
@@ -207,6 +211,7 @@ func gameOver():
 	get_tree().paused = true
 	print("RIP Saraf")
 	await get_tree().create_timer(1.0).timeout
+	if not is_inside_tree(): return
 	spaceship.sprite.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(GAME_OVER_SCENE.instantiate())
 	spaceship.die()
@@ -220,11 +225,11 @@ var defParticleTime = 20
 var p_x_offset = 30.0
 var p_y_offset = 170.0
 func _spawn_particles(delta: float):
-	particleTime = defParticleTime / diffi
+	particleTime = defParticleTime / diffi / Globals.particleAmountMulti
 	particleTimer += 1 * delta
 	if particleTimer > particleTime:
 		particleTimer = 0.0
 		var p = particle.instantiate()
-		p.speed = diffi*5
+		p.speed = clamp(diffi*5, 0, 1000)
 		p.global_position = Vector2(randf_range(p_x_offset, viewpos.x - p_x_offset), randf_range(-50.0, viewpos.y - p_y_offset))
 		add_child(p)

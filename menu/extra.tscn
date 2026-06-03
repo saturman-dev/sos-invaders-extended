@@ -240,6 +240,15 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4d4cm"]
+shader = ExtResource("16_337yk")
+shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
+shader_parameter/gradient_color2 = Color(1, 1, 1, 1)
+shader_parameter/gradient_speed = 2.50000011875
+shader_parameter/gradient_scale = 0.015
+shader_parameter/blend_strength = 0.6
+shader_parameter/flash_brightness = 0.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qua0r"]
 resource_local_to_scene = true
 shader = ExtResource("12_altx8")
@@ -262,7 +271,7 @@ shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0.69917375, 0.46534687, 1.347661e-06, 1)
 shader_parameter/gradient_speed = 5.0000002375
-shader_parameter/gradient_scale = 0.020000000950000003
+shader_parameter/gradient_scale = 0.02000000095
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -271,7 +280,7 @@ shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0.09411765, 1, 0.23137255, 1)
 shader_parameter/gradient_speed = 5.0000002375
-shader_parameter/gradient_scale = 0.020000000950000003
+shader_parameter/gradient_scale = 0.02000000095
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -280,7 +289,7 @@ shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0.9843137, 0, 0.8117647, 1)
 shader_parameter/gradient_speed = 5.0000002375
-shader_parameter/gradient_scale = 0.020000000950000003
+shader_parameter/gradient_scale = 0.02000000095
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -323,7 +332,7 @@ shader = ExtResource("16_337yk")
 shader_parameter/gradient_color1 = Color(1, 0.9, 0, 1)
 shader_parameter/gradient_color2 = Color(0, 1, 0.8627451, 1)
 shader_parameter/gradient_speed = 5.0000002375
-shader_parameter/gradient_scale = 0.020000000950000003
+shader_parameter/gradient_scale = 0.02000000095
 shader_parameter/blend_strength = 1.0
 shader_parameter/flash_brightness = 0.0
 
@@ -1177,6 +1186,30 @@ horizontal_alignment = 2
 layout_mode = 2
 mouse_filter = 1
 
+[node name="NEO" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=1556553650]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="beginner" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/NEO" unique_id=1817722524]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/NEO" unique_id=1648830567]
+material = SubResource("ShaderMaterial_4d4cm")
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("7_xr6wq")
+theme_override_font_sizes/normal_font_size = 6
+text = "NEO enemies have special behaviour, increased speed and more HP."
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="darsinNEO" type="HBoxContainer" parent="CanvasLayer2/ScrollContainer/VBoxContainer" unique_id=394460574]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -1346,6 +1379,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(1, 1, 1, 0)
 
 [node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO" unique_id=878998982]
@@ -1437,6 +1471,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(1, 1, 1, 0)
 
 [node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO" unique_id=211393996]
@@ -1533,6 +1568,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(1, 1, 1, 0)
 
 [node name="ender" type="Control" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO" unique_id=845456324]

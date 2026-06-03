@@ -11,6 +11,7 @@ func ghosts():
 	while 1>0:
 		Functions.add_ghost(self, 0.7, 0.63)
 		await get_tree().create_timer(gh / SPEEDMOD).timeout
+		if not is_inside_tree(): return
 
 func _ready() -> void:
 	ghosts()
@@ -43,6 +44,8 @@ func rright():
 	direction = 2
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	await get_tree().create_timer(5.0, false).timeout
+	if not is_inside_tree(): return
 	queue_free()
 
 const breakParticleScene = preload("res://elements/particles/inter_particle.tscn")

@@ -17,6 +17,7 @@ func _ready() -> void:
 	best.bbcode_enabled = true
 	while Saves.is_loading == true:
 		await get_tree().process_frame
+		if not is_inside_tree(): return
 	var score = Saves.data["score"]
 	if score > 0:
 		best.text = str("Highest score: [color=#ffffff]%s[/color]" % str(int(score)))
@@ -43,18 +44,23 @@ func loaded():
 	settingsAnim.modulate.a = 0.0
 	quitAnim.modulate.a = 0.0
 	await get_tree().create_timer(betweenLoaded*2, false).timeout
+	if not is_inside_tree(): return
 	lt = create_tween().set_parallel(true)
 	lt.tween_property(logo, "modulate:a", 1.0, loadedTime)
 	await get_tree().create_timer(betweenLoaded, false).timeout
+	if not is_inside_tree(): return
 	lt = create_tween().set_parallel(true)
 	lt.parallel().tween_property(playAnim, "modulate:a", 1.0, loadedTime*0.7)
 	await get_tree().create_timer(betweenLoaded, false).timeout
+	if not is_inside_tree(): return
 	lt = create_tween().set_parallel(true)
 	lt.parallel().tween_property(extraAnim, "modulate:a", 1.0, loadedTime*0.85)
 	await get_tree().create_timer(betweenLoaded, false).timeout
+	if not is_inside_tree(): return
 	lt = create_tween().set_parallel(true)
 	lt.parallel().tween_property(settingsAnim, "modulate:a", 1.0, loadedTime)
 	await get_tree().create_timer(betweenLoaded, false).timeout
+	if not is_inside_tree(): return
 	lt = create_tween().set_parallel(true)
 	lt.parallel().tween_property(quitAnim, "modulate:a", 1.0, loadedTime*1.2)
 
@@ -88,6 +94,7 @@ func start():
 	s.parallel().tween_property(settingsAnim, "global_position:y", 115, stspeed).as_relative().set_trans(trans).set_ease(Tween.EASE_OUT)
 	s.parallel().tween_property(quitAnim, "global_position:y", 115, stspeed).as_relative().set_trans(trans).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(stspeed/2, false).timeout
+	if not is_inside_tree(): return
 	get_parent().staart()
 	await s.finished
 	queue_free()

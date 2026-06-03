@@ -35,12 +35,15 @@ func da():
 	move1 = create_tween()
 	move1.tween_property(label, "position", Vector2(140.0, 0.0), tm).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(ly).timeout
+	if not is_inside_tree(): return
 	move2 = create_tween()
 	move2.tween_property(cont, "position", Vector2(140.0, 0.0), tm).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(ly/2).timeout
+	if not is_inside_tree(): return
 	move3 = create_tween()
 	move3.tween_property(sett, "position", Vector2(140.0, 0.0), tm).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(ly).timeout
+	if not is_inside_tree(): return
 	move4 = create_tween()
 	move4.tween_property(quit, "position", Vector2(140.0, 0.0), tm).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await move2.finished
@@ -56,9 +59,11 @@ func net():
 	move2 = create_tween()
 	move2.tween_property(cont, "position", Vector2(-140.0, 0.0), tm).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(ly).timeout
+	if not is_inside_tree(): return
 	move3 = create_tween()
 	move3.tween_property(sett, "position", Vector2(-140.0, 0.0), tm).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(ly).timeout
+	if not is_inside_tree(): return
 	move4 = create_tween()
 	move4.tween_property(quit, "position", Vector2(-140.0, 0.0), tm).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
@@ -95,6 +100,7 @@ func continuee():
 		while ct > 0:
 			cnt.text = str(ct)
 			await get_tree().create_timer(1.0).timeout
+			if not is_inside_tree(): return
 			ct -= 1
 		cnt.visible = false
 		Globals.game_running = true
@@ -111,6 +117,7 @@ func _on_sett_mouse_exited() -> void:
 func _on_sett_pressed() -> void:
 	menuClick_play()
 	var settsss = setts.instantiate()
+	settsss.able = true
 	add_child(settsss)
 	settss = settsss
 	settsss.get_node("CanvasLayer").layer = 80
@@ -135,6 +142,7 @@ func _on_quit_pressed() -> void:
 
 func back(direction: int):
 	if settss:
+		Functions.sfx_play("res://sounds/menuClick.mp3")
 		settss.queue_free()
 	stb.visible = false
 	cont.disabled = false

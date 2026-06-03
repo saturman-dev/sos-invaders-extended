@@ -12,6 +12,7 @@ func get_ready():
 
 func get_unready():
 	await get_tree().process_frame
+	if not is_inside_tree(): return
 	hitbox.disabled = true
 
 var interrupting := false

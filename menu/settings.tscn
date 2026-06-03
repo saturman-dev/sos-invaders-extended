@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cdh6vw81ppmrd" path="res://textures/window.png" id="2_qxoij"]
 [ext_resource type="Texture2D" uid="uid://bnbpwhwq1dlvc" path="res://textures/back.png" id="3_oksnb"]
 [ext_resource type="Texture2D" uid="uid://c75sw53sbht8j" path="res://textures/bg.png" id="4_oksnb"]
+[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="4_ymyge"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="5_lwjig"]
 [ext_resource type="Texture2D" uid="uid://dgdvlaankchxc" path="res://textures/slider.png" id="6_mottj"]
 [ext_resource type="Texture2D" uid="uid://c57p4g27ebhfe" path="res://textures/galochka.png" id="7_fredc"]
@@ -195,9 +196,9 @@ texture = ExtResource("2_qxoij")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=953583657]
 offset_left = 122.0
-offset_top = 51.0
+offset_top = 52.0
 offset_right = 268.0
-offset_bottom = 197.0
+offset_bottom = 196.0
 theme = SubResource("Theme_ymyge")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer" unique_id=1831796844]
@@ -208,6 +209,7 @@ size_flags_vertical = 3
 [node name="Control" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer" unique_id=976608949]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control" unique_id=808270711]
 layout_mode = 0
@@ -216,15 +218,17 @@ offset_right = 146.0
 offset_bottom = 23.0
 texture = SubResource("AtlasTexture_sw158")
 
-[node name="sounds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=1485734779]
+[node name="sounds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=290951916]
 layout_mode = 0
-offset_left = 53.0
-offset_top = 6.0
-offset_right = 94.0
-offset_bottom = 14.0
-theme_override_fonts/font = ExtResource("5_lwjig")
-theme_override_font_sizes/font_size = 9
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 147.0
+offset_bottom = 16.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_ymyge")
+theme_override_font_sizes/font_size = 20
 text = "sounds"
+horizontal_alignment = 1
 
 [node name="all" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=140632191]
 layout_mode = 0
@@ -256,6 +260,7 @@ offset_left = 89.0
 offset_top = 26.0
 offset_right = 103.0
 offset_bottom = 34.0
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
@@ -294,6 +299,7 @@ offset_left = 89.0
 offset_top = 46.0
 offset_right = 103.0
 offset_bottom = 54.0
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
@@ -332,6 +338,7 @@ offset_left = 89.0
 offset_top = 66.0
 offset_right = 103.0
 offset_bottom = 74.0
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
@@ -341,8 +348,9 @@ text = "100"
 horizontal_alignment = 1
 
 [node name="gameplay" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer" unique_id=1212755440]
-custom_minimum_size = Vector2(0, 56)
+custom_minimum_size = Vector2(0, 156)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="TextureRect3" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay" unique_id=802573956]
 layout_mode = 0
@@ -352,13 +360,15 @@ texture = SubResource("AtlasTexture_sw158")
 
 [node name="gameplay" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=1105807006]
 layout_mode = 0
-offset_left = 47.0
-offset_top = 6.0
-offset_right = 102.0
-offset_bottom = 14.0
-theme_override_fonts/font = ExtResource("5_lwjig")
-theme_override_font_sizes/font_size = 9
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 147.0
+offset_bottom = 16.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_ymyge")
+theme_override_font_sizes/font_size = 20
 text = "gameplay"
+horizontal_alignment = 1
 
 [node name="countd" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=682918537]
 layout_mode = 0
@@ -366,16 +376,18 @@ offset_left = 5.0
 offset_top = 26.0
 offset_right = 52.0
 offset_bottom = 33.0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("5_lwjig")
 theme_override_font_sizes/font_size = 7
-text = "Countdown"
+text = "Unpause
+countdown"
 
 [node name="cdSlider" type="HSlider" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=2110098358]
 layout_mode = 0
 offset_left = 64.0
-offset_top = 22.0
+offset_top = 27.0
 offset_right = 137.0
-offset_bottom = 38.0
+offset_bottom = 43.0
 theme_override_icons/grabber = SubResource("AtlasTexture_i7nx7")
 theme_override_icons/grabber_highlight = SubResource("AtlasTexture_5lakt")
 theme_override_styles/slider = SubResource("StyleBoxFlat_mottj")
@@ -391,6 +403,7 @@ offset_left = 98.0
 offset_top = 26.0
 offset_right = 103.0
 offset_bottom = 34.0
+mouse_filter = 1
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
@@ -402,9 +415,10 @@ horizontal_alignment = 1
 [node name="hpbars" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=2013299603]
 layout_mode = 0
 offset_left = 5.0
-offset_top = 46.0
+offset_top = 56.0
 offset_right = 83.0
-offset_bottom = 53.0
+offset_bottom = 63.0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("5_lwjig")
 theme_override_font_sizes/font_size = 7
 text = "Hide healthbars"
@@ -412,9 +426,9 @@ text = "Hide healthbars"
 [node name="hbbarsb" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=2053350038]
 layout_mode = 0
 offset_left = 122.0
-offset_top = 41.0
+offset_top = 51.0
 offset_right = 137.0
-offset_bottom = 56.0
+offset_bottom = 66.0
 focus_mode = 0
 flat = true
 
@@ -424,9 +438,114 @@ sprite_frames = SubResource("SpriteFrames_omhd3")
 animation = &"no"
 autoplay = "no"
 
+[node name="shaket" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=1609021043]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 77.0
+offset_right = 106.0
+offset_bottom = 84.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Disable camera shake"
+
+[node name="shake" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=258236163]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 73.0
+offset_right = 137.0
+offset_bottom = 88.0
+focus_mode = 0
+flat = true
+
+[node name="shake" type="AnimatedSprite2D" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/shake" unique_id=2118303455]
+position = Vector2(7.5, 7.5)
+sprite_frames = SubResource("SpriteFrames_omhd3")
+animation = &"no"
+autoplay = "no"
+
+[node name="fpst" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=62641023]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 99.0
+offset_right = 83.0
+offset_bottom = 106.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Show FPS"
+
+[node name="fps" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=1812143898]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 95.0
+offset_right = 137.0
+offset_bottom = 110.0
+focus_mode = 0
+flat = true
+
+[node name="fps" type="AnimatedSprite2D" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/fps" unique_id=2049873634]
+position = Vector2(7.5, 7.5)
+sprite_frames = SubResource("SpriteFrames_omhd3")
+animation = &"no"
+autoplay = "no"
+
+[node name="bgtintt" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=385817493]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 121.0
+offset_right = 122.0
+offset_bottom = 128.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Disable bg tint effect"
+
+[node name="bgtint" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=1948339803]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 117.0
+offset_right = 137.0
+offset_bottom = 132.0
+focus_mode = 0
+flat = true
+
+[node name="bgtint" type="AnimatedSprite2D" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/bgtint" unique_id=1485057878]
+position = Vector2(7.5, 7.5)
+sprite_frames = SubResource("SpriteFrames_omhd3")
+animation = &"no"
+autoplay = "no"
+
+[node name="particlest" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=571150277]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 143.0
+offset_right = 122.0
+offset_bottom = 150.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("5_lwjig")
+theme_override_font_sizes/font_size = 7
+text = "Simplier particles"
+
+[node name="particles" type="Button" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=235998009]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 139.0
+offset_right = 137.0
+offset_bottom = 154.0
+focus_mode = 0
+flat = true
+
+[node name="particles" type="AnimatedSprite2D" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/particles" unique_id=1974964554]
+position = Vector2(7.5, 7.5)
+sprite_frames = SubResource("SpriteFrames_omhd3")
+animation = &"no"
+autoplay = "no"
+
 [node name="keybinds" type="Control" parent="CanvasLayer/ScrollContainer/VBoxContainer" unique_id=22422766]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds" unique_id=642433958]
 layout_mode = 0
@@ -434,15 +553,17 @@ offset_right = 146.0
 offset_bottom = 20.0
 texture = SubResource("AtlasTexture_sw158")
 
-[node name="keybinds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/TextureRect2" unique_id=531503155]
+[node name="keybinds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/TextureRect2" unique_id=1608386901]
 layout_mode = 0
-offset_left = 46.0
-offset_top = 7.0
-offset_right = 102.0
-offset_bottom = 15.0
-theme_override_fonts/font = ExtResource("5_lwjig")
-theme_override_font_sizes/font_size = 9
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 147.0
+offset_bottom = 16.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4_ymyge")
+theme_override_font_sizes/font_size = 20
 text = "keybinds"
+horizontal_alignment = 1
 
 [node name="VBOXkb" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds" unique_id=221892494]
 layout_mode = 0
@@ -583,6 +704,10 @@ autoplay = "default"
 [connection signal="gui_input" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/cdSlider" to="." method="_on_cd_slider_gui_input"]
 [connection signal="value_changed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/cdSlider" to="." method="_on_cd_slider_value_changed"]
 [connection signal="pressed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/hbbarsb" to="." method="_on_hbbarsb_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/shake" to="." method="_on_shake_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/fps" to="." method="_on_fps_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/bgtint" to="." method="_on_bgtint_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/particles" to="." method="_on_particles_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/back" to="." method="_on_back_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/back" to="." method="_on_back_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/back" to="." method="_on_back_pressed"]

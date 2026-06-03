@@ -38,6 +38,7 @@ const bulletScene = preload("res://elements/wertue/wertueBeam.tscn")
 @onready var enrageLoop := $ENRAGED
 @onready var hitbox := $CollisionShape2D
 @onready var blink := $blink
+@onready var bar := $bar
 
 
 
@@ -45,7 +46,7 @@ var direction := int([-1, 1].pick_random())
 var defspeed := 20.0
 var speed := defspeed
 var yspeed = defyspeed
-var defyspeed = 13.5
+var defyspeed = 9.0
 var raycast = false
 var dirChanging := 40.0
 
@@ -132,6 +133,7 @@ func die():
 	died = true
 	enrageLoop.stop()
 	remove_from_group("enemies")
+	bar.hide()
 	
 	if warning == true:
 		Functions.sfx_play("res://sounds/unterruptable.mp3", 4.0, randf_range(1.15, 1.35), true)
@@ -164,10 +166,12 @@ func die():
 	dietween.parallel().tween_property(expl, "scale", Vector2(explsize, explsize), expltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	dietween.parallel().tween_property(sprite, "scale", Vector2.ZERO, expltime)
 	await get_tree().create_timer(expltime + explstay).timeout
+	if not is_inside_tree(): return
 	sprite.visible = false
 	dietween2 = create_tween()
 	dietween2.tween_property(expl, "scale", Vector2(0.0, 0.0), unexpltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(afterdead, false).timeout
+	if not is_inside_tree(): return
 	queue_free()
 
 
@@ -195,11 +199,21 @@ func shot():
 			bullet2.NEO = NEO
 			bullet2.NEO2 = NEO
 			bullet2.SPEEDMOD = SPEEDMOD
+		
+		await get_tree().process_frame
+		if not is_inside_tree(): return
+		bar.show()
+		bar.value = 0
+		if not "waittime" in bullet: return
+		var bartween = create_tween()
+		bartween.tween_property(bar, "value", 100, bullet.waittime.wait_time)
+		bartween.tween_callback(bar.hide)
 
 func newShot():
 	if failedAttacks >= maxFailedAttacks:
 		enrage()
 	await get_tree().create_timer(betweenAttacks / SPEEDMOD, false).timeout
+	if not is_inside_tree(): return
 	shot()
 
 func enrage():

@@ -11,6 +11,7 @@ func ghosts():
 	while 1>0:
 		Functions.add_ghost(self, 0.7, 0.5)
 		await get_tree().create_timer(gh).timeout
+		if not is_inside_tree(): return
 
 var t: Tween
 func _ready() -> void:

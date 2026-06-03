@@ -40,6 +40,12 @@ func _process(delta: float) -> void:
 		speed = clamp(defspeed + Globals.diffi, 0, 400)
 		huespeed = clamp(Globals.diffi / 400, 0, 3)
 		if Globals.diffi > 0:
+			if Saves.data["disable_bg_tint"] == true:
+				wall1.material.set_shader_parameter("hue_offset", 0)
+				wall2.material.set_shader_parameter("hue_offset", 0)
+				wall3.material.set_shader_parameter("hue_offset", 0)
+				wall4.material.set_shader_parameter("hue_offset", 0)
+				return
 			hue += huespeed * delta
 			wall1.material.set_shader_parameter("hue_offset", hue)
 			wall2.material.set_shader_parameter("hue_offset", hue)

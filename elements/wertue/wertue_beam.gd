@@ -45,6 +45,7 @@ func _ready() -> void:
 	
 	while not wertue is Object:
 		await get_tree().process_frame
+		if not is_inside_tree(): return
 		
 	if wertue.enraged == true:
 		slabost.modulate = enragedColor
@@ -124,10 +125,12 @@ func _run_warning_flashing():
 		if NEO == 0:
 			Functions.sfx_play("res://sounds/wertueWarning.mp3")
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if not is_inside_tree(): return
 		if current_state != "WARNING": break
 		
 		warning.visible = false
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if not is_inside_tree(): return
 		if current_state != "WARNING": break
 		warrned.emit()
 
@@ -137,10 +140,12 @@ func _run_interruption_flashing():
 		if NEO == 0:
 			Functions.sfx_play("res://sounds/wertueInterruption.mp3")
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if not is_inside_tree(): return
 		if current_state != "INTERRUPTION": break
 		
 		warning.visible = false
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if not is_inside_tree(): return
 		if current_state != "INTERRUPTION": break
 		warrned.emit()
 

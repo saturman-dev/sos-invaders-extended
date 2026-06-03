@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cdse5spa6ogel" path="res://fg_1.tscn" id="5_7jktm"]
 [ext_resource type="Texture2D" uid="uid://bo1g1rpdcg3x7" path="res://textures/StrLogo.png" id="6_eow3j"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="7_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://diox7b0gdyjva" path="res://UI/meta/meta.tscn" id="9_vef74"]
 
 [node name="game" type="Node2D" unique_id=2020904288]
 script = ExtResource("1_feb5d")
@@ -113,3 +114,5 @@ theme_override_fonts/font = ExtResource("7_j5wjh")
 text = "v0.0 (unreleased)"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="meta" parent="." unique_id=626485823 instance=ExtResource("9_vef74")]

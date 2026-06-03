@@ -43,6 +43,7 @@ func _ready() -> void:
 	blackXoffset = size.x - red.size.x
 	blackYoffset = size.y - red.size.y
 	await get_tree().process_frame
+	if not is_inside_tree(): return
 	setted_default.emit()
 	
 	Events.unpaused.connect(_on_unp)

@@ -11,22 +11,31 @@ func _ready() -> void:
 func ready_animation():
 	parent.hide()
 	await get_tree().create_timer(0.2, false).timeout
+	if not is_inside_tree(): return
 	parent.show()
 	await get_tree().create_timer(0.03, false).timeout
+	if not is_inside_tree(): return
 	parent.hide()
 	await get_tree().create_timer(0.05, false).timeout
+	if not is_inside_tree(): return
 	parent.show()
 	await get_tree().create_timer(0.04, false).timeout
+	if not is_inside_tree(): return
 	parent.hide()
 	await get_tree().create_timer(0.075, false).timeout
+	if not is_inside_tree(): return
 	parent.show()
 	await get_tree().create_timer(0.07, false).timeout
+	if not is_inside_tree(): return
 	parent.hide()
 	await get_tree().create_timer(0.15, false).timeout
+	if not is_inside_tree(): return
 	parent.show()
 	await get_tree().create_timer(0.15, false).timeout
+	if not is_inside_tree(): return
 	parent.hide()
 	await get_tree().create_timer(0.25, false).timeout
+	if not is_inside_tree(): return
 	parent.show()
 
 func _process(delta: float) -> void:

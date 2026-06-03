@@ -13,6 +13,7 @@ var gr = 2000.0
 
 func _ready() -> void:
 	await get_tree().process_frame
+	if not is_inside_tree(): return
 	rotation_degrees = -rot/2
 	rotatee()
 

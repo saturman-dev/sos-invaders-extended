@@ -112,10 +112,12 @@ func die():
 	dietween.parallel().tween_property(expl, "scale", Vector2(explsize, explsize), expltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	dietween.parallel().tween_property(sprite, "scale", Vector2.ZERO, expltime)
 	await get_tree().create_timer(expltime + explstay).timeout
+	if not is_inside_tree(): return
 	sprite.visible = false
 	dietween2 = create_tween()
 	dietween2.tween_property(expl, "scale", Vector2(0.0, 0.0), unexpltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(afterdead, false).timeout
+	if not is_inside_tree(): return
 	queue_free()
 
 

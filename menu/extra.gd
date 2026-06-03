@@ -46,9 +46,6 @@ var flseyeAttacksText := "[color=a999ff]Attack 1:[/color]   Fires 2 lasers point
 [color=a999ff]Attack 4:[/color]   Shoots 12 bullets 3 times around itself."
 
 
-var neoInfoText := "NEO enemies have increased speed and HP. Also they've got special behaviour."
-
-
 
 var healLockedText := "[color=00ff22]???[/color]   [color=7f7f7f]Defeat any enemy after taking damage to get this bonus.[/color]"
 var healInfoText := "[color=00ff22]Heal:[/color]   Heals 1 HP. Maximum amount is 3."
@@ -115,6 +112,8 @@ var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases you
 @onready var flseyeExpand := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand
 @onready var flseyeExpandSprite := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/expand/Control/Sprite2D
 @onready var flseyeAttacks := $CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info/textAttacks
+
+@onready var NEOtext := $CanvasLayer2/ScrollContainer/VBoxContainer/NEO
 
 @onready var darsinNeoName := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info/name
 @onready var darsinNeoInfo := $CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info/text
@@ -185,7 +184,6 @@ func _on_back_mouse_exited() -> void:
 	backButton.play("unhover")
 
 func _on_back_pressed() -> void:
-	menuClick_play()
 	back()
 
 func _input(event):
@@ -285,6 +283,8 @@ func _ready() -> void:
 		flseyeBg.modulate = bgNoEnemyColor
 		flseyeLock.visible = true
 		flseyeIcon.visible = false
+	if Saves.data["greatest_neo_tier"] == 0:
+		NEOtext.hide()
 	if Saves.data["ever_met_darsin_neo"] == true:
 		darsinNeoInfo.text = darsinNeoInfoText
 		darsinNeoSpecialButton.text = noSpecial

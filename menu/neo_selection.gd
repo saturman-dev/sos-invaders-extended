@@ -104,6 +104,7 @@ func _on_down_button_up() -> void:
 func _on_down_pressed() -> void:
 	if current_number > 0: Functions.sfx_play("res://sounds/menuClick2.mp3", 7.5)
 	await get_tree().process_frame
+	if not is_inside_tree(): return
 	_change_number(-1)
 
 
@@ -124,6 +125,7 @@ func _on_up_button_up() -> void:
 func _on_up_pressed() -> void:
 	if current_number < 10: Functions.sfx_play("res://sounds/menuClick2.mp3", 7.5)
 	await get_tree().process_frame
+	if not is_inside_tree(): return
 	_change_number(1)
 	
 

@@ -33,6 +33,7 @@ func ready_animation():
 	var scoreTween = create_tween()
 	scoreTween.tween_property(scoreV, "position", Vector2(scoreVoffsetx, -scoreVoffsety), 3.0).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(2.0, false).timeout
+	if not is_inside_tree(): return
 	Globals.paused = false
 
 func align_position():

@@ -9,7 +9,10 @@ var color := Color.WHITE
 var lifetime := 0.5
 
 func _ready() -> void:
+	if Globals.particleCollision == false:
+		hitbox.disabled = true
 	sprite.target = self
+	sprite.tick_rate /= Globals.particleFramesMulti
 	var tween = create_tween()
 	tween.tween_property(sprite, "width", 0.0, lifetime)
 	tween.tween_callback(queue_free)

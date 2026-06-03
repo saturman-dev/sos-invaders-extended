@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func ready_animation():
 	await get_tree().create_timer(0.2, false).timeout
+	if not is_inside_tree(): return
 	for i in range(Globals.def_hp):
 		var rect = RECT_SCENE.instantiate()
 		add_child(rect)
@@ -19,6 +20,7 @@ func ready_animation():
 		var rectTween = create_tween()
 		rectTween.tween_property(rect.get_child(0), "scale", target_scale, 1.0 * (i+1)).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		await get_tree().create_timer(0.2 * (i+1), false).timeout
+		if not is_inside_tree(): return
 
 func update_lives(lives: int):
 	if lives < 0:

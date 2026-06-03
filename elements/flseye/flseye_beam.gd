@@ -35,8 +35,10 @@ func go() -> void:
 		if NEO == false:
 			Functions.sfx_play("res://sounds/wertueWarning.mp3", 0.0, pitch)
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if not is_inside_tree(): return
 		warning.visible = false
 		await get_tree().create_timer(warnTickTime, false).timeout
+		if not is_inside_tree(): return
 		warrned.emit()
 
 var m: Tween
@@ -51,6 +53,7 @@ func altgo():
 	m = create_tween()
 	m.tween_property(self, "global_position:x", 420 * dir, movingTime).as_relative()
 	await get_tree().create_timer(movingTime * 0.7, false).timeout
+	if not is_inside_tree(): return
 	gone()
 
 func _on_warning_time_timeout() -> void:

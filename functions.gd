@@ -25,6 +25,7 @@ func hitstop(seconds: float):
 	#get_tree().paused = true
 	Engine.time_scale = 0
 	await get_tree().create_timer(seconds, true, false, true).timeout
+	if not is_inside_tree(): return
 	#get_tree().paused = false
 	Engine.time_scale = 1
 	hitstopping = false
@@ -33,6 +34,7 @@ func hitstop(seconds: float):
 func add_ghost(source: Object, visibility: float, duration: float):
 	var sprite = source.get("sprite")
 	var ghost := Sprite2D.new()
+	ghost.name = "Ghost"
 	if sprite is Sprite2D:
 		ghost.texture = sprite.texture
 		ghost.flip_h = sprite.flip_h
@@ -59,7 +61,7 @@ func add_ghost(source: Object, visibility: float, duration: float):
 	get_tree().current_scene.add_child(ghost)
 	var ATween = ghost.create_tween()
 	ghost.modulate.a = visibility
-	ATween.tween_property(ghost, "modulate:a", 0.0, duration)
+	ATween.tween_property(ghost, "modulate:a", 0.0, duration * Globals.ghostDurationMulti)
 	ATween.finished.connect(ghost.queue_free)
 
 
@@ -149,6 +151,7 @@ func stop_all_sfx():
 
 
 func notify(notification_text: String = "Some notification", notification_info: String = "More info ahh"):
+	return
 	var Notifier = notifier.instantiate()
 	add_child(Notifier)
 	Notifier.notify(notification_text, notification_info)
@@ -260,6 +263,7 @@ func flash(fade_in: float, fade_out: float, hold: float = 0.0, visibility: float
 	ftween.tween_property(flasher, "modulate:a", visibility, fade_in)
 	await ftween.finished
 	await get_tree().create_timer(hold, false).timeout
+	if not is_inside_tree(): return
 	if not canv:
 		return
 	ftween = create_tween()
@@ -295,7 +299,7 @@ func particle_explosion(
 	collide_with_walls: bool = true,
 	trail_length: float = 0.05
 ):
-	for i in range(particle_amount):
+	for i in range(particle_amount * Globals.particleAmountMulti):
 		var p = single_particle.instantiate()
 		p.global_position = position
 		

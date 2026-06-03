@@ -48,8 +48,10 @@ func go():
 	dash.modulate.a = 0.0
 	show_shoot()
 	await get_tree().create_timer(0.2, false).timeout
+	if not is_inside_tree(): return
 	show_move()
 	await get_tree().create_timer(0.2, false).timeout
+	if not is_inside_tree(): return
 	show_dash()
 
 var moved = false

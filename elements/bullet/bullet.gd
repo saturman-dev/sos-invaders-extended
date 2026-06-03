@@ -19,6 +19,7 @@ func ghosts():
 	while 1>0:
 		Functions.add_ghost(self, 0.5, 0.3)
 		await get_tree().create_timer(gh, false).timeout
+		if not is_inside_tree(): return
 
 func _ready() -> void:
 	ghosts()
@@ -55,7 +56,9 @@ func _on_body_entered(body: Node2D):
 		body.get_out()
 	if splashing == false:
 		await get_tree().process_frame
+		if not is_inside_tree(): return
 		await get_tree().process_frame
+		if not is_inside_tree(): return
 		queue_free()
 
 func _on_area_entered(area: Area2D):

@@ -54,6 +54,7 @@ atlas = ExtResource("5_4odtj")
 region = Rect2(190, 0, 31, 34)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4odtj"]
+resource_local_to_scene = true
 shader = ExtResource("6_3pmag")
 shader_parameter/enable_outline = false
 shader_parameter/outline_thickness = 1.0000000475

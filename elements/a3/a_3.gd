@@ -143,10 +143,12 @@ func die():
 	dietween.parallel().tween_property(expl, "scale", Vector2(explsize, explsize), expltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	dietween.parallel().tween_property(sprite, "scale", Vector2.ZERO, expltime)
 	await get_tree().create_timer(expltime + explstay).timeout
+	if not is_inside_tree(): return
 	sprite.visible = false
 	dietween2 = create_tween()
 	dietween2.tween_property(expl, "scale", Vector2(0.0, 0.0), unexpltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(afterdead, false).timeout
+	if not is_inside_tree(): return
 	queue_free()
 
 var dmgtween: Tween
@@ -170,28 +172,34 @@ var color2 := Color.BLUE
 func shot():
 	sprite.play("preshot1")
 	await get_tree().create_timer(0.5 / SPEEDMOD, false).timeout
+	if not is_inside_tree(): return
 	if died == false:
 		sprite.play("preshot2")
 		Functions.sfx_play("res://sounds/A3Reload1.mp3", -10.0)
 	await get_tree().create_timer(0.5 / SPEEDMOD, false).timeout
+	if not is_inside_tree(): return
 	if died == false:
 		sprite.play("preshot3")
 		Functions.sfx_play("res://sounds/A3Reload2.mp3", -10.0)
 		interZone.get_ready()
 	await get_tree().create_timer(0.75 / SPEEDMOD, false).timeout
 	sprite.play("def")
+	if interrupted == true:
+		interrupted = false
+		
+		return
+	
 	spawn_bullets()
+	interrupted = false
 	ATween = create_tween().set_parallel(true)
 	ATween.tween_property(self, "position", Vector2(0.0, -offpos), 0.10 / SPEEDMOD).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await ATween.finished
 	ATween = create_tween().set_parallel(true)
 	ATween.tween_property(self, "position", Vector2(0.0, offpos), 0.5 / SPEEDMOD).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	interrupted = false
 
 func spawn_bullets():
 	if died == false:
-		if interrupted == true:
-			interrupted = false
-			return
 		interZone.get_unready()
 		Functions.sfx_play("res://sounds/A3Fire.mp3", -7.5)
 		var bullet = bulletScene.instantiate()
@@ -230,6 +238,7 @@ func spawn_bullets():
 var interrupted := false
 const explScene = preload("res://elements/bobm/bobm_explosion.tscn")
 func interrupt():
+	interrupted = true
 	interZone.get_unready()
 	Functions.sfx_play("res://sounds/unterruptable.mp3", 4.0, randf_range(1.1, 1.3), true)
 	Functions.hitstop(0.4)
@@ -237,13 +246,13 @@ func interrupt():
 	if NEO == 0:
 		Functions.dmg(self, fullhp)
 	PtbonusesManager.ptbonus(givepts * 2 * (NEO + 1), "FOLDED", color)
-	interrupted = true
 	Globals.apply_shake(4.0)
 	var explosion = explScene.instantiate()
 	explosion.global_scale *= 1.2
 	explosion.global_position = global_position
 	explosion.SPEEDMOD = SPEEDMOD
 	explosion.fragments = false
+	explosion.color = color
 	get_parent().add_child(explosion)
 	explosion.set_hue_offset(0.65)
 	Functions.sfx_play("res://sounds/bobmExplosion.mp3")

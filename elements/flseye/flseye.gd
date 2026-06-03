@@ -120,6 +120,7 @@ func _ready() -> void:
 	Saves.data["ever_met_flseye"] = true
 	dotScale = dot.scale
 	await get_tree().create_timer(4.0, false).timeout
+	if not is_inside_tree(): return
 	contactDamager.disabled = false
 	get_tree().get_first_node_in_group("background").flseye_animation_finished()
 	get_tree().get_first_node_in_group("foreground").flseye_animation_finished()
@@ -201,13 +202,16 @@ func die():
 	raycast_right.queue_free()
 	sprite.play("death")
 	await get_tree().create_timer(3.0, false).timeout
+	if not is_inside_tree(): return
 	
 	# DEATH ANIMATION
 	shake()
 	explosions()
 	await get_tree().create_timer(explosionsTime, false).timeout
+	if not is_inside_tree(): return
 	exploded = true
 	await get_tree().create_timer(afterExplosionsTime, false).timeout
+	if not is_inside_tree(): return
 	
 	Functions.particle_explosion(self, global_position, randi_range(25, 40), color, 400, 2.0, 50, 1.5, 5.0, true, 0.4)
 	Functions.flash(0.2, 2.0, 0.2, 0.9, Color("7200ff"))
@@ -224,10 +228,12 @@ func die():
 	BTween = create_tween()
 	BTween.tween_property(sprite, "modulate:a", 0.0, expltime)
 	await get_tree().create_timer(expltime + explstay, false).timeout
+	if not is_inside_tree(): return
 	sprite.visible = false
 	ATween = create_tween()
 	ATween.tween_property(expl, "scale", Vector2(0.0, 0.0), unexpltime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(afterdead, false).timeout
+	if not is_inside_tree(): return
 	get_tree().get_first_node_in_group("level").boss_defeated()
 	queue_free()
 
@@ -239,6 +245,7 @@ func shake():
 		sprite.position.x = defspritepos.x + randf_range(-shakestrength, shakestrength)
 		sprite.position.y = defspritepos.y + randf_range(-shakestrength, shakestrength)
 		await get_tree().create_timer(shaketick, false).timeout
+		if not is_inside_tree(): return
 
 var explosionsTick = 0.4
 var explosionPosRange = 80
@@ -255,6 +262,7 @@ func explosions():
 		add_child(explosion)
 		Functions.sfx_play("res://sounds/damage.mp3", 0.0, randf_range(0.8, 1.2))
 		await get_tree().create_timer(explosionsTick, false).timeout
+		if not is_inside_tree(): return
 
 var ATween: Tween
 var BTween: Tween
@@ -332,6 +340,7 @@ func attackLaser():
 	laser_right.tween_property(laser1, "rotation_degrees", 180, laserAttackTime).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	laser_left.tween_property(laser2, "rotation_degrees", -180, laserAttackTime).as_relative().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	await get_tree().create_timer(laserAttackTime / 3.0, false).timeout
+	if not is_inside_tree(): return
 	if died == true:
 		return
 	sprite.play("laserAttackCon1")
@@ -339,6 +348,7 @@ func attackLaser():
 	laser1.position = dot.position
 	laser2.position = dot.position
 	await get_tree().create_timer(laserAttackTime / 3.0, false).timeout
+	if not is_inside_tree(): return
 	if died == true:
 		return
 	sprite.play("laserAttackCon2")
@@ -395,15 +405,18 @@ func attackBeams():
 	beam3.global_position = Vector2(randf_range(25.0, 365.0), 0.0)
 	get_parent().add_child(beam1)
 	await get_tree().create_timer(beamsAttackSpawnSpeed + randf_range(-beamsAttackSpawnSpeedRange, beamsAttackSpawnSpeedRange), false).timeout
+	if not is_inside_tree(): return
 	if died == true:
 		return
 	get_parent().add_child(beam2)
 	await get_tree().create_timer(beamsAttackSpawnSpeed + randf_range(-beamsAttackSpawnSpeedRange, beamsAttackSpawnSpeedRange), false).timeout
+	if not is_inside_tree(): return
 	if died == true:
 		return
 	get_parent().add_child(beam3)
 	sprite.play("laserAttackFin")
 	await get_tree().create_timer(afterBeamsTime, false).timeout
+	if not is_inside_tree(): return
 	if died == true:
 		return
 	shotTimer.start()
@@ -441,10 +454,12 @@ func attackCircle():
 		return
 	attackCircle0()
 	await get_tree().create_timer(betweenCircles, false).timeout
+	if not is_inside_tree(): return
 	if died == true:
 		return
 	attackCircle0()
 	await get_tree().create_timer(betweenCircles, false).timeout
+	if not is_inside_tree(): return
 	if died == true:
 		return
 	attackCircle0()
@@ -452,6 +467,7 @@ func attackCircle():
 	sqt.tween_property(self, "squarespeed", 180, 1.0)
 	stopped = false
 	await get_tree().create_timer(betweenCircles, false).timeout
+	if not is_inside_tree(): return
 	shotTimer.start()
 
 func attackCircle0():

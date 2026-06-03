@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ck7ioqmrjuli0" path="res://elements/trail/trail.tscn" id="7_g1k5q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_do6qd"]
+resource_local_to_scene = true
 shader = ExtResource("3_sjns3")
 shader_parameter/enable_outline = false
 shader_parameter/outline_thickness = 2.0

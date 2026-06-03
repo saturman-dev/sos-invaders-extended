@@ -14,6 +14,7 @@ func ghosts():
 	while 1>0:
 		Functions.add_ghost(self, 0.5, 0.5)
 		await get_tree().create_timer(gh / SPEEDMOD, false).timeout
+		if not is_inside_tree(): return
 
 func tick_sound(volume: float = 0.0, hitstop: bool = false):
 	Functions.sfx_play("res://sounds/bobmTick.mp3", volume - 0.0, 1.0, hitstop)
@@ -29,8 +30,10 @@ func _ready() -> void:
 	t.tween_property(sprite, "scale", defsize, 0.5 / (1 + (SPEEDMOD - 1) / 4)).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tick_sound()
 	await get_tree().create_timer(1.0 / (1 + (SPEEDMOD - 1) / 4), false).timeout
+	if not is_inside_tree(): return
 	tick_sound(-5.0)
 	await get_tree().create_timer(1.0 / (1 + (SPEEDMOD - 1) / 4), false).timeout
+	if not is_inside_tree(): return
 	tick_sound(-10.0)
 
 var second = false
@@ -58,6 +61,7 @@ var warned = false
 func tick():
 	while self:
 		await get_tree().create_timer(0.1 / (1 + (SPEEDMOD - 1) / 4), false).timeout
+		if not is_inside_tree(): return
 		tick_sound()
 
 func warn():
@@ -67,6 +71,7 @@ func warn():
 		tick_sound(4.0, true)
 		tick()
 		await get_tree().create_timer(1.5 / (1 + (SPEEDMOD - 1) / 2), false).timeout
+		if not is_inside_tree(): return
 		explode()
 
 func explode():

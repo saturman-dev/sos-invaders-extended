@@ -23,6 +23,10 @@ var cd = Saves.data["ct"]
 @onready var scroll := $CanvasLayer/ScrollContainer
 @onready var scroll_speed = 10
 @onready var bargal := $CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/hbbarsb/hpbarsg
+@onready var shake := $CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/shake/shake
+@onready var fps := $CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/fps/fps
+@onready var bgtint := $CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/bgtint/bgtint
+@onready var particles := $CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3/particles/particles
 
 var loaded := false
 
@@ -31,6 +35,27 @@ func _ready():
 		bargal.play("yes")
 	else:
 		bargal.play("no")
+		
+	if Saves.data["disable_shake"] == true:
+		shake.play("yes")
+	else:
+		shake.play("no")
+		
+	if Saves.data["show_fps"] == true:
+		fps.play("yes")
+	else:
+		fps.play("no")
+		
+	if Saves.data["disable_bg_tint"] == true:
+		bgtint.play("yes")
+	else:
+		bgtint.play("no")
+	
+	if Saves.data["simplier_particles"] == true:
+		particles.play("yes")
+	else:
+		particles.play("no")
+		
 	allSlider.value = allVolume
 	sfxSlider.value = sfxVolume
 	musicSlider.value = musicVolume
@@ -46,10 +71,13 @@ func menuClick_play():
 
 func menuClick2_play():
 	if loaded == true:
-		Functions.sfx_play("res://sounds/menuClick2.mp3")
+		Functions.sfx_play("res://sounds/menuClick2.mp3", 5.0)
+
+func menuClick3_play():
+	if loaded == true:
+		return
 
 func _on_back_pressed() -> void:
-	menuClick_play()
 	backk()
 
 func backk():
@@ -189,3 +217,44 @@ func _on_hbbarsb_pressed() -> void:
 	else:
 		bargal.play("yes")
 		Saves.data["bars"] = 0.0
+
+
+func _on_shake_pressed() -> void:
+	menuClick2_play()
+	if Saves.data["disable_shake"] == true:
+		shake.play("no")
+		Saves.data["disable_shake"] = false
+	else:
+		shake.play("yes")
+		Saves.data["disable_shake"] = true
+
+
+func _on_fps_pressed() -> void:
+	menuClick2_play()
+	if Saves.data["show_fps"] == true:
+		fps.play("no")
+		Saves.data["show_fps"] = false
+	else:
+		fps.play("yes")
+		Saves.data["show_fps"] = true
+
+
+func _on_bgtint_pressed() -> void:
+	menuClick2_play()
+	if Saves.data["disable_bg_tint"] == true:
+		bgtint.play("no")
+		Saves.data["disable_bg_tint"] = false
+	else:
+		bgtint.play("yes")
+		Saves.data["disable_bg_tint"] = true
+
+
+func _on_particles_pressed() -> void:
+	menuClick2_play()
+	if Saves.data["simplier_particles"] == true:
+		particles.play("no")
+		Saves.data["simplier_particles"] = false
+	else:
+		particles.play("yes")
+		Saves.data["simplier_particles"] = true
+	Globals.update_simplier_particles()

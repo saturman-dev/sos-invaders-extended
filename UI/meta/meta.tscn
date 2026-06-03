@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://diox7b0gdyjva"]
+
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="1_wjf8v"]
+[ext_resource type="Script" uid="uid://dotaxr8ktnwhh" path="res://UI/meta/meta.gd" id="1_ynois"]
+
+[node name="meta" type="CanvasLayer" unique_id=626485823]
+layer = 1000
+script = ExtResource("1_ynois")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1918264462]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="hbox" type="HBoxContainer" parent="MarginContainer" unique_id=806340733]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="vbox" type="VBoxContainer" parent="MarginContainer/hbox" unique_id=183599345]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="fps" type="Label" parent="MarginContainer/hbox/vbox" unique_id=349066256]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wjf8v")
+theme_override_font_sizes/font_size = 8
+text = "0"

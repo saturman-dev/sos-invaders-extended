@@ -6,6 +6,8 @@ var znsize = 2.0
 var znfadein = 0.3
 var znfadeout = 2.2
 
+var color := Color("8fd94e")
+
 var SPEEDMOD := 1.0
 var bullet_count := 10
 
@@ -38,7 +40,7 @@ var fragments := true
 func _ready() -> void:
 	var defscale = global_scale
 	global_scale *= 0.2
-	Functions.particle_explosion(self, global_position, randi_range(20, 30), Color("8fd94e"), 500, 0.8, 100.0, 0.7, 1.5, true, 0.1)
+	Functions.particle_explosion(self, global_position, randi_range(20, 30), color, 500, 0.8, 100.0, 0.7, 1.5, true, 0.1)
 	if SPEEDMOD > 1.0 and fragments == true:
 		#defscale *= 1.3
 		var angle_step = TAU / bullet_count
@@ -67,6 +69,7 @@ func _ready() -> void:
 	CTween = create_tween()
 	CTween.tween_property(znak, "modulate:a", 0.0, znfadeout)
 	await get_tree().create_timer(okfade * 0.8 - znfadein, false).timeout
+	if not is_inside_tree(): return
 	hitbox.disabled = true
 	await CTween.finished
 	queue_free()

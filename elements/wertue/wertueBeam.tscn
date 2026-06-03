@@ -107,6 +107,7 @@ autoplay = "default"
 frame_progress = 0.7116505
 
 [node name="bar" type="TextureProgressBar" parent="." unique_id=1613916551]
+visible = false
 modulate = Color(0.98624766, 1, 0.9995603, 0.4)
 offset_left = -17.499996
 offset_top = -17.500004

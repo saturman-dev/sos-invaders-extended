@@ -69,6 +69,7 @@ func die():
 	BTween.tween_property(sprite, "scale", Vector2(3.0, 3.0), fadetime).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await ATween.finished
 	await get_tree().create_timer(afterdead).timeout
+	if not is_inside_tree(): return
 	queue_free()
 
 

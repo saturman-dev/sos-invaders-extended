@@ -13,6 +13,7 @@ func ghosts():
 	while 1>0:
 		Functions.add_ghost(self, 0.7, 0.5)
 		await get_tree().create_timer(gh / SPEEDMOD).timeout
+		if not is_inside_tree(): return
 
 var defaultscale: Vector2
 
@@ -47,5 +48,6 @@ func fade():
 	fadetw.tween_property(self, "scale", Vector2.ZERO, 2.0 / SPEEDMOD).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	fadetw.tween_callback(queue_free)
 	await get_tree().create_timer(1.5 / SPEEDMOD, false).timeout
+	if not is_inside_tree(): return
 	hitbox.disabled = true
 	

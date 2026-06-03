@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
 			camera.offset = Vector2(
 				randf_range(-shake_str, shake_str),
 				randf_range(-shake_str, shake_str)
-			)
+			) if Saves.data["disable_shake"] == false else Vector2.ZERO
 	
 	# STAMINA
 	if currentStaminas < staminas and game_running == true:
@@ -100,7 +100,7 @@ func change_points(diff: int):
 		Functions.notify("New \"Overheal\" bonus added!!", "Go catch it!")
 		Functions.add_bonus("overheal", Vector2(195.0, 70.0))
 	
-	pointMultiplyer = clamp(pointMultiplyer + diff / 35.0 * pointMultiplyer, 1.0, 3.0)
+	pointMultiplyer = clamp(pointMultiplyer + pow(diff, 0.8) / 15.0, 1.0, 3.0)
 	if pointMultiplyer >= 3.0:
 		if waitptw and waitptw.is_running(): waitptw.kill()
 		pointMultiWaiting = true
@@ -142,3 +142,19 @@ func update_stats():
 	Saves.data["bonus_modifier"] = remap(k_ratio, 0.0, 1.0, 1.0, maxBonusModifier)
 	var t_ratio = clampf(float(Saves.data["max_diffi"]) / maxSpeedModifierNeedSeconds, 0.0, 1.0)
 	Saves.data["speed_modifier"] = remap(t_ratio, 0.0, 1.0, 1.0, maxSpeedModifier)
+
+var ghostDurationMulti := 1.0
+var particleAmountMulti := 1.0
+var particleFramesMulti := 1.0
+var particleCollision := true
+func update_simplier_particles():
+	if Saves.data["simplier_particles"] == true:
+		ghostDurationMulti = 0.5
+		particleAmountMulti = 0.5
+		particleFramesMulti = 0.1
+		particleCollision = false
+	else:
+		ghostDurationMulti = 1.0
+		particleAmountMulti = 1.0
+		particleFramesMulti = 1.0
+		particleCollision = true

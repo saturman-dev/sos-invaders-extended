@@ -31,6 +31,7 @@ const pause = preload ("res://menu/pause/pause.tscn")
 
 var strl: Tween
 func _ready() -> void:
+	Globals.update_simplier_particles()
 	Globals.diffi = 0
 	Globals.update_stats()
 	music_fade_in()
@@ -45,6 +46,7 @@ func _ready() -> void:
 		instart()
 	while Saves.is_loading == true:
 		await get_tree().process_frame
+		if not is_inside_tree(): return
 	Globals.update_volume()
 	strlogo.global_position.y += 20
 	strl = create_tween()
@@ -126,6 +128,7 @@ func unshimmer():
 
 func music_fade_in():
 	await get_tree().process_frame
+	if not is_inside_tree(): return
 	if not music: return
 	music.play()
 	var mt = create_tween()
@@ -179,6 +182,7 @@ func extra():
 	t.parallel().tween_property(scrollMan, "position:x", scrollStrength/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	t.parallel().tween_property(scrollMan, "rotation_degrees", -45, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(speed / 2, false).timeout
+	if not is_inside_tree(): return
 	menuu.queue_free()
 	extr.able = true
 	extr.get_node("CanvasLayer2/back").disabled = false
@@ -198,12 +202,14 @@ func settings():
 	t.parallel().tween_property(scrollMan, "position:x", -scrollStrength/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	t.parallel().tween_property(scrollMan, "rotation_degrees", -45, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(speed / 2, false).timeout
+	if not is_inside_tree(): return
 	menuu.queue_free()
 	settingss.able = true
 	settingss.get_node("CanvasLayer/back").disabled = false
 
 
 func back(direction: int):
+	Functions.sfx_play("res://sounds/menuClick.mp3")
 	if direction == 1 and setting:
 		setting.able = false
 		var menu = menu_scene.instantiate()
@@ -218,6 +224,7 @@ func back(direction: int):
 		t.parallel().tween_property(scrollMan, "position:x", scrollStrength*direction/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		t.parallel().tween_property(scrollMan, "rotation_degrees", 0.0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		await get_tree().create_timer(speed / 2, false).timeout
+		if not is_inside_tree(): return
 		setting.queue_free()
 		menuu.able = true
 	elif direction == -1 and extr:
@@ -234,6 +241,7 @@ func back(direction: int):
 		t.parallel().tween_property(scrollMan, "position:x", scrollStrength*direction/2*0.9, speed).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		t.parallel().tween_property(scrollMan, "rotation_degrees", 0.0, speed).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		await get_tree().create_timer(speed / 2, false).timeout
+		if not is_inside_tree(): return
 		extr.queue_free()
 		menuu.able = true
 

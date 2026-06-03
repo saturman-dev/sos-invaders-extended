@@ -139,6 +139,7 @@ func takeDmg():
 		Globals.change_overlives(-1)
 	sprite.play("dmg")
 	await get_tree().create_timer(INVINCIBLE, false).timeout
+	if not is_inside_tree(): return
 	sprite.play("def")
 	set_collision_layer_value(2, true)
 	is_invincible = false
@@ -157,6 +158,7 @@ func ghosts():
 	while Globals.bonusSpeedActive == true:
 		Functions.add_ghost(self, 0.5, 0.3)
 		await get_tree().create_timer(gh, false).timeout
+		if not is_inside_tree(): return
 
 @onready var bonusGained = $bonusGained
 @onready var trio = $NicknameTrio
@@ -178,6 +180,7 @@ func bonusTrio():
 	trio.visible = true
 	shit.scale = trioShitSize
 	await get_tree().create_timer(Globals.trioTimer, false).timeout
+	if not is_inside_tree(): return
 	shit.scale = defShitSize
 	Globals.bonusTrioActive = false
 	trio.visible = false
@@ -197,6 +200,7 @@ func bonusSpeed():
 	Globals.bonusSpeedActive = true
 	ghosts()
 	await get_tree().create_timer(Globals.speedTimer, false).timeout
+	if not is_inside_tree(): return
 	cd *= bonusSpeedMod
 	speed /= bonusSpeedMod
 	acceleration /= bonusSpeedMod
@@ -229,6 +233,7 @@ func bonusSplash():
 	shit.modulate = Color.DEEP_SKY_BLUE
 	Globals.bonusSplashActive = true
 	await get_tree().create_timer(Globals.splashTimer, false).timeout
+	if not is_inside_tree(): return
 	Globals.bonusSplashActive = false
 	shit.modulate = Color.WHITE
 	playBonusEnded()
