@@ -114,9 +114,11 @@ func fade_music(player: AudioStreamPlayer, duration: float):
 
 
 
-func sfx_play(soundPath, volume: float = 0.0, pitch: float = 1.0, play_on_hitstop: bool = false, reverb_power: float = 0.0):
+func sfx_play(soundPath: String, volume: float = 0.0, pitch: float = 1.0, play_on_hitstop: bool = false, reverb_power: float = 0.0):
 	
 	var player: Object
+	
+	soundPath = soundPath.replace(".mp3", ".wav")
 	
 	if play_on_hitstop == true:
 		player = AudioStreamPlayer.new()

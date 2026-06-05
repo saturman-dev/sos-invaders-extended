@@ -55,15 +55,15 @@ var overhealInfoText := "[color=ffff00]Overheal:[/color]   Gives you additional 
 
 var splashLockedText := "[color=ff0009]???[/color]   [color=7f7f7f]Defeat ????? with his own bomb to get this bonus.[/color]"
 var splashUnlockedText := "[color=ff0009]???[/color]   [color=7f7f7f]Defeat BigDar with his own bomb to get this bonus.[/color]"
-var splashInfoText := "[color=ff0009]Splash:[/color]   Allows your bullets pass through enemies."
+var splashInfoText := "[color=ff0009]Splash:[/color]   Allows your bullets pass through enemies and makes them slightly bigger."
 
 var trioLockedText := "[color=ff00dd]???[/color]   [color=7f7f7f]Defeat ????? to get this bonus.[/color]"
 var trioUnlockedText := "[color=ff00dd]???[/color]   [color=7f7f7f]Defeat A3 to get this bonus.[/color]"
-var trioInfoText := "[color=ff00dd]Trio:[/color]   Allows you shoot 3 bullets instead of 1. additional bullets take 0.75x damage."
+var trioInfoText := "[color=ff00dd]Trio:[/color]   Allows you shoot 3 bullets instead of 1. additional bullets take 0.5x damage."
 
 var speedLockedText := "[color=00fff6]???[/color]   [color=7f7f7f]Defeat ????? to get this bonus.[/color]"
 var speedUnlockedText := "[color=00fff6]???[/color]   [color=7f7f7f]Defeat Wertue to get this bonus.[/color]"
-var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases your movement and attack speed."
+var speedInfoText := "[color=00fff6]Speed:[/color]   Significantly increases your movement and attack speed except dash reloading."
 
 
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dihu0uufti3so" path="res://elements/flseye/flseye_beam.gd" id="1_smy26"]
 [ext_resource type="Texture2D" uid="uid://depyqp7tuumiv" path="res://textures/flseyeLaserWarning.png" id="2_euh1l"]
 [ext_resource type="Texture2D" uid="uid://bgcygesqkya6g" path="res://textures/flseyeLaser.png" id="4_4aljl"]
-[ext_resource type="AudioStream" uid="uid://cummi6ocb8wi4" path="res://sounds/wertueAttackLoop.mp3" id="8_as8qn"]
+[ext_resource type="AudioStream" uid="uid://de8yocx1bcvn7" path="res://sounds/wertueAttackLoop.wav" id="4_euh1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqk33"]
 size = Vector2(35.38462, 472.30774)
@@ -50,7 +50,7 @@ one_shot = true
 one_shot = true
 
 [node name="attackLoop" type="AudioStreamPlayer" parent="." unique_id=1517528492]
-stream = ExtResource("8_as8qn")
+stream = ExtResource("4_euh1l")
 volume_db = 20.0
 pitch_scale = 0.8
 bus = &"SFX"

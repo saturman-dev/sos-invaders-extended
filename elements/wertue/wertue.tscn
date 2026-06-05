@@ -7,12 +7,12 @@
 [ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="3_p4ll1"]
 [ext_resource type="Texture2D" uid="uid://fw01sauinruo" path="res://textures/normtema.png" id="4_q74va"]
 [ext_resource type="Texture2D" uid="uid://ccs21h62xd5bk" path="res://textures/enrageEffect.png" id="6_a763e"]
-[ext_resource type="AudioStream" uid="uid://dxsdpkpndejrq" path="res://sounds/enrageLoop.mp3" id="7_7rjny"]
+[ext_resource type="AudioStream" uid="uid://ygijcvgvnhxb" path="res://sounds/enrageLoop.wav" id="7_jw2qr"]
 [ext_resource type="PackedScene" uid="uid://bon0r1wnk0jr1" path="res://elements/contactDamager/contact_damager.tscn" id="8_h36qe"]
 [ext_resource type="Texture2D" uid="uid://bacc4rq30qa2o" path="res://textures/interruptable.png" id="10_2pupj"]
 [ext_resource type="Texture2D" uid="uid://ba6kt3a21imh3" path="res://textures/progressRing.png" id="11_jw2qr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jw2qr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgt0q"]
 resource_local_to_scene = true
 shader = ExtResource("3_p4ll1")
 shader_parameter/enable_outline = false
@@ -29,7 +29,7 @@ shader_parameter/rage_color = Color(1, 0, 0.1, 1)
 shader_parameter/flash_brightness = 0.0
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgt0q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5621"]
 resource_local_to_scene = true
 shader = ExtResource("3_p4ll1")
 shader_parameter/enable_outline = false
@@ -164,12 +164,12 @@ collision_mask = 259
 script = ExtResource("1_3hj3l")
 
 [node name="wingRight" parent="." unique_id=1902289196 instance=ExtResource("2_3hj3l")]
-material = SubResource("ShaderMaterial_jw2qr")
+material = SubResource("ShaderMaterial_rgt0q")
 position = Vector2(0, 3.8146973e-06)
 scale = Vector2(1.25, 1.25)
 
 [node name="wingLeft" parent="." unique_id=1355497482 instance=ExtResource("2_3hj3l")]
-material = SubResource("ShaderMaterial_rgt0q")
+material = SubResource("ShaderMaterial_f5621")
 position = Vector2(0, 3.8146973e-06)
 scale = Vector2(-1.25, 1.25)
 
@@ -223,7 +223,7 @@ visible = false
 texture = ExtResource("6_a763e")
 
 [node name="ENRAGED" type="AudioStreamPlayer" parent="." unique_id=1321285801]
-stream = ExtResource("7_7rjny")
+stream = ExtResource("7_jw2qr")
 volume_db = 13.0
 bus = &"SFX"
 
