@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cdh6vw81ppmrd" path="res://textures/window.png" id="2_qxoij"]
 [ext_resource type="Texture2D" uid="uid://bnbpwhwq1dlvc" path="res://textures/back.png" id="3_oksnb"]
 [ext_resource type="Texture2D" uid="uid://c75sw53sbht8j" path="res://textures/bg.png" id="4_oksnb"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="4_ymyge"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="4_ymyge"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="5_lwjig"]
 [ext_resource type="Texture2D" uid="uid://dgdvlaankchxc" path="res://textures/slider.png" id="6_mottj"]
 [ext_resource type="Texture2D" uid="uid://c57p4g27ebhfe" path="res://textures/galochka.png" id="7_fredc"]
@@ -221,12 +221,11 @@ texture = SubResource("AtlasTexture_sw158")
 [node name="sounds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/Control/TextureRect" unique_id=290951916]
 layout_mode = 0
 offset_left = -1.0
-offset_top = 2.0
+offset_top = 3.0
 offset_right = 147.0
-offset_bottom = 16.0
+offset_bottom = 17.0
 mouse_filter = 1
-theme_override_fonts/font = ExtResource("4_ymyge")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("4_ymyge")
 text = "sounds"
 horizontal_alignment = 1
 
@@ -361,12 +360,11 @@ texture = SubResource("AtlasTexture_sw158")
 [node name="gameplay" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/gameplay/TextureRect3" unique_id=1105807006]
 layout_mode = 0
 offset_left = -1.0
-offset_top = 2.0
+offset_top = 3.0
 offset_right = 147.0
-offset_bottom = 16.0
+offset_bottom = 17.0
 mouse_filter = 1
-theme_override_fonts/font = ExtResource("4_ymyge")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("4_ymyge")
 text = "gameplay"
 horizontal_alignment = 1
 
@@ -556,12 +554,11 @@ texture = SubResource("AtlasTexture_sw158")
 [node name="keybinds" type="Label" parent="CanvasLayer/ScrollContainer/VBoxContainer/keybinds/TextureRect2" unique_id=1608386901]
 layout_mode = 0
 offset_left = -1.0
-offset_top = 2.0
+offset_top = 3.0
 offset_right = 147.0
-offset_bottom = 16.0
+offset_bottom = 17.0
 mouse_filter = 1
-theme_override_fonts/font = ExtResource("4_ymyge")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("4_ymyge")
 text = "keybinds"
 horizontal_alignment = 1
 

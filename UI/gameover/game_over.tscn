@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dksowa3jrtejc" path="res://UI/gameover/game_over.gd" id="1_iglle"]
 [ext_resource type="Texture2D" uid="uid://cls8nj4707wrh" path="res://textures/a6.png" id="2_67l1h"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="3_idpvd"]
 [ext_resource type="Texture2D" uid="uid://cujrbyhq5mwjp" path="res://textures/gameover.png" id="3_pb6xu"]
 [ext_resource type="AudioStream" uid="uid://cfgqy6apyx13g" path="res://sounds/gameOver.mp3" id="5_0b4p0"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="5_idpvd"]
 
 [sub_resource type="Gradient" id="Gradient_idpvd"]
 colors = PackedColorArray(0.47843137, 0, 0.07058824, 1, 0, 0, 0, 1)
@@ -90,6 +90,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_idpvd")
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 10
 
@@ -123,21 +124,20 @@ layout_mode = 2
 
 [node name="PtsL" type="Label" parent="MarginContainer/VBOX/POINTS/Pt" unique_id=965399767]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("3_idpvd")
 text = "Points:"
 
 [node name="Pts2" type="Label" parent="MarginContainer/VBOX/POINTS/Pt/PtsL" unique_id=321359003]
 layout_mode = 0
-offset_left = 95.0
+offset_left = 94.0
 offset_top = 13.0
-offset_right = 130.0
-offset_bottom = 20.0
+offset_right = 129.0
+offset_bottom = 21.0
 scale = Vector2(0.92, 0.92)
 pivot_offset_ratio = Vector2(1, 1)
+theme = ExtResource("3_idpvd")
 theme_override_colors/font_color = Color(0.9647059, 0.09803922, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 7
 text = "New best!"
 
 [node name="Spacer2" type="Control" parent="MarginContainer/VBOX/POINTS/Pt" unique_id=1290273067]
@@ -147,15 +147,14 @@ size_flags_horizontal = 3
 
 [node name="Pts" type="Label" parent="MarginContainer/VBOX/POINTS/Pt" unique_id=1740704678]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("3_idpvd")
 text = "0"
 
 [node name="maxPts" type="Label" parent="MarginContainer/VBOX/POINTS" unique_id=765099756]
 layout_mode = 2
+theme = ExtResource("3_idpvd")
 theme_override_colors/font_color = Color(1, 1, 1, 0.5)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 7
+theme_override_font_sizes/font_size = 5
 text = "/ maxPts"
 vertical_alignment = 1
 
@@ -177,12 +176,11 @@ texture = SubResource("GradientTexture2D_yog4v")
 [node name="max" type="Label" parent="MarginContainer/VBOX/POINTS/bar" unique_id=1418466306]
 layout_mode = 0
 offset_left = 152.0
-offset_top = 3.0
+offset_top = 4.0
 offset_right = 192.0
-offset_bottom = 26.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "?.??x"
 vertical_alignment = 1
 
@@ -201,10 +199,9 @@ show_percentage = false
 
 [node name="DAMAGE" type="Label" parent="MarginContainer/VBOX/POINTS/bar" unique_id=1670201571]
 layout_mode = 0
-offset_top = 11.0
+offset_top = 12.0
 offset_right = 150.0
-offset_bottom = 34.0
-theme_override_fonts/font = ExtResource("5_idpvd")
+offset_bottom = 35.0
 text = "DAMAGE"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -212,12 +209,11 @@ vertical_alignment = 1
 [node name="min" type="Label" parent="MarginContainer/VBOX/POINTS/bar" unique_id=1078116329]
 layout_mode = 0
 offset_left = -41.0
-offset_top = 3.0
+offset_top = 4.0
 offset_right = -1.0
-offset_bottom = 26.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(0.9647059, 0.09803922, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "1.00x"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -229,8 +225,7 @@ offset_top = 10.0
 offset_right = 24.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.9647059, 0.09803922, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "1.00x"
 vertical_alignment = 1
 
@@ -242,8 +237,7 @@ offset_top = 18.0
 offset_right = 180.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(0.9647059, 0.09803922, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "NO LIMITS NEEDED"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -257,8 +251,6 @@ layout_mode = 2
 
 [node name="KilL" type="Label" parent="MarginContainer/VBOX/KILLS/Kil" unique_id=1489316866]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 20
 text = "Kills:"
 
 [node name="Kil2" type="Label" parent="MarginContainer/VBOX/KILLS/Kil/KilL" unique_id=856184122]
@@ -269,8 +261,7 @@ offset_right = 130.0
 offset_bottom = 20.0
 pivot_offset_ratio = Vector2(1, 1)
 theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 7
 text = "New best!"
 
 [node name="Spacer2" type="Control" parent="MarginContainer/VBOX/KILLS/Kil" unique_id=1943932790]
@@ -280,15 +271,12 @@ size_flags_horizontal = 3
 
 [node name="Kills" type="Label" parent="MarginContainer/VBOX/KILLS/Kil" unique_id=152279133]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 20
 text = "0"
 
 [node name="maxKills" type="Label" parent="MarginContainer/VBOX/KILLS" unique_id=1125075749]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.5)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 7
+theme_override_font_sizes/font_size = 5
 text = "/ maxKills"
 vertical_alignment = 1
 
@@ -314,10 +302,9 @@ show_percentage = false
 
 [node name="BONUS CHANCES" type="Label" parent="MarginContainer/VBOX/KILLS/bar" unique_id=313232725]
 layout_mode = 0
-offset_top = 11.0
+offset_top = 12.0
 offset_right = 150.0
-offset_bottom = 34.0
-theme_override_fonts/font = ExtResource("5_idpvd")
+offset_bottom = 35.0
 text = "BONUS CHANCES"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -325,12 +312,11 @@ vertical_alignment = 1
 [node name="min" type="Label" parent="MarginContainer/VBOX/KILLS/bar" unique_id=1768014921]
 layout_mode = 0
 offset_left = -41.0
-offset_top = 3.0
+offset_top = 4.0
 offset_right = -1.0
-offset_bottom = 26.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "1.00x"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -338,12 +324,11 @@ vertical_alignment = 1
 [node name="max" type="Label" parent="MarginContainer/VBOX/KILLS/bar" unique_id=1336403692]
 layout_mode = 0
 offset_left = 152.0
-offset_top = 3.0
+offset_top = 4.0
 offset_right = 192.0
-offset_bottom = 26.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "?.??x"
 vertical_alignment = 1
 
@@ -354,8 +339,7 @@ offset_top = 10.0
 offset_right = 42.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.96862745, 0.96862745, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "1.00x"
 vertical_alignment = 1
 
@@ -368,8 +352,6 @@ layout_mode = 2
 
 [node name="TimeL" type="Label" parent="MarginContainer/VBOX/TIME/Tim" unique_id=1289527671]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 20
 text = "Difficulty:"
 
 [node name="Time2" type="Label" parent="MarginContainer/VBOX/TIME/Tim/TimeL" unique_id=2112781340]
@@ -380,8 +362,7 @@ offset_right = 130.0
 offset_bottom = 20.0
 pivot_offset_ratio = Vector2(1, 1)
 theme_override_colors/font_color = Color(0, 0.8235294, 0.85882354, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 7
 text = "New best!"
 
 [node name="Spacer2" type="Control" parent="MarginContainer/VBOX/TIME/Tim" unique_id=768341026]
@@ -391,15 +372,12 @@ size_flags_horizontal = 3
 
 [node name="Time" type="Label" parent="MarginContainer/VBOX/TIME/Tim" unique_id=1718062772]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 20
 text = "0"
 
 [node name="maxTime" type="Label" parent="MarginContainer/VBOX/TIME" unique_id=421864237]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.5)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 7
+theme_override_font_sizes/font_size = 5
 text = "/ maxTime"
 vertical_alignment = 1
 
@@ -425,10 +403,9 @@ show_percentage = false
 
 [node name="COOLDOWNS SPEED" type="Label" parent="MarginContainer/VBOX/TIME/bar" unique_id=1147698030]
 layout_mode = 0
-offset_top = 11.0
+offset_top = 12.0
 offset_right = 150.0
-offset_bottom = 34.0
-theme_override_fonts/font = ExtResource("5_idpvd")
+offset_bottom = 35.0
 text = "COOLDOWNS SPEED"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -436,12 +413,11 @@ vertical_alignment = 1
 [node name="min" type="Label" parent="MarginContainer/VBOX/TIME/bar" unique_id=58834730]
 layout_mode = 0
 offset_left = -41.0
-offset_top = 3.0
+offset_top = 4.0
 offset_right = -1.0
-offset_bottom = 26.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 0.8235294, 0.85882354, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "1.00x"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -449,12 +425,11 @@ vertical_alignment = 1
 [node name="max" type="Label" parent="MarginContainer/VBOX/TIME/bar" unique_id=1189475872]
 layout_mode = 0
 offset_left = 152.0
-offset_top = 3.0
+offset_top = 4.0
 offset_right = 192.0
-offset_bottom = 26.0
+offset_bottom = 27.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "?.??x"
 vertical_alignment = 1
 
@@ -465,8 +440,7 @@ offset_top = 10.0
 offset_right = 42.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(0, 0.8235294, 0.85882354, 1)
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "1.00x"
 vertical_alignment = 1
 
@@ -483,14 +457,13 @@ layout_mode = 2
 
 [node name="Press" type="Label" parent="MarginContainer/VBOX/BOTTOM/text" unique_id=1048616128]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 17
 text = "Press [R] to restart"
 horizontal_alignment = 1
 
 [node name="esc to exit" type="Label" parent="MarginContainer/VBOX/BOTTOM/text" unique_id=773523160]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_idpvd")
+theme_override_font_sizes/font_size = 9
 text = "[esc] - back to menu"
 horizontal_alignment = 1
 

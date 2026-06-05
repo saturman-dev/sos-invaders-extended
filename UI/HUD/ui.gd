@@ -35,7 +35,7 @@ func ready_animation():
 	await get_tree().create_timer(2.0, false).timeout
 	if not is_inside_tree(): return
 	Globals.paused = false
-	#Globals.change_points(5283744)
+	#Globals.change_points(528374)
 
 func align_position():
 	multi2.global_position = multi1.global_position

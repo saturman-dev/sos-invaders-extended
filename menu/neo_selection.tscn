@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dqq8n7ui5v5o6" path="res://textures/window2.png" id="1_1mjf0"]
 [ext_resource type="Script" uid="uid://di4eo1vwinmr3" path="res://menu/neo_selection.gd" id="1_6hu48"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="2_akkcm"]
 [ext_resource type="Texture2D" uid="uid://ccg2slv5gj30f" path="res://textures/GO.png" id="2_bmefg"]
 [ext_resource type="Texture2D" uid="uid://dwgbyh6vadcd5" path="res://textures/jarsin.png" id="3_akkcm"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="3_r40xj"]
 [ext_resource type="Texture2D" uid="uid://b8t71rk2yrw60" path="res://textures/extra.png" id="5_4odtj"]
 [ext_resource type="Texture2D" uid="uid://cuqg23i1hwebq" path="res://textures/expand.png" id="5_q0y6g"]
 [ext_resource type="Shader" uid="uid://d06jbjw2r5vpa" path="res://shaders/enemy.gdshader" id="6_3pmag"]
@@ -201,8 +201,9 @@ theme_override_constants/separation = 9
 
 [node name="text" type="Label" parent="window/vbox" unique_id=1699504694]
 layout_mode = 2
+theme = ExtResource("3_r40xj")
 theme_override_colors/font_color = Color(0.8980392, 1, 0, 1)
-theme_override_fonts/font = ExtResource("2_akkcm")
+theme_override_font_sizes/font_size = 10
 text = "Select NEO tier"
 horizontal_alignment = 1
 
@@ -263,9 +264,9 @@ flat = true
 
 [node name="text3" type="Label" parent="window/vbox/spriteAndNumber/buttons/buttons" unique_id=1488446529]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_akkcm")
-theme_override_font_sizes/font_size = 14
-text = "  0  "
+theme = ExtResource("3_r40xj")
+theme_override_font_sizes/font_size = 10
+text = "   0   "
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -307,10 +308,10 @@ offset_left = -55.0
 offset_top = 13.0
 offset_right = 55.0
 offset_bottom = 23.0
+theme = ExtResource("3_r40xj")
 theme_override_colors/font_color = Color(0.8980392, 1, 0, 1)
 theme_override_constants/line_spacing = 0
-theme_override_fonts/font = ExtResource("2_akkcm")
-theme_override_font_sizes/font_size = 7
+theme_override_font_sizes/font_size = 5
 text = "You'll start from
 ???% difficulty"
 horizontal_alignment = 1

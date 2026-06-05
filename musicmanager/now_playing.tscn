@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7nslu5lhsojl" path="res://musicmanager/now_playing.gd" id="1_p8awm"]
 [ext_resource type="Texture2D" uid="uid://bjwy4eapa7e8r" path="res://textures/musicIcon.png" id="1_u35oo"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="1_yddr8"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="2_p8awm"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="3_p8awm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1bskx"]
@@ -73,9 +73,10 @@ offset_left = 272.0
 offset_top = 23.0
 offset_right = 385.0
 offset_bottom = 34.0
+theme = ExtResource("2_p8awm")
 theme_override_colors/font_color = Color(0.3254902, 0.41568628, 1, 1)
-theme_override_fonts/font = ExtResource("1_yddr8")
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("3_p8awm")
+theme_override_font_sizes/font_size = 7
 text = "Unknown - Untitled"
 
 [node name="vbox" type="VBoxContainer" parent="." unique_id=372842237]
@@ -97,7 +98,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="icon" type="AnimatedSprite2D" parent="vbox/name/icon" unique_id=1978878158]
-position = Vector2(8, 6)
+position = Vector2(8, 5)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_hwo2b")
 autoplay = "default"
@@ -106,9 +107,10 @@ frame_progress = 0.07843111
 
 [node name="text" type="Label" parent="vbox/name" unique_id=313263889]
 layout_mode = 2
+theme = ExtResource("2_p8awm")
 theme_override_colors/font_color = Color(1, 0.8666667, 0.003921569, 1)
-theme_override_fonts/font = ExtResource("1_yddr8")
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("3_p8awm")
+theme_override_font_sizes/font_size = 7
 text = "Unknown - Untitled"
 
 [node name="now" type="HBoxContainer" parent="vbox" unique_id=1138382176]

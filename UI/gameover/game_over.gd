@@ -83,7 +83,7 @@ func animate_points():
 		return
 	
 	var target_value = Globals.points
-	var duration = 0.05 if is_skipped else clamp(float(target_value) / 100, 0.5, 3.5)
+	var duration = 0.05 if is_skipped else clamp(float(target_value) / 300, 0.5, 3.5)
 	var closure_state = {"last_int": -1}
 	
 	current_tween = create_tween()
@@ -110,7 +110,7 @@ func animate_kills():
 		return
 	
 	var target_value = Globals.kills
-	var duration = 0.05 if is_skipped else clamp(float(target_value) / 20, 0.5, 3.5)
+	var duration = 0.05 if is_skipped else clamp(float(target_value) / 40, 0.5, 3.5)
 	var closure_state = {"last_int": -1}
 	
 	current_tween = create_tween()
@@ -133,7 +133,7 @@ func animate_kills():
 func animate_time():
 	
 	var target_value = Globals.diffi / 150 * 100
-	var duration = 0.05 if is_skipped else clamp((float(target_value) / 55) * 0.5, 0.5, 4.0)
+	var duration = 0.05 if is_skipped else clamp((float(target_value) / 100) * 0.5, 0.5, 4.0)
 	
 	var closure_state = {"last_int": -1}
 	
@@ -373,7 +373,7 @@ func start_animation():
 	a6tween.tween_property(a6, "modulate:a", 0.7, 3.0)
 	
 	shimmer()
-	await animate_delay(between * 1.5)
+	await animate_delay(between * 4)
 	
 	show_and_flash(pointsText)
 	precounterSfx()

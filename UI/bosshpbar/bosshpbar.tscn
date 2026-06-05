@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://lna63yx2e5fn"]
 
 [ext_resource type="Script" uid="uid://d3s0ywbl23ntw" path="res://UI/bosshpbar/bosshpbar.gd" id="1_3lcev"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="2_3lcev"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="2_3lcev"]
 
 [node name="bosshpbar" type="Control" unique_id=214188899]
 custom_minimum_size = Vector2(390, 37.5)
@@ -53,11 +53,11 @@ color = Color(1, 0, 0, 1)
 
 [node name="Label" type="Label" parent="." unique_id=105829806]
 layout_mode = 0
-offset_top = -1.0
+offset_top = -2.0
 offset_right = 390.0
-offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("2_3lcev")
-theme_override_font_sizes/font_size = 32
+offset_bottom = 23.0
+theme = ExtResource("2_3lcev")
+theme_override_font_sizes/font_size = 28
 text = "BOSSNAME"
 horizontal_alignment = 1
 vertical_alignment = 1

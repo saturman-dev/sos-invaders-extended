@@ -245,7 +245,7 @@ func interrupt():
 	await Functions.unhitstopped
 	if NEO == 0:
 		Functions.dmg(self, fullhp)
-	PtbonusesManager.ptbonus(givepts * 2 * (NEO + 1), "FOLDED", color)
+	PtbonusesManager.ptbonus(givepts * 1.5 * (NEO + 1), "FOLDED", color)
 	Globals.apply_shake(4.0)
 	var explosion = explScene.instantiate()
 	explosion.global_scale *= 1.2

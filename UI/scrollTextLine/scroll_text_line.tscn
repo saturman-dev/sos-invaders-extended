@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3m1t2vsioi1"]
 
 [ext_resource type="Script" uid="uid://72atdjjg6ers" path="res://UI/scrollTextLine/scroll_text_line.gd" id="1_6ljmq"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="1_popmi"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="2_6ljmq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6ljmq"]
 blend_mode = 1
@@ -17,8 +17,8 @@ script = ExtResource("1_6ljmq")
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_6ljmq")
 layout_mode = 0
-offset_right = 89.0
-offset_bottom = 11.0
-theme_override_fonts/normal_font = ExtResource("1_popmi")
+offset_right = 107.0
+offset_bottom = 14.0
+theme = ExtResource("2_6ljmq")
 text = "-SCROLL TEXT-"
 scroll_active = false

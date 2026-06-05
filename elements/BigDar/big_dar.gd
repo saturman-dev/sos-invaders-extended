@@ -124,7 +124,7 @@ func die():
 	Saves.data["killed_enemies"] += 1
 	if bonus_blocked == false:
 		Functions.addRandomBonus(self)
-	Functions.sfx_play("res://sounds/bigDarDead.mp3", 0.0, randf_range(0.9, 1.1))
+	Functions.sfx_play("res://sounds/bigDarDead.mp3", 10.0, randf_range(0.9, 1.1))
 	Globals.change_points(givepts / 2 * (1 + NEO))
 	hitbox.queue_free()
 	raycast_left.queue_free()

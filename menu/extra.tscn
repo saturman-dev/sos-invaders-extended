@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://c75sw53sbht8j" path="res://textures/bg.png" id="4_oa725"]
 [ext_resource type="Texture2D" uid="uid://b8t71rk2yrw60" path="res://textures/extra.png" id="5_f3lx7"]
 [ext_resource type="Texture2D" uid="uid://dwgbyh6vadcd5" path="res://textures/jarsin.png" id="6_qout1"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="7_kwec3"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="7_xr6wq"]
 [ext_resource type="Texture2D" uid="uid://l2clt1eillu2" path="res://textures/bigDar.png" id="8_gsxb3"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="8_qua0r"]
 [ext_resource type="Texture2D" uid="uid://bdejy1182uyrv" path="res://textures/wertue.png" id="9_f3lx7"]
 [ext_resource type="Texture2D" uid="uid://h5jirjw1c7uy" path="res://textures/a3.png" id="9_oa725"]
 [ext_resource type="PackedScene" uid="uid://o5xip0drl264" path="res://elements/wertue/wing_right.tscn" id="10_f3lx7"]
@@ -747,8 +747,9 @@ mouse_filter = 2
 
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin/info" unique_id=807427961]
 layout_mode = 2
+theme = ExtResource("7_kwec3")
 theme_override_colors/font_color = Color(1, 0.76862746, 0.44705883, 1)
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme_override_font_sizes/font_size = 12
 text = "Darsin"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsin/info" unique_id=1421334362]
@@ -828,8 +829,9 @@ size_flags_horizontal = 3
 
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info" unique_id=660904697]
 layout_mode = 2
+theme = ExtResource("7_kwec3")
 theme_override_colors/font_color = Color(0.09411765, 1, 0.23137255, 1)
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme_override_font_sizes/font_size = 12
 text = "BigDar"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdar/info" unique_id=364328232]
@@ -918,8 +920,9 @@ size_flags_horizontal = 3
 
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info" unique_id=1623546352]
 layout_mode = 2
+theme = ExtResource("7_kwec3")
 theme_override_colors/font_color = Color(0.9843137, 0, 0.8117647, 1)
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme_override_font_sizes/font_size = 12
 text = "A3"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3/info" unique_id=646875474]
@@ -1013,8 +1016,9 @@ size_flags_horizontal = 3
 
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info" unique_id=1804261360]
 layout_mode = 2
+theme = ExtResource("7_kwec3")
 theme_override_colors/font_color = Color(0, 1, 0.8627451, 1)
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme_override_font_sizes/font_size = 12
 text = "Wertue"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertue/info" unique_id=1628967762]
@@ -1115,8 +1119,9 @@ size_flags_horizontal = 3
 
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=798010904]
 layout_mode = 2
+theme = ExtResource("7_kwec3")
 theme_override_colors/font_color = Color(0.54509807, 0.40784314, 1, 1)
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme_override_font_sizes/font_size = 12
 text = "FLSEYE"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/flseye/info" unique_id=85419031]
@@ -1264,7 +1269,8 @@ mouse_filter = 2
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info" unique_id=630276863]
 material = SubResource("ShaderMaterial_kwec3")
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme = ExtResource("7_kwec3")
+theme_override_font_sizes/font_size = 12
 text = "Darsin NEO"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/darsinNEO/info" unique_id=1513685837]
@@ -1346,7 +1352,8 @@ size_flags_horizontal = 3
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info" unique_id=895444672]
 material = SubResource("ShaderMaterial_113gv")
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme = ExtResource("7_kwec3")
+theme_override_font_sizes/font_size = 12
 text = "BigDar NEO"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/bigdarNEO/info" unique_id=761193589]
@@ -1438,7 +1445,8 @@ size_flags_horizontal = 3
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info" unique_id=739676820]
 material = SubResource("ShaderMaterial_o28lg")
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme = ExtResource("7_kwec3")
+theme_override_font_sizes/font_size = 12
 text = "A3 NEO"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/a3NEO/info" unique_id=556359276]
@@ -1535,7 +1543,8 @@ size_flags_horizontal = 3
 [node name="name" type="Label" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info" unique_id=749092791]
 material = SubResource("ShaderMaterial_qda8b")
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_qua0r")
+theme = ExtResource("7_kwec3")
+theme_override_font_sizes/font_size = 12
 text = "Wertue NEO"
 
 [node name="text" type="RichTextLabel" parent="CanvasLayer2/ScrollContainer/VBoxContainer/wertueNEO/info" unique_id=48575469]

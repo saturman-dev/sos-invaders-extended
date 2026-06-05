@@ -75,7 +75,7 @@ func warn():
 		explode()
 
 func explode():
-	Functions.sfx_play("res://sounds/bobmExplosion.mp3")
+	Functions.sfx_play("res://sounds/bobmExplosion.mp3", -7.0)
 	var Expl = explosion.instantiate()
 	Expl.global_position = global_position
 	Expl.SPEEDMOD = SPEEDMOD

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://dgoy77b26ktvu"]
+
+[ext_resource type="FontFile" uid="uid://crbxk1vohncw8" path="res://fonts/upheavtt.ttf" id="1_byt7c"]
+
+[resource]
+default_font = ExtResource("1_byt7c")
+default_font_size = 14

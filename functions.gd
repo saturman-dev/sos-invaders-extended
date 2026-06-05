@@ -103,7 +103,7 @@ func dmg(object: Object, dam: float):
 	else:
 		print("Error: no method 'damageAnimation' found when damaging.")
 	
-	Functions.sfx_play("res://sounds/enemyDamage.mp3", -4.0, randf_range(0.8, 1.2))
+	Functions.sfx_play("res://sounds/enemyDamage.mp3", 10.0, randf_range(0.8, 1.2))
 
 
 

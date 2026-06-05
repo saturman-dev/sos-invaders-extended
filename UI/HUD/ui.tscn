@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c4nswko4yvo00" path="res://UI/HUD/ui.gd" id="1_3frql"]
 [ext_resource type="PackedScene" uid="uid://declhp76gcxrb" path="res://UI/HUD/lives_bar.tscn" id="2_3frql"]
-[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="2_iho6x"]
 [ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="2_kmbvj"]
 [ext_resource type="PackedScene" uid="uid://6o0apg1kop5v" path="res://UI/HUD/overlives_bar.tscn" id="3_0xfy4"]
+[ext_resource type="Theme" uid="uid://dgoy77b26ktvu" path="res://texttheme.tres" id="3_1gyg6"]
 [ext_resource type="Script" uid="uid://ivg0l8msg6aa" path="res://UI/HUD/time.gd" id="4_8pomw"]
 [ext_resource type="Script" uid="uid://rl3xnbpftogj" path="res://UI/HUD/diffi.gd" id="4_gjbdv"]
 [ext_resource type="PackedScene" uid="uid://s1ut3vxfcggr" path="res://UI/HUD/oberlives_0_bar.tscn" id="5_f67e7"]
@@ -91,8 +91,8 @@ alignment = 1
 
 [node name="time" type="Label" parent="timeV/timeH" unique_id=787700631]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("3_1gyg6")
+theme_override_font_sizes/font_size = 10
 text = "0:00"
 script = ExtResource("4_8pomw")
 
@@ -102,7 +102,8 @@ alignment = 1
 
 [node name="diffi" type="Label" parent="timeV/diffiH" unique_id=351012690]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_iho6x")
+theme = ExtResource("3_1gyg6")
+theme_override_font_sizes/font_size = 14
 text = "0.00%"
 script = ExtResource("4_gjbdv")
 
@@ -126,19 +127,20 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_gjbdv")
 
 [node name="scoreHH" type="HBoxContainer" parent="scoreV/scoreH/scorePanel" unique_id=2128291715]
 layout_mode = 2
+theme_override_constants/separation = 7
 
 [node name="score" type="Label" parent="scoreV/scoreH/scorePanel/scoreHH" unique_id=773541712]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("3_1gyg6")
+theme_override_font_sizes/font_size = 18
 text = "0"
 horizontal_alignment = 1
 
 [node name="highscore" type="Label" parent="scoreV/scoreH/scorePanel/scoreHH" unique_id=625636267]
 modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 8
+theme = ExtResource("3_1gyg6")
+theme_override_font_sizes/font_size = 5
 text = "/ *HIGHEST*"
 
 [node name="spacer" type="Control" parent="scoreV/scoreH" unique_id=924760723]
@@ -156,8 +158,8 @@ layout_mode = 2
 [node name="multiplyer" type="Label" parent="scoreV/scoreH/multiV" unique_id=1909489025]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("3_1gyg6")
+theme_override_font_sizes/font_size = 10
 text = "x1.00"
 
 [node name="everythingButTime" type="VBoxContainer" parent="." unique_id=1076433339]
@@ -225,8 +227,8 @@ offset_top = -25.0
 offset_right = 23.0
 offset_bottom = -5.0
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 24
+theme = ExtResource("3_1gyg6")
+theme_override_font_sizes/font_size = 20
 text = "0"
 horizontal_alignment = 1
 
@@ -235,8 +237,8 @@ offset_left = 120.0
 offset_top = 222.0
 offset_right = 142.0
 offset_bottom = 231.0
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 14
+theme = ExtResource("3_1gyg6")
+theme_override_font_sizes/font_size = 10
 text = "x1.00"
 
 [node name="killsDebug" type="Label" parent="." unique_id=1405390169]
