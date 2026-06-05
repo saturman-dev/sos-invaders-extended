@@ -14,7 +14,7 @@ func add(text: String):
 	
 	var label = RichTextLabel.new()
 	label.bbcode_enabled = true
-	label.text = "    " + text
+	label.text = "     " + text
 	label.fit_content = true
 	label.scroll_active = false
 	label.autowrap_mode = TextServer.AUTOWRAP_OFF

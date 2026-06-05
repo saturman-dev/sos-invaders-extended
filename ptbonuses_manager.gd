@@ -19,6 +19,7 @@ func _ready() -> void:
 	spawn_timer.timeout.connect(_process_queue)
 
 func enemy_killed():
+	Globals.kills += 1
 	killStreak += 1
 	#ptbonus(3, "KILL", Color.WHITE)
 	enemyTimer.start()

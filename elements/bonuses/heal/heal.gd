@@ -14,6 +14,11 @@ var speed := 40.0
 func _ready() -> void:
 	circle.modulate.a = circleAlphaUp
 	circling()
+	
+	var defsize = scale
+	scale = Vector2.ZERO
+	var readytween = create_tween()
+	readytween.tween_property(self, "scale", defsize, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 func _physics_process(delta: float) -> void:
 	global_position.y += speed * delta

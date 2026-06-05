@@ -176,7 +176,6 @@ func _ready() -> void:
 	
 	print("Game started!")
 	Events.lives_changed.connect(func(lives): check_game_over())
-	Events.enemy_killed.connect(func(): Globals.kills += 1)
 	ready_animation()
 
 func ready_animation():

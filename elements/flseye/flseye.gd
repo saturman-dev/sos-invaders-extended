@@ -7,10 +7,10 @@ var NEO = false
 var last_attack = -1
 
 # FOR DAMAGE
-var fullhp = 250.0
+var fullhp = 200.0
 var hp = fullhp
 
-var givepts = 100
+var givepts = 228
 var died = false
 var bar2 = 0.4
 var expltime = 0.5
@@ -430,9 +430,9 @@ func attackMovingBeams():
 	last_attack = 3
 	var beam1 = beamScene.instantiate()
 	var beam2 = beamScene.instantiate()
-	beam1.global_position = Vector2(-30.0, 0.0)
+	beam1.global_position = Vector2(-50.0, 0.0)
 	beam1.alter = true
-	beam2.global_position = Vector2(420.0, 0.0)
+	beam2.global_position = Vector2(440.0, 0.0)
 	beam2.alter = true
 	beam2.dir = -1
 	get_parent().add_child(beam1)

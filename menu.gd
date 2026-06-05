@@ -71,6 +71,7 @@ var trans := Tween.TRANS_CUBIC
 var s: Tween
 var stspeed := 0.5
 func _on_play_pressed() -> void:
+	
 	if Saves.data["greatest_neo_tier"] > 0:
 		menuClick_play()
 		var neo_select := neo_sel.instantiate()
@@ -121,8 +122,8 @@ var pt: Tween
 var hovspeed := 0.5
 var unhovspeed := 0.8
 func _on_play_mouse_entered() -> void:
-	if able == false: return
 	playAnim.play("hover")
+	if able == false: return
 	if pt and pt.is_running():
 		pt.kill()
 	pt = create_tween()
@@ -134,10 +135,10 @@ func _on_play_mouse_entered() -> void:
 
 
 func _on_play_mouse_exited() -> void:
-	if able == false: return
 	if s and s.is_running():
 		return
 	playAnim.play("unhover")
+	if able == false: return
 	if pt and pt.is_running():
 		pt.kill()
 	pt = create_tween()

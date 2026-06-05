@@ -35,6 +35,7 @@ func ready_animation():
 	await get_tree().create_timer(2.0, false).timeout
 	if not is_inside_tree(): return
 	Globals.paused = false
+	#Globals.change_points(5283744)
 
 func align_position():
 	multi2.global_position = multi1.global_position
@@ -100,6 +101,10 @@ func _process(delta: float) -> void:
 		multi2.add_theme_color_override("font_color", Color.RED)
 		multiOffset.x = randf_range(-multiShakeStr * 5, multiShakeStr * 5)
 		multiOffset.y = randf_range(-multiShakeStr, multiShakeStr)
+	
+	$killsDebug.text = str(Globals.kills)
+
+
 
 func update_multi(multi: float):
 	multi1.text = "x%.2f" % multi

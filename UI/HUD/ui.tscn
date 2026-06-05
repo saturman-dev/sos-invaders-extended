@@ -130,7 +130,7 @@ layout_mode = 2
 [node name="score" type="Label" parent="scoreV/scoreH/scorePanel/scoreHH" unique_id=773541712]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
@@ -138,7 +138,7 @@ horizontal_alignment = 1
 modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "/ *HIGHEST*"
 
 [node name="spacer" type="Control" parent="scoreV/scoreH" unique_id=924760723]
@@ -226,7 +226,7 @@ offset_right = 23.0
 offset_bottom = -5.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 
@@ -238,3 +238,12 @@ offset_bottom = 231.0
 theme_override_fonts/font = ExtResource("2_iho6x")
 theme_override_font_sizes/font_size = 14
 text = "x1.00"
+
+[node name="killsDebug" type="Label" parent="." unique_id=1405390169]
+visible = false
+offset_left = 220.0
+offset_top = 211.0
+offset_right = 260.0
+offset_bottom = 234.0
+text = "0"
+horizontal_alignment = 1

@@ -6,7 +6,7 @@ var SPEEDMOD := 1.0
 var NEO := 0
 
 # FOR DAMAGE
-var fullhp = 20.0
+var fullhp = 15.0
 var hp = fullhp
 @onready var sprite := $AnimatedSprite2D
 @onready var hpbar := $hpfull

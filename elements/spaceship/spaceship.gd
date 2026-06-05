@@ -11,7 +11,7 @@ var defTrailColor: Color
 var trailDashTween: Tween
 var dashTrailWidth := 70.0
 var dashTrailColor := Color("59a5ff")
-var cd = 0.2 / Saves.data["speed_modifier"]
+var cd = 0.225 / Saves.data["speed_modifier"]
 var defcd  = cd
 var INVINCIBLE := 1.5
 var dmg = 1.0
@@ -50,7 +50,8 @@ func _physics_process(delta: float) -> void:
 		dash_time_left -= delta
 		if dash_time_left <= 0.0:
 			velocity = direction * speed
-			set_collision_layer_value(2, true)
+			if is_invincible == false:
+				set_collision_layer_value(2, true)
 		else:
 			velocity = dash_direction * dash_speed
 		#move_and_slide()

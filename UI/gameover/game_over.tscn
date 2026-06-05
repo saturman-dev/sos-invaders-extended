@@ -496,5 +496,6 @@ horizontal_alignment = 1
 
 [node name="music" type="AudioStreamPlayer2D" parent="." unique_id=1854068831]
 stream = ExtResource("5_0b4p0")
-volume_db = 10.0
+volume_db = 20.0
 autoplay = true
+bus = &"Music"
