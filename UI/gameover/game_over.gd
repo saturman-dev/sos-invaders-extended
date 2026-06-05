@@ -354,9 +354,9 @@ func _ready() -> void:
 	bonusChancesBar.max_value = Globals.maxBonusModifier
 	damageBar.max_value = Globals.maxDamageModifier
 	cooldownsSpeedBar.max_value = Globals.maxSpeedModifier
-	pointsMax.text = "/ " + str(Globals.oldMaxPoints)
-	killsMax.text = "/ " + str(Globals.oldMaxKills)
-	timeMax.text = "/ " + str(Globals.oldMaxDiffi / 150 * 100) + "%"
+	pointsMax.text = "/ " + str(int(Globals.oldMaxPoints))
+	killsMax.text = "/ " + str(int(Globals.oldMaxKills))
+	timeMax.text = "/ " + str(int(Globals.oldMaxDiffi / 150 * 100)) + "%"
 	
 	# BAR SETUP
 	set_bar(bonusChancesBar, bonusChancesCurrent, Globals.oldBonusMod, 1.0, Globals.maxBonusModifier)

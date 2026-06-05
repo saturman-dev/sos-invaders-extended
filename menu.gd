@@ -71,14 +71,15 @@ var trans := Tween.TRANS_CUBIC
 var s: Tween
 var stspeed := 0.5
 func _on_play_pressed() -> void:
-	menuClick_play()
 	if Saves.data["greatest_neo_tier"] > 0:
+		menuClick_play()
 		var neo_select := neo_sel.instantiate()
 		neo_select.global_position = get_viewport_rect().size / 2
 		neo_select.global_position.y -= 10
 		neo_select.scale *= 1.2
 		canv.add_child(neo_select)
 		return
+	Functions.sfx_play("res://sounds/menuClick.mp3", 5.0, 1.0, false, 0.2)
 	start()
 
 func start():

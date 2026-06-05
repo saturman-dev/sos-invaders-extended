@@ -248,7 +248,7 @@ func unenrage():
 
 var warning := false
 func interruptable():
-	blink.speed_scale = SPEEDMOD if enraged == false else SPEEDMOD / 2
+	blink.speed_scale = SPEEDMOD if enraged == false else SPEEDMOD * 2
 	blink.play("int")
 	Functions.sfx_play("res://sounds/unterruptable.mp3", -2.0, randf_range(0.8, 0.9))
 	warning = true

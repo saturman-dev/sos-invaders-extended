@@ -28,9 +28,9 @@ var bigdarInfoText := "Fires a bomb that leaves a damaging area briefly after de
 var bigdarSpecialNote := "[color=18ff3b]Shoot the bomb to instantly detonate it! This can be used to defeat groups of enemies.[/color]"
 var bigdarNeoInfoText := "The bomb requires 2 bullets to explode and breaks into damaging fragments."
 
-var a3InfoText := "Shoots 3 breakable bullets in a V-shaped pattern. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 0.5 seconds."
-var a3SpecialNote := "[color=fb00cf]Shoot the right spot at the right time to explode it! This also cancels the attack.[/color]"
-var a3NeoInfoText := "Shoots 5 bullets. They are connected now."
+var a3InfoText := "Shoots 3 breakable projectiles in a V-shaped pattern. There's a really small chance to defeat it before it shoots, because the first shot cooldown is set to 0.5 seconds."
+var a3SpecialNote := "[color=fb00cf]You can cancel the attack and instantly kill a3 by shooting the forming projectiles at the right time![/color]"
+var a3NeoInfoText := "Shoots 5 connected bullets. Also doesn't die to an interruption instantly."
 
 var wertueInfoText := "Creates a beam of light that follows the player. The beam stops after a few seconds and activates for a moment, dealing damage. After 3 failed attacks it becomes enraged, doubling its attack speed."
 var wertueSpecialNote := "[color=00ffdc]If you kill Wertue right before the beam activates, it will attack significantly harder, damaging enemies.[/color]"
@@ -228,6 +228,7 @@ func _ready() -> void:
 		darsinInfo.text = darsinInfoText
 		darsinSpecialButton.text = noSpecial
 	else:
+		darsinInfo.queue_free()
 		darsinCount.visible = false
 		darsinName.text = noText
 		darsinSpecialButton.queue_free()
@@ -240,6 +241,7 @@ func _ready() -> void:
 		bigdarSpecialButton.text = yesSpecial
 		bigdarSpecialButton.add_theme_color_override("font_color", Color("18ff3b"))
 	else:
+		bigdarInfo.queue_free()
 		bigdarCount.visible = false
 		bigdarName.text = noText
 		bigdarSpecialButton.queue_free()
@@ -253,6 +255,7 @@ func _ready() -> void:
 		a3SpecialButton.text = yesSpecial
 		a3SpecialButton.add_theme_color_override("font_color", Color("fb00cf"))
 	else:
+		a3Info.queue_free()
 		a3Count.visible = false
 		a3Name.text = noText
 		a3SpecialButton.queue_free()
@@ -266,6 +269,7 @@ func _ready() -> void:
 		wertueSpecialButton.text = yesSpecial
 		wertueSpecialButton.add_theme_color_override("font_color", Color("00ffdc"))
 	else:
+		wertueInfo.queue_free()
 		wertueCount.visible = false
 		wertueName.text = noText
 		wertueSpecialButton.queue_free()
@@ -276,6 +280,7 @@ func _ready() -> void:
 		flseyeInfo.text = flseyeInfoText
 		flseyeSpecialButton.text = noSpecial
 	else:
+		flseyeInfo.queue_free()
 		flseyeCount.visible = false
 		flseyeName.text = noText
 		flseyeSpecialButton.queue_free()

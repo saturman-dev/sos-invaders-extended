@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		if body.has_method("periodic_dmg"):
 			body.periodic_dmg(5.0 * SPEEDMOD)
 		if body.has_method("explode"):
-			body.get_hit(true)
+			body.explode()
 
 var fragments := true
 func _ready() -> void:

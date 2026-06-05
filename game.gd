@@ -31,6 +31,7 @@ const pause = preload ("res://menu/pause/pause.tscn")
 
 var strl: Tween
 func _ready() -> void:
+	MusicManager.stop_all()
 	Globals.update_simplier_particles()
 	Globals.diffi = 0
 	Globals.update_stats()
@@ -145,7 +146,7 @@ func staart():
 	var staminaTween = create_tween()
 	staminaTween.tween_property(Globals, "currentStaminas", Globals.staminas, 2.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	move_tween = create_tween()
-	move_tween.tween_property($lv1/spaceship, "position", Vector2(0.0, -40.0), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	move_tween.tween_property($lv1/spaceship, "position", Vector2(0.0, -50.0), 1.0).as_relative().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	#move_tween2 = create_tween()
 	#move_tween2.tween_property($lv1/UI/MarginContainer, "global_position", Vector2(0, 0), 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await move_tween.finished
@@ -209,7 +210,7 @@ func settings():
 
 
 func back(direction: int):
-	Functions.sfx_play("res://sounds/menuClick.mp3")
+	Functions.sfx_play("res://sounds/menuCancel.mp3")
 	if direction == 1 and setting:
 		setting.able = false
 		var menu = menu_scene.instantiate()

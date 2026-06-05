@@ -132,7 +132,7 @@ func die():
 		Functions.add_bonus("trio", global_position)
 	else:
 		Functions.addRandomBonus(self)
-	Functions.sfx_play("res://sounds/A3Dead.mp3", -8.0, randf_range(0.9, 1.1))
+	Functions.sfx_play("res://sounds/A3Dead.mp3", 5.0, randf_range(0.9, 1.1))
 	Globals.change_points(givepts / 2 * (1 + NEO))
 	hitbox.queue_free()
 	raycast_left.queue_free()

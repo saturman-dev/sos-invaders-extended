@@ -408,11 +408,15 @@ func set_neo(object: Object, NEO: int):
 const flseye = preload("res://elements/flseye/flseye.tscn")
 func spawn_boss(type: String):
 	if type == "flseye":
+		MusicManager.fade_out_music()
 		
 		var bg = get_tree().get_first_node_in_group("background")
 		var fg = get_tree().get_first_node_in_group("foreground")
 		bg.flseye_animation()
 		await fg.flseye_animation()
+		
+		await get_tree().create_timer(1.5, false).timeout
+		if not is_inside_tree(): return
 		
 		var Flseye = flseye.instantiate()
 		get_tree().get_first_node_in_group("level").add_child(Flseye)

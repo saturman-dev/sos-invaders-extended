@@ -1,7 +1,7 @@
 extends Node
 
-var needForOverheal = 40
-var nodeath: bool = true
+var needForOverheal = 50
+var nodeath: bool = false
 
 var hpBarScreenTop := 5.0
 
@@ -24,13 +24,13 @@ var diffi := 0.0
 var maxBonusModifier := 2.5
 var maxDamageModifier := 3.0
 var maxSpeedModifier := 3.0
-var maxBonusModifierNeedKills := 500
-var maxDamageModifierNeedPoints := 10000
-var maxSpeedModifierNeedSeconds := 1500
-var oldMaxPoints := 0
-var oldMaxKills := 0
-var oldMaxTime := 0
-var oldMaxDiffi := 0
+var maxBonusModifierNeedKills := 500.0
+var maxDamageModifierNeedPoints := 10000.0
+var maxSpeedModifierNeedSeconds := 1500.0
+var oldMaxPoints := 0.0
+var oldMaxKills := 0.0
+var oldMaxTime := 0.0
+var oldMaxDiffi := 0.0
 var oldBonusMod := 0.0
 var oldDamageMod := 0.0
 var oldSpeedMod := 0.0

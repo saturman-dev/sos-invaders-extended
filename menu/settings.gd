@@ -71,11 +71,11 @@ func menuClick_play():
 
 func menuClick2_play():
 	if loaded == true:
-		Functions.sfx_play("res://sounds/menuClick2.mp3", 5.0)
+		Functions.sfx_play("res://sounds/menuClick2.mp3", -10.0)
 
 func menuClick3_play():
 	if loaded == true:
-		return
+		Functions.sfx_play("res://sounds/menuCancel.mp3")
 
 func _on_back_pressed() -> void:
 	backk()
@@ -210,51 +210,56 @@ func _on_cd_slider_gui_input(event: InputEvent) -> void:
 
 
 func _on_hbbarsb_pressed() -> void:
-	menuClick2_play()
 	if Saves.data["bars"] == 0.0:
 		bargal.play("no")
+		menuClick3_play()
 		Saves.data["bars"] = 1.0
 	else:
 		bargal.play("yes")
 		Saves.data["bars"] = 0.0
+		menuClick_play()
 
 
 func _on_shake_pressed() -> void:
-	menuClick2_play()
 	if Saves.data["disable_shake"] == true:
 		shake.play("no")
+		menuClick3_play()
 		Saves.data["disable_shake"] = false
 	else:
 		shake.play("yes")
+		menuClick_play()
 		Saves.data["disable_shake"] = true
 
 
 func _on_fps_pressed() -> void:
-	menuClick2_play()
 	if Saves.data["show_fps"] == true:
 		fps.play("no")
+		menuClick3_play()
 		Saves.data["show_fps"] = false
 	else:
 		fps.play("yes")
+		menuClick_play()
 		Saves.data["show_fps"] = true
 
 
 func _on_bgtint_pressed() -> void:
-	menuClick2_play()
 	if Saves.data["disable_bg_tint"] == true:
 		bgtint.play("no")
+		menuClick3_play()
 		Saves.data["disable_bg_tint"] = false
 	else:
 		bgtint.play("yes")
+		menuClick_play()
 		Saves.data["disable_bg_tint"] = true
 
 
 func _on_particles_pressed() -> void:
-	menuClick2_play()
 	if Saves.data["simplier_particles"] == true:
 		particles.play("no")
 		Saves.data["simplier_particles"] = false
+		menuClick3_play()
 	else:
 		particles.play("yes")
 		Saves.data["simplier_particles"] = true
+		menuClick_play()
 	Globals.update_simplier_particles()

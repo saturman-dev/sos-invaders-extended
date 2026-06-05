@@ -142,7 +142,7 @@ func _on_quit_pressed() -> void:
 
 func back(direction: int):
 	if settss:
-		Functions.sfx_play("res://sounds/menuClick.mp3")
+		Functions.sfx_play("res://sounds/menuCancel.mp3")
 		settss.queue_free()
 	stb.visible = false
 	cont.disabled = false

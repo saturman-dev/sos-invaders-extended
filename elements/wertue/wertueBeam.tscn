@@ -85,6 +85,7 @@ wait_time = 4.0
 one_shot = true
 
 [node name="warningTime" type="Timer" parent="." unique_id=1401969069]
+wait_time = 1.2
 one_shot = true
 
 [node name="laserTime" type="Timer" parent="." unique_id=179983393]

@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dsfjyx503lspu"]
+
+[ext_resource type="PackedScene" uid="uid://cau75my8inu6q" path="res://musicmanager/now_playing.tscn" id="1_8ihol"]
+[ext_resource type="Script" uid="uid://c0ddahxfubp7x" path="res://musicmanager/music_manager.gd" id="1_gcenu"]
+
+[sub_resource type="Animation" id="Animation_gcenu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("nowPlaying:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_am75u"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("nowPlaying:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8ihol"]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("nowPlaying:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gcenu"]
+_data = {
+&"RESET": SubResource("Animation_gcenu"),
+&"hide": SubResource("Animation_am75u"),
+&"show": SubResource("Animation_8ihol")
+}
+
+[node name="MusicManager" type="Node" unique_id=1463061729]
+script = ExtResource("1_gcenu")
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1016310277]
+process_mode = 1
+bus = &"Music"
+
+[node name="NowPlayingCanvas" type="CanvasLayer" parent="." unique_id=765994568]
+layer = 74
+
+[node name="nowPlaying" parent="NowPlayingCanvas" unique_id=1922250306 instance=ExtResource("1_8ihol")]
+modulate = Color(1, 1, 1, 0)
+offset_left = -31.0
+offset_top = 138.0
+offset_right = -35.0
+offset_bottom = -73.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NowPlayingCanvas" unique_id=411408845]
+libraries/ = SubResource("AnimationLibrary_gcenu")
+
+[connection signal="finished" from="AudioPlayer" to="." method="_on_audio_player_finished"]

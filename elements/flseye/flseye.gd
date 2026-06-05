@@ -7,7 +7,7 @@ var NEO = false
 var last_attack = -1
 
 # FOR DAMAGE
-var fullhp = 300.0
+var fullhp = 250.0
 var hp = fullhp
 
 var givepts = 100
@@ -119,7 +119,10 @@ func _ready() -> void:
 	Events.flseye_shield_broken.connect(func(): shield_broken())
 	Saves.data["ever_met_flseye"] = true
 	dotScale = dot.scale
-	await get_tree().create_timer(4.0, false).timeout
+	await get_tree().create_timer(2.75, false).timeout
+	if not is_inside_tree(): return
+	MusicManager.play_boss_music("res://music/boss_themes/WaxTerK_-_Bloom.mp3")
+	await get_tree().create_timer(1.25, false).timeout
 	if not is_inside_tree(): return
 	contactDamager.disabled = false
 	get_tree().get_first_node_in_group("background").flseye_animation_finished()
@@ -174,6 +177,7 @@ var afterExplosionsTime = 2.0
 func die():
 	if died: return
 	died = true
+	MusicManager.boss_defeated()
 	shake_str = 0.0
 	shieldcd.stop()
 	Globals.bgStay = true

@@ -102,7 +102,7 @@ func _on_down_button_up() -> void:
 	dtw.tween_property(down, "scale", downdefscale, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 func _on_down_pressed() -> void:
-	if current_number > 0: Functions.sfx_play("res://sounds/menuClick2.mp3", 7.5)
+	if current_number > 0: Functions.sfx_play("res://sounds/menuClick2.mp3", 3.0)
 	await get_tree().process_frame
 	if not is_inside_tree(): return
 	_change_number(-1)
@@ -123,7 +123,7 @@ func _on_up_button_up() -> void:
 	utw.tween_property(up, "scale", updefscale, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _on_up_pressed() -> void:
-	if current_number < 10: Functions.sfx_play("res://sounds/menuClick2.mp3", 7.5)
+	if current_number < 10: Functions.sfx_play("res://sounds/menuClick2.mp3", 3.0)
 	await get_tree().process_frame
 	if not is_inside_tree(): return
 	_change_number(1)
@@ -154,11 +154,12 @@ func _on_go_pressed() -> void:
 	var stw = create_tween()
 	stw.tween_property(self, "position:y", -170, 1.5).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	stw.parallel().tween_property(go, "position:y", 170 * 2, 1.5).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-	Functions.sfx_play("res://sounds/menuClick.mp3", 5.0)
+	Functions.sfx_play("res://sounds/menuClick.mp3", 5.0, 1.0, false, 0.2)
 
 
 
 func _start_pokachivanie():
+	Functions.sfx_play("res://sounds/menuWrong.mp3")
 	gobutt.disabled = true
 	var poktw = create_tween()
 	poktw.tween_property(self, "position:x", 40, 0.2).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -191,6 +192,7 @@ func _on_back_pressed() -> void:
 	back()
 
 func back():
+	Functions.sfx_play("res://sounds/menuCancel.mp3")
 	bg.hide()
 	gobutt.disabled = true
 	var stw = create_tween()

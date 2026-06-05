@@ -111,7 +111,7 @@ offset_bottom = 13.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0.8980392, 1, 0, 1)
 theme_override_fonts/font = ExtResource("7_j5wjh")
-text = "v0.0 (unreleased)"
+text = "v1.0"
 horizontal_alignment = 2
 vertical_alignment = 1
 

@@ -9,32 +9,24 @@
 [ext_resource type="Script" uid="uid://rl3xnbpftogj" path="res://UI/HUD/diffi.gd" id="4_gjbdv"]
 [ext_resource type="PackedScene" uid="uid://s1ut3vxfcggr" path="res://UI/HUD/oberlives_0_bar.tscn" id="5_f67e7"]
 [ext_resource type="PackedScene" uid="uid://c6tqmptox0vky" path="res://UI/HUD/pt_bonuses.tscn" id="5_vw7f5"]
+[ext_resource type="Shader" uid="uid://becqslumgy30o" path="res://UI/HUD/ui.gdshader" id="7_1gyg6"]
 [ext_resource type="PackedScene" uid="uid://cgxlit60vbwto" path="res://UI/HUD/liver_0_bar.tscn" id="7_g81w3"]
 [ext_resource type="PackedScene" uid="uid://b3om6yevg4tt7" path="res://UI/HUD/stamina_bar.tscn" id="9_g81w3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1vl1"]
+shader = ExtResource("7_1gyg6")
+shader_parameter/skew_amount = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjbdv"]
+content_margin_left = 25.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.5)
 
 [node name="UI" type="CanvasLayer" unique_id=1498106473 groups=["ui"]]
 layer = 71
 script = ExtResource("1_3frql")
-
-[node name="Label2" type="Label" parent="." unique_id=1989910893]
-offset_left = 10.0
-offset_top = -25.0
-offset_right = 21.0
-offset_bottom = -10.0
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 24
-text = "0"
-horizontal_alignment = 1
-
-[node name="multiplyer2" type="Label" parent="." unique_id=1449358124]
-offset_left = 120.0
-offset_top = 222.0
-offset_right = 142.0
-offset_bottom = 231.0
-theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 12
-text = "x1.00"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1556699986]
 offset_left = 10.0
@@ -115,10 +107,10 @@ text = "0.00%"
 script = ExtResource("4_gjbdv")
 
 [node name="scoreV" type="VBoxContainer" parent="." unique_id=1101744757]
-offset_left = 10.0
-offset_top = -5.0
-offset_right = 81.0
-offset_bottom = 235.0
+offset_left = -15.0
+offset_top = 4.0
+offset_right = 143.0
+offset_bottom = 244.0
 alignment = 2
 
 [node name="ptBonuses" parent="scoreV" unique_id=879256944 groups=["ptBonusesContainer"] instance=ExtResource("5_vw7f5")]
@@ -127,14 +119,22 @@ layout_mode = 2
 [node name="scoreH" type="HBoxContainer" parent="scoreV" unique_id=1787593278]
 layout_mode = 2
 
-[node name="score" type="Label" parent="scoreV/scoreH" unique_id=773541712]
+[node name="scorePanel" type="PanelContainer" parent="scoreV/scoreH" unique_id=417330161]
+material = SubResource("ShaderMaterial_j1vl1")
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gjbdv")
+
+[node name="scoreHH" type="HBoxContainer" parent="scoreV/scoreH/scorePanel" unique_id=2128291715]
+layout_mode = 2
+
+[node name="score" type="Label" parent="scoreV/scoreH/scorePanel/scoreHH" unique_id=773541712]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 28
 text = "0"
 horizontal_alignment = 1
 
-[node name="highscore" type="Label" parent="scoreV/scoreH" unique_id=625636267]
+[node name="highscore" type="Label" parent="scoreV/scoreH/scorePanel/scoreHH" unique_id=625636267]
 modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_iho6x")
@@ -145,11 +145,19 @@ text = "/ *HIGHEST*"
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="multiplyer" type="Label" parent="scoreV/scoreH" unique_id=1909489025]
+[node name="multiV" type="VBoxContainer" parent="scoreV/scoreH" unique_id=721585724]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="spacer" type="Control" parent="scoreV/scoreH/multiV" unique_id=1022985890]
+custom_minimum_size = Vector2(0, 8.345)
+layout_mode = 2
+
+[node name="multiplyer" type="Label" parent="scoreV/scoreH/multiV" unique_id=1909489025]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_iho6x")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "x1.00"
 
 [node name="everythingButTime" type="VBoxContainer" parent="." unique_id=1076433339]
@@ -210,3 +218,23 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="endedlivesManager" type="Node2D" parent="." unique_id=1360639939 groups=["endedLivesManager"]]
+
+[node name="Label2" type="Label" parent="." unique_id=1989910893]
+offset_left = 10.0
+offset_top = -25.0
+offset_right = 23.0
+offset_bottom = -5.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+
+[node name="multiplyer2" type="Label" parent="." unique_id=1449358124]
+offset_left = 120.0
+offset_top = 222.0
+offset_right = 142.0
+offset_bottom = 231.0
+theme_override_fonts/font = ExtResource("2_iho6x")
+theme_override_font_sizes/font_size = 14
+text = "x1.00"

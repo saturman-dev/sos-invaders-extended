@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://cau75my8inu6q"]
+
+[ext_resource type="Script" uid="uid://7nslu5lhsojl" path="res://musicmanager/now_playing.gd" id="1_p8awm"]
+[ext_resource type="Texture2D" uid="uid://bjwy4eapa7e8r" path="res://textures/musicIcon.png" id="1_u35oo"]
+[ext_resource type="FontFile" uid="uid://cn4ehssbdb4ij" path="res://fonts/ByteBounce.ttf" id="1_yddr8"]
+[ext_resource type="FontFile" uid="uid://dd25ehpfnuo0g" path="res://fonts/PixelatedEleganceRegular-ovawB.ttf" id="3_p8awm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bskx"]
+atlas = ExtResource("1_u35oo")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib7ih"]
+atlas = ExtResource("1_u35oo")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5o5v"]
+atlas = ExtResource("1_u35oo")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n326"]
+atlas = ExtResource("1_u35oo")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gnma"]
+atlas = ExtResource("1_u35oo")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rap0"]
+atlas = ExtResource("1_u35oo")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hwo2b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bskx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib7ih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5o5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n326")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gnma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rap0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="nowPlaying" type="Control" unique_id=1922250306]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -4.0
+offset_bottom = -211.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_p8awm")
+
+[node name="text2" type="Label" parent="." unique_id=1141176016]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 23.0
+offset_right = 385.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.3254902, 0.41568628, 1, 1)
+theme_override_fonts/font = ExtResource("1_yddr8")
+theme_override_font_sizes/font_size = 12
+text = "Unknown - Untitled"
+
+[node name="vbox" type="VBoxContainer" parent="." unique_id=372842237]
+layout_mode = 0
+offset_right = 385.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="name" type="HBoxContainer" parent="vbox" unique_id=1362489363]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="icon" type="Control" parent="vbox/name" unique_id=789293703]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="icon" type="AnimatedSprite2D" parent="vbox/name/icon" unique_id=1978878158]
+position = Vector2(8, 6)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_hwo2b")
+autoplay = "default"
+frame = 3
+frame_progress = 0.07843111
+
+[node name="text" type="Label" parent="vbox/name" unique_id=313263889]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8666667, 0.003921569, 1)
+theme_override_fonts/font = ExtResource("1_yddr8")
+theme_override_font_sizes/font_size = 12
+text = "Unknown - Untitled"
+
+[node name="now" type="HBoxContainer" parent="vbox" unique_id=1138382176]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="text" type="Label" parent="vbox/now" unique_id=647963183]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.90588236, 0.30588236, 1)
+theme_override_fonts/font = ExtResource("3_p8awm")
+theme_override_font_sizes/font_size = 5
+text = "now playing"

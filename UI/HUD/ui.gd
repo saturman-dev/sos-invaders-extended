@@ -6,10 +6,10 @@ var pton = 0.05
 var ptoff = 0.2
 
 @onready var scoreV := $scoreV
-@onready var highest := $scoreV/scoreH/highscore
-@onready var pts1 := $scoreV/scoreH/score
+@onready var highest := $scoreV/scoreH/scorePanel/scoreHH/highscore
+@onready var pts1 := $scoreV/scoreH/scorePanel/scoreHH/score
 @onready var pts2 := $Label2
-@onready var multi1 := $scoreV/scoreH/multiplyer
+@onready var multi1 := $scoreV/scoreH/multiV/multiplyer
 @onready var multi2 := $multiplyer2
 @onready var bonuses := $everythingButTime/thewholedown/staminaHpBonuses/bonusesH/bonusesV
 @onready var diffLabel = $VBoxContainer3/HBoxContainer/diffLabel

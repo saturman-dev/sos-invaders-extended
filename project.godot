@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="sos invaders prefinal"
+config/name="sos invaders final"
 run/main_scene="uid://bipoqhhalsyp8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://diult6hm7bbdg"
@@ -27,6 +27,7 @@ Saves="*uid://3bjc448xuoqj"
 Functions="*uid://ctwxpxw0mjenk"
 PtbonusesManager="*uid://ckhpbu53j815b"
 ProcessAlways="*uid://bk4t0t55l30w1"
+MusicManager="*uid://dsfjyx503lspu"
 
 [display]
 

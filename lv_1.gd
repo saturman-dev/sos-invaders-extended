@@ -68,7 +68,7 @@ func _process(delta: float) -> void:
 	elif enemy_count >= 7:
 		growth_modifier = 0.5
 	
-	diffi += 1.0 * growth_modifier * delta
+	diffi += 0.5 * growth_modifier * delta
 	spawn_credits += diffi * 0.1 * delta * growth_modifier
 	Globals.diffi = diffi
 	_check_boss_timeline()
@@ -136,8 +136,9 @@ func _check_boss_timeline() -> void:
 func _prepare_boss_fight(name: String) -> void:
 	is_boss_fight = true
 	
-	while get_tree().get_nodes_in_group("enemies").size() > 0 or is_inside_tree():
+	while get_tree().get_nodes_in_group("enemies").size() > 0 and is_inside_tree():
 		if not is_inside_tree(): return
+		#print(get_tree().get_nodes_in_group("enemies"))
 		await get_tree().process_frame
 		if not is_inside_tree(): return
 	
@@ -145,6 +146,7 @@ func _prepare_boss_fight(name: String) -> void:
 
 func boss_defeated() -> void:
 	is_boss_fight = false
+	MusicManager.play_level_music()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -191,6 +193,13 @@ func ready_animation():
 	Functions.sfx_play("res://sounds/hpStart.mp3", 0.0, 1.2)
 	Globals.hp_animation = false
 	spawn_timer.start()
+	
+	await get_tree().create_timer(2, false).timeout
+	if not is_inside_tree(): return
+	while Saves.data["educated"] == false:
+		await get_tree().process_frame
+		if not is_inside_tree(): return
+	MusicManager.play_level_music()
 
 func check_game_over():
 	if Globals.lives <= 0:
