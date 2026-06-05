@@ -24,8 +24,11 @@ var is_boss_fight: bool = false
 var audio_tween: Tween
 
 func _init() -> void:
+	if OS.has_feature("web"):
+		PATH_DEFAULT = "res://music/default"
+		PATH_NEO = "res://music/neo"
 	# ИЗМЕНЕНИЕ 2: Умное разделение для разработки и для релиза
-	if OS.has_feature("editor"):
+	elif OS.has_feature("editor"):
 		# Когда ты тестируешь игру из редактора Godot, папки создадутся прямо в корне твоего проекта
 		PATH_DEFAULT = ProjectSettings.globalize_path("res://").path_join("music/default/")
 		PATH_NEO = ProjectSettings.globalize_path("res://").path_join("music/neo/")
@@ -40,8 +43,9 @@ func _ready() -> void:
 	track_label = nowPlaying.nameText
 	
 	# ИЗМЕНЕНИЕ 3: Автоматически создаем эти папки на диске, если игрок их случайно удалил
-	_ensure_folder_exists(PATH_DEFAULT)
-	_ensure_folder_exists(PATH_NEO)
+	if not OS.has_feature("web"):
+		_ensure_folder_exists(PATH_DEFAULT)
+		_ensure_folder_exists(PATH_NEO)
 	
 	# Сканируем внешние папки при запуске игры
 	default_pool = _scan_music_folder(PATH_DEFAULT)

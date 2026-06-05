@@ -18,6 +18,7 @@ config/icon="uid://diult6hm7bbdg"
 [audio]
 
 buses/default_bus_layout="uid://bx1w6at2tam7j"
+driver/output_latency.web=75
 
 [autoload]
 
@@ -90,3 +91,5 @@ pointing/emulate_touch_from_mouse=true
 
 textures/canvas_textures/default_texture_filter=3
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

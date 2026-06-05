@@ -95,4 +95,9 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("Saving...")
 		save()
+		
+		if OS.has_feature("web"):
+			get_tree().change_scene_to_file("res://web_exited.tscn")
+			return
+		
 		get_tree().quit()

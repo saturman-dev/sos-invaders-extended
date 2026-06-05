@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b8nhrap6hvlo0"]
+
+[ext_resource type="Script" uid="uid://dwwyoa7h52kbg" path="res://web_exited.gd" id="1_33snf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqx1s"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l55q7"]
+bg_color = Color(0.19506672, 0.19506672, 0.19506669, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8fvl"]
+bg_color = Color(0.7514611, 0.751461, 0.751461, 1)
+
+[node name="webExited" type="Node2D" unique_id=1305263548]
+script = ExtResource("1_33snf")
+
+[node name="bg" type="ColorRect" parent="." unique_id=1172535778]
+offset_left = -60.0
+offset_top = -58.0
+offset_right = 441.0
+offset_bottom = 309.0
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=811343929]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 390.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=763704606]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=641971821]
+layout_mode = 2
+alignment = 1
+
+[node name="text" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2078930826]
+layout_mode = 2
+text = "Game saved!"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1165995503]
+layout_mode = 2
+alignment = 1
+
+[node name="button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=399362308]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fqx1s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l55q7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o8fvl")
+text = " RESTART GAME "
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/button" to="." method="_on_button_pressed"]
