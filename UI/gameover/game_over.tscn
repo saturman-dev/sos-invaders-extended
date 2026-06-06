@@ -232,9 +232,9 @@ vertical_alignment = 1
 [node name="unlimited" type="Label" parent="MarginContainer/VBOX/POINTS/bar" unique_id=1157884555]
 visible = false
 layout_mode = 0
-offset_left = 100.0
+offset_left = 101.0
 offset_top = 18.0
-offset_right = 180.0
+offset_right = 181.0
 offset_bottom = 28.0
 theme_override_colors/font_color = Color(0.9647059, 0.09803922, 0, 1)
 theme_override_font_sizes/font_size = 8
@@ -469,6 +469,6 @@ horizontal_alignment = 1
 
 [node name="music" type="AudioStreamPlayer2D" parent="." unique_id=1854068831]
 stream = ExtResource("5_0b4p0")
-volume_db = 20.0
+volume_db = 10.0
 autoplay = true
 bus = &"Music"

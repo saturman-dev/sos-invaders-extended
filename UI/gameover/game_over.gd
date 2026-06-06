@@ -184,8 +184,8 @@ func set_damage_bar():
 	
 	if target_x > max_width:
 		damageCurrent.force_update_transform()
-		damageCurrent.position.x = 179 - damageCurrent.size.x
-		damageCurrent.position.y = 2
+		damageCurrent.position.x = 177 - damageCurrent.size.x
+		damageCurrent.position.y = 1
 		unlimited.modulate.a = 1.0
 		already_unlimited = true
 	else:
@@ -287,8 +287,8 @@ func animate_damage_bar():
 			var max_width = bar.size.x / 2 + 2
 			
 			if target_x > max_width:
-				label.position.x = 179 - label.size.x
-				label.position.y = 2
+				label.position.x = 177 - label.size.x
+				label.position.y = 1
 				unlimit()
 			else:
 				label.position.x = target_x
@@ -451,21 +451,20 @@ func shimmer():
 		await GOt.finished
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_ESCAPE:
-			Functions.stop_all_sfx()
-			get_tree().paused = false
-			get_node("/root/Globals").setDefHp()
-			get_node("/root/Globals").points = 0
-			Globals.game_running = false
-			get_tree().reload_current_scene()
-		if event.keycode == KEY_R:
-			Functions.stop_all_sfx()
-			get_tree().paused = false
-			get_node("/root/Globals").setDefHp()
-			get_node("/root/Globals").points = 0
-			Globals.instart = true
-			get_tree().reload_current_scene()
-		if event.keycode == KEY_SPACE:
-			if not is_skipped:
-				skip_sequence()
+	if event.is_action_pressed("ui_cancel"):
+		Functions.stop_all_sfx()
+		get_tree().paused = false
+		get_node("/root/Globals").setDefHp()
+		get_node("/root/Globals").points = 0
+		Globals.game_running = false
+		get_tree().reload_current_scene()
+	if event.is_action_pressed("restart"):
+		Functions.stop_all_sfx()
+		get_tree().paused = false
+		get_node("/root/Globals").setDefHp()
+		get_node("/root/Globals").points = 0
+		Globals.instart = true
+		get_tree().reload_current_scene()
+	if event.is_action_pressed("ui_accept"):
+		if not is_skipped:
+			skip_sequence()

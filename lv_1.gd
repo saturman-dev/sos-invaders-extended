@@ -149,12 +149,11 @@ func boss_defeated() -> void:
 	MusicManager.play_level_music()
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_R:
-			Globals.setDefHp()
-			Globals.points = 0
-			Globals.instart = true
-			get_tree().reload_current_scene()
+	if event.is_action_pressed("restart"):
+		Globals.setDefHp()
+		Globals.points = 0
+		Globals.instart = true
+		get_tree().reload_current_scene()
 
 func _ready() -> void:
 	
