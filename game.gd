@@ -165,7 +165,7 @@ func start():
 	if strl and strl.is_running:
 		strl.kill()
 	var s = create_tween()
-	s.tween_property(strlogo, "global_position:y", 20, 0.4).as_relative()
+	s.tween_property(strlogo, "global_position:y", 25, 0.4).as_relative()
 
 
 func extra():

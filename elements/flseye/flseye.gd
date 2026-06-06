@@ -52,12 +52,12 @@ const flbulletScene = preload("res://elements/flseye/flbullet.tscn")
 
 
 var direction := int([-1, 1].pick_random())
-var defspeed := 70
+var defspeed := 70.0
 var speed := defspeed
 var yspeed = 7.5
 var defyspeed = yspeed
 var raycast = false
-var dirChanging := 110
+var dirChanging := 130.0
 var dirYup = false
 var dotScale := Vector2.ZERO
 
